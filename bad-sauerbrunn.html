@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savanyúkút / Bad Sauerbrunn</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --ink: #2f3a33;
+    --soft: #7b857d;
+    --accent: #8a9a7b;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    text-align: center;
+    padding: 56px 16px 32px;
+  }
+  h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    letter-spacing: 0.01em;
+  }
+  h1 span { color: var(--accent); font-style: italic; font-weight: 400; }
+  .line {
+    width: 60px; height: 2px; background: var(--accent);
+    margin: 18px auto 0; border-radius: 2px;
+  }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px 64px;
+    columns: 3 280px;
+    column-gap: 14px;
+  }
+  figure {
+    break-inside: avoid;
+    margin-bottom: 14px;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    cursor: zoom-in;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  figure:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,.12);
+  }
+  figure img { width: 100%; display: block; }
+
+  /* Großansicht */
+  #lightbox {
+    position: fixed; inset: 0;
+    background: rgba(20, 24, 21, .94);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 10;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 92vw; max-height: 86vh;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .btn {
+    position: absolute;
+    background: none; border: none;
+    color: #fff; font-size: 2.4rem;
+    cursor: pointer; padding: 16px;
+    opacity: .7; transition: opacity .2s;
+    user-select: none;
+  }
+  .btn:hover { opacity: 1; }
+  #prev { left: 4px; } #next { right: 4px; }
+  #close { top: 4px; right: 8px; font-size: 2rem; }
+  #count {
+    position: absolute; bottom: 18px; width: 100%;
+    text-align: center; color: #cfd6cf; font-size: .85rem; letter-spacing: .1em;
+  }
+  footer {
+    text-align: center; color: var(--soft);
+    font-size: .8rem; padding-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Savanyúkút <span>/</span> Bad Sauerbrunn</h1>
+  <div class="line"></div>
+</header>
+
+<main id="gallery"></main>
+
+<div id="lightbox">
+  <button class="btn" id="close" aria-label="Schließen">✕</button>
+  <button class="btn" id="prev" aria-label="Zurück">‹</button>
+  <img id="big" alt="">
+  <button class="btn" id="next" aria-label="Weiter">›</button>
+  <div id="count"></div>
+</div>
+
+<footer>🌿</footer>
+
+<script>
+  const ANZAHL = 22;
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const big = document.getElementById('big');
+  const count = document.getElementById('count');
+  let bilder = [];
+  let aktuell = 0;
+
+  for (let i = 1; i <= ANZAHL; i++) {
+    const fig = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = i + '.png';
+    img.alt = 'Bad Sauerbrunn ' + i;
+    img.loading = 'lazy';
+    img.onerror = () => { fig.remove(); bilder = bilder.filter(b => b !== img.src); };
+    fig.appendChild(img);
+    fig.onclick = () => zeige(bilder.indexOf(img.src));
+    gallery.appendChild(fig);
+    bilder.push(img.src);
+  }
+
+  function zeige(i) {
+    aktuell = (i + bilder.length) % bilder.length;
+    big.src = bilder[aktuell];
+    count.textContent = (aktuell + 1) + ' / ' + bilder.length;
+    lightbox.classList.add('open');
+  }
+  function zu() { lightbox.classList.remove('open'); }
+
+  document.getElementById('next').onclick = e => { e.stopPropagation(); zeige(aktuell + 1); };
+  document.getElementById('prev').onclick = e => { e.stopPropagation(); zeige(aktuell - 1); };
+  document.getElementById('close').onclick = zu;
+  lightbox.onclick = e => { if (e.target === lightbox) zu(); };
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') zeige(aktuell + 1);
+    if (e.key === 'ArrowLeft') zeige(aktuell - 1);
+    if (e.key === 'Escape') zu();
+  });
+
+  // Wischen am Handy
+  let startX = null;
+  lightbox.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  lightbox.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) zeige(aktuell + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+</script>
+</body>
+</html>
