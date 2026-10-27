@@ -51,6 +51,12 @@ button,input{font:inherit;color:inherit}
 .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:.82rem}
 .linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;padding:2px 0;font-size:.82rem}
 .source{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.store{font-size:.8rem;color:var(--muted)}
+.store.ok::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#3C9A5F;margin-right:6px}
+.store.warn{color:var(--stamp)}
+.clearbox{font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+.danger{color:var(--stamp);justify-self:start}
+.confirm-btns{display:flex;gap:6px;margin-top:6px}
 .sample{font-size:.8rem;background:var(--accent-soft);border-radius:6px;padding:6px 8px}
 
 #rows{list-style:none;margin:0;padding:0;overflow-y:auto;flex:1}
@@ -124,8 +130,11 @@ button,input{font:inherit;color:inherit}
       <div class="tools">
         <input class="search" id="q" type="search" placeholder="Suchen nach Absender, Empfänger, Betreff …" autocomplete="off">
         <div class="meta"><span id="count"></span><button class="linkbtn" id="sort" type="button"></button></div>
-        <div class="source" id="source"></div>
-        <div class="sample" id="sampleNote">Das sind drei Beispielmails. Öffne oben deine eigene Datei, dann erscheinen hier deine Mails.</div>
+        <div class="store" id="store"></div>
+        <div class="clearbox"><button class="linkbtn danger" id="clear" type="button">Alle Mails aus dem Leser entfernen</button>
+          <span id="confirm" hidden>Wirklich alle Mails aus dem Leser entfernen? Deine Original-Dateien bleiben unberührt.
+            <span class="confirm-btns"><button class="tab" id="yes" type="button">Ja, entfernen</button><button class="tab" id="no" type="button">Abbrechen</button></span></span></div>
+        <div class="sample" id="sampleNote">Das sind drei Beispielmails. Öffne oben deine eigene Datei, dann erscheinen hier deine Mails und bleiben gespeichert.</div>
       </div>
       <ul id="rows"></ul>
     </aside>
@@ -242,6 +251,18 @@ function splitMbox(s){
     if(i<0)break;start=i+1}
   return out.map(c=>c.slice(c.indexOf('\n')+1).replace(/^>(>*From )/gm,'$1')).filter(c=>c.trim());
 }
+function cleanMsg(c){return c.slice(c.indexOf('\n')+1).replace(/^>(>*From )/gm,'$1')}
+function splitBytes(u8){
+  let st=0;if(u8[0]===0xEF&&u8[1]===0xBB&&u8[2]===0xBF)st=3;
+  while(st<u8.length&&(u8[st]===10||u8[st]===13||u8[st]===32||u8[st]===9))st++;
+  const isFrom=i=>u8[i]===70&&u8[i+1]===114&&u8[i+2]===111&&u8[i+3]===109&&u8[i+4]===32;
+  if(!isFrom(st))return splitMbox(bin2str(u8.subarray(st)));
+  const out=[];let s=st,i=st;
+  while((i=u8.indexOf(10,i+1))>=0){if(isFrom(i+1)){const c=cleanMsg(bin2str(u8.subarray(s,i)));if(c.trim())out.push(c);s=i+1}}
+  const c=cleanMsg(bin2str(u8.subarray(s)));if(c.trim())out.push(c);
+  return out;
+}
+function hashStr(s){let h=2166136261;const n=Math.min(s.length,6000);for(let i=0;i<n;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)+'-'+s.length}
 function nameOf(addr){
   const m=addr.match(/^\s*"?([^"<]*?)"?\s*<([^>]+)>/);
   if(m)return (m[1].trim()||m[2].trim());
@@ -250,7 +271,8 @@ function nameOf(addr){
 function makeMail(raw){
   const [h]=splitHead(raw),H=parseHeaders(h);
   const from=decodeWords(H.from||''),d=new Date(H.date||'');
-  return {raw,from,who:nameOf(from),to:decodeWords(H.to||''),cc:decodeWords(H.cc||''),
+  const mid=(H['message-id']||'').trim();
+  return {id:mid?'m:'+mid:'h:'+hashStr(raw),raw,from,who:nameOf(from),to:decodeWords(H.to||''),cc:decodeWords(H.cc||''),
     subject:decodeWords(H.subject||'')||'(kein Betreff)',date:isNaN(d)?null:d,
     hasAtt:/multipart\/(mixed|related)/i.test(H['content-type']||''),parsed:null};
 }
@@ -288,6 +310,7 @@ function linkify(t){
 function htmlToText(h){try{return new DOMParser().parseFromString(h,'text/html').body.textContent.replace(/\n{3,}/g,'\n\n').trim()}catch(e){return ''}}
 
 function openMail(m){
+  const prev=mails[current];if(prev&&prev!==m)prev.parsed=null;
   current=mails.indexOf(m);
   if(!m.parsed){const out={text:null,html:null,att:[]};try{parseEntity(m.raw,out,0)}catch(e){}m.parsed=out}
   const p=m.parsed;
@@ -328,6 +351,25 @@ function emptyReader(msg){
   $('#reader').innerHTML=`<div class="empty"><div class="mark">POSTFACH</div><p>${msg}</p></div>`;
 }
 
+/* ---------- Dauerhaft speichern (nur auf diesem Gerät) ---------- */
+let db=null;
+function openDB(){return new Promise(res=>{try{const r=indexedDB.open('postfach-leser',1);
+  r.onupgradeneeded=()=>r.result.createObjectStore('mails',{keyPath:'id'});
+  r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}})}
+function dbAll(){return new Promise(res=>{try{const q=db.transaction('mails').objectStore('mails').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>res(null)}catch(e){res(null)}})}
+function dbPut(list){return new Promise(res=>{try{const tx=db.transaction('mails','readwrite'),st=tx.objectStore('mails');
+  list.forEach(m=>st.put({id:m.id,raw:m.raw}));tx.oncomplete=()=>res(true);tx.onerror=tx.onabort=()=>res(false)}catch(e){res(false)}})}
+function dbClear(){return new Promise(res=>{try{const tx=db.transaction('mails','readwrite');tx.objectStore('mails').clear();tx.oncomplete=()=>res(true);tx.onerror=()=>res(false)}catch(e){res(false)}})}
+let saveFailed=false;
+function setStore(){
+  const el=$('#store');
+  if(isSample){el.className='store';el.textContent='';$('.clearbox').hidden=true;return}
+  $('.clearbox').hidden=false;
+  if(db&&!saveFailed){el.className='store ok';el.textContent=mails.length+' Mails sind in diesem Browser gespeichert und bleiben auch nach dem Schließen erhalten.'}
+  else{el.className='store warn';el.textContent='Dieser Browser erlaubt hier kein dauerhaftes Speichern. Die Mails bleiben nur, solange diese Seite offen ist. In Chrome oder Firefox bleiben sie dauerhaft.'}
+}
+const tick=()=>new Promise(r=>setTimeout(r,0));
+
 /* ---------- Laden ---------- */
 const SKIP=/^(table_of_contents|info\.plist|\.ds_store|\._.*|.*\.(plist|sqlite|db|json|png|jpe?g|gif|pdf|zip))$/i;
 async function loadFiles(input){
@@ -340,21 +382,43 @@ async function loadFiles(input){
   const total=[...files].reduce((s,f)=>s+f.size,0);
   emptyReader(`Lese ${files.length>1?files.length+' Dateien':esc(files[0].name)} (${fmtSize(total)}) …`);
   await new Promise(r=>setTimeout(r,30));
-  const list=[];
-  try{
-    for(const f of files){const buf=new Uint8Array(await f.arrayBuffer());splitMbox(bin2str(buf)).forEach(raw=>list.push(makeMail(raw)))}
-  }catch(e){emptyReader('Die Datei ließ sich nicht lesen. Ist sie vielleicht zu groß für den Browser? Versuch es mit einer kleineren Datei oder teile das Postfach auf.');return}
-  if(!list.length){emptyReader('In dieser Datei wurden keine Mails gefunden. Prüfe, ob es eine .mbox- oder .eml-Datei ist.');return}
-  mails=list;isSample=false;current=-1;
-  $('#sampleNote').hidden=true;
-  $('#source').textContent=[...files].map(f=>f.name).join(', ');
-  $('#q').value='';applyFilter();
-  emptyReader(`${mails.length} Mails geladen. Wähle links eine Mail aus.`);
+  if(isSample){mails=[];isSample=false;current=-1;$('#sampleNote').hidden=true}
+  const known=new Set(mails.map(m=>m.id));
+  const fresh=[];let dup=0,failed=0,n=0;
+  for(const f of files){
+    let raws;
+    try{raws=splitBytes(new Uint8Array(await f.arrayBuffer()))}catch(e){failed++;continue}
+    for(const raw of raws){
+      const m=makeMail(raw);
+      if(known.has(m.id)){dup++;continue}
+      known.add(m.id);fresh.push(m);mails.push(m);
+      if(++n%400===0){$('#count').textContent=n+' Mails gelesen …';await tick()}
+    }
+  }
+  if(db&&fresh.length){
+    for(let i=0;i<fresh.length;i+=500){if(!(await dbPut(fresh.slice(i,i+500)))){saveFailed=true;break}}
+  }
+  applyFilter();setStore();
+  if(!fresh.length&&!dup){
+    emptyReader(failed?'Die Datei ließ sich nicht lesen. Ist sie vielleicht zu groß für den Browser? Versuch es mit einer kleineren Datei.':'In dieser Datei wurden keine Mails gefunden. Prüfe, ob es eine .mbox- oder .eml-Datei ist.');
+    return}
+  let msg=`${fresh.length} neue Mails hinzugefügt. Insgesamt sind jetzt ${mails.length} Mails da.`;
+  if(dup)msg+=` ${dup} Mails waren schon vorhanden und wurden nicht doppelt aufgenommen.`;
+  if(saveFailed&&db)msg+=' Achtung: Der Speicherplatz des Browsers reicht nicht für alle Mails. Sie sind jetzt sichtbar, bleiben aber eventuell nicht alle nach dem Schließen erhalten.';
+  emptyReader(msg+' Wähle links eine Mail aus.');
   $('#app').dataset.view='list';
 }
 
 $('#file').addEventListener('change',e=>{loadFiles(e.target.files);e.target.value=''});
 $('#q').addEventListener('input',applyFilter);
+$('#clear').addEventListener('click',()=>{$('#confirm').hidden=false;$('#clear').hidden=true});
+$('#no').addEventListener('click',()=>{$('#confirm').hidden=true;$('#clear').hidden=false});
+$('#yes').addEventListener('click',async()=>{
+  if(db)await dbClear();
+  mails=[];current=-1;saveFailed=false;$('#confirm').hidden=true;$('#clear').hidden=false;
+  applyFilter();setStore();emptyReader('Der Leser ist jetzt leer. Öffne oben eine Mail-Datei, um Mails hinzuzufügen.');
+});
+window.addEventListener('beforeunload',e=>{if(!isSample&&mails.length&&(!db||saveFailed)){e.preventDefault();e.returnValue=''}});
 $('#sort').addEventListener('click',()=>{newestFirst=!newestFirst;applyFilter()});
 $('#rows').addEventListener('click',e=>{
   if(e.target.closest('#more')){shown+=300;renderList();return}
@@ -454,11 +518,22 @@ Content-Transfer-Encoding: base64
 JVBERi0xLjQKJcOkw7zDtsOfCjEgMCBvYmoKPDwvVHlwZS9DYXRhbG9nPj4KZW5kb2JqCg==
 --b2--
 `;
-mails=splitMbox(sample).map(makeMail);
-$('#source').textContent='Beispiel-Postfach';
-applyFilter();
-openMail(filtered[0]);
-if(matchMedia('(max-width:760px)').matches)$('#app').dataset.view='list';
+(async function start(){
+  emptyReader('Lade gespeicherte Mails …');
+  db=await openDB();
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  const recs=db?await dbAll():null;
+  if(recs&&recs.length){
+    isSample=false;$('#sampleNote').hidden=true;mails=[];
+    for(let i=0;i<recs.length;i++){mails.push(makeMail(recs[i].raw));if(i%400===399){$('#count').textContent=(i+1)+' Mails geladen …';await tick()}}
+    applyFilter();setStore();
+    emptyReader(`${mails.length} gespeicherte Mails sind da. Wähle links eine Mail aus.`);
+  }else{
+    mails=splitMbox(sample).map(makeMail);
+    applyFilter();setStore();openMail(filtered[0]);
+  }
+  if(matchMedia('(max-width:760px)').matches)$('#app').dataset.view='list';
+})();
 })();
 </script>
 
