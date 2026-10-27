@@ -39,6 +39,7 @@ button,input{font:inherit;color:inherit}
 .open{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--panel);
   border:0;border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer}
 .open:hover{filter:brightness(1.08)}
+.open.alt{background:var(--panel);color:var(--accent);border:1px solid var(--accent)}
 .open input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .privacy{color:var(--muted);font-size:.82rem;flex-basis:100%}
 
@@ -108,9 +109,14 @@ button,input{font:inherit;color:inherit}
     <label class="open" for="file">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h6l2 2h8v10H4z"/></svg>
       Mail-Datei öffnen
-      <input type="file" id="file" multiple accept=".mbox,.mbx,.eml,.txt,application/mbox,message/rfc822">
+      <input type="file" id="file" multiple>
     </label>
-    <div class="privacy">Deine Mails bleiben auf deinem Gerät. Die Datei wird nur hier im Browser gelesen und nirgendwohin hochgeladen. Du kannst sie auch einfach ins Fenster ziehen.</div>
+    <label class="open alt" for="dir">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/><path d="M3 11h18"/></svg>
+      Mail-Ordner öffnen
+      <input type="file" id="dir" webkitdirectory directory multiple>
+    </label>
+    <div class="privacy">Deine Mails bleiben auf deinem Gerät. Die Datei wird nur hier im Browser gelesen und nirgendwohin hochgeladen. Du kannst sie auch einfach ins Fenster ziehen. Hat Apple Mail dein Postfach exportiert, ist die .mbox in Wahrheit ein Ordner: Nimm dann „Mail-Ordner öffnen“.</div>
   </header>
 
   <div class="main">
@@ -226,6 +232,9 @@ function parseEntity(raw,out,depth){
 
 /* ---------- mbox ---------- */
 function splitMbox(s){
+  s=s.replace(/^\xEF\xBB\xBF/,'').replace(/^\s+/,'');
+  if(/^\d+\s*\n/.test(s)&&!s.startsWith('From ')){ /* Apple-Mail .emlx */
+    const n=parseInt(s,10),body=s.slice(s.indexOf('\n')+1);return [n>0&&n<=body.length?body.slice(0,n):body]}
   if(!s.startsWith('From ')){return s.trim()?[s]:[]}
   const out=[];let start=0;
   while(true){const i=s.indexOf('\nFrom ',start+1);
@@ -320,8 +329,14 @@ function emptyReader(msg){
 }
 
 /* ---------- Laden ---------- */
-async function loadFiles(files){
-  if(!files||!files.length)return;
+const SKIP=/^(table_of_contents|info\.plist|\.ds_store|\._.*|.*\.(plist|sqlite|db|json|png|jpe?g|gif|pdf|zip))$/i;
+async function loadFiles(input){
+  const all=[...(input||[])];
+  if(!all.length)return;
+  const files=all.filter(f=>f.size>0&&!SKIP.test(f.name));
+  if(!files.length){emptyReader(all.length===1&&all[0].size===0
+    ?'Diese .mbox ist offenbar ein Ordner (so speichert Apple Mail exportierte Postfächer). Klicke oben auf „Mail-Ordner öffnen“ und wähle die .mbox dort aus, oder ziehe den Ordner ins Fenster.'
+    :'In der Auswahl war keine lesbare Mail-Datei.');return}
   const total=[...files].reduce((s,f)=>s+f.size,0);
   emptyReader(`Lese ${files.length>1?files.length+' Dateien':esc(files[0].name)} (${fmtSize(total)}) …`);
   await new Promise(r=>setTimeout(r,30));
@@ -358,7 +373,18 @@ let dragDepth=0;
 window.addEventListener('dragenter',e=>{e.preventDefault();dragDepth++;$('#drop').hidden=false});
 window.addEventListener('dragleave',()=>{if(--dragDepth<=0){dragDepth=0;$('#drop').hidden=true}});
 window.addEventListener('dragover',e=>e.preventDefault());
-window.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;$('#drop').hidden=true;loadFiles(e.dataTransfer.files)});
+$('#dir').addEventListener('change',e=>{loadFiles(e.target.files);e.target.value=''});
+function readEntry(en,out){
+  return new Promise(res=>{
+    if(en.isFile){en.file(f=>{out.push(f);res()},()=>res())}
+    else if(en.isDirectory){const r=en.createReader(),batch=()=>r.readEntries(async list=>{
+        if(!list.length)return res();for(const x of list)await readEntry(x,out);batch()},()=>res());batch()}
+    else res()});
+}
+window.addEventListener('drop',async e=>{e.preventDefault();dragDepth=0;$('#drop').hidden=true;
+  const items=[...(e.dataTransfer.items||[])].map(i=>i.webkitGetAsEntry&&i.webkitGetAsEntry()).filter(Boolean);
+  if(items.length&&items.some(x=>x.isDirectory)){const out=[];for(const en of items)await readEntry(en,out);loadFiles(out)}
+  else loadFiles(e.dataTransfer.files)});
 
 /* ---------- Beispielmails ---------- */
 const sample=`From beispiel@example.org Mon Oct 26 09:12:00 2026
