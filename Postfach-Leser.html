@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Postfach-Leser</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: zweispaltiger Mail-Leser – Liste links, Lesebereich rechts; auf dem Handy nacheinander */
+:root{
+  --bg:#ECEFF3; --panel:#FFFFFF; --ink:#1B2430; --muted:#5B6676; --line:#D5DBE3;
+  --accent:#2A5DB0; --accent-soft:#E2EAF8; --stamp:#B5482F;
+  --f-ui:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151C; --panel:#18202A; --ink:#E3E8EF; --muted:#94A1B3; --line:#2A3542;
+  --accent:#86A9EC; --accent-soft:#1E2C45; --stamp:#E08A6F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151C; --panel:#18202A; --ink:#E3E8EF; --muted:#94A1B3; --line:#2A3542;
+  --accent:#86A9EC; --accent-soft:#1E2C45; --stamp:#E08A6F; color-scheme:dark}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.45}
+*{box-sizing:border-box}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.app{height:100%;display:grid;grid-template-rows:auto 1fr;gap:12px;
+  padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;min-width:0}
+.brand h1{margin:0;font-size:1.25rem;letter-spacing:.01em}
+.brand span{color:var(--muted);font-size:.85rem}
+.open{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--panel);
+  border:0;border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer}
+.open:hover{filter:brightness(1.08)}
+.open input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.privacy{color:var(--muted);font-size:.82rem;flex-basis:100%}
+
+.main{display:grid;grid-template-columns:minmax(260px,380px) minmax(0,1fr);gap:12px;min-height:0}
+.list,.reader{background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+
+.tools{padding:12px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.search{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:.82rem}
+.linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;padding:2px 0;font-size:.82rem}
+.source{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sample{font-size:.8rem;background:var(--accent-soft);border-radius:6px;padding:6px 8px}
+
+#rows{list-style:none;margin:0;padding:0;overflow-y:auto;flex:1}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;width:100%;text-align:left;background:none;border:0;
+  border-bottom:1px solid var(--line);padding:10px 12px;cursor:pointer}
+.row:hover{background:var(--bg)}
+.row[aria-current="true"]{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.row .who{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .when{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.row .subj{grid-column:1/-1;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.row .subj svg{flex:none}
+.more{margin:12px;align-self:center}
+.nohit{padding:24px 12px;color:var(--muted);text-align:center}
+
+.reader-head{padding:16px 20px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.back{display:none;justify-self:start}
+.reader-head h2{margin:0;font-size:1.3rem;line-height:1.25;text-wrap:balance;overflow-wrap:anywhere}
+.fields{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;font-size:.88rem}
+.fields dt{color:var(--muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.06em;padding-top:3px}
+.fields dd{margin:0;overflow-wrap:anywhere}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:none;border-radius:999px;padding:4px 12px;font-size:.82rem;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.body{flex:1;overflow:auto;min-height:0;display:flex;flex-direction:column}
+.text{margin:0;padding:18px 20px;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--f-ui);font-size:.95rem;max-width:80ch}
+.text .q{color:var(--muted)}
+.text a{color:var(--accent)}
+.raw{margin:0;padding:18px 20px;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+.htmlframe{flex:1;min-height:420px;border:0;width:100%;background:#fff}
+.atts{border-top:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;gap:8px}
+.att{display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.8rem;max-width:220px}
+.att b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.att small{color:var(--muted);font-family:var(--f-mono)}
+.att img{border-radius:4px;max-height:140px;object-fit:contain;background:var(--bg)}
+
+.empty{margin:auto;padding:32px;text-align:center;color:var(--muted);max-width:42ch}
+.empty .mark{font-family:var(--f-mono);color:var(--stamp);border:2px solid var(--stamp);display:inline-block;padding:4px 10px;border-radius:4px;transform:rotate(-4deg);margin-bottom:14px;letter-spacing:.08em;font-size:.8rem}
+
+.drop{position:fixed;inset:0;background:color-mix(in srgb,var(--accent) 22%,transparent);display:grid;place-items:center;z-index:20;
+  font-size:1.3rem;font-weight:700;color:var(--ink);border:4px dashed var(--accent)}
+
+@media (max-width:760px){
+  .main{grid-template-columns:minmax(0,1fr)}
+  .app:not([data-view="read"]) .reader{display:none}
+  .app[data-view="read"] .list{display:none}
+  .back{display:inline-block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body style="margin:0">
+<div class="app" id="app">
+  <header class="bar">
+    <div class="brand"><h1>Postfach-Leser</h1><span>für .mbox- und .eml-Dateien</span></div>
+    <label class="open" for="file">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h6l2 2h8v10H4z"/></svg>
+      Mail-Datei öffnen
+      <input type="file" id="file" multiple accept=".mbox,.mbx,.eml,.txt,application/mbox,message/rfc822">
+    </label>
+    <div class="privacy">Deine Mails bleiben auf deinem Gerät. Die Datei wird nur hier im Browser gelesen und nirgendwohin hochgeladen. Du kannst sie auch einfach ins Fenster ziehen.</div>
+  </header>
+
+  <div class="main">
+    <aside class="list" aria-label="Mailliste">
+      <div class="tools">
+        <input class="search" id="q" type="search" placeholder="Suchen nach Absender, Empfänger, Betreff …" autocomplete="off">
+        <div class="meta"><span id="count"></span><button class="linkbtn" id="sort" type="button"></button></div>
+        <div class="source" id="source"></div>
+        <div class="sample" id="sampleNote">Das sind drei Beispielmails. Öffne oben deine eigene Datei, dann erscheinen hier deine Mails.</div>
+      </div>
+      <ul id="rows"></ul>
+    </aside>
+    <section class="reader" id="reader" aria-live="polite"></section>
+  </div>
+</div>
+<div class="drop" id="drop" hidden>Datei hier loslassen</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const clip='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-label="Anhang"><path d="M21 11l-8.5 8.5a5 5 0 0 1-7-7L14 4a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L15 7"/></svg>';
+let mails=[], filtered=[], shown=300, current=-1, newestFirst=true, isSample=true;
+
+/* ---------- Bytes & Zeichensätze ---------- */
+function bin2str(u8){let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return s}
+function bytesOf(s){const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i)&255;return u}
+function decodeBytes(s,cs){
+  cs=(cs||'utf-8').trim().toLowerCase().replace(/^"|"$/g,'');
+  if(cs==='us-ascii'||cs==='ascii'||cs==='unknown-8bit'||cs==='x-unknown')cs='utf-8';
+  try{return new TextDecoder(cs).decode(bytesOf(s))}catch(e){
+    try{return new TextDecoder('windows-1252').decode(bytesOf(s))}catch(e2){return s}}
+}
+function smartText(s){
+  if(!/[\x80-\xff]/.test(s))return s;
+  try{return new TextDecoder('utf-8',{fatal:true}).decode(bytesOf(s))}catch(e){return decodeBytes(s,'windows-1252')}
+}
+function decWord(enc,txt){
+  if(enc.toUpperCase()==='B'){const c=txt.replace(/[^A-Za-z0-9+/=]/g,'');try{return atob(c)}catch(e){return atob(c.replace(/=+$/,'').slice(0,c.replace(/=+$/,'').length&~3))}}
+  return txt.replace(/_/g,' ').replace(/=([0-9A-Fa-f]{2})/g,(m,h)=>String.fromCharCode(parseInt(h,16)));
+}
+function decodeWords(v){
+  if(!v)return '';
+  const re=/=\?([^?*]+)(?:\*[^?]*)?\?([BbQq])\?([^?]*)\?=/g;
+  let out='',last=0,pend=null,m;
+  const flush=()=>{if(pend){out+=decodeBytes(pend.b,pend.cs);pend=null}};
+  while((m=re.exec(v))){
+    const gap=v.slice(last,m.index);
+    if(!(pend&&/^\s*$/.test(gap))){flush();out+=smartText(gap)}
+    let b;try{b=decWord(m[2],m[3])}catch(e){flush();out+=m[0];last=re.lastIndex;continue}
+    if(pend&&pend.cs.toLowerCase()===m[1].toLowerCase())pend.b+=b;else{flush();pend={cs:m[1],b}}
+    last=re.lastIndex;
+  }
+  flush();out+=smartText(v.slice(last));
+  return out;
+}
+
+/* ---------- MIME ---------- */
+function splitHead(raw){const m=raw.match(/\r?\n\r?\n/);return m?[raw.slice(0,m.index),raw.slice(m.index+m[0].length)]:[raw,'']}
+function parseHeaders(h){
+  const o={};
+  h.replace(/\r?\n[ \t]+/g,' ').split(/\r?\n/).forEach(l=>{const i=l.indexOf(':');if(i>0){const k=l.slice(0,i).trim().toLowerCase();if(!(k in o))o[k]=l.slice(i+1).trim()}});
+  return o;
+}
+function splitParams(v){const out=[];let cur='',q=false;for(const ch of v){if(ch==='"')q=!q;if(ch===';'&&!q){out.push(cur);cur=''}else cur+=ch}out.push(cur);return out}
+function parseCT(v){
+  const res={type:'',params:{}};if(!v)return res;
+  const parts=splitParams(v);res.type=parts[0].trim().toLowerCase();
+  const ext={};
+  parts.slice(1).forEach(p=>{
+    const i=p.indexOf('=');if(i<=0)return;
+    const k=p.slice(0,i).trim().toLowerCase();let val=p.slice(i+1).trim().replace(/^"([\s\S]*)"$/,'$1');
+    const m=k.match(/^([^*]+)\*(?:(\d+)\*?|)?$/);
+    if(m&&k.includes('*')){const enc=k.endsWith('*');(ext[m[1]]=ext[m[1]]||[])[+(m[2]||0)]={val,enc}}
+    else res.params[k]=val;
+  });
+  for(const base in ext){
+    let cs='utf-8',bytes='';
+    ext[base].forEach((seg,i)=>{if(!seg)return;let v=seg.val;
+      if(seg.enc){if(i===0){const mm=v.match(/^([^']*)'[^']*'([\s\S]*)$/);if(mm){cs=mm[1]||cs;v=mm[2]}}
+        bytes+=v.replace(/%([0-9A-Fa-f]{2})/g,(x,h)=>String.fromCharCode(parseInt(h,16)))}else bytes+=v});
+    res.params[base]=decodeBytes(bytes,cs);
+  }
+  return res;
+}
+function decTE(b,enc){
+  if(enc==='base64'){const c=b.replace(/[^A-Za-z0-9+/]/g,'');try{return atob(c.slice(0,c.length&~3)+(c.length%4===2?'==':c.length%4===3?'=':''))}catch(e){return ''}}
+  if(enc==='quoted-printable')return b.replace(/=\r?\n/g,'').replace(/=([0-9A-Fa-f]{2})/g,(m,h)=>String.fromCharCode(parseInt(h,16)));
+  return b;
+}
+function splitMultipart(body,bd){
+  const lines=body.split(/\r?\n/),parts=[],d='--'+bd;let cur=null;
+  for(const l of lines){const t=l.replace(/[ \t]+$/,'');
+    if(t===d){if(cur)parts.push(cur.join('\n'));cur=[]}
+    else if(t===d+'--'){if(cur)parts.push(cur.join('\n'));cur=null;break}
+    else if(cur)cur.push(l)}
+  if(cur&&cur.length)parts.push(cur.join('\n'));
+  return parts;
+}
+function parseEntity(raw,out,depth){
+  const [h,b]=splitHead(raw),H=parseHeaders(h),ct=parseCT(H['content-type']),cd=parseCT(H['content-disposition']);
+  const type=ct.type||'text/plain';
+  if(type.startsWith('multipart/')&&ct.params.boundary&&depth<12){splitMultipart(b,ct.params.boundary).forEach(p=>parseEntity(p,out,depth+1));return}
+  const enc=(H['content-transfer-encoding']||'').toLowerCase().trim();
+  const name=decodeWords(cd.params.filename||ct.params.name||'');
+  const isAtt=cd.type==='attachment';
+  if(!isAtt&&!name&&type==='text/plain'&&out.text==null){out.text=decodeBytes(decTE(b,enc),ct.params.charset);return}
+  if(!isAtt&&!name&&type==='text/html'&&out.html==null){out.html=decodeBytes(decTE(b,enc),ct.params.charset);return}
+  if(!isAtt&&!name&&type.startsWith('text/'))return;
+  const data=decTE(b,enc);
+  out.att.push({name:name||(type==='message/rfc822'?'weitergeleitete Nachricht.eml':'(ohne Namen)'),type,size:data.length,
+    cid:(H['content-id']||'').replace(/^<|>$/g,''),data});
+}
+
+/* ---------- mbox ---------- */
+function splitMbox(s){
+  if(!s.startsWith('From ')){return s.trim()?[s]:[]}
+  const out=[];let start=0;
+  while(true){const i=s.indexOf('\nFrom ',start+1);
+    const chunk=s.slice(start,i<0?s.length:i);out.push(chunk);
+    if(i<0)break;start=i+1}
+  return out.map(c=>c.slice(c.indexOf('\n')+1).replace(/^>(>*From )/gm,'$1')).filter(c=>c.trim());
+}
+function nameOf(addr){
+  const m=addr.match(/^\s*"?([^"<]*?)"?\s*<([^>]+)>/);
+  if(m)return (m[1].trim()||m[2].trim());
+  return addr.replace(/[<>]/g,'').trim()||'(unbekannt)';
+}
+function makeMail(raw){
+  const [h]=splitHead(raw),H=parseHeaders(h);
+  const from=decodeWords(H.from||''),d=new Date(H.date||'');
+  return {raw,from,who:nameOf(from),to:decodeWords(H.to||''),cc:decodeWords(H.cc||''),
+    subject:decodeWords(H.subject||'')||'(kein Betreff)',date:isNaN(d)?null:d,
+    hasAtt:/multipart\/(mixed|related)/i.test(H['content-type']||''),parsed:null};
+}
+
+/* ---------- Anzeige ---------- */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtShort=d=>{if(!d)return '–';const now=new Date();
+  if(d.toDateString()===now.toDateString())return d.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});
+  return d.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:d.getFullYear()===now.getFullYear()?undefined:'2-digit'})};
+const fmtLong=d=>d?d.toLocaleString('de-AT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'unbekannt';
+const fmtSize=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(0)+' KB':(n/1048576).toFixed(1)+' MB';
+
+function applyFilter(){
+  const q=$('#q').value.trim().toLowerCase();
+  filtered=mails.filter(m=>!q||(m.from+' '+m.to+' '+m.cc+' '+m.subject).toLowerCase().includes(q));
+  filtered.sort((a,b)=>{const x=a.date?a.date.getTime():0,y=b.date?b.date.getTime():0;return newestFirst?y-x:x-y});
+  shown=300;renderList();
+}
+function renderList(){
+  const ul=$('#rows');
+  $('#count').textContent=filtered.length===mails.length?mails.length+' Mails':filtered.length+' von '+mails.length+' Mails';
+  $('#sort').textContent=newestFirst?'Neueste zuerst':'Älteste zuerst';
+  if(!filtered.length){ul.innerHTML='<li class="nohit">Keine Mail passt zu deiner Suche.</li>';return}
+  ul.innerHTML=filtered.slice(0,shown).map((m,i)=>
+    `<li><button class="row" type="button" data-i="${i}" aria-current="${mails.indexOf(m)===current}">
+      <span class="who">${esc(m.who)}</span><span class="when">${fmtShort(m.date)}</span>
+      <span class="subj">${m.hasAtt?clip:''}<span>${esc(m.subject)}</span></span></button></li>`).join('')+
+    (filtered.length>shown?`<li style="display:flex"><button class="open more" type="button" id="more">${Math.min(300,filtered.length-shown)} weitere anzeigen</button></li>`:'');
+}
+function linkify(t){
+  return esc(t).split('\n').map(l=>{
+    l=l.replace(/(https?:\/\/[^\s<&]+|www\.[^\s<&]+)/g,u=>`<a href="${u.startsWith('www.')?'http://'+u:u}" target="_blank" rel="noopener noreferrer">${u}</a>`);
+    return /^\s*&gt;/.test(l)?`<span class="q">${l}</span>`:l}).join('\n');
+}
+function htmlToText(h){try{return new DOMParser().parseFromString(h,'text/html').body.textContent.replace(/\n{3,}/g,'\n\n').trim()}catch(e){return ''}}
+
+function openMail(m){
+  current=mails.indexOf(m);
+  if(!m.parsed){const out={text:null,html:null,att:[]};try{parseEntity(m.raw,out,0)}catch(e){}m.parsed=out}
+  const p=m.parsed;
+  const views=[];if(p.html)views.push(['html','Formatiert']);views.push(['text','Text']);views.push(['raw','Quelltext']);
+  const r=$('#reader');
+  r.innerHTML=`<div class="reader-head">
+      <button class="linkbtn back" type="button" id="back">← zurück zur Liste</button>
+      <h2>${esc(m.subject)}</h2>
+      <dl class="fields"><dt>Von</dt><dd>${esc(m.from)||'–'}</dd>
+        ${m.to?`<dt>An</dt><dd>${esc(m.to)}</dd>`:''}${m.cc?`<dt>Cc</dt><dd>${esc(m.cc)}</dd>`:''}
+        <dt>Datum</dt><dd>${esc(fmtLong(m.date))}</dd></dl>
+      <div class="tabs" role="tablist">${views.map((v,i)=>`<button class="tab" role="tab" type="button" data-v="${v[0]}" aria-selected="${i===0}">${v[1]}</button>`).join('')}</div>
+    </div><div class="body" id="mbody"></div>`+
+    (p.att.length?`<div class="atts">${p.att.map(a=>`<div class="att">${/^image\//.test(a.type)&&a.size<8e6?`<img alt="" src="data:${esc(a.type)};base64,${btoa(a.data)}">`:''}<b title="${esc(a.name)}">${esc(a.name)}</b><small>${esc(a.type)} · ${fmtSize(a.size)}</small></div>`).join('')}</div>`:'');
+  showView(views[0][0]);
+  r.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{r.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));showView(t.dataset.v)});
+  $('#back').onclick=()=>{$('#app').dataset.view='list'};
+  $('#app').dataset.view='read';
+  document.querySelectorAll('.row').forEach(b=>b.setAttribute('aria-current',filtered[+b.dataset.i]===m));
+}
+function showView(v){
+  const m=mails[current],p=m.parsed,box=$('#mbody');
+  if(v==='html'){
+    let h=p.html;
+    p.att.forEach(a=>{if(a.cid&&/^image\//.test(a.type))h=h.split('cid:'+a.cid).join(`data:${a.type};base64,${btoa(a.data)}`)});
+    const f=document.createElement('iframe');f.className='htmlframe';f.title='Mailinhalt';
+    f.setAttribute('sandbox','allow-popups allow-popups-to-escape-sandbox');
+    f.srcdoc='<meta charset="utf-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;color:#222;background:#fff;margin:16px;overflow-wrap:anywhere}img{max-width:100%;height:auto}</style>'+h;
+    box.innerHTML='';box.appendChild(f);
+  }else if(v==='text'){
+    const t=p.text!=null?p.text:(p.html?htmlToText(p.html):'');
+    box.innerHTML=`<pre class="text">${t.trim()?linkify(t):'<span class="q">Diese Mail hat keinen lesbaren Text.</span>'}</pre>`;
+  }else{
+    box.innerHTML=`<pre class="raw">${esc(smartText(m.raw.length>400000?m.raw.slice(0,400000)+'\n\n[… gekürzt]':m.raw))}</pre>`;
+  }
+}
+function emptyReader(msg){
+  $('#reader').innerHTML=`<div class="empty"><div class="mark">POSTFACH</div><p>${msg}</p></div>`;
+}
+
+/* ---------- Laden ---------- */
+async function loadFiles(files){
+  if(!files||!files.length)return;
+  const total=[...files].reduce((s,f)=>s+f.size,0);
+  emptyReader(`Lese ${files.length>1?files.length+' Dateien':esc(files[0].name)} (${fmtSize(total)}) …`);
+  await new Promise(r=>setTimeout(r,30));
+  const list=[];
+  try{
+    for(const f of files){const buf=new Uint8Array(await f.arrayBuffer());splitMbox(bin2str(buf)).forEach(raw=>list.push(makeMail(raw)))}
+  }catch(e){emptyReader('Die Datei ließ sich nicht lesen. Ist sie vielleicht zu groß für den Browser? Versuch es mit einer kleineren Datei oder teile das Postfach auf.');return}
+  if(!list.length){emptyReader('In dieser Datei wurden keine Mails gefunden. Prüfe, ob es eine .mbox- oder .eml-Datei ist.');return}
+  mails=list;isSample=false;current=-1;
+  $('#sampleNote').hidden=true;
+  $('#source').textContent=[...files].map(f=>f.name).join(', ');
+  $('#q').value='';applyFilter();
+  emptyReader(`${mails.length} Mails geladen. Wähle links eine Mail aus.`);
+  $('#app').dataset.view='list';
+}
+
+$('#file').addEventListener('change',e=>{loadFiles(e.target.files);e.target.value=''});
+$('#q').addEventListener('input',applyFilter);
+$('#sort').addEventListener('click',()=>{newestFirst=!newestFirst;applyFilter()});
+$('#rows').addEventListener('click',e=>{
+  if(e.target.closest('#more')){shown+=300;renderList();return}
+  const b=e.target.closest('.row');if(b)openMail(filtered[+b.dataset.i]);
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input')||!filtered.length)return;
+  if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+  e.preventDefault();
+  let i=filtered.indexOf(mails[current]);i=e.key==='ArrowDown'?Math.min(filtered.length-1,i+1):Math.max(0,i-1);
+  if(i>=shown){shown=i+1;renderList()}
+  openMail(filtered[i]);
+  const b=document.querySelector(`.row[data-i="${i}"]`);if(b)b.scrollIntoView({block:'nearest'});
+});
+let dragDepth=0;
+window.addEventListener('dragenter',e=>{e.preventDefault();dragDepth++;$('#drop').hidden=false});
+window.addEventListener('dragleave',()=>{if(--dragDepth<=0){dragDepth=0;$('#drop').hidden=true}});
+window.addEventListener('dragover',e=>e.preventDefault());
+window.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;$('#drop').hidden=true;loadFiles(e.dataTransfer.files)});
+
+/* ---------- Beispielmails ---------- */
+const sample=`From beispiel@example.org Mon Oct 26 09:12:00 2026
+From: =?UTF-8?Q?Gartenverein_Sch=C3=B6nblick?= <info@example.org>
+To: du@example.com
+Subject: =?UTF-8?Q?Einladung_zum_Herbstfest_=E2=80=93_Beispielmail?=
+Date: Mon, 26 Oct 2026 09:12:00 +0100
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b1"
+
+--b1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Liebe Mitglieder,
+
+am Samstag feiern wir unser Herbstfest mit S=C3=BC=C3=9Fmost und Kastanien.
+Mehr Infos: https://example.org/herbstfest
+
+Herzliche Gr=C3=BC=C3=9Fe
+--b1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<div style=3D"font-family:Georgia,serif;max-width:520px"><h2 style=3D"color:#7a3b1d">Herbstfest im Garten</h2><p>Liebe Mitglieder,</p><p>am <b>Samstag</b> feiern wir unser Herbstfest mit S=C3=BC=C3=9Fmost und Kastanien.</p><p><a href=3D"https://example.org/herbstfest">Mehr Infos</a></p><p>Herzliche Gr=C3=BC=C3=9Fe</p></div>
+--b1--
+
+From beispiel@example.org Fri Oct 23 17:40:00 2026
+From: "Muster Anna" <anna@example.net>
+To: du@example.com
+Subject: Re: Termin morgen (Beispielmail)
+Date: Fri, 23 Oct 2026 17:40:00 +0200
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hallo,
+
+passt mir gut, dann bis morgen um zehn!
+
+Anna
+
+> Geht morgen um 10 Uhr bei dir?
+> Liebe Gr=C3=BC=C3=9Fe
+
+From beispiel@example.org Tue Oct 20 08:05:00 2026
+From: Rechnungsstelle <rechnung@example.com>
+To: du@example.com
+Subject: =?ISO-8859-1?Q?Ihre_Unterlagen_f=FCr_Oktober_(Beispielmail)?=
+Date: Tue, 20 Oct 2026 08:05:00 +0200
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="b2"
+
+--b2
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Guten Tag,
+
+anbei finden Sie die Unterlagen f=FCr Oktober.
+
+Mit freundlichen Gr=FC=DFen
+--b2
+Content-Type: application/pdf; name="Oktober.pdf"
+Content-Disposition: attachment; filename="Oktober.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKJcOkw7zDtsOfCjEgMCBvYmoKPDwvVHlwZS9DYXRhbG9nPj4KZW5kb2JqCg==
+--b2--
+`;
+mails=splitMbox(sample).map(makeMail);
+$('#source').textContent='Beispiel-Postfach';
+applyFilter();
+openMail(filtered[0]);
+if(matchMedia('(max-width:760px)').matches)$('#app').dataset.view='list';
+})();
+</script>
+
+</body>
+</html>
