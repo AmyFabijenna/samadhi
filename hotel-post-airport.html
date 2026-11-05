@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English on the Road</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ec; --card:#ffffff; --ink:#1b1b1f; --muted:#5b5862; --line:#e4ddd2;
+  --sky:#34527e; --petrol:#1d6a70; --lilac:#5f4a72; --terra:#9a5a3c; --moss:#4f6b45;
+  --soft-sky:#e7edf5; --soft-pet:#e1efee; --soft-lil:#ede7f1; --soft-terra:#f4e9e1; --soft-moss:#e8efe4;
+  --ok:#2f7a57; --ok-bg:#e3f1e9; --bad:#a3463e; --bad-bg:#f6e4e1;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Lexend",system-ui,sans-serif;font-size:18px;line-height:1.6;font-weight:300}
+button,select,input{font-family:inherit;font-size:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 80px}
+header.top{background:linear-gradient(135deg,#2c4669 0%,#1d6a70 60%,#5f4a72 100%);color:#fff;border-radius:26px;padding:30px 30px 26px;margin-bottom:22px;box-shadow:0 10px 30px rgba(30,40,60,.15)}
+header.top h1{margin:0 0 6px;font-size:2rem;font-weight:600;letter-spacing:-.01em}
+header.top p{margin:0;opacity:.92;font-size:1.05rem}
+.topbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:6px 16px;font-size:.95rem}
+.pill select{background:transparent;color:#fff;border:none;outline:none}
+.pill select option{color:#000}
+.topics{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.tchip{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:8px 18px;cursor:pointer;font-weight:400}
+.tchip.on{background:#fff;color:#2c4669;border-color:#fff;font-weight:600}
+nav.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin-bottom:24px}
+nav.modes button{display:flex;gap:12px;align-items:center;text-align:left;background:var(--card);border:2px solid transparent;border-radius:18px;padding:12px 14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.15s;color:var(--ink)}
+nav.modes button:hover{transform:translateY(-2px)}
+nav.modes button.active{border-color:var(--c)}
+nav.modes .num{flex:0 0 38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;background:var(--c);font-weight:600}
+nav.modes .t{font-weight:500;line-height:1.25}
+nav.modes .s{display:block;font-size:.8rem;color:var(--muted);font-weight:300}
+section.mode{display:none}
+section.mode.show{display:block}
+.intro{background:var(--card);border-radius:20px;padding:18px 22px;margin-bottom:18px;border-left:6px solid var(--c);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.intro h2{margin:0 0 4px;font-weight:600;font-size:1.45rem;color:var(--c)}
+.intro p{margin:0;color:var(--muted)}
+.card{background:var(--card);border-radius:20px;padding:20px 22px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:16px}
+.muted{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.btn{background:var(--c,var(--sky));color:#fff;border:none;border-radius:14px;padding:10px 20px;cursor:pointer;font-weight:500}
+.btn.ghost{background:transparent;color:var(--c,var(--sky));border:2px solid var(--c,var(--sky))}
+.btn.small{padding:6px 14px;font-size:.92rem}
+.spk{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:none;background:var(--soft-sky);color:var(--sky);cursor:pointer;display:inline-grid;place-items:center;margin-left:8px}
+.spk:hover{background:var(--sky);color:#fff}
+.spk svg{width:18px;height:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.92rem;color:var(--ink)}
+.chip.on{background:var(--c);border-color:var(--c);color:#fff}
+.toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.toolbar input[type=search]{flex:1 1 240px;padding:10px 16px;border-radius:14px;border:2px solid var(--line);background:#fff}
+.switch{display:flex;gap:8px;align-items:center;cursor:pointer;font-size:.95rem}
+.switch input{width:20px;height:20px;accent-color:var(--petrol)}
+.scene{background:var(--card);border-radius:22px;padding:18px 20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.guest{display:flex;align-items:center;gap:10px;background:var(--soft-sky);border-radius:18px 18px 18px 4px;padding:12px 16px;margin-bottom:12px}
+.guest p{margin:0;flex:1;font-weight:500}
+.who{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sky);font-weight:600;flex:0 0 auto}
+.answers{display:grid;gap:10px}
+.ans{display:flex;align-items:flex-start;gap:10px;border-radius:16px;padding:10px 14px;border:1px solid var(--line)}
+.ans p{margin:0;flex:1}
+.ans .tag{flex:0 0 96px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding-top:4px}
+.ans.l0{background:#faf8f5}.ans.l0 .tag{color:var(--terra)}
+.ans.l1{background:var(--soft-pet)}.ans.l1 .tag{color:var(--petrol)}
+.ans.l2{background:var(--soft-lil)}.ans.l2 .tag{color:var(--lilac)}
+mark{background:#f3e3b8;border-radius:6px;padding:0 4px}
+.answers.hide .ans p{filter:blur(7px);user-select:none}
+.progress{display:flex;justify-content:space-between;color:var(--muted);font-size:.95rem;margin-bottom:10px}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--c);transition:.3s}
+.qcard .label{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+.qline{display:flex;align-items:center;font-size:1.25rem;font-weight:500}
+.qline span{flex:1}
+.starter{font-size:1.25rem;margin-top:12px}
+.starter b{color:var(--c);font-weight:600}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 16px;cursor:pointer;color:var(--ink);transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--c)}
+.opt .letter{flex:0 0 32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--soft-sky);color:var(--sky);font-weight:600}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.right .letter{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.wrong .letter{background:var(--bad);color:#fff}
+.opt:disabled{cursor:default}
+.feedback{margin-top:14px}
+.fb{border-radius:14px;padding:10px 14px;margin-bottom:8px;font-size:.95rem}
+.fb.ok{background:var(--ok-bg);border-left:5px solid var(--ok)}
+.fb.no{background:#f7f4f0;border-left:5px solid #c9b9a8}
+.fb b{font-weight:600}
+.tipbox{background:var(--soft-terra);border-radius:14px;padding:10px 14px;margin-top:8px;font-size:.95rem}
+.alts{background:var(--soft-lil);border-radius:14px;padding:10px 14px;margin-top:8px}
+.alts div{display:flex;align-items:center;margin:4px 0}
+.alts div span{flex:1}
+.rude{background:var(--bad-bg);border-radius:14px;padding:10px 14px;margin-top:10px;text-decoration:line-through;text-decoration-color:var(--bad);color:#6b3b36}
+.place{display:inline-block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;border-radius:999px;padding:2px 10px;margin-bottom:8px;background:var(--soft-lil);color:var(--lilac)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcol{display:grid;gap:10px;align-content:start}
+.mitem{border:2px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;cursor:pointer;text-align:left;color:var(--ink);transition:.15s}
+.mitem.sel{border-color:var(--c);background:var(--soft-pet)}
+.mitem.done{border-color:var(--ok);background:var(--ok-bg);cursor:default;opacity:.75}
+.mitem.shake{animation:shake .35s;border-color:var(--bad)}
+.mitem.expr{font-weight:500}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.learned{display:grid;gap:8px;margin-top:6px}
+.learned div{background:var(--soft-moss);border-radius:12px;padding:8px 12px;font-size:.95rem;display:flex;align-items:center}
+.learned div span{flex:1}
+.m10{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.qrow{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.qrow .n{flex:0 0 30px;height:30px;border-radius:10px;background:var(--soft-lil);color:var(--lilac);display:grid;place-items:center;font-weight:600}
+.qrow p{margin:0;flex:1}
+.qrow select{flex:0 0 74px;padding:6px;border-radius:10px;border:2px solid var(--line);background:#fff}
+.qrow select.ok{border-color:var(--ok);background:var(--ok-bg)}
+.qrow select.no{border-color:var(--bad);background:var(--bad-bg)}
+.arow{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.arow .n{flex:0 0 30px;height:30px;border-radius:10px;background:var(--soft-terra);color:var(--terra);display:grid;place-items:center;font-weight:600}
+.arow p{margin:0;flex:1}
+.line,.pool{min-height:62px;border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.line{background:var(--soft-pet);border:2px dashed var(--petrol);margin:10px 0}
+.pool{background:#faf8f5;border:1px solid var(--line)}
+.word{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;color:var(--ink)}
+.line .word{border-color:var(--petrol)}
+.gap{display:inline-block;padding:4px 8px;margin:0 3px;border-radius:10px;border:2px solid var(--line);background:#fff;color:var(--ink)}
+.gap.ok{border-color:var(--ok);background:var(--ok-bg)}
+.gap.no{border-color:var(--bad);background:var(--bad-bg)}
+.gline{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.gline .n{flex:0 0 30px;color:var(--muted)}
+.gline .txt{flex:1;line-height:2.2}
+.gline .sol{display:block;font-size:.88rem;color:var(--bad);line-height:1.4}
+.storylist{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.story{background:var(--card);border-radius:20px;padding:18px;cursor:pointer;border:2px solid transparent;box-shadow:0 2px 10px rgba(0,0,0,.05);text-align:left;color:var(--ink)}
+.story:hover{border-color:var(--c)}
+.story h3{margin:0 0 6px;color:var(--c);font-weight:600}
+.story p{margin:0;color:var(--muted);font-size:.95rem}
+.result{text-align:center;padding:30px}
+.result .big{font-size:2.6rem;font-weight:600;color:var(--c)}
+.playbig{width:84px;height:84px;border-radius:50%;border:none;background:var(--c);color:#fff;cursor:pointer;display:grid;place-items:center;margin:6px auto 10px}
+.playbig svg{width:36px;height:36px}
+.hiddenq{filter:blur(8px);user-select:none}
+@media (max-width:720px){
+  .match,.m10{grid-template-columns:1fr}
+  header.top h1{font-size:1.55rem}
+  .ans{flex-wrap:wrap}.ans .tag{flex-basis:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>English on the Road</h1>
+    <p>Hotel reception, post office, airport – understand what people say to you, and always find the right, elegant answer.</p>
+    <div class="topics" id="topics">
+      <button class="tchip on" data-a="all">All three places</button>
+      <button class="tchip" data-a="h">🛎 Hotel reception</button>
+      <button class="tchip" data-a="p">✉ Post office</button>
+      <button class="tchip" data-a="a">✈ Airport</button>
+    </div>
+    <div class="topbar">
+      <span class="pill">★ Points: <b id="score">0</b></span>
+      <span class="pill">Voice speed:
+        <select id="rate"><option value="0.7">slow</option><option value="0.85" selected>relaxed</option><option value="1">normal</option></select>
+      </span>
+      <span class="pill">Tip: click the speaker to hear every sentence</span>
+    </div>
+  </header>
+  <nav class="modes" id="nav"></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+/* ================= DATA ================= */
+/* a: h = hotel reception, p = post office, a = airport */
+const AREAN={h:"Hotel reception",p:"Post office",a:"Airport"};
+const SAYS={h:"At the hotel, the receptionist says",p:"At the post office, the clerk says",a:"At the airport, you hear"};
+const LV=["Short","Polite","Detailed & elegant"];
+
+const PHRASES=[
+/* ---------- HOTEL ---------- */
+{a:"h",who:"Receptionist",cat:"Hotel · Arrival & Check-in",items:[
+["Good evening! How can I help you?","I have a reservation.","Good evening! I have a reservation under the name [your name].","Good evening! I booked a double room for three nights – the reservation is under the name [your name]. Here's my booking confirmation on my phone."],
+["Could I see your passport, please?","Of course, here you are.","Of course – here's my passport.","Certainly, here's my passport. Do you also need my credit card for the deposit?"],
+["How many nights are you staying?","Three nights.","Three nights, please – until Sunday.","We're staying for three nights, so we'll check out on Sunday morning. Would it be possible to add one more night if we decide to stay longer?"],
+["I'm afraid your room isn't ready yet. Check-in is from three o'clock.","OK, no problem.","No problem. Can I leave my luggage here?","That's absolutely fine. Could you keep my suitcase for me until then? I'd like to go into town for lunch – perhaps you could recommend a nice place nearby?"],
+["Would you like a room with a view or a quieter room at the back?","A quiet room, please.","I'd prefer a quiet room, please – I sleep badly when it's noisy.","A quiet room would be perfect, thank you. I start work early, so a good night's sleep is more important to me than the view."],
+["Could you fill in this form, please?","Sure. Do you have a pen?","Of course. Could I borrow a pen, please?","Of course. Should I write my home address or my business address? And do I need to sign at the bottom?"]
+]},
+{a:"h",who:"Receptionist",cat:"Hotel · Room & Facilities",items:[
+["Here's your key card. Your room is on the fourth floor.","Thank you. Where's the lift?","Thank you very much. Where's the lift, please?","Thank you! Could you tell me where the lift is? And does the key card also open the door to the gym?"],
+["Breakfast is served from seven to ten in the restaurant.","Great, thanks.","Thank you. Is it included in the price?","Wonderful, thank you. Is breakfast included in my room rate, or do I pay for it separately? And are there vegetarian options?"],
+["Is there anything else I can help you with?","What's the Wi-Fi password?","Yes – could you tell me the Wi-Fi password, please?","Yes, two small things: what's the Wi-Fi password, and is there a safe in the room for my laptop?"],
+["The pool is on the ground floor. It's open until nine.","Do I need a towel?","Thank you. Are there towels at the pool?","Thank you! Are towels provided there, or should I take the ones from my room? And is the sauna included as well?"],
+["Would you like a wake-up call?","Yes, at six, please.","Yes, please – at six o'clock tomorrow morning.","Yes, that would be great. Could you call me at six tomorrow morning? I have an early train, and I really don't want to oversleep."],
+["Do you need a parking space?","No, thanks. I came by train.","No, thank you – I don't have a car.","No, thank you, I came by train. But could you tell me the easiest way to get to the city centre by public transport?"]
+]},
+{a:"h",who:"Receptionist",cat:"Hotel · Services & Tips",items:[
+["Good morning! Did you sleep well?","Yes, very well, thanks.","Yes, very well, thank you. The bed is really comfortable.","Yes, wonderfully, thank you! The room is very quiet. By the way, could you book me a taxi to the station for eleven o'clock?"],
+["Shall I call a taxi for you?","Yes, please.","Yes, please – for ten o'clock, if possible.","That would be very kind. I need to be at the airport by twelve, so could you order it for ten o'clock? How much does it usually cost?"],
+["Would you like us to clean your room today?","No, thanks.","Not today, thank you – but could I have fresh towels?","Not today, thank you – I'm working in the room this morning. But I'd be grateful for two fresh towels and some more coffee for the machine."],
+["We have a laundry service. Do you have anything to wash?","Yes, two shirts.","Yes, please – two shirts. When will they be ready?","Yes, thank you. I have two shirts and a pair of trousers. Could they be ready by tomorrow morning? I have an important meeting."],
+["Are you looking for something special in town?","A good restaurant.","Yes – could you recommend a good place for dinner?","Yes, actually. I'd love to try the local food. Could you recommend a traditional restaurant within walking distance – nothing too touristy?"],
+["We can keep valuables in the hotel safe.","Thanks, that's good.","Thank you – may I leave my passport there?","That's very helpful, thank you. Could I leave my passport and some cash there while I'm out today? Until what time can I collect them?"]
+]},
+{a:"h",who:"Receptionist",cat:"Hotel · Problems in the Room",items:[
+["Reception, how can I help?","The air conditioning doesn't work.","Hello, this is room [412]. I'm afraid the air conditioning isn't working.","Hello, this is room [412]. I'm sorry to bother you, but the air conditioning isn't working and it's very warm in the room. Could someone come up and have a look?"],
+["Is everything all right with your room?","Not really – it's noisy.","Actually, it's quite noisy. Is there a quieter room?","To be honest, not quite. The room is right above the bar, and the music is loud until midnight. Would it be possible to move to a quieter room?"],
+["What's the problem with the shower?","There's no hot water.","There's no hot water, I'm afraid.","I've let the water run for ten minutes, but it's still cold. Could you send someone to check it, or should I try again later?"],
+["Have you locked yourself out?","Yes, my key is inside.","Yes, I'm afraid I left my key card in the room.","Yes, I'm really sorry – I left my key card on the desk in my room. Could you give me a new one? Here's my passport, so you can see it's really me."],
+["I'm afraid we have no rooms with a bath, only showers.","That's fine.","That's fine – a shower is OK.","That's no problem at all – a shower is fine. But could I have an extra blanket, please? I get cold quite easily."],
+["Did you take anything from the minibar?","No, nothing.","No, I didn't take anything from it.","No, I didn't use the minibar at all. But I think there's a mistake on my bill – there are two drinks on it."]
+]},
+{a:"h",who:"Receptionist",cat:"Hotel · Check-out & Paying",items:[
+["Good morning! Are you checking out?","Yes, room [412].","Yes, please. Here's my key card – room [412].","Yes, I am. Here's my key card – room [412]. Could I pay the bill and leave my suitcase here until this afternoon?"],
+["How would you like to pay?","By card, please.","By credit card, please.","By credit card, please. And could I have an invoice with my company's name on it? Here's the address."],
+["Did you enjoy your stay?","Yes, very much!","Yes, very much, thank you. The staff were very friendly.","Very much, thank you! The room was lovely and the breakfast was excellent. I'll definitely come back and recommend you to my friends."],
+["There's a city tax of three euros per night.","OK.","I see. Is that per person?","I see – thank you for explaining. Is that per person or per room? And is it already on the bill?"],
+["Check-out is at eleven o'clock.","OK, thanks.","Could I have a late check-out, please?","Thank you. My flight isn't until the evening – would a late check-out at two o'clock be possible? I'm happy to pay a little extra."],
+["Would you like a receipt?","Yes, please.","Yes, please – I need it for my business.","Yes, please. Could you print it with my company name on it? I need it for my business expenses."]
+]},
+/* ---------- POST OFFICE ---------- */
+{a:"p",who:"Clerk",cat:"Post Office · Letters & Stamps",items:[
+["Next, please! How can I help you?","Three stamps, please.","I'd like three stamps for postcards to China, please.","Good morning! I'd like to send these three postcards to China. How much is a stamp, and how long will they take to arrive?"],
+["Where would you like to send it?","To China.","To [Shanghai], in China.","It's going to [Shanghai], in China. It's a birthday card, so it should arrive before the twentieth – do you think that's possible?"],
+["Do you want to send it by normal post or registered?","Registered, please.","Registered, please – it's an important document.","Registered, please. It contains important documents, so I'd like a receipt and the possibility to track it."],
+["That's 1.80 for each stamp.","Here you are.","OK. Can I pay by card?","Fine, so that's 5.40 for three. Can I pay by card, or is there a minimum amount?"],
+["Do you need anything else?","Some envelopes, please.","Yes – do you sell envelopes?","Yes, actually. I need two large envelopes for documents. Do you sell them here? And could you weigh this letter for me, too?"],
+["This letter is too heavy for a normal stamp.","How much is it, then?","Oh, I see. How much do I have to pay?","Oh, I didn't know that. How much extra does it cost? And is there a cheaper way to send it if it isn't urgent?"]
+]},
+{a:"p",who:"Clerk",cat:"Post Office · Parcels Abroad",items:[
+["What's in the parcel?","Clothes and books.","Some clothes and two books – presents for my family.","Just presents for my family: a jumper, some chocolate and two books. There's nothing dangerous or very expensive in it."],
+["How fast does it need to arrive?","It's not urgent.","It's not urgent, so the cheapest option, please.","It's not urgent – the cheapest option is fine. But I'd like to be able to track it. How long does economy post to China take?"],
+["Outside the EU you need to fill in a customs form.","OK, where is it?","Of course. Could you help me with it, please?","No problem. Could you show me which parts I have to fill in? I've never sent a parcel outside the EU before."],
+["Would you like insurance for the parcel?","Yes, please.","Yes, please. How much does it cost?","Yes, please – the contents are worth about 200 euros. How much is the insurance, and what do I need to do if something gets lost?"],
+["Did you pack it yourself?","Yes, I did.","Yes, I packed it myself this morning.","Yes, I packed it myself. Do you think the box is strong enough, or should I buy a better one here?"],
+["Please write the full address with the postcode.","OK. Here?","Of course. Should I write it in English?","Of course. Should I write the address in English or in Chinese characters? Perhaps both is safest?"]
+]},
+{a:"p",who:"Clerk",cat:"Post Office · Picking Up & Deliveries",items:[
+["Do you have the notification slip?","Yes, here it is.","Yes, here it is. The parcel came on Monday.","Yes, here it is. The delivery driver came while I was at work, so I couldn't take the parcel. Here's my ID as well."],
+["Can I see some ID, please?","Here's my passport.","Of course – here's my passport.","Of course. Here's my passport. One of the parcels is for my colleague – here's her notification slip and a signed note from her."],
+["I'm sorry, the parcel isn't here yet.","When will it come?","Oh. When do you think it will arrive?","Oh, that's a pity. Could you check online where it is at the moment? Here's the tracking number."],
+["You can also pick it up from a parcel locker.","Where is it?","That's great. Where's the nearest locker?","That's very practical. Where's the nearest locker, and do I need an app or a code to open it?"],
+["Would you like us to deliver it again?","Yes, on Friday.","Yes, please – on Friday, if possible.","Yes, please. Could it come on Friday morning? And if I'm not at home, could it be left with my neighbours?"],
+["Your parcel was sent back to the sender.","Why?","Oh no – why was it sent back?","Oh no! Do you know why it was sent back? I was at home all day, and nobody rang the bell."]
+]},
+{a:"p",who:"Clerk",cat:"Post Office · Problems & Customs",items:[
+["Your parcel is being held at customs.","Why?","What do I need to do?","I see. What do I need to do to get it? Do I have to pay customs duty, and if so, how much?"],
+["This parcel is damaged. Do you want to make a complaint?","Yes, please.","Yes, please. How do I do that?","Yes, definitely – two plates inside are broken. Which form do I need, and should I keep the box and the broken pieces as proof?"],
+["The tracking says it was delivered.","But I don't have it.","I'm afraid I didn't receive it.","That's strange – I didn't receive anything, and my neighbours don't have it either. Could you find out where exactly it was left?"],
+["The office closes in five minutes.","OK, I'll be quick.","Sorry, I'll be quick – just one stamp, please.","I'm sorry, I'll be very quick. I just need one stamp for this letter. What are your opening hours on Saturday?"],
+["You've written the postcode in the wrong place.","Oh, sorry.","Oh, sorry – where should it go?","Oh, I'm sorry – in my country we write it differently. Could you show me where it goes? Then I'll write a new label."],
+["Sorry, we can't send batteries abroad.","Oh, I didn't know.","Oh, I didn't know. I'll take them out.","Oh, I'm sorry, I didn't know that. I'll take them out right now – is everything else in the parcel all right to send?"]
+]},
+/* ---------- AIRPORT ---------- */
+{a:"a",who:"Check-in agent",cat:"Airport · Check-in & Luggage",items:[
+["Good morning. Where are you flying today?","To London.","To London, please. Here's my passport.","Good morning! I'm flying to London on the ten o'clock flight. Here's my passport – I've already checked in online."],
+["How many bags are you checking in?","Just one.","Just this one, please.","Only this suitcase, please. The small bag is my hand luggage – is it the right size for the cabin?"],
+["Your suitcase is three kilos overweight.","Oh no. How much is that?","Oh, I'm sorry. How much do I have to pay?","Oh, I'm sorry. Could I take a few things out and put them in my hand luggage? Otherwise, how much is the extra charge?"],
+["Would you like a window or an aisle seat?","Window, please.","A window seat, please, if possible.","A window seat would be lovely – I love watching the view during take-off. If that's not possible, an aisle seat is fine too."],
+["Did you pack your bag yourself?","Yes, I did.","Yes, I packed it myself.","Yes, I packed it myself this morning, and nobody has given me anything to carry."],
+["Here's your boarding pass. Boarding starts at 9.20 at gate B12.","Thank you.","Thank you. Where's gate B12?","Thank you very much. How long does it take to get to gate B12? And is passport control on the way?"]
+]},
+{a:"a",who:"Officer",cat:"Airport · Security & Passport Control",items:[
+["Do you have any liquids in your bag?","Yes, here.","Yes – they're in this plastic bag.","Yes, I do – my creams and toothpaste are in this small plastic bag. They're all under 100 millilitres."],
+["Please take your laptop out of the bag.","OK.","Of course. Should I take my tablet out too?","Of course. Should I take out my tablet and my phone charger as well, or only the laptop?"],
+["Please remove your belt and your shoes.","OK, one moment.","Of course – shall I put them in the tray?","Of course. Shall I put them in the tray with my jacket? And may I put my shoes back on over there?"],
+["What's the purpose of your visit?","Holiday.","I'm here on holiday.","I'm here on holiday for a week – I'm visiting friends and doing some sightseeing. Here's my hotel booking, if you'd like to see it."],
+["How long are you staying?","Ten days.","For ten days.","For ten days. My return flight is on the twentieth – I can show you the ticket if you need it."],
+["Is this your bag? I need to check it.","Yes, it's mine.","Yes, it's mine. Is there a problem?","Yes, that's mine. Is there a problem? Oh – I think it's the jar of honey I bought as a present. Is that not allowed?"]
+]},
+{a:"a",who:"Crew",cat:"Airport · Gate & On Board",items:[
+["Can I see your boarding pass, please?","Here you are.","Of course, here you are.","Of course – here it is, on my phone. Do you also need to see my passport?"],
+["Your seat is at the back, on the left.","Thank you.","Thank you. Is there space for my bag?","Thank you. Could you help me put my bag in the overhead locker? It's a bit too heavy for me."],
+["Would you like something to drink?","Water, please.","A glass of water, please.","Just some water for now, please – and a tea with milk later, if possible. Is the tea free?"],
+["Chicken or pasta?","Pasta, please.","The pasta, please.","I'll have the pasta, please. Does it contain meat? I'd prefer something vegetarian."],
+["Please fasten your seat belt.","Oh, sorry.","Sorry – yes, of course.","Oh, sorry – I didn't see the sign. By the way, how long is it until we land?"],
+["Our flight is delayed by forty minutes.","Oh no.","Oh no. Will I catch my connection?","Oh, that's a pity. I have a connecting flight in [Frankfurt] – will I still catch it, or should I talk to someone at the gate?"]
+]},
+{a:"a",who:"Staff",cat:"Airport · Arrival & Problems",items:[
+["Can I help you? You look a little lost.","Where's baggage claim?","Yes, please – where's the baggage claim?","Yes, thank you! I'm looking for the baggage claim for the flight from Vienna. And where can I find a taxi afterwards?"],
+["What does your suitcase look like?","It's big and red.","It's a big red suitcase with four wheels.","It's a large red suitcase with four wheels and a black ribbon on the handle. My name and address are on the label."],
+["I'm sorry, your bag is still in Vienna.","When will it arrive?","Oh no. When will it get here?","Oh no. Could you send it to my hotel as soon as it arrives? Here's the address. And may I buy a few things I need tonight and get the money back?"],
+["I'm afraid your flight has been cancelled.","What can I do?","Oh no. Is there another flight today?","Oh no! Is there another flight later today? And if not, will the airline pay for a hotel tonight?"],
+["Do you have anything to declare?","No, nothing.","No, I have nothing to declare.","No, nothing to declare – just my clothes and a few small presents."],
+["Where would you like to go?","To the city centre.","To the city centre. Is there a train?","To the city centre. What's the best way – train, bus or taxi? And where can I buy a ticket?"]
+]}
+];
+
+const MC=[
+/* ---------- HOTEL ---------- */
+{a:"h",g:"Do you have a reservation?",o:[["Yes, I do. I booked online last week.","Perfect: “Do you…?” → “Yes, I do.” And “last week” (finished time) takes the past simple: I booked."],["Yes, I have. I booked online last week.","After a “Do you…?” question the short answer is “Yes, I do.” – not “I have”."],["Yes, I do. I have booked online last week.","With a finished time like “last week”, English uses the past simple: I booked."],["No, but I have a reservation.","Contradiction: “No” and “I have a reservation” can't both be true."]]},
+{a:"h",g:"How many nights will you stay?",o:[["Three nights, until Friday.","Correct – a number of nights and the day you leave."],["Since three nights.","German thinking (“seit”). “Since” needs a starting point – and your stay is in the future."],["Three nights ago.","“Ago” is for the past. Your stay hasn't happened yet."],["Three nights, until yesterday.","Impossible: you can't stay until a day that is already over."]]},
+{a:"h",g:"Your room is on the fifth floor.",o:[["Thank you. Where's the lift?","Correct – “lift” (British) or “elevator” (American)."],["Thank you. Where is the lift from?","“Where is it from?” asks about origin (a country). You want to know the place."],["Thank you. Where's the elevate?","“Elevate” is a verb. The noun is “lift” or “elevator”."],["Thank you. Where's the lift? I'll take the stairs.","Contradiction: why ask for the lift if you want to walk?"]]},
+{a:"h",g:"Would you like breakfast?",o:[["Yes, please. Is it included in the price?","Correct: “included in the price”."],["Yes, please. Is it inclusive the price?","False friend: German “inklusive” = English “included”."],["Yes, please. Is it included at the price?","Wrong preposition: included IN the price."],["Yes, please – but I'll have it in the evening.","Breakfast is in the morning!"]]},
+{a:"h",g:"Is there anything else I can do for you?",o:[["Yes – could you wake me up at six, please?","Correct: could you + base verb, and with a pronoun: wake ME up."],["Yes – could you waking me up at six, please?","After “could” always the base form: wake."],["Yes – could you wake up me at six, please?","With a pronoun the word order is “wake me up”, not “wake up me”."],["Yes – could you sleep me at six, please?","“Sleep” can't take an object like this. You mean “wake me up”."]]},
+{a:"h",g:"How was your room?",o:[["Very comfortable, thank you.","Correct: after “was” you need the adjective – comfortable."],["Very comfortably, thank you.","“Comfortably” is an adverb. The room WAS comfortable."],["Very comfortable – I didn't sleep at all.","Contradiction."],["Very comfortable, you're welcome.","“You're welcome” is the answer to “thank you” – but nobody thanked you."]]},
+{a:"h",g:"Check-out is at eleven o'clock.",o:[["Could I check out a little later, at one?","Correct: “later” + clock time with “at”."],["Could I check out a little later, on one?","Clock times take “at”, not “on”."],["Could I check out a little later, at nine?","Content: nine is EARLIER than eleven."],["Could I check out more late, at one?","The comparative of “late” is “later”, not “more late”."]]},
+{a:"h",g:"Have you used the minibar?",o:[["Yes, I had a bottle of water.","Correct: “had” = drank, past simple for a finished action."],["Yes, I have a bottle of water yesterday.","With “yesterday” you need the past simple: I had."],["No, I only drank two beers from it.","Contradiction: “No” – and then you drank two beers?"],["Yes, I used it to keep my shoes cold.","A joke – shoes don't belong in the minibar!"]]},
+{a:"h",g:"Reception, how can I help you?",o:[["Hello, this is room 214. The heating doesn't work.","Correct telephone English: “This is room…”."],["Hello, here is room 214. The heating doesn't work.","German pattern (“Hier ist…”). On the phone say “This is…”."],["Hello, I am room 214. The heating doesn't work.","You're a person, not a room!"],["Hello, this is room 214. The heating doesn't works.","After “doesn't” use the base form: work."]]},
+{a:"h",g:"Would you like a single or a double room?",o:[["A double room, please – I'm travelling with a friend.","Correct: two people → double room; present continuous for now."],["A single room, please – there are four of us.","Content: four people can't share a single room."],["A double room, please – I'm travel with a friend.","The present continuous needs -ing: I'm travelling."],["A doubled room, please.","The adjective is “double”, not “doubled”."]]},
+{a:"h",g:"Can I help you with your luggage?",o:[["That's very kind, thank you.","Correct and warm."],["That's very kindly, thank you.","After “that's” use the adjective “kind”, not the adverb."],["Yes, please carry me.","You want them to carry your BAGS, not you!"],["No, thank you – please carry it for me.","Contradiction: “No” – and then you ask for help."]]},
+{a:"h",g:"How would you like to pay?",o:[["By credit card, please.","Correct: “by card”."],["With credit card, please.","Without an article we say “by card”."],["By cash, please.","Careful: “by card”, but “in cash”."],["By credit card, please – but I don't have a card.","Contradiction."]]},
+/* ---------- POST OFFICE ---------- */
+{a:"p",g:"Where would you like to send this?",o:[["To China, please.","Correct: direction → “to”."],["In China, please.","“In” is a position. For a direction use “to”."],["From China, please.","You're sending it FROM here TO China."],["To China, please – by bicycle.","A joke – the post office decides how it travels."]]},
+{a:"p",g:"That's 1.80 for a postcard to the USA.",o:[["OK, I'll take five, please.","Correct: “I'll” for a decision you make right now."],["OK, I take five, please.","A spontaneous decision needs “I'll take”."],["OK, I'll take five stamp, please.","Five → plural: five stamps."],["OK, I'll take five – but only for Austria.","Content: the price was for the USA."]]},
+{a:"p",g:"What's inside the parcel?",o:[["Some books and a few clothes.","Correct: “a few” + plural countable noun."],["Some books and a few clothing.","“Clothing” is uncountable: “some clothing” – or “a few clothes”."],["Inside is a parcel.","Nonsense – the parcel IS the box."],["Some books and many cloth.","“Cloth” is material (Stoff). You mean “clothes”."]]},
+{a:"p",g:"Would you like to send it by registered post?",o:[["Yes, please – it's very important.","Correct: important things go by registered post."],["Yes, please – it's not important at all.","Illogical: registered post is for important things."],["Yes, please – it's very importance.","“Importance” is a noun. After “it's very” use the adjective: important."],["Yes, please register me.","You register the LETTER, not yourself."]]},
+{a:"p",g:"Please fill in this form.",o:[["Of course. Could I borrow a pen, please?","Correct: I BORROW something from you."],["Of course. Can you borrow me a pen?","Classic mistake: “borrow” = take. Say “Can you lend me a pen?” or “Can I borrow a pen?”"],["Of course. Where should I fill in it?","With a pronoun: “fill it in”."],["Of course – I'll fill in the parcel.","You fill in a FORM, not the parcel."]]},
+{a:"p",g:"Your parcel weighs four kilos.",o:[["How much does it cost to send?","Correct question word order."],["How much costs it to send?","Questions need “does”: How much does it cost?"],["How many does it cost to send?","Money is uncountable here: how much."],["How much does it weigh?","She has just told you the weight!"]]},
+{a:"p",g:"The parcel will arrive in about ten days.",o:[["Is there a faster option?","Correct comparative: fast → faster."],["Is there a more fast option?","Short adjectives take -er: faster."],["Is there a slower option? I'm in a hurry.","Contradiction."],["Is there a fastest option?","The superlative needs “the” – and here you compare with one option: “a faster option”."]]},
+{a:"p",g:"Do you have the notification card?",o:[["Yes, here it is.","Correct fixed phrase."],["Yes, here is it.","Word order: “Here it is.”"],["Yes, here they are.","One card → “it”."],["No, but here it is.","Contradiction."]]},
+{a:"p",g:"We tried to deliver your parcel yesterday.",o:[["Sorry, I wasn't at home. Can I pick it up today?","Correct: past “wasn't” + “pick it up”."],["Sorry, I wasn't at home. Can I pick up it today?","With a pronoun: pick IT up."],["Sorry, I'm not at home yesterday.","“Yesterday” needs the past: I wasn't."],["Sorry, I wasn't at home. Can you pick me up today?","“Pick ME up” means: come and get me (by car)!"]]},
+{a:"p",g:"Anything else?",o:[["No, that's all, thank you.","Correct fixed phrase."],["No, it's all, thank you.","The fixed phrase is “That's all.”"],["No, that's all, you're welcome.","“You're welcome” answers “thank you” – the clerk didn't thank you."],["No, that's all – and two more stamps, please.","Contradiction."]]},
+{a:"p",g:"Sorry, we don't sell boxes here.",o:[["Oh, where can I buy one?","Correct: “one” = any box."],["Oh, where can I buy it?","“It” means one particular box. You want any box → “one”."],["Oh, where can I sell one?","You want to BUY, not sell."],["Oh, where I can buy one?","Question word order: Where CAN I buy…?"]]},
+{a:"p",g:"Your parcel is being held at customs.",o:[["What do I have to do to get it?","Correct: do + have to."],["What do I must do to get it?","“Must” never takes “do”: What must I do? – or What do I have to do?"],["What have I to do to get it?","Very old-fashioned. Today: What do I have to do?"],["What do I have to do to send it?","Content: the parcel is FOR you – you want to get it."]]},
+/* ---------- AIRPORT ---------- */
+{a:"a",g:"Would you like a window or an aisle seat?",o:[["Window, please – I'd like to see the view.","Correct and logical."],["Aisle, please – I'd like to see the view.","From the aisle you can't see much outside."],["Window, please – I would like see the view.","After “would like” you need “to”: would like TO see."],["Window, please – I'd like to see the few.","“Few” (wenige) is not “view” (Aussicht). Listen carefully!"]]},
+{a:"a",g:"Did you pack your bag yourself?",o:[["Yes, I did.","Correct: Did you…? → Yes, I did."],["Yes, I do.","The question is in the past (did), so: Yes, I did."],["Yes, I packed.","“Pack” needs an object here: I packed IT."],["Yes, my friend packed it for me.","Content: then the answer to “yourself?” is NO."]]},
+{a:"a",g:"Do you have any liquids in your hand luggage?",o:[["Yes, a small bottle of perfume.","Correct."],["Yes, a small bottle of perfume and a few water.","“Water” is uncountable: some water / a little water."],["No, only a bottle of water.","Water IS a liquid!"],["Yes, many liquid.","Wrong form: “some liquids” – and say what they are."]]},
+{a:"a",g:"What's the purpose of your trip?",o:[["I'm visiting friends.","Correct: present continuous for what you are doing now."],["I'm visit friends.","Present continuous needs -ing: I'm visiting."],["I'm visiting friends next year.","You are on the trip NOW, not next year."],["My purpose is very purposeful.","Nonsense – the officer wants a reason."]]},
+{a:"a",g:"How long are you staying?",o:[["For two weeks.","Correct: “for” + a length of time."],["Since two weeks.","German “seit”. A length of time takes “for”."],["Two weeks ago.","“Ago” is for the past."],["Until two weeks.","“Until” needs a date: until the 15th."]]},
+{a:"a",g:"I'm afraid your flight is delayed.",o:[["How long will we have to wait?","Correct: future “will have to”."],["How long must we waiting?","After “must” use the base form: wait."],["How long have we to wait?","Old-fashioned. Say: How long do we have to wait?"],["How long was the delay yesterday?","Wrong time – you want to know about today."]]},
+{a:"a",g:"Chicken or vegetarian?",o:[["Vegetarian, please.","Correct and simple."],["Vegetarian, please – with extra chicken.","Contradiction."],["Vegetarian, please – I don't eat meet.","Spelling trap: “meet” = treffen, “meat” = Fleisch."],["Vegetarian, please – I'm a vegetable.","A joke: a vegetarian is a person, a vegetable is a carrot!"]]},
+{a:"a",g:"Please fasten your seat belt.",o:[["Of course, sorry.","Correct."],["Of course – faster, faster!","“Fasten” (zumachen) is not “faster” (schneller)!"],["Of course, I'm fastening myself.","You fasten the belt, not yourself."],["Of course, I'll fasten it after we land.","Content: you need it on NOW."]]},
+{a:"a",g:"Can you describe your suitcase?",o:[["It's a big blue suitcase with wheels.","Correct adjective order: size before colour."],["It's a blue big suitcase with wheels.","English order: size first, then colour – big blue."],["It's big blue suitcase with wheels.","The article is missing: it's A big blue suitcase."],["It's a suitcase.","Not helpful – there are hundreds of suitcases."]]},
+{a:"a",g:"Boarding starts at gate C4.",o:[["Thank you. How do I get there?","Correct: no preposition before “there”."],["Thank you. How do I get to there?","“There” already means “to that place” – no “to”."],["Thank you. How do I get here?","“Here” is where you are now."],["Thank you. What do I get there?","“What” asks about a thing. You need “How”."]]},
+{a:"a",g:"Do you have anything to declare?",o:[["No, nothing.","Correct."],["No, I don't have nothing.","Double negative: “I don't have anything” or “I have nothing”."],["No – only fifty kilos of cheese.","Contradiction: that IS something to declare!"],["Yes – I declare that I love this country!","A joke: “declare” here means telling customs about goods."]]},
+{a:"a",g:"Your bag is too big for the cabin.",o:[["Oh, can I check it in, then?","Correct: with a pronoun “check it in”."],["Oh, can I check in it, then?","With a pronoun: check IT in."],["Oh, then can I take it into the cabin?","Contradiction: it's too big for the cabin."],["Oh, can I make it smaller in the toilet?","A joke – bags don't shrink!"]]}
+];
+
+/* [area, expression, meaning, example] */
+const EXPR=[
+["h","to check in","to arrive and register at a hotel","We can check in from three o'clock."],
+["h","to check out","to pay and leave the hotel","I have to check out before eleven."],
+["h","a wake-up call","the hotel phones you to wake you","Could I have a wake-up call at six?"],
+["h","room service","food brought to your room","I'm too tired to go out – let's order room service."],
+["h","a late check-out","leaving the room later than normal","Is a late check-out at two possible?"],
+["h","No vacancies","the hotel has no free rooms","Sorry, the sign says “No vacancies”."],
+["h","a twin room","a room with two separate beds","We're colleagues, so a twin room, please."],
+["h","half board","breakfast and dinner included","We booked half board, so dinner is included."],
+["h","Do not disturb","a sign: please don't come in","I put the “Do not disturb” sign on the door."],
+["h","to settle the bill","to pay what you owe","I'd like to settle the bill, please."],
+["h","the deposit","money you pay first, as security","There's a deposit of 100 euros on your card."],
+["h","complimentary","free – included at no cost","The bottle of water is complimentary."],
+["p","to post a letter","to send a letter by mail","I need to post this letter today."],
+["p","registered mail","post with a receipt and signature","Send the contract by registered mail."],
+["p","the tracking number","a number to follow your parcel online","Here's the tracking number for your parcel."],
+["p","the sender","the person who sends the post","The sender's address goes on the back."],
+["p","the recipient","the person who receives the post","The recipient has to sign for it."],
+["p","fragile","easily broken – be careful","Please write “fragile” on the box – there are glasses inside."],
+["p","to sign for something","to write your name to show you received it","I had to sign for the parcel."],
+["p","to drop off","to bring something and leave it","I'll drop off the parcel on my way to work."],
+["p","postage","the money you pay to send post","How much is the postage to China?"],
+["p","snail mail","normal, slow post (not e-mail)","I sent the invitation by snail mail."],
+["p","to keep someone posted","to give someone the latest news","I'll keep you posted about the delivery."],
+["p","a parcel locker","a box where you collect parcels with a code","Your parcel is waiting in the parcel locker."],
+["a","hand luggage","the bag you take into the plane","Only one piece of hand luggage, please."],
+["a","a connecting flight","your next flight after a stop","I have a connecting flight in Frankfurt."],
+["a","a stopover","a short stay on the way","We have a two-day stopover in Dubai."],
+["a","jet lag","feeling tired after flying across time zones","I can't sleep – I still have jet lag."],
+["a","to take off","when a plane leaves the ground","The plane will take off in ten minutes."],
+["a","a red-eye flight","a flight that leaves late at night","I took the red-eye, so I'm very tired."],
+["a","to board","to get on a plane","Passengers may now board the plane."],
+["a","duty-free","shops where you pay no tax","I bought perfume at the duty-free shop."],
+["a","the overhead locker","the space for bags above your seat","Please put your bag in the overhead locker."],
+["a","to miss a flight","to arrive too late for your plane","Hurry up, or we'll miss our flight!"],
+["a","baggage claim","where you collect your suitcase","Our bags are at baggage claim, belt four."],
+["a","to be bumped","to lose your seat because the flight is overbooked","The flight was full, so I was bumped to the next one."]
+];
+
+const MATCHSETS=[
+{a:"h",t:"Hotel – Check-in",p:[
+["Good evening, do you have a booking?","Yes, for two nights, under my name."],
+["Could I see your passport?","Of course, here it is."],
+["Would you like breakfast?","Yes, please – what time is it served?"],
+["Do you need a parking space?","No, thanks – I don't have a car."],
+["How will you pay?","By credit card, when I check out."],
+["Could you sign here, please?","Sure – at the bottom of the page?"],
+["Is this your first time in our city?","Yes, it is – I'm really excited."],
+["Shall I help you with your bags?","That's very kind – the big one is heavy."],
+["Your room is 512, on the fifth floor.","Thank you – which way is the lift?"],
+["Would you prefer a quiet room?","Yes, please – I'm a light sleeper."]]},
+{a:"h",t:"Hotel – Stay & Check-out",p:[
+["Did you sleep well?","Very well – the bed is so comfortable."],
+["Shall we clean your room today?","Not today, thanks – just fresh towels."],
+["Do you need a wake-up call?","Yes, at half past six, please."],
+["Would you like a taxi?","Yes, please – to the station at ten."],
+["Are you checking out?","Yes – here's my key card."],
+["Did you use the minibar?","Only one bottle of water."],
+["How was your stay?","Wonderful – I'll come back next year."],
+["Would you like the receipt by email?","Yes, please – that's easier for me."],
+["Can I help with anything else?","Could I leave my suitcase here until three?"],
+["There's a city tax of two euros.","Is that per person or per room?"]]},
+{a:"p",t:"Post Office – At the Counter",p:[
+["Next, please!","Good morning! I'd like to send this letter."],
+["Where's it going?","To Beijing, in China."],
+["Normal or express?","Normal is fine – it's not urgent."],
+["Do you need it registered?","Yes, I need proof that it arrived."],
+["That's 4.50, please.","Can I pay by card?"],
+["What's in the parcel?","Only books – nothing fragile."],
+["Would you like insurance?","No, thanks – it isn't valuable."],
+["Here's your receipt.","Thank you. Is the tracking number on it?"],
+["Please put it on the scale.","Here you are – is it very heavy?"],
+["Anything else today?","Yes, ten stamps for postcards, please."]]},
+{a:"p",t:"Post Office – Collecting & Problems",p:[
+["Do you have the notification slip?","Yes, the driver left it in my letterbox."],
+["Can I see your ID?","Here's my passport."],
+["This parcel isn't addressed to you.","I know – it's for my colleague. Here's her signed note."],
+["Your parcel isn't here yet.","Could you check the tracking number for me?"],
+["It's waiting at customs.","Do I have to pay anything?"],
+["The box is damaged.","Then I'd like to make a complaint."],
+["Shall we deliver it again?","Yes, please – on Saturday morning."],
+["You can use a parcel locker.","Great – where's the nearest one?"],
+["We close at six today.","Then I'll come back after work."],
+["Please sign here.","With my full name or just my initials?"]]},
+{a:"a",t:"Airport – Departure",p:[
+["Passport, please.","Here you are."],
+["Where are you flying to?","To London, via Frankfurt."],
+["How many bags?","One suitcase and one small bag for the cabin."],
+["Any liquids in your hand luggage?","Just a small bottle of hand cream."],
+["Window or aisle?","Aisle, please – I like to stretch my legs."],
+["Your bag is overweight.","Can I move some things into my backpack?"],
+["Did anyone give you something to carry?","No, everything is mine."],
+["Boarding starts at 8.40.","And which gate is it?"],
+["Please put your laptop in a tray.","Do I need to take my shoes off too?"],
+["Have a nice flight!","Thank you – have a nice day!"]]},
+{a:"a",t:"Airport – Arrival",p:[
+["What's the purpose of your visit?","Business – I have meetings all week."],
+["How long will you stay?","Five days, until Saturday."],
+["Where are you staying?","At a hotel near the city centre."],
+["Anything to declare?","No, nothing to declare."],
+["Your suitcase didn't arrive.","Oh no – what should I do now?"],
+["What colour is your bag?","Dark grey, with a yellow ribbon."],
+["We'll send it to your hotel.","Thank you – when will it get there?"],
+["Do you need a taxi?","No, thanks – I'll take the train."],
+["Your connecting flight has already left.","Can you rebook me on the next one?"],
+["Welcome to Austria!","Thank you – it's nice to be here."]]}
+];
+
+const FINISH=[
+/* ---------- HOTEL ---------- */
+{a:"h",g:"I'm afraid check-in is only from three o'clock.",s:"Could I leave…",o:[["my luggage here until then?","Correct: leave + something + a place + until."],["my luggage here since then?","“Since” goes back into the past. You need “until” (bis)."],["my luggage here until yesterday?","Yesterday is already over."],["to my luggage here?","No “to”: you leave SOMETHING somewhere."]],alt:["Could I leave my suitcase at reception for a few hours?","Could I leave my bags with you while I have lunch?"]},
+{a:"h",g:"Is everything all right with your room?",s:"Actually, the room is…",o:[["a bit too noisy – could I change it?","Correct: too + adjective."],["a bit too noise – could I change it?","“Noise” is the noun. After “too” use the adjective: noisy."],["a bit too much noisy.","Not “too much” + adjective – just “too noisy”."],["a bit too noisy – so it's perfect.","Contradiction."]],alt:["Actually, the room is quite cold – is there an extra heater?","Actually, the room is lovely, but the Wi-Fi doesn't work."]},
+{a:"h",g:"Good morning! How can I help you?",s:"I'd like to…",o:[["stay one more night, if possible.","Correct: I'd like to + base verb."],["staying one more night, if possible.","After “would like to” use the base form: stay."],["stay one more night ago.","“Ago” is for the past."],["stay one more night, so I'm leaving today.","Contradiction."]],alt:["I'd like to book a table in your restaurant for tonight.","I'd like to change to a room with a bath."]},
+{a:"h",g:"Do you have any questions about the hotel?",s:"Could you tell me…",o:[["where the gym is?","Correct: an indirect question has normal word order."],["where is the gym?","After “Could you tell me…” no question order: where the gym IS."],["where the gym is it?","Double subject: “the gym” and “it” – one is enough."],["where the gym was last year?","Wrong time – you want to go there now."]],alt:["Could you tell me when the pool closes?","Could you tell me if there's a pharmacy nearby?"]},
+{a:"h",g:"(The receptionist hands you your key:) Enjoy your stay!",s:"Thank you very…",o:[["much!","Correct fixed phrase."],["many!","Fixed phrase: Thank you very MUCH."],["lot!","Either “Thanks a lot” or “Thank you very much” – not “very lot”."],["much – I'll enjoy my departure!","A joke – a strange thing to say on arrival."]],alt:["Thank you so much – I'm sure I will!","Thank you, that's very kind!"]},
+{a:"h",g:"We hope you enjoyed your stay.",s:"I really enjoyed…",o:[["staying here – thank you for everything.","Correct: enjoy + -ing."],["to stay here – thank you for everything.","“Enjoy” is never followed by “to”."],["stay here.","“Enjoy” needs -ing: staying."],["staying here – I'll never come back.","Contradiction."]],alt:["I really enjoyed the breakfast – it was excellent.","I really enjoyed my time here – see you next year!"]},
+/* ---------- POST OFFICE ---------- */
+{a:"p",g:"How can I help you?",s:"I'd like to send…",o:[["this parcel to Shanghai, please.","Correct: send something TO a place."],["this parcel at Shanghai, please.","Direction needs “to”."],["this parcel from Shanghai, please.","You're here – you send it TO Shanghai."],["to this parcel to Shanghai.","No “to” before the object: send this parcel."]],alt:["I'd like to send this letter by registered post.","I'd like to send these postcards to China."]},
+{a:"p",g:"Normal post takes about two weeks.",s:"Is there a way…",o:[["to send it faster?","Correct: a way + to + verb."],["sending it faster?","After “a way” use “to + verb”."],["to send it more faster?","Double comparative – just “faster”."],["to send it slower? I'm in a hurry.","Contradiction."]],alt:["Is there a way to track it online?","Is there a way to send it more cheaply?"]},
+{a:"p",g:"Do you need anything else?",s:"How much does it cost…",o:[["to send a postcard to the USA?","Correct: it costs + to + verb."],["to sending a postcard to the USA?","After “to” use the base form: to send."],["to send a postcard to the USA yesterday?","Wrong time – you want to send it now."],["send a postcard to the USA?","“To” is missing: cost TO send."]],alt:["How much does it cost to send it by express?","How much does it cost to insure the parcel?"]},
+{a:"p",g:"Your parcel is waiting at customs.",s:"Do I have to…",o:[["pay anything to get it?","Correct: have to + base verb."],["paying anything to get it?","After “have to” the base form: pay."],["to pay anything to get it?","Double “to” – “have to pay”."],["pay anything to send it?","Content: you want to GET it, not send it."]],alt:["Do I have to show the receipt for the things inside?","Do I have to come back with my passport?"]},
+{a:"p",g:"We tried to deliver your parcel, but nobody was at home.",s:"Could you deliver it…",o:[["again on Friday, please?","Correct: “on” + day."],["again in Friday, please?","Days take “on”: on Friday."],["again on Friday last week?","Last week is in the past."],["again on Friday? I'm never at home on Fridays.","Contradiction."]],alt:["Could you deliver it to my office instead?","Could you deliver it after six o'clock?"]},
+{a:"p",g:"Oh dear – the box is damaged.",s:"I'm afraid…",o:[["something inside is broken.","Correct: broken = kaputt."],["something inside is break.","“Break” is the verb. You need “broken”."],["of the box.","“Afraid of” = scared of. You're not scared of the box!"],["nothing is broken, so I'd like my money back.","Contradiction."]],alt:["I'm afraid the glasses inside are broken.","I'm afraid I'll have to make a complaint."]},
+/* ---------- AIRPORT ---------- */
+{a:"a",g:"Your suitcase is two kilos too heavy.",s:"Could I take…",o:[["some things out and put them in my backpack?","Correct: things → them; take out of the heavy suitcase."],["some things out and put it in my backpack?","“Things” is plural → them."],["some things in and put them in my backpack?","Content: you need to take things OUT."],["some things out and put them in my suitcase?","Content: the same suitcase – that doesn't help!"]],alt:["Could I pay for the extra kilos by card?","Could I put my jacket on instead of packing it?"]},
+{a:"a",g:"Our flight is delayed by one hour.",s:"Will I still be able…",o:[["to catch my connecting flight?","Correct: be able TO + base verb."],["to catching my connecting flight?","After “to” the base form: catch."],["catch my connecting flight?","“Able” needs “to”: able to catch."],["to miss my connecting flight?","Content: you don't WANT to miss it."]],alt:["Will I still be able to get a meal at the airport?","Will I still be able to change my seat?"]},
+{a:"a",g:"Is this your first visit to Austria?",s:"No, I've been here…",o:[["twice before.","Correct: present perfect + “before”."],["since twice.","“Since” needs a point in time, not a number of times."],["two times ago.","“Ago” only works with the past simple and a length of time."],["twice before – this is my first visit.","Contradiction."]],alt:["No, I've been here many times – I love it.","No, I've been here once before, for work."]},
+{a:"a",g:"Lost luggage desk – how can I help you?",s:"My suitcase…",o:[["didn't arrive with my flight.","Correct: didn't + base verb."],["didn't arrived with my flight.","After “didn't” use the base form: arrive."],["doesn't arrive with my flight yesterday.","With “yesterday” you need the past: didn't arrive."],["arrived, so I'm here to report it lost.","Contradiction."]],alt:["My suitcase is damaged – one wheel is broken.","My suitcase isn't on the belt."]},
+{a:"a",g:"Excuse me, I think you're sitting in my seat.",s:"Oh, I'm so sorry – …",o:[["let me check my boarding pass.","Correct: let me + base verb."],["let me to check my boarding pass.","After “let me” no “to”."],["let check me my boarding pass.","Word order: let ME check."],["please sit on my lap.","A joke – very strange to a stranger!"]],alt:["Oh, I'm so sorry – I'll move right away.","Oh, I'm so sorry – I thought this was 14C."]},
+{a:"a",g:"Here's your boarding pass. Have a pleasant flight!",s:"Thank you – …",o:[["have a nice day!","Correct – the staff stay on the ground."],["have a nice flight too!","The check-in agent isn't flying with you."],["make a nice day!","German pattern (“Mach dir einen schönen Tag”). In English: Have a nice day!"],["have a nice night – it's eight in the morning!","A joke – wrong time of day."]],alt:["Thank you – that's very kind!","Thank you – see you next time!"]}
+];
+
+const POLITE=[
+/* ---------- HOTEL ---------- */
+{a:"h",ctx:"Your hotel room is too cold.",rude:"Room cold. Fix it.",o:[["I'm sorry to bother you, but my room is quite cold. Could someone have a look at the heating?","Softener + clear request = elegant."],["Fix my room, please – it's cold.","“Please” doesn't make a command polite."],["You must repair the heating now.","“Must” sounds very hard."]],tip:"“I'm sorry to bother you, but…” opens every request beautifully."},
+{a:"h",ctx:"You need fresh towels.",rude:"Towels!",o:[["Could I have some fresh towels, please?","The perfect structure for asking for things."],["Give me towels, please.","Still a command."],["I want towels now.","“I want” sounds demanding."]],tip:"Could I have…? – perfect for asking for things."},
+{a:"h",ctx:"You want to know the Wi-Fi password.",rude:"Password?",o:[["Excuse me, could you tell me the Wi-Fi password, please?","Excuse me + could you tell me = polite."],["Tell me the password.","A command."],["What is password? Quick.","Rude – and the article “the” is missing."]],tip:"Start with “Excuse me…” to get someone's attention."},
+{a:"h",ctx:"The receptionist speaks very fast.",rude:"Too fast! Again!",o:[["Sorry, could you speak a little more slowly, please?","Polite – and correct: “more slowly” (adverb)."],["Speak slow!","A command – and the adverb is “slowly”."],["You talk too fast, I don't understand you.","Sounds like you're blaming the person."]],tip:"“A little more slowly” – the magic phrase for fast speakers."},
+{a:"h",ctx:"You want a late check-out.",rude:"I leave at two.",o:[["Would it be possible to check out a bit later, at about two?","Asking, not telling."],["I check out at two, OK?","A statement – the hotel has no choice."],["You have to give me a late check-out.","A command."]],tip:"Would it be possible…? – the elegant way to ask for a favour."},
+/* ---------- POST OFFICE ---------- */
+{a:"p",ctx:"You need a pen to fill in a form.",rude:"Pen!",o:[["Excuse me, could I borrow a pen, please?","Correct verb: I borrow."],["Borrow me a pen.","A command – and wrong verb: “lend me”."],["Give pen please.","Too short and grammatically wrong."]],tip:"I BORROW from you – you LEND to me."},
+{a:"p",ctx:"The clerk gave you the wrong change.",rude:"Wrong! You cheat!",o:[["Excuse me, I think there's a small mistake with the change.","Polite – nobody is accused."],["You gave me the wrong money.","Blames the clerk."],["Give me my money back now.","A command."]],tip:"I think there's a small mistake… – the friendliest way to complain."},
+{a:"p",ctx:"You want to know when your parcel will arrive.",rude:"When it comes?",o:[["Could you tell me when it will arrive?","An indirect question – very polite."],["When it comes? Tell me.","Wrong word order and a command."],["You must tell me the day.","“Must” sounds hard."]],tip:"Could you tell me when…? – normal word order after it."},
+{a:"p",ctx:"You didn't understand what the clerk said.",rude:"What?",o:[["Sorry, I didn't quite catch that. Could you repeat it, please?","Elegant and natural."],["What? Again.","Rude."],["Say again, please.","Too short – and “it” is missing."]],tip:"Sorry, I didn't quite catch that… – very natural English."},
+{a:"p",ctx:"You need help with the customs form.",rude:"Do this form for me.",o:[["Would you mind helping me with this form? It's my first time.","Would you mind + -ing + a reason."],["Do this form for me, please.","Still a command."],["You help me with this form.","Sounds like an order."]],tip:"Would you mind + -ing…? – and a short reason makes people happy to help."},
+/* ---------- AIRPORT ---------- */
+{a:"a",ctx:"Someone is sitting in your seat on the plane.",rude:"My seat! Go!",o:[["Excuse me, I think you might be in my seat – I have 14A.","“I think you might…” is soft – maybe it's your mistake."],["This is my seat. Move.","A command."],["You sit wrong.","Rude and unclear."]],tip:"I think you might… – soft and friendly, even if you're right."},
+{a:"a",ctx:"You need help putting your bag in the overhead locker.",rude:"Lift my bag.",o:[["Excuse me, could you help me with my bag, please? It's a bit heavy.","Request + reason."],["Lift my bag for me.","A command."],["You must help me.","“Must” is much too strong."]],tip:"Could you help me with…? – plus a reason."},
+{a:"a",ctx:"You would like water from the flight attendant.",rude:"Water. Now.",o:[["Could I have a glass of water, please, when you have a moment?","“When you have a moment” shows respect."],["Bring water.","A command."],["I want water quickly.","Demanding."]],tip:"…when you have a moment – shows you see they're busy."},
+{a:"a",ctx:"You need to pass the person in the aisle seat.",rude:"Stand up.",o:[["Sorry to disturb you – could I just get past?","Apology + small request."],["Stand up, please, I go.","A command – and wrong grammar."],["Move, I need the toilet.","Rude."]],tip:"Sorry to disturb you… – perfect on planes and trains."},
+{a:"a",ctx:"Your bag didn't arrive and you're angry.",rude:"Your airline is terrible! Find my bag!",o:[["To be honest, I'm quite upset – my bag didn't arrive. Could you help me find it?","You show your feelings AND stay polite."],["Find my bag now! It's your fault!","Shouting doesn't find bags."],["You lost my bag. Very bad.","Blames – and sounds cold."]],tip:"You can say you're upset – just add a polite request."}
+];
+
+/* [area, sentence with [[correct*|wrong|wrong]]] */
+const GAPS=[
+["h","I'd like to check [[in*|on|at]], please. I have a reservation."],
+["h","We're staying [[for*|since|during]] three nights."],
+["h","Breakfast is served [[from*|since|at]] seven to ten."],
+["h","Is breakfast included [[in*|at|on]] the price?"],
+["h","Could you wake me [[up*|on|out]] at six?"],
+["h","My room is [[on*|in|at]] the fourth floor."],
+["h","The air conditioning [[doesn't*|don't|isn't]] work."],
+["h","I [[left*|have left|leave]] my key in the room yesterday."],
+["h","Could I have some fresh [[towels*|towel|towelling]], please?"],
+["h","I'd like to pay [[by*|on|at]] credit card."],
+["p","I'd like to send this letter [[to*|in|at]] China."],
+["p","How much [[does*|do|is]] it cost?"],
+["p","I need [[an*|a|some]] envelope for these documents."],
+["p","The parcel [[weighs*|weights|weigh]] three kilos."],
+["p","Can I pick [[it up*|up it|it on]] tomorrow?"],
+["p","It will arrive [[in*|since|ago]] about ten days."],
+["p","I wasn't at home when the driver [[came*|come|has come]]."],
+["p","Please write the address in capital [[letters*|letter|words]]."],
+["p","Is this box [[strong enough*|enough strong|too strong enough]]?"],
+["p","You have to fill [[in*|on|up]] a customs form."],
+["a","I'm flying [[to*|in|at]] London tomorrow."],
+["a","Boarding starts [[at*|on|in]] 9.20."],
+["a","My flight [[has been*|is been|have been]] cancelled."],
+["a","I have [[a*|an|any]] connecting flight in Frankfurt."],
+["a","Please put your liquids [[in*|on|at]] a plastic bag."],
+["a","We landed twenty minutes [[ago*|before|since]]."],
+["a","How long [[does*|is|do]] the flight take?"],
+["a","I [[didn't get*|don't got|haven't get]] my suitcase yesterday."],
+["a","Is it far [[from*|of|off]] the airport to the city?"],
+["a","The gate closes ten minutes [[before*|ago|until]] departure."]
+];
+
+const BUILD=[
+["h","I have a reservation for three nights."],
+["h","Could I have a room with a view?"],
+["h","What time is breakfast served?"],
+["h","The shower in my room doesn't work."],
+["h","Could I leave my luggage here?"],
+["h","I'd like to pay by credit card."],
+["h","Could you call a taxi for me, please?"],
+["p","I'd like to send this parcel to China."],
+["p","How long will it take to arrive?"],
+["p","Could I have ten stamps, please?"],
+["p","I would like to send it by registered mail."],
+["p","Where do I have to sign?"],
+["p","My parcel was not delivered yesterday."],
+["a","Where is the check-in desk for London?"],
+["a","I would like a window seat, please."],
+["a","My suitcase did not arrive with my flight."],
+["a","How long is the flight delayed?"],
+["a","Is this the right gate for Paris?"],
+["a","Could you help me with my bag?"],
+["a","I have nothing to declare."]
+];
+
+const STORIES=[
+{a:"h",who:"Receptionist",t:"A Night at the Hotel",d:"From arrival to check-out – with a small problem in between.",steps:[
+{g:"Good afternoon and welcome! How can I help you?",o:[["Good afternoon! I have a reservation for two nights.","Greeting + clear information."],["Good afternoon! I have reserved for two nights.","“Reserve” needs an object: I've reserved a room – or simply: I have a reservation."],["Good afternoon! I'd like a reservation from yesterday.","Confusing – what do you mean?"]]},
+{g:"Could I see your passport, please?",o:[["Of course – here you are.","Correct fixed phrase."],["Of course – here are you.","Word order: Here you are."],["Of course – I don't have it with me. Here it is.","Contradiction."]]},
+{g:"I'm afraid your room isn't ready yet – check-in is at three.",o:[["No problem. Could I leave my suitcase here and come back later?","Polite and practical."],["No problem. I'll wait in my room.","Content: the room isn't ready!"],["No problem. Could I leave here my suitcase?","Word order: leave my suitcase here."]]},
+{g:"Here's your key card – room 308. Anything else?",o:[["Yes – what's the Wi-Fi password, please?","Natural and polite."],["Yes – which is the password of the Wi-Fi?","Unnatural. Say: What's the Wi-Fi password?"],["No, thank you. And what's the Wi-Fi password?","Contradiction: “No” – and then a question."]]},
+{g:"(On the phone) Reception, how can I help?",o:[["Hello, this is room 308. I'm afraid the TV doesn't work.","Telephone English + softener."],["Hello, here is room 308. The TV doesn't work.","On the phone: “This is…”."],["Hello, this is room 308. The TV isn't work.","Grammar: doesn't work / isn't working."]]},
+{g:"I'm sorry about that. A technician will come up in ten minutes.",o:[["Thank you very much – that's very kind.","Warm thanks."],["Thank you very much – that's very kindly.","After “that's” the adjective: kind."],["Thank you – but I needed it ten minutes ago.","Sounds impatient and rude."]]},
+{g:"Good morning! Are you checking out?",o:[["Yes, I am. Here's my key card.","Correct short answer."],["Yes, I'm. Here's my key card.","A sentence can't end with “I'm” – say “Yes, I am.”"],["Yes, I am checking in.","Content: you're leaving – checking OUT."]]},
+{g:"How was your stay?",o:[["Lovely, thank you – the room was very quiet.","Positive and specific."],["Lovely, thank you – the room was very quietly.","After “was” the adjective: quiet."],["Terrible, thank you – I loved it!","Contradiction."]]}
+]},
+{a:"p",who:"Clerk",t:"A Parcel for the Family",d:"Send a parcel of presents abroad – customs form included.",steps:[
+{g:"Next, please! What can I do for you?",o:[["Good morning! I'd like to send this parcel to China.","Clear and polite."],["Good morning! I'd like to send this parcel in China.","Direction: TO China."],["Good morning! I'd like to receive this parcel to China.","“Receive” = get. You want to SEND it."]]},
+{g:"Please put it on the scale… That's five kilos.",o:[["How much does it cost to send it?","Correct question."],["How much costs it?","Questions need “does”: How much does it cost?"],["How heavy is it?","She has just told you!"]]},
+{g:"By air it's 48 euros. By sea it's 25, but it takes eight weeks.",o:[["By sea, please – it isn't urgent.","Logical: cheap and slow is fine."],["By sea, please – I need it there tomorrow.","Contradiction: by sea takes eight weeks."],["By sea, please – it isn't urgently.","After “isn't” the adjective: urgent."]]},
+{g:"What's inside?",o:[["Clothes, some tea and two books – presents for my family.","Clear list."],["Clothes, some tea and two book.","Two → plural: books."],["Inside is the inside.","Nonsense."]]},
+{g:"Then you need to fill in this customs form.",o:[["Of course. Could you help me with it? It's my first time.","Polite + a reason."],["Of course. Could you help me with it? It's my first times.","“My first time” – singular."],["Of course – I'll put the form inside the box.","The form goes ON the box, where customs can see it."]]},
+{g:"Would you like insurance?",o:[["Yes, please – the presents are quite valuable.","Logical reason."],["Yes, please – the presents are quite worthless.","Then why insure them?"],["Yes, please – the presents are quite value.","“Value” is a noun – the adjective is valuable."]]},
+{g:"Here's your receipt with the tracking number.",o:[["Thank you! So I can follow the parcel online?","A smart question."],["Thank you! So I can following the parcel online?","After “can” the base form: follow."],["Thank you! So I can follow the parcel on foot?","A joke – it's going to China!"]]}
+]},
+{a:"a",who:"Airport staff",t:"From Check-in to Arrival",d:"A whole trip: check-in, security, the flight – and a missing suitcase.",steps:[
+{g:"Good morning! Where are you flying to today?",o:[["Good morning! To Amsterdam. Here's my passport.","Clear and helpful."],["Good morning! In Amsterdam. Here's my passport.","Direction: TO Amsterdam."],["Good morning! From Amsterdam. Here's my passport.","You're leaving from here – you fly TO Amsterdam."]]},
+{g:"Any bags to check in?",o:[["Yes, just this suitcase.","Correct."],["Yes, just this suitcases.","“This” + singular: this suitcase."],["No, just this suitcase.","Contradiction: “No” – but you have a suitcase to check in."]]},
+{g:"(At security) Do you have a laptop in your bag?",o:[["Yes, I do. Shall I take it out?","Correct short answer and offer."],["Yes, I have. Shall I take it out?","After “Do you…?” → Yes, I do."],["Yes, I do. Shall I take out it?","With a pronoun: take IT out."]]},
+{g:"(At the gate) We're boarding now. May I see your boarding pass?",o:[["Here you are – it's on my phone.","Correct: ON my phone."],["Here you are – it's in my phone.","On a screen we say “on my phone”."],["Here you are – but I don't have one.","Contradiction."]]},
+{g:"(On board) Would you like a drink?",o:[["Some apple juice, please – no ice.","Correct."],["A apple juice, please – no ice.","Before a vowel sound: AN apple juice."],["Some apple juice, please – with a lot of no ice.","Nonsense."]]},
+{g:"(Passport control) What's the purpose of your visit?",o:[["Holiday – I'm staying for a week.","Correct: “for” + length of time."],["Holiday – I'm staying since a week.","German “seit”. A length of time takes “for”."],["Holiday – I stayed for a week.","Past tense – but you've just arrived."]]},
+{g:"(Lost luggage desk) Can I help you?",o:[["Yes, please – my suitcase didn't arrive.","Correct: didn't + base verb."],["Yes, please – my suitcase didn't arrived.","After “didn't” the base form: arrive."],["Yes, please – my suitcase arrived, so it's lost.","Contradiction."]]},
+{g:"We'll deliver it to your hotel tomorrow.",o:[["Thank you – here's the hotel's address.","Practical and polite."],["Thank you – here's the hotel's adress.","Spelling: address – with double d and double s."],["Thank you – but please deliver it yesterday.","Impossible."]]}
+]}
+];
+
+/* ================= HELPERS ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>';
+const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const spk=t=>`<button class="spk" data-say="${esc(t)}" aria-label="Listen" title="Listen">${ICON}</button>`;
+const ph=t=>esc(t).replace(/\[(.+?)\]/g,"<mark>$1</mark>");
+const place=a=>`<span class="place">${esc(AREAN[a])}</span>`;
+
+let AREA="all";
+const F=arr=>AREA==="all"?arr:arr.filter(x=>(Array.isArray(x)?x[0]:x.a)===AREA);
+
+let voices=[];
+function loadVoices(){voices=window.speechSynthesis?speechSynthesis.getVoices():[];}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+function speak(t){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t.replace(/[\[\]]/g,"").replace(/^\(.*?\)\s*/,""));
+  const v=voices.find(v=>v.lang==="en-GB")||voices.find(v=>v.lang&&v.lang.startsWith("en"));
+  if(v)u.voice=v;u.lang=v?v.lang:"en-GB";
+  u.rate=parseFloat($("#rate").value);
+  speechSynthesis.speak(u);
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".spk");if(b){e.stopPropagation();speak(b.dataset.say);}});
+
+let score=0;
+function addPoint(n=1){score+=n;$("#score").textContent=score;}
+
+/* ================= GENERIC MULTIPLE CHOICE ================= */
+function makeMC(root,source,cfg){
+  let items=cfg.ordered?source.slice():shuffle(source);
+  let i=0,right=0;
+  function draw(){
+    if(!items.length){root.innerHTML='<div class="card muted">No exercises for this place yet.</div>';return;}
+    if(i>=items.length){
+      const pct=Math.round(right/items.length*100);
+      root.innerHTML=`<div class="card result"><div class="big">${right} / ${items.length}</div>
+      <p>${pct>=90?"Outstanding – you can travel the world with this English!":pct>=70?"Very good! A little more practice and you'll be perfect.":"Good start! Go through the explanations again – that's where the learning happens."}</p>
+      <div class="row" style="justify-content:center"><button class="btn again">Play again</button>${cfg.back?'<button class="btn ghost back">Choose another story</button>':""}</div></div>`;
+      root.querySelector(".again").onclick=()=>{items=cfg.ordered?source.slice():shuffle(source);i=0;right=0;draw();};
+      if(cfg.back)root.querySelector(".back").onclick=cfg.back;
+      return;
+    }
+    const it=items[i];
+    const opts=shuffle(it.o.map((x,k)=>({t:x[0],why:x[1],ok:k===0})));
+    root.innerHTML=`<div class="progress"><span>${cfg.label||"Question"} ${i+1} of ${items.length}</span><span>✓ ${right}</span></div>
+    <div class="bar"><i style="width:${i/items.length*100}%"></i></div>
+    <div class="card qcard">${cfg.head(it)}</div>
+    <div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="letter">${"ABCD"[k]}</span><span style="flex:1">${esc(o.t)}</span></button>`).join("")}</div>
+    <div class="feedback"></div>
+    <div class="row"><button class="btn next" style="display:none">Next →</button></div>`;
+    const fb=root.querySelector(".feedback"),nx=root.querySelector(".next");
+    root.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      const chosen=opts[+b.dataset.k];
+      root.querySelectorAll(".opt").forEach((x,k)=>{x.disabled=true;if(opts[k].ok)x.classList.add("right");});
+      if(!chosen.ok)b.classList.add("wrong");else{right++;addPoint();}
+      const full=s=>cfg.full?cfg.full(it,s):s;
+      const best=full(opts.find(o=>o.ok).t);
+      fb.innerHTML=`<div class="fb ${chosen.ok?"ok":"no"}"><b>${chosen.ok?"Excellent! ":"Not quite. "}</b>${chosen.ok?"":"The best answer is marked in green."}</div>`+
+        opts.map((o,k)=>`<div class="fb ${o.ok?"ok":"no"}"><b>${"ABCD"[k]} ${o.ok?"✓":"✗"}</b> ${esc(o.why)}</div>`).join("")+
+        `<div class="alts"><div><span><b>Say it:</b> ${esc(best)}</span>${spk(best)}</div></div>`+
+        (cfg.after?cfg.after(it):"");
+      nx.style.display="inline-block";
+    });
+    nx.onclick=()=>{i++;draw();window.scrollTo({top:root.offsetTop-20,behavior:"smooth"});};
+  }
+  draw();
+}
+
+/* ================= MODES ================= */
+const MODES=[
+{id:"phrase",n:"Phrasebook",s:"Learn the answers",c:"#34527e",title:"Phrasebook – what you hear & how to answer",intro:"At the hotel, the post office and the airport: what the staff say to you – and at least three ways to answer: short, polite, and detailed & elegant. Click the speaker to listen. Switch on the self-test to hide the answers and try first yourself. Yellow words are placeholders – put in your own information.",render:renderPhrase},
+{id:"mc",n:"Tricky Choice",s:"Only one is right",c:"#1d6a70",title:"Tricky Choice",intro:"Someone speaks to you – which answer is right? Careful: some answers have a small grammar mistake, some don't fit the content, and some are jokes. After each answer you see WHY every option is right or wrong.",render:r=>makeMC(r,F(MC),{head:it=>`${place(it.a)}<div class="label">${esc(SAYS[it.a])}</div><div class="qline"><span>“${esc(it.g)}”</span>${spk(it.g)}</div>`})},
+{id:"expr",n:"Expression Match",s:"Travel words & phrases",c:"#5f4a72",title:"Expression Match",intro:"Click an expression on the left, then its meaning on the right. Every matched pair shows an example sentence – these words are everywhere in hotels, post offices and airports.",render:renderExpr},
+{id:"m10",n:"Match 1–10",s:"Questions & answers",c:"#9a5a3c",title:"Match 1–10 with A–J",intro:"Ten things people say to you, ten answers. Choose the right letter for each number, then click “Check”. Two sets for every place.",render:renderM10},
+{id:"finish",n:"Finish the Sentence",s:"Start → perfect end",c:"#4f6b45",title:"Finish the Sentence",intro:"You see the start of your answer. Choose the ending that is grammatically correct AND fits the situation. Afterwards you get more elegant ways to finish the same sentence.",render:r=>makeMC(r,F(FINISH),{label:"Sentence",head:it=>`${place(it.a)}<div class="label">Situation</div><div class="qline"><span>${it.g.startsWith("(")?esc(it.g):"“"+esc(it.g)+"”"}</span>${spk(it.g)}</div><div class="starter">You: <b>${esc(it.s)}</b></div>`,full:(it,t)=>it.s.replace(/…$/,"").replace(/\s*–\s*$/," –").trim()+" "+t,after:it=>`<div class="alts"><b>More ways to say it:</b>${it.alt.map(a=>`<div><span>${esc(a)}</span>${spk(a)}</div>`).join("")}</div>`})},
+{id:"build",n:"Sentence Builder",s:"Put words in order",c:"#34527e",title:"Sentence Builder",intro:"Click the words in the right order to build a perfect travel sentence. Click a word in your sentence to send it back.",render:renderBuild},
+{id:"polite",n:"Make It Polite",s:"From rude to elegant",c:"#1d6a70",title:"Make It Polite",intro:"Here are sentences that are much too direct. Which version is truly polite and elegant? Watch out – “please” alone is not enough!",render:r=>makeMC(r,F(POLITE),{label:"Situation",head:it=>`${place(it.a)}<div class="label">Situation</div><div style="font-size:1.1rem">${esc(it.ctx)}</div><div class="rude">${esc(it.rude)}</div><p class="muted" style="margin:8px 0 0">Which sentence is the most polite?</p>`,after:it=>`<div class="tipbox">💡 ${esc(it.tip)}</div>`})},
+{id:"gap",n:"Fill the Gap",s:"Small words, big effect",c:"#5f4a72",title:"Fill the Gap",intro:"Prepositions, tenses, word order, phrasal verbs … Choose the right word for every gap, then click “Check”.",render:renderGap},
+{id:"story",n:"Travel Story",s:"Whole conversations",c:"#9a5a3c",title:"Travel Story",intro:"Play a whole situation from beginning to end. At every step choose your best answer – like a real day on the road.",render:renderStory},
+{id:"listen",n:"Listen & Answer",s:"Hear and react",c:"#4f6b45",title:"Listen & Answer",intro:"Press play and listen. Don't read – just listen! Then choose the answer that fits. You can show the text if you need help.",render:renderListen}
+];
+
+function renderPhrase(root){
+  const cats=F(PHRASES);
+  let cat="all",q="",test=false;
+  root.innerHTML=`<div class="card"><div class="toolbar"><input type="search" placeholder="Search a word, e.g. passport, stamp, towel…"><label class="switch"><input type="checkbox"> Self-test: hide the answers</label></div><div class="chips"></div><div class="muted" style="font-size:.9rem" id="pbCount"></div></div><div class="pbList"></div>`;
+  const chips=root.querySelector(".chips"),list=root.querySelector(".pbList");
+  chips.innerHTML=`<button class="chip on" data-c="all">All topics</button>`+cats.map((c,k)=>`<button class="chip" data-c="${k}">${esc(c.cat)}</button>`).join("");
+  chips.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;chips.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));draw();};
+  root.querySelector("input[type=search]").oninput=e=>{q=e.target.value.toLowerCase();draw();};
+  root.querySelector("input[type=checkbox]").onchange=e=>{test=e.target.checked;draw();};
+  function draw(){
+    let html="",n=0;
+    cats.forEach((c,k)=>{
+      if(cat!=="all"&&+cat!==k)return;
+      const its=c.items.filter(it=>!q||it.join(" ").toLowerCase().includes(q));
+      if(!its.length)return;
+      html+=`<h3 style="color:var(--sky);font-weight:600;margin:22px 0 10px">${esc(c.cat)}</h3>`;
+      its.forEach(it=>{n++;
+        html+=`<article class="scene"><div class="guest"><span class="who">${esc(c.who)}</span><p>“${esc(it[0])}”</p>${spk(it[0])}</div>
+        <div class="answers ${test?"hide":""}">${it.slice(1).map((a,j)=>`<div class="ans l${j}"><span class="tag">${LV[j]}</span><p>${ph(a)}</p>${spk(a)}</div>`).join("")}</div>
+        ${test?'<div class="row"><button class="btn small reveal">Show answers</button></div>':""}</article>`;
+      });
+    });
+    list.innerHTML=html||'<div class="card muted">Nothing found – try another word.</div>';
+    root.querySelector("#pbCount").textContent=n+" situations";
+    list.querySelectorAll(".reveal").forEach(b=>b.onclick=()=>{b.closest(".scene").querySelector(".answers").classList.remove("hide");b.remove();});
+  }
+  draw();
+}
+
+function renderExpr(root){
+  const src=F(EXPR);
+  let pool=shuffle(src),round=0;
+  const rounds=Math.ceil(pool.length/8);
+  function draw(){
+    const set=pool.slice(round*8,round*8+8);
+    const L=shuffle(set.map((x,k)=>({t:x[1],k}))),R=shuffle(set.map((x,k)=>({t:x[2],k})));
+    let sl=null,sr=null,done=0;
+    root.innerHTML=`<div class="progress"><span>Round ${round+1} of ${rounds}</span><span class="cnt">0 / ${set.length}</span></div>
+    <div class="match"><div class="mcol L">${L.map(x=>`<button class="mitem expr" data-k="${x.k}">${esc(x.t)}</button>`).join("")}</div>
+    <div class="mcol R">${R.map(x=>`<button class="mitem" data-k="${x.k}">${esc(x.t)}</button>`).join("")}</div></div>
+    <div class="card" style="margin-top:16px"><b>Your new expressions</b><div class="learned"></div></div>
+    <div class="row"><button class="btn nextR" style="display:none">${round+1<rounds?"Next round →":"Play again"}</button></div>`;
+    const learned=root.querySelector(".learned");
+    function tryMatch(){
+      if(!sl||!sr)return;
+      if(sl.dataset.k===sr.dataset.k){
+        [sl,sr].forEach(x=>{x.classList.remove("sel");x.classList.add("done");x.disabled=true;});
+        const e=set[+sl.dataset.k];done++;addPoint();
+        learned.insertAdjacentHTML("beforeend",`<div><span><b>${esc(e[1])}</b> – ${esc(e[3])}</span>${spk(e[3])}</div>`);
+        root.querySelector(".cnt").textContent=done+" / "+set.length;
+        if(done===set.length)root.querySelector(".nextR").style.display="inline-block";
+      }else{
+        [sl,sr].forEach(x=>{x.classList.remove("sel");x.classList.add("shake");setTimeout(()=>x.classList.remove("shake"),400);});
+      }
+      sl=sr=null;
+    }
+    root.querySelectorAll(".L .mitem").forEach(b=>b.onclick=()=>{if(b.disabled)return;root.querySelectorAll(".L .mitem").forEach(x=>x.classList.remove("sel"));sl=b;b.classList.add("sel");speak(b.textContent);tryMatch();});
+    root.querySelectorAll(".R .mitem").forEach(b=>b.onclick=()=>{if(b.disabled)return;root.querySelectorAll(".R .mitem").forEach(x=>x.classList.remove("sel"));sr=b;b.classList.add("sel");tryMatch();});
+    root.querySelector(".nextR").onclick=()=>{round++;if(round>=rounds){round=0;pool=shuffle(src);}draw();};
+  }
+  draw();
+}
+
+function renderM10(root){
+  const sets=F(MATCHSETS);
+  let si=0;
+  function draw(){
+    const set=sets[si],letters="ABCDEFGHIJ";
+    const ans=shuffle(set.p.map((p,k)=>({t:p[1],k})));
+    const correctLetter=k=>letters[ans.findIndex(a=>a.k===k)];
+    root.innerHTML=`<div class="chips">${sets.map((s,k)=>`<button class="chip ${k===si?"on":""}" data-s="${k}">Set ${k+1}: ${esc(s.t)}</button>`).join("")}</div>
+    <div class="m10"><div class="card"><b>What people say to you</b>${set.p.map((p,k)=>`<div class="qrow"><span class="n">${k+1}</span><p>${esc(p[0])}</p>${spk(p[0])}<select data-k="${k}"><option value="">–</option>${letters.split("").map(l=>`<option>${l}</option>`).join("")}</select></div>`).join("")}</div>
+    <div class="card"><b>Your answers</b>${ans.map((a,j)=>`<div class="arow"><span class="n">${letters[j]}</span><p>${esc(a.t)}</p>${spk(a.t)}</div>`).join("")}</div></div>
+    <div class="row"><button class="btn chk">Check</button><button class="btn ghost new">Mix again</button><span class="res muted"></span></div>`;
+    root.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{si=+b.dataset.s;draw();});
+    root.querySelector(".new").onclick=draw;
+    const rewarded=new Set();
+    root.querySelector(".chk").onclick=()=>{
+      let r=0;
+      root.querySelectorAll("select").forEach(s=>{
+        const k=+s.dataset.k,ok=s.value===correctLetter(k);
+        s.classList.remove("ok","no");if(s.value)s.classList.add(ok?"ok":"no");
+        if(ok){r++;if(!rewarded.has(k)){rewarded.add(k);addPoint();}}
+      });
+      root.querySelector(".res").textContent=`${r} of 10 correct`+(r===10?" – perfect!":" – red ones need another try.");
+    };
+  }
+  draw();
+}
+
+function renderBuild(root){
+  const src=F(BUILD).map(x=>x[1]);
+  let items=shuffle(src),i=0,right=0;
+  function draw(){
+    if(i>=items.length){items=shuffle(src);i=0;}
+    const target=items[i],words=target.split(" ");
+    let pool=shuffle(words.map((w,k)=>({w,k}))),line=[],solved=false;
+    root.innerHTML=`<div class="progress"><span>Sentence ${i+1} of ${items.length}</span><span>✓ ${right}</span></div>
+    <div class="card"><p class="muted" style="margin:0">Build the sentence:</p><div class="line"></div><div class="pool"></div>
+    <div class="row"><button class="btn chk">Check</button><button class="btn ghost hint">Hint</button><button class="btn ghost show">Show answer</button></div><div class="feedback"></div></div>
+    <div class="row"><button class="btn nx">Next sentence →</button></div>`;
+    const L=root.querySelector(".line"),P=root.querySelector(".pool"),fb=root.querySelector(".feedback");
+    function paint(){
+      L.innerHTML=line.map((x,j)=>`<button class="word" data-j="${j}">${esc(x.w)}</button>`).join("");
+      P.innerHTML=pool.filter(x=>!line.includes(x)).map(x=>`<button class="word" data-k="${x.k}">${esc(x.w)}</button>`).join("");
+      L.querySelectorAll(".word").forEach(b=>b.onclick=()=>{if(solved)return;line.splice(+b.dataset.j,1);paint();});
+      P.querySelectorAll(".word").forEach(b=>b.onclick=()=>{if(solved)return;line.push(pool.find(x=>x.k===+b.dataset.k));paint();});
+    }
+    paint();
+    root.querySelector(".chk").onclick=()=>{
+      const s=line.map(x=>x.w).join(" ");
+      if(s===target){if(!solved){right++;addPoint();}solved=true;fb.innerHTML=`<div class="fb ok"><b>Perfect!</b> ${esc(target)} ${spk(target)}</div>`;}
+      else fb.innerHTML=`<div class="fb no"><b>Not yet.</b> ${line.length<words.length?"Some words are still missing.":"Check the word order again."}</div>`;
+    };
+    root.querySelector(".hint").onclick=()=>{
+      let n=0;while(n<line.length&&line[n].w===words[n])n++;
+      line=line.slice(0,n);const nextW=pool.find(x=>x.w===words[n]&&!line.includes(x));
+      if(nextW)line.push(nextW);paint();fb.innerHTML=`<div class="fb no">The first ${Math.min(n+1,words.length)} word(s) are now in place.</div>`;
+    };
+    root.querySelector(".show").onclick=()=>{solved=true;fb.innerHTML=`<div class="fb no"><b>Answer:</b> ${esc(target)} ${spk(target)}</div>`;};
+    root.querySelector(".nx").onclick=()=>{i++;draw();};
+  }
+  draw();
+}
+
+function renderGap(root){
+  const src=F(GAPS);
+  let items=shuffle(src);
+  function draw(){
+    let gid=0;const sols=[];
+    const rows=items.map((x,n)=>{
+      const html=x[1].split(/(\[\[.*?\]\])/).map(part=>{
+        if(!part.startsWith("[["))return esc(part);
+        const opts=part.slice(2,-2).split("|"),corr=opts.find(o=>o.endsWith("*")).slice(0,-1);
+        sols[gid]=corr;
+        return `<select class="gap" data-g="${gid++}"><option value="">…</option>${shuffle(opts.map(o=>o.replace("*",""))).map(o=>`<option>${esc(o)}</option>`).join("")}</select>`;
+      }).join("");
+      return `<div class="gline"><span class="n">${n+1}.</span><div class="txt">${AREA==="all"?place(x[0])+" ":""}${html}<span class="sol"></span></div></div>`;
+    }).join("");
+    root.innerHTML=`<div class="card">${rows}<div class="row"><button class="btn chk">Check</button><button class="btn ghost new">New order</button><span class="res muted"></span></div></div>`;
+    const rewarded=new Set();
+    root.querySelector(".chk").onclick=()=>{
+      let r=0,t=0;
+      root.querySelectorAll(".gline").forEach(line=>{
+        const wrong=[];
+        line.querySelectorAll("select").forEach(s=>{
+          t++;const g=+s.dataset.g,ok=s.value===sols[g];
+          s.classList.remove("ok","no");s.classList.add(ok?"ok":"no");
+          if(ok){r++;if(!rewarded.has(g)){rewarded.add(g);addPoint();}}else wrong.push(sols[g]);
+        });
+        line.querySelector(".sol").textContent=wrong.length?"Correct: "+wrong.join(" … "):"";
+      });
+      root.querySelector(".res").textContent=`${r} of ${t} correct`;
+    };
+    root.querySelector(".new").onclick=()=>{items=shuffle(src);draw();};
+  }
+  draw();
+}
+
+function renderStory(root){
+  const list=F(STORIES);
+  function menu(){
+    root.innerHTML=`<div class="storylist">${list.map((s,k)=>`<button class="story" data-k="${k}">${place(s.a)}<h3>${esc(s.t)}</h3><p>${esc(s.d)}</p><p style="margin-top:8px">${s.steps.length} steps</p></button>`).join("")}</div>`;
+    root.querySelectorAll(".story").forEach(b=>b.onclick=()=>{
+      const s=list[+b.dataset.k];
+      makeMC(root,s.steps,{ordered:true,label:s.t+" · step",back:menu,head:it=>`<div class="guest" style="margin:0"><span class="who">${esc(s.who)}</span><p>“${esc(it.g)}”</p>${spk(it.g)}</div><p class="muted" style="margin:10px 0 0">What do you say?</p>`});
+    });
+  }
+  menu();
+}
+
+function renderListen(root){
+  const all=[];F(PHRASES).forEach((c,ci)=>c.items.forEach(it=>all.push({ci,a:c.a,it})));
+  const items=shuffle(all).slice(0,15).map(x=>{
+    const others=shuffle(all.filter(y=>y.ci!==x.ci)).slice(0,3);
+    return {a:x.a,g:x.it[0],o:[[x.it[2],"This answer fits what you heard."],...others.map(y=>[y.it[2],"This would answer something different: “"+y.it[0]+"”"])]};
+  });
+  makeMC(root,items,{label:"Listening",head:it=>`<div style="text-align:center">${place(it.a)}</div><div class="label" style="text-align:center">Listen carefully</div><button class="playbig" data-say="${esc(it.g)}" aria-label="Play">${PLAY}</button>
+    <div style="text-align:center"><span class="qtext hiddenq">“${esc(it.g)}”</span><br><button class="btn ghost small showq" style="margin-top:8px">Show text</button></div>`});
+  root.addEventListener("click",e=>{
+    const p=e.target.closest(".playbig");if(p)speak(p.dataset.say);
+    const s=e.target.closest(".showq");if(s){root.querySelector(".qtext").classList.remove("hiddenq");s.remove();}
+  });
+  root.addEventListener("click",e=>{if(e.target.closest(".opt")){const q=root.querySelector(".qtext");if(q)q.classList.remove("hiddenq");}},true);
+}
+
+/* ================= BOOT ================= */
+const nav=$("#nav"),main=$("#main");let rendered={},cur=0;
+MODES.forEach((m,k)=>{
+  nav.insertAdjacentHTML("beforeend",`<button data-k="${k}" style="--c:${m.c}"><span class="num">${k+1}</span><span class="t">${esc(m.n)}<span class="s">${esc(m.s)}</span></span></button>`);
+  main.insertAdjacentHTML("beforeend",`<section class="mode" id="sec-${m.id}" style="--c:${m.c}"><div class="intro"><h2>${k+1}. ${esc(m.title)}</h2><p>${esc(m.intro)}</p></div><div class="body"></div></section>`);
+});
+function open(k){
+  cur=k;const m=MODES[k];
+  nav.querySelectorAll("button").forEach((b,j)=>b.classList.toggle("active",j===k));
+  main.querySelectorAll(".mode").forEach(s=>s.classList.remove("show"));
+  const sec=$("#sec-"+m.id);sec.classList.add("show");
+  if(!rendered[m.id]){m.render(sec.querySelector(".body"));rendered[m.id]=true;}
+}
+nav.onclick=e=>{const b=e.target.closest("button");if(b){open(+b.dataset.k);window.scrollTo({top:nav.offsetTop+nav.offsetHeight-10,behavior:"smooth"});}};
+$("#topics").onclick=e=>{
+  const b=e.target.closest(".tchip");if(!b)return;
+  AREA=b.dataset.a;
+  document.querySelectorAll(".tchip").forEach(x=>x.classList.toggle("on",x===b));
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  rendered={};
+  main.querySelectorAll(".body").forEach(old=>{const n=document.createElement("div");n.className="body";old.replaceWith(n);});
+  open(cur);
+};
+open(0);
+</script>
+</body>
+</html>
