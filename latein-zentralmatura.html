@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latein Zentralmatura – Schritt für Schritt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ec; --card:#ffffff; --ink:#1b1b1f; --muted:#56535d; --line:#e3ddd3;
+  --blue:#3a5a8c; --blue-soft:#e7edf6;
+  --petrol:#1d6b74; --petrol-soft:#e3eff1;
+  --lilac:#5d4a7e; --lilac-soft:#eee9f5;
+  --terra:#9c4f3d; --terra-soft:#f6e9e4;
+  --gold:#a7843b; --gold-soft:#f6efdf;
+  --radius:20px; --shadow:0 6px 24px rgba(40,30,20,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Lexend',system-ui,sans-serif;font-size:18px;line-height:1.7;font-weight:400}
+.wrap{max-width:1020px;margin:0 auto;padding:0 18px}
+h1,h2,h3,h4{line-height:1.3;font-weight:600;margin:0 0 .6em}
+h2{font-size:1.7rem}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+.latin{font-family:'Source Serif 4',Georgia,serif;font-size:1.2rem;line-height:1.85}
+em.lat{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:1.08em}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#2f4a75 0%,#4a3e6b 55%,#7a4a45 100%);color:#fff;padding:64px 0 54px;border-radius:0 0 36px 36px}
+.hero h1{font-size:2.5rem;margin-bottom:.3em;font-weight:700}
+.hero p{font-size:1.12rem;max-width:720px;opacity:.95}
+.hero .motto{font-family:'Source Serif 4',serif;font-style:italic;font-size:1.25rem;opacity:.9;margin-top:1.2em}
+
+/* Nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(245,242,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.top a{white-space:nowrap;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:.92rem;transition:.2s}
+nav.top a:hover{background:var(--blue-soft);border-color:var(--blue)}
+nav.top a.sim{background:var(--terra);color:#fff;border-color:var(--terra)}
+
+section{padding:52px 0 8px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.badge{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.b-blue{background:var(--blue)}.b-petrol{background:var(--petrol)}.b-lilac{background:var(--lilac)}.b-terra{background:var(--terra)}.b-gold{background:var(--gold)}
+.lead{color:var(--muted);font-size:1.05rem;max-width:820px}
+
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;margin-bottom:20px;border:1px solid #efe9df}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.stat{border-radius:18px;padding:20px 22px}
+.stat .num{font-size:2rem;font-weight:700;line-height:1.1}
+.stat .lbl{font-size:.95rem;color:var(--muted)}
+.s-blue{background:var(--blue-soft)}.s-blue .num{color:var(--blue)}
+.s-petrol{background:var(--petrol-soft)}.s-petrol .num{color:var(--petrol)}
+.s-lilac{background:var(--lilac-soft)}.s-lilac .num{color:var(--lilac)}
+.s-terra{background:var(--terra-soft)}.s-terra .num{color:var(--terra)}
+.s-gold{background:var(--gold-soft)}.s-gold .num{color:var(--gold)}
+
+.note{border-left:5px solid var(--gold);background:var(--gold-soft);padding:14px 18px;border-radius:12px;margin:14px 0}
+.note.blue{border-color:var(--blue);background:var(--blue-soft)}
+.note.lilac{border-color:var(--lilac);background:var(--lilac-soft)}
+.note.terra{border-color:var(--terra);background:var(--terra-soft)}
+.note.petrol{border-color:var(--petrol);background:var(--petrol-soft)}
+
+table.plain{width:100%;border-collapse:separate;border-spacing:0;font-size:.97rem}
+table.plain th{background:var(--blue-soft);text-align:left;padding:10px 14px;font-weight:600}
+table.plain td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+table.plain tr:last-child td{border-bottom:none}
+table.plain th:first-child{border-radius:12px 0 0 0}table.plain th:last-child{border-radius:0 12px 0 0}
+
+/* Stepper */
+.stepper .sentence{display:flex;flex-wrap:wrap;gap:6px 8px;padding:18px;background:var(--bg);border-radius:16px;margin:12px 0 18px}
+.tok{font-family:'Source Serif 4',serif;font-size:1.35rem;padding:3px 9px;border-radius:9px;transition:.35s;border:2px solid transparent}
+.tok.dim{opacity:.28}
+.tok.sub{background:var(--lilac-soft);border-color:var(--lilac)}
+.tok.pred{background:var(--terra-soft);border-color:var(--terra)}
+.tok.inf{background:var(--gold-soft);border-color:var(--gold)}
+.tok.main{background:var(--blue-soft);border-color:var(--blue)}
+.tok.aci{background:var(--petrol-soft);border-color:var(--petrol)}
+.step-dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.step-dots span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:.88rem;background:#efe9df;color:var(--muted);cursor:pointer}
+.step-dots span.on{background:var(--blue);color:#fff}
+.step-body h3{color:var(--blue)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button,.btn{font-family:inherit;font-size:1rem;border:none;border-radius:14px;padding:11px 20px;cursor:pointer;background:var(--blue);color:#fff;transition:.2s}
+button:hover{filter:brightness(1.08)}
+button.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+button.terra{background:var(--terra)}
+button.petrol{background:var(--petrol)}
+button.lilac{background:var(--lilac)}
+button:disabled{opacity:.45;cursor:default}
+
+/* Accordion */
+details.acc{background:#fff;border-radius:18px;box-shadow:var(--shadow);margin-bottom:14px;border:1px solid #efe9df;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;padding:18px 24px;font-weight:600;font-size:1.08rem;display:flex;align-items:center;gap:12px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:'+';margin-left:auto;font-size:1.5rem;color:var(--muted);transition:.2s}
+details.acc[open] summary::after{transform:rotate(45deg)}
+details.acc .inner{padding:0 24px 22px}
+.tag{display:inline-block;font-size:.78rem;padding:3px 10px;border-radius:999px;font-weight:500;background:var(--blue-soft);color:var(--blue)}
+.tag.p{background:var(--petrol-soft);color:var(--petrol)}.tag.l{background:var(--lilac-soft);color:var(--lilac)}.tag.t{background:var(--terra-soft);color:var(--terra)}.tag.g{background:var(--gold-soft);color:var(--gold)}
+.ex{background:var(--bg);border-radius:14px;padding:14px 18px;margin:10px 0}
+.ex .latin{font-size:1.15rem}
+.ex .de{color:var(--muted);font-size:.98rem}
+
+/* Stilmittel grid */
+.sm{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);border-top:5px solid var(--lilac)}
+.sm h4{margin-bottom:.35em;font-size:1.08rem}
+.sm p{font-size:.95rem;margin-bottom:.5em}
+.sm .latin{font-size:1.05rem;color:var(--lilac)}
+
+/* Quiz */
+.q{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:20px 24px;margin-bottom:16px;border:1px solid #efe9df}
+.q .qhead{font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.q .prompt{font-weight:500;margin-bottom:12px}
+.opts{display:grid;gap:9px}
+.opt{text-align:left;background:var(--bg);color:var(--ink);border:2px solid transparent;border-radius:13px;padding:11px 16px;font-size:.98rem}
+.opt:hover{border-color:var(--blue);filter:none}
+.opt.right{background:var(--petrol-soft);border-color:var(--petrol)}
+.opt.wrong{background:var(--terra-soft);border-color:var(--terra)}
+.expl{display:none;margin-top:12px;padding:12px 16px;border-radius:12px;background:var(--blue-soft);font-size:.96rem}
+.expl.show{display:block}
+.expl b.ok{color:var(--petrol)}.expl b.no{color:var(--terra)}
+.scorebar{position:sticky;top:62px;z-index:20;background:var(--lilac);color:#fff;border-radius:14px;padding:10px 18px;margin-bottom:16px;display:flex;justify-content:space-between;font-weight:500}
+
+/* Simulation */
+.sim-hero{background:linear-gradient(135deg,#7a4a45,#4a3e6b);color:#fff;border-radius:26px;padding:30px 32px;margin-bottom:22px}
+.sim-hero h2{color:#fff}
+.timer{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;margin-top:14px}
+.timer .clock{font-size:2.1rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:1px}
+.timer button{background:#fff;color:var(--lilac)}
+.textbox{background:#fffdf9;border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.textbox sup{color:var(--terra);font-family:'Lexend';font-size:.7rem;font-weight:600}
+.lines{counter-reset:ln}
+.lines div{counter-increment:ln;position:relative;padding-left:44px}
+.lines div::before{content:counter(ln);position:absolute;left:0;width:30px;text-align:right;color:var(--muted);font-family:'Lexend';font-size:.8rem;top:.45em}
+.vocab{font-size:.9rem;color:var(--muted);margin-top:14px;columns:2 300px;column-gap:28px}
+.vocab div{break-inside:avoid;margin-bottom:4px}
+textarea{width:100%;min-height:120px;font-family:inherit;font-size:1rem;line-height:1.6;border:2px solid var(--line);border-radius:14px;padding:14px 16px;background:#fff;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--blue)}
+textarea.big{min-height:320px}
+input[type=text],select{font-family:inherit;font-size:1rem;border:2px solid var(--line);border-radius:11px;padding:8px 12px;background:#fff;max-width:100%}
+.task{background:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px;box-shadow:var(--shadow);border-left:6px solid var(--blue)}
+.task.self{border-left-color:var(--gold)}
+.task h4{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.task h4 .pts{font-size:.85rem;font-weight:500;background:var(--blue-soft);color:var(--blue);padding:3px 12px;border-radius:999px;white-space:nowrap}
+.task.self h4 .pts{background:var(--gold-soft);color:var(--gold)}
+.fieldrow{display:flex;align-items:center;gap:12px;margin:8px 0;flex-wrap:wrap}
+.fieldrow label{min-width:190px}
+.mark-ok{border-color:var(--petrol)!important;background:var(--petrol-soft)!important}
+.mark-no{border-color:var(--terra)!important;background:var(--terra-soft)!important}
+.clickword{font-family:'Source Serif 4',serif;font-size:1.15rem;display:inline-block;padding:1px 6px;margin:2px 1px;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.clickword:hover{background:var(--blue-soft)}
+.clickword.sel{background:var(--blue-soft);border-color:var(--blue)}
+.clickword.ok{background:var(--petrol-soft);border-color:var(--petrol)}
+.clickword.no{background:var(--terra-soft);border-color:var(--terra)}
+.clickword.miss{border-color:var(--gold);border-style:dashed}
+.model{display:none;margin-top:12px;background:var(--gold-soft);border-radius:12px;padding:14px 18px;font-size:.97rem}
+.model.show{display:block}
+.hidden{display:none}
+.se-table td.lat{font-family:'Source Serif 4',serif;font-size:1.02rem;width:38%}
+.se-table td.chk{width:90px;text-align:center}
+.cp{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.cp:last-child{border-bottom:none}
+.cp input{margin-top:6px;transform:scale(1.3);accent-color:var(--petrol)}
+.cp small{color:var(--muted);display:block}
+input[type=checkbox],input[type=radio]{accent-color:var(--petrol)}
+.lang-opt{display:flex;gap:10px;align-items:flex-start;padding:7px 0}
+.result{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:28px;border:2px solid var(--lilac)}
+.bar{height:16px;background:#efe9df;border-radius:999px;overflow:hidden;margin:6px 0 16px}
+.bar>div{height:100%;border-radius:999px;transition:width .8s}
+.grade{font-size:2.2rem;font-weight:700;color:var(--lilac)}
+.mini{font-size:.9rem;color:var(--muted)}
+footer{padding:50px 0 60px;color:var(--muted);font-size:.9rem;text-align:center}
+@media (max-width:640px){
+  body{font-size:17px}
+  .hero h1{font-size:1.9rem}
+  .card,.task,.q{padding:20px 18px}
+  .fieldrow label{min-width:0;width:100%}
+  .se-table td.lat{width:auto}
+  .scorebar{top:58px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Latein Zentralmatura</h1>
+    <p>Dein Weg durch die schriftliche Reifeprüfung – vom ersten Blick auf den Text über die sichere Übersetzung bis zur souveränen Interpretation. Alles Schritt für Schritt erklärt, mit Übungen und einer vollständigen Maturasimulation am Ende.</p>
+    <div class="motto">„Non scholae, sed vitae discimus.“ – Wir lernen nicht für die Schule, sondern für das Leben.</div>
+  </div>
+</header>
+
+<nav class="top"><div class="wrap">
+  <a href="#ueberblick">1 · Überblick</a>
+  <a href="#methode">2 · Übersetzen in 8 Schritten</a>
+  <a href="#konstruktionen">3 · Konstruktionen</a>
+  <a href="#formen">4 · Formen-Fallen</a>
+  <a href="#woerterbuch">5 · Wörterbuch</a>
+  <a href="#interpretation">6 · Arbeitsaufgaben</a>
+  <a href="#stilmittel">7 · Stilmittel</a>
+  <a href="#metrik">8 · Metrik</a>
+  <a href="#training">9 · Training</a>
+  <a href="#simulation" class="sim">★ Maturasimulation</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ============ 1 ÜBERBLICK ============ -->
+<section id="ueberblick">
+  <div class="sec-head"><div class="badge b-blue">1</div><h2>Die Klausur im Überblick</h2></div>
+  <p class="lead">Wer weiß, wie die Prüfung gebaut ist, verliert die Angst vor ihr. Die schriftliche Lateinmatura besteht aus zwei voneinander unabhängigen Originaltexten: einem Text, den du vollständig übersetzt, und einem zweiten Text, zu dem du Arbeitsaufgaben löst.</p>
+
+  <div class="grid g3" style="margin:20px 0">
+    <div class="stat s-blue"><div class="num">270</div><div class="lbl">Minuten Arbeitszeit für beide Teile zusammen</div></div>
+    <div class="stat s-terra"><div class="num">36</div><div class="lbl">Punkte für den Übersetzungstext (ÜT)</div></div>
+    <div class="stat s-lilac"><div class="num">24</div><div class="lbl">Punkte für den Interpretationstext (IT) mit 10 Arbeitsaufgaben</div></div>
+    <div class="stat s-petrol"><div class="num">50 %</div><div class="lbl">pro Teil nötig: mindestens 18 Punkte im ÜT und 12 Punkte im IT</div></div>
+    <div class="stat s-gold"><div class="num">📖</div><div class="lbl">Ein Latein-Deutsch-Wörterbuch ist erlaubt (auch elektronisch)</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Wie der Übersetzungstext bewertet wird</h3>
+    <p>Die 36 Punkte für die Übersetzung entstehen nicht durch „Fehlerzählen“, sondern über ein Raster mit sogenannten <b>Checkpoints</b>. Das ist eine gute Nachricht: Du kannst Punkte gezielt sammeln, und ein einzelner Patzer zieht nicht den ganzen Satz mit hinunter.</p>
+    <table class="plain">
+      <tr><th>Bereich</th><th>Punkte</th><th>Was geprüft wird</th></tr>
+      <tr><td><b>Sinneinheiten (SE)</b></td><td>12</td><td>Ist der Sinn jedes Textabschnitts im Großen und Ganzen richtig erfasst?</td></tr>
+      <tr><td><b>Lexik · Morphologie · Syntax</b></td><td>18</td><td>Ausgewählte Stellen: passende Wortbedeutung, richtig bestimmte Formen, korrekt aufgelöste Konstruktionen</td></tr>
+      <tr><td><b>Sprache</b></td><td>6</td><td>Ist deine Übersetzung gutes, flüssiges, korrektes Deutsch?</td></tr>
+    </table>
+    <div class="note blue"><b>Das heißt für dich:</b> Lass niemals eine Lücke! Auch eine unsichere, aber sinnvolle Übersetzung kann die Sinneinheit retten. Eine leere Stelle bringt garantiert null Punkte.</div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Textumfang</h3>
+      <p>Im vierjährigen Latein umfasst der Übersetzungstext etwa 110 bis 130 Wörter, der Interpretationstext etwa 80 bis 100 Wörter. In der Langform (sechsjähriges Latein) sind die Texte etwas länger.</p>
+    </div>
+    <div class="card">
+      <h3>Notenorientierung</h3>
+      <table class="plain">
+        <tr><td>53–60 Punkte</td><td><b>Sehr gut</b></td></tr>
+        <tr><td>45–52 Punkte</td><td><b>Gut</b></td></tr>
+        <tr><td>37–44 Punkte</td><td><b>Befriedigend</b></td></tr>
+        <tr><td>30–36 Punkte</td><td><b>Genügend</b></td></tr>
+        <tr><td>0–29 Punkte</td><td><b>Nicht genügend</b></td></tr>
+      </table>
+      <p class="mini" style="margin-top:10px">Übliche Orientierungswerte – maßgeblich ist immer der offizielle Beurteilungsschlüssel des jeweiligen Prüfungstermins.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Zeitplan, der sich bewährt</h3>
+    <p>Teile dir die 270 Minuten bewusst ein, sonst frisst die Übersetzung die Interpretation auf. Ein bewährter Rhythmus sieht so aus:</p>
+    <table class="plain">
+      <tr><th>Zeit</th><th>Tätigkeit</th></tr>
+      <tr><td>0–10 Min.</td><td>Beide Texte, Einleitungen und alle Arbeitsaufgaben kurz durchlesen – so arbeitet dein Kopf im Hintergrund schon mit.</td></tr>
+      <tr><td>10–160 Min.</td><td>Übersetzungstext: Satz für Satz nach der Methode in Kapitel 2, zuerst Rohübersetzung, dann Feinschliff.</td></tr>
+      <tr><td>160–245 Min.</td><td>Interpretationstext: Text erschließen, dann die zehn Arbeitsaufgaben – geschlossene Aufgaben zuerst, offene danach.</td></tr>
+      <tr><td>245–270 Min.</td><td>Kontrolle: Hast du überall etwas stehen? Ist das Deutsch flüssig? Stimmen Zitate und Zeilenangaben?</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 2 METHODE ============ -->
+<section id="methode">
+  <div class="sec-head"><div class="badge b-petrol">2</div><h2>Übersetzen in 8 Schritten</h2></div>
+  <p class="lead">Lateinische Sätze wirken oft wie ein Knäuel. Mit einer festen Reihenfolge wird daraus ein Faden, den du ruhig abwickelst. Klicke dich durch das Beispiel und beobachte, wie der Satz Schritt für Schritt durchsichtig wird.</p>
+
+  <div class="card stepper">
+    <div class="step-dots" id="dots"></div>
+    <div class="sentence" id="sentence"></div>
+    <div class="step-body" id="stepBody"></div>
+    <div class="btnrow">
+      <button class="ghost" id="prevStep">← zurück</button>
+      <button id="nextStep">weiter →</button>
+    </div>
+  </div>
+
+  <div class="note petrol"><b>Farblegende:</b> <span class="tok sub" style="font-size:1rem">Nebensatz-Einleiter</span> <span class="tok pred" style="font-size:1rem">Prädikat</span> <span class="tok inf" style="font-size:1rem">Infinitiv</span> <span class="tok main" style="font-size:1rem">Hauptsatz</span> <span class="tok aci" style="font-size:1rem">Konstruktion (AcI)</span></div>
+</section>
+
+<!-- ============ 3 KONSTRUKTIONEN ============ -->
+<section id="konstruktionen">
+  <div class="sec-head"><div class="badge b-lilac">3</div><h2>Konstruktionen-Werkstatt</h2></div>
+  <p class="lead">Die Checkpoints im Bereich Syntax drehen sich fast immer um dieselben Bausteine. Wenn du sie auf den ersten Blick erkennst, gewinnst du nicht nur Punkte, sondern vor allem Zeit und Sicherheit. Jede Karte zeigt dir: woran du die Konstruktion erkennst, wie du sie übersetzt und wo die typische Falle lauert.</p>
+
+  <details class="acc" open>
+    <summary><span class="tag l">Syntax</span> AcI – Akkusativ mit Infinitiv</summary>
+    <div class="inner">
+      <p><b>Erkennen:</b> Ein Verb des Sagens, Denkens, Wissens oder Wahrnehmens (<em class="lat">dicere, putare, scire, videre, audire, sentire</em>) oder ein unpersönlicher Ausdruck (<em class="lat">constat, necesse est</em>) – und danach ein Akkusativ zusammen mit einem Infinitiv.</p>
+      <p><b>Übersetzen:</b> Mit einem „dass“-Satz. Der Akkusativ wird zum Subjekt, der Infinitiv zum Prädikat.</p>
+      <div class="ex"><div class="latin">Scio te verum dicere.</div><div class="de">Ich weiß, dass du die Wahrheit sagst.</div></div>
+      <p><b>Zeitverhältnis</b> – das wichtigste Detail: Infinitiv Präsens bedeutet gleichzeitig, Infinitiv Perfekt vorzeitig, Infinitiv Futur nachzeitig zum übergeordneten Verb.</p>
+      <div class="ex"><div class="latin">Dixit se venisse. · Dixit se venturum esse.</div><div class="de">Er sagte, er sei gekommen (vorzeitig). · Er sagte, er werde kommen (nachzeitig).</div></div>
+      <div class="note terra"><b>Falle:</b> Das Reflexivpronomen <em class="lat">se</em> im AcI meint das Subjekt des übergeordneten Satzes – also „er/sie selbst“, nicht irgendeine dritte Person.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> NcI – Nominativ mit Infinitiv</summary>
+    <div class="inner">
+      <p><b>Erkennen:</b> Ein passives Verb des Sagens oder Meinens (<em class="lat">dicitur, putatur, videtur</em>) mit einem Nominativ und einem Infinitiv.</p>
+      <p><b>Übersetzen:</b> „man sagt, dass …“, „angeblich …“, „er soll …“; bei <em class="lat">videtur</em> „er scheint …“.</p>
+      <div class="ex"><div class="latin">Homerus caecus fuisse dicitur.</div><div class="de">Homer soll blind gewesen sein. / Man sagt, Homer sei blind gewesen.</div></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> PC – Participium coniunctum</summary>
+    <div class="inner">
+      <p><b>Erkennen:</b> Ein Partizip, das in Fall, Zahl und Geschlecht mit einem Nomen im Satz übereinstimmt (KNG-Kongruenz) und eine zusätzliche Handlung beschreibt.</p>
+      <p><b>Zeitverhältnis:</b> Partizip Präsens (PPA) = gleichzeitig, Partizip Perfekt Passiv (PPP) = vorzeitig, Partizip Futur Aktiv (PFA) = nachzeitig.</p>
+      <p><b>Übersetzungsmöglichkeiten</b> – probiere sie der Reihe nach, bis eine im Deutschen gut klingt:</p>
+      <table class="plain">
+        <tr><th>Variante</th><th>Beispiel zu <em class="lat">Hostes fugientes capti sunt.</em></th></tr>
+        <tr><td>Relativsatz</td><td>Die Feinde, die flohen, wurden gefangen.</td></tr>
+        <tr><td>Adverbialsatz</td><td>Die Feinde wurden gefangen, während sie flohen.</td></tr>
+        <tr><td>Beiordnung</td><td>Die Feinde flohen und wurden (dabei) gefangen.</td></tr>
+        <tr><td>Präpositionalausdruck</td><td>Die Feinde wurden auf der Flucht gefangen.</td></tr>
+      </table>
+      <div class="note terra"><b>Falle:</b> Das PPP eines Deponens hat aktive Bedeutung: <em class="lat">hortatus</em> heißt „nachdem er ermahnt hatte“, nicht „ermahnt worden“.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> Ablativus absolutus</summary>
+    <div class="inner">
+      <p><b>Erkennen:</b> Ein Nomen im Ablativ und ein Partizip im Ablativ, die zusammengehören und grammatisch nicht vom Rest des Satzes abhängen. Er steht oft am Satzanfang, gern zwischen Kommas.</p>
+      <p><b>Zeitverhältnis</b> wie beim PC. Sinnrichtungen: temporal (als, nachdem, während), kausal (weil, da), konzessiv (obwohl), modal (wobei, indem).</p>
+      <div class="ex"><div class="latin">Urbe capta milites praedam diviserunt.</div><div class="de">Nachdem die Stadt erobert worden war, teilten die Soldaten die Beute. – eleganter: Nach der Eroberung der Stadt …</div></div>
+      <p><b>Nominaler Abl. abs.</b> ganz ohne Partizip: <em class="lat">Cicerone consule</em> – „als Cicero Konsul war“ / „unter dem Konsulat Ciceros“.</p>
+      <div class="note terra"><b>Falle:</b> Ein Abl. abs. darf nie mit dem Subjekt des Satzes verschmolzen werden. Wenn das Partizip sich auf ein Satzglied bezieht, ist es ein PC.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> nd-Formen: Gerundium und Gerundivum</summary>
+    <div class="inner">
+      <p><b>Gerundium</b> = substantivierter Infinitiv, nur im Singular, ohne Bezugswort: <em class="lat">ars scribendi</em> – die Kunst des Schreibens; <em class="lat">ad discendum</em> – zum Lernen.</p>
+      <p><b>Gerundivum attributiv</b> = mit einem Bezugswort, KNG-kongruent. Übersetze es wie ein Gerundium mit Objekt: <em class="lat">ad pacem petendam</em> – um Frieden zu erbitten (wörtlich: zum Frieden, der erbeten werden soll).</p>
+      <p><b>Gerundivum prädikativ</b> mit <em class="lat">esse</em> = Notwendigkeit: <em class="lat">Carthago delenda est.</em> – Karthago muss zerstört werden. Die handelnde Person steht im Dativ: <em class="lat">Mihi laborandum est.</em> – Ich muss arbeiten.</p>
+      <div class="note terra"><b>Falle:</b> Verneint heißt es „nicht dürfen“: <em class="lat">Hoc non faciendum est.</em> – Das darf man nicht tun.</div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> cum – vier Sinnrichtungen</summary>
+    <div class="inner">
+      <table class="plain">
+        <tr><th>Modus</th><th>Bedeutung</th><th>Erkennungszeichen</th></tr>
+        <tr><td>cum + Indikativ</td><td>als (plötzlich), immer wenn, sobald</td><td>oft mit <em class="lat">tum</em>, <em class="lat">subito</em></td></tr>
+        <tr><td>cum + Konjunktiv</td><td>als, nachdem (narrativum)</td><td>Erzählung in der Vergangenheit</td></tr>
+        <tr><td>cum + Konjunktiv</td><td>weil, da (causale)</td><td>Begründung im Kontext</td></tr>
+        <tr><td>cum + Konjunktiv</td><td>obwohl (concessivum) / während hingegen (adversativum)</td><td>oft mit <em class="lat">tamen</em> im Hauptsatz</td></tr>
+      </table>
+      <p style="margin-top:12px">Zeitverhältnis beim Konjunktiv: Konj. Imperfekt = gleichzeitig, Konj. Plusquamperfekt = vorzeitig.</p>
+      <div class="ex"><div class="latin">Cum Romam venisset, amicum visitavit.</div><div class="de">Als (nachdem) er nach Rom gekommen war, besuchte er einen Freund.</div></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> ut und ne mit Konjunktiv</summary>
+    <div class="inner">
+      <table class="plain">
+        <tr><th>Art</th><th>ut</th><th>ne</th></tr>
+        <tr><td>Finalsatz (Absicht)</td><td>damit, um … zu</td><td>damit nicht</td></tr>
+        <tr><td>Begehrsatz (nach bitten, ermahnen, befehlen)</td><td>dass</td><td>dass nicht</td></tr>
+        <tr><td>Konsekutivsatz (Folge, oft nach <em class="lat">ita, tam, sic, tantus</em>)</td><td>(so)dass</td><td>– (hier: <em class="lat">ut non</em>)</td></tr>
+        <tr><td>nach Verben des Fürchtens</td><td>dass nicht</td><td>dass</td></tr>
+      </table>
+      <div class="ex"><div class="latin">Timeo, ne veniat.</div><div class="de">Ich fürchte, dass er kommt. (Achtung: <em class="lat">ne</em> = „dass“!)</div></div>
+      <p><em class="lat">ut</em> + Indikativ heißt dagegen „wie“ oder „sobald“: <em class="lat">ut scribo</em> – wie ich schreibe.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> Konjunktiv im Hauptsatz</summary>
+    <div class="inner">
+      <table class="plain">
+        <tr><th>Funktion</th><th>Beispiel</th><th>Übersetzung</th></tr>
+        <tr><td>Hortativ (1. Pers. Pl.)</td><td><em class="lat">Gaudeamus!</em></td><td>Lasst uns fröhlich sein!</td></tr>
+        <tr><td>Iussiv (3. Pers.)</td><td><em class="lat">Taceat!</em></td><td>Er soll schweigen!</td></tr>
+        <tr><td>Prohibitiv (ne + Konj. Perf.)</td><td><em class="lat">Ne dubitaveris!</em></td><td>Zweifle nicht!</td></tr>
+        <tr><td>Wunsch erfüllbar (Konj. Präs.)</td><td><em class="lat">Utinam veniat!</em></td><td>Hoffentlich kommt er!</td></tr>
+        <tr><td>Wunsch unerfüllbar (Konj. Impf./Plqpf.)</td><td><em class="lat">Utinam adesses!</em></td><td>Wenn du doch hier wärst!</td></tr>
+        <tr><td>Potentialis / Irrealis</td><td><em class="lat">Dicat aliquis …</em></td><td>Es könnte jemand sagen …</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> Relativer Satzanschluss</summary>
+    <div class="inner">
+      <p><b>Erkennen:</b> Ein Relativpronomen am Satzanfang, oft direkt nach einem Punkt oder Strichpunkt, das sich auf den vorigen Satz bezieht.</p>
+      <p><b>Übersetzen:</b> Mit einem Demonstrativpronomen: „dieser, diese, dieses“ oder „er, sie, es“.</p>
+      <div class="ex"><div class="latin">Quae cum ita sint, …</div><div class="de">Da dies so ist, … (relativer Anschluss + cum causale)</div></div>
+      <div class="ex"><div class="latin">Quo facto Caesar discessit.</div><div class="de">Nachdem dies geschehen war, zog Caesar ab.</div></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary><span class="tag l">Syntax</span> Besondere Kasusfunktionen</summary>
+    <div class="inner">
+      <table class="plain">
+        <tr><th>Funktion</th><th>Beispiel</th><th>Übersetzung</th></tr>
+        <tr><td>Dativus possessivus</td><td><em class="lat">Mihi liber est.</em></td><td>Ich habe ein Buch.</td></tr>
+        <tr><td>Doppelter Dativ</td><td><em class="lat">Hoc tibi curae est.</em></td><td>Das liegt dir am Herzen.</td></tr>
+        <tr><td>Genitivus partitivus</td><td><em class="lat">satis pecuniae, quidquid aetatis</em></td><td>genug Geld, was an Lebenszeit</td></tr>
+        <tr><td>Genitivus qualitatis</td><td><em class="lat">vir magnae virtutis</em></td><td>ein Mann von großer Tapferkeit</td></tr>
+        <tr><td>Ablativus comparationis</td><td><em class="lat">luce clarior</em></td><td>heller als das Licht</td></tr>
+        <tr><td>Ablativus instrumentalis</td><td><em class="lat">gladio pugnare</em></td><td>mit dem Schwert kämpfen</td></tr>
+      </table>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 4 FORMEN-FALLEN ============ -->
+<section id="formen">
+  <div class="sec-head"><div class="badge b-terra">4</div><h2>Formen-Fallen</h2></div>
+  <p class="lead">Viele Morphologie-Checkpoints sind genau dort versteckt, wo eine Endung mehrere Formen sein kann. Hier sind die häufigsten Doppelgänger – wenn du sie kennst, prüfst du automatisch beide Möglichkeiten.</p>
+  <div class="grid g2">
+    <div class="card"><h3><em class="lat">-ere</em></h3><p>Infinitiv Präsens Aktiv (<em class="lat">legere</em>) · Imperativ eines Deponens (<em class="lat">hortare</em> – ermahne!) · Kurzform der 3. Pl. Perfekt (<em class="lat">fecere = fecerunt</em>) · Nebenform der 2. Sg. Passiv (<em class="lat">laudare = laudaris</em>).</p></div>
+    <div class="card"><h3><em class="lat">-eris</em></h3><p>Futur II (<em class="lat">laudaveris</em> – du wirst gelobt haben) · Konjunktiv Perfekt (gleiche Form!) · 2. Sg. Präsens Passiv der 3. Konjugation (<em class="lat">legeris</em> – du wirst gelesen).</p></div>
+    <div class="card"><h3><em class="lat">-i</em></h3><p>Genitiv Sg. oder Nominativ Pl. der o-Deklination (<em class="lat">amici</em>) · Dativ Sg. der 3. Deklination (<em class="lat">regi</em>) · Infinitiv Präsens Passiv der 3. Konj. (<em class="lat">legi</em> – gelesen werden) · 1. Sg. Perfekt (<em class="lat">legi</em> – ich habe gelesen).</p></div>
+    <div class="card"><h3><em class="lat">-a</em></h3><p>Nominativ Sg. der a-Deklination · Ablativ Sg. der a-Deklination · Nominativ/Akkusativ Pl. Neutrum (<em class="lat">tempora, omnia</em>). Prüfe immer: Passt das Prädikat im Singular oder Plural?</p></div>
+    <div class="card"><h3><em class="lat">quod</em></h3><p>Relativpronomen Neutrum („das, was“) · Konjunktion „weil“ (+ Ind.) · faktisches „dass“ („darin, dass …“) · relativer Satzanschluss („dies“).</p></div>
+    <div class="card"><h3>Deponentien</h3><p>Passive Form, aktive Bedeutung: <em class="lat">elabitur</em> – es entgleitet; <em class="lat">complectere</em> – umfasse! Wenn eine passive Übersetzung seltsam klingt, schlag im Wörterbuch nach, ob das Verb ein Deponens ist.</p></div>
+    <div class="card"><h3>Kurzformen</h3><p><em class="lat">amasti = amavisti</em> · <em class="lat">praeterit = praeteriit</em> (Perfekt!) · <em class="lat">temptaris = temptaveris</em>. Das ausgefallene <em class="lat">-vi-</em> oder <em class="lat">-ve-</em> ändert die Zeit nicht.</p></div>
+    <div class="card"><h3>Komparation</h3><p><em class="lat">-ior/-ius</em> = Komparativ, <em class="lat">-issimus</em> = Superlativ (auch Elativ: „sehr …“). <em class="lat">maxima pars</em> – der größte Teil. Unregelmäßig: <em class="lat">bonus – melior – optimus</em>, <em class="lat">magnus – maior – maximus</em>.</p></div>
+  </div>
+</section>
+
+<!-- ============ 5 WÖRTERBUCH ============ -->
+<section id="woerterbuch">
+  <div class="sec-head"><div class="badge b-gold">5</div><h2>Wörterbuch wie ein Profi</h2></div>
+  <p class="lead">Das Wörterbuch ist dein größter Verbündeter – oder dein größter Zeitfresser. Der Unterschied liegt in der Methode.</p>
+  <div class="card">
+    <table class="plain">
+      <tr><th>Schritt</th><th>So gehst du vor</th></tr>
+      <tr><td><b>1. Grundform bilden</b></td><td>Erst die Form bestimmen, dann nachschlagen. Unter <em class="lat">tulit</em> findest du nichts – unter <em class="lat">fero</em> schon.</td></tr>
+      <tr><td><b>2. Wortart klären</b></td><td><em class="lat">cum</em>, <em class="lat">quod</em>, <em class="lat">ut</em> haben mehrere Einträge. Prüfe, welcher zu deinem Satz passt.</td></tr>
+      <tr><td><b>3. Nicht die erste Bedeutung nehmen</b></td><td>Lies den ganzen Eintrag. Die erste Bedeutung ist die Grundbedeutung, nicht automatisch die passende. <em class="lat">vindicare</em> heißt eben nicht nur „rächen“.</td></tr>
+      <tr><td><b>4. Wendungen suchen</b></td><td>Feste Verbindungen stehen meist fett oder kursiv weiter unten im Eintrag: <em class="lat">manum inicere</em>, <em class="lat">pretium ponere</em>.</td></tr>
+      <tr><td><b>5. Komposita zerlegen</b></td><td><em class="lat">sub-ripere</em> = „von unten wegraffen“ = heimlich entwenden. Die Vorsilbe verrät oft schon die Richtung.</td></tr>
+      <tr><td><b>6. Zeitlimit setzen</b></td><td>Pro Wort höchstens eine Minute. Wenn du nichts findest: Kontext nutzen, sinnvoll übersetzen, weiter.</td></tr>
+    </table>
+  </div>
+  <div class="note"><b>Wichtig:</b> Wörter, die im Wörterbuch nicht oder kaum zu finden sind, werden dir in der Matura in den Anmerkungen unter dem Text erklärt. Lies diese Anmerkungen <b>vor</b> dem Übersetzen – sie verraten oft auch viel über den Inhalt.</div>
+</section>
+
+<!-- ============ 6 INTERPRETATION ============ -->
+<section id="interpretation">
+  <div class="sec-head"><div class="badge b-blue">6</div><h2>Die Arbeitsaufgaben zum Interpretationstext</h2></div>
+  <p class="lead">Den Interpretationstext musst du nicht vollständig übersetzen – du musst ihn verstehen. Die zehn Arbeitsaufgaben folgen immer wiederkehrenden Formaten. Wer die Formate kennt, weiß sofort, was verlangt ist.</p>
+
+  <div class="note lilac"><b>Goldene Regel:</b> Lies zuerst die deutsche Einleitung und alle Aufgaben, dann den Text. Viele Aufgaben verraten, worum es geht – und manche Aufgabe nennt dir sogar Zeilen, in denen du suchen sollst.</div>
+
+  <div class="grid g2">
+    <div class="card"><span class="tag">Wortschatz</span><h3 style="margin-top:8px">Fremd- und Lehnwörter zuordnen</h3><p>Zu einem deutschen Fremdwort sollst du ein verwandtes lateinisches Wort aus dem Text zitieren. Suche den Wortstamm: <i>Debilität</i> → <em class="lat">debilitat</em>.</p><p class="mini">Tipp: Zitiere genau die Form, die im Text steht.</p></div>
+    <div class="card"><span class="tag p">Sammeln und Auflisten</span><h3 style="margin-top:8px">Belege aus dem Text sammeln</h3><p>Z. B. alle Ausdrücke für „Zeit“ oder alle Imperative. Zitiere lateinisch, exakt und mit Zeilenangabe. Nenne nur so viele, wie verlangt sind – Zusatzbelege bringen nichts, falsche können Punkte kosten.</p></div>
+    <div class="card"><span class="tag l">Gliedern und Strukturieren</span><h3 style="margin-top:8px">Abschnitte erkennen</h3><p>Achte auf Wechsel von Person, Zeit, Modus (Aussage → Aufforderung), Ort oder Sprecher. Formuliere zu jedem Abschnitt eine knappe Überschrift mit Substantiv: „Warnung vor …“, „Aufforderung zu …“.</p></div>
+    <div class="card"><span class="tag t">Zusammenfassen und Paraphrasieren</span><h3 style="margin-top:8px">In eigenen Worten wiedergeben</h3><p>Nicht wörtlich übersetzen, sondern den Sinn erklären. Formulierung: „Der Sprecher macht deutlich, dass …“, „Gemeint ist, dass …“.</p></div>
+    <div class="card"><span class="tag g">Analysieren</span><h3 style="margin-top:8px">Stilmittel benennen und deuten</h3><p>Drei Schritte: Stilmittel benennen, lateinisch zitieren, Wirkung erklären. Ohne Deutung gibt es oft nur halbe Punkte. Formulierung: „Durch die Anapher <em class="lat">…</em> wird betont, dass …“.</p></div>
+    <div class="card"><span class="tag">Belegen und Nachweisen</span><h3 style="margin-top:8px">Aussagen mit Zitaten stützen</h3><p>Zu einer deutschen Aussage passende lateinische Stelle finden. Prüfe, ob dein Zitat die Aussage wirklich trägt und nicht nur ähnlich klingt.</p></div>
+    <div class="card"><span class="tag p">Gegenüberstellen und Vergleichen</span><h3 style="margin-top:8px">Text mit Vergleichstext oder Bild</h3><p>Häufig ein deutsches Gedicht, ein moderner Text oder ein Bild. Nenne Gemeinsamkeiten <b>und</b> Unterschiede, jeweils mit Beleg aus beiden Texten. Formulierung: „Während Horaz …, betont Gryphius …“.</p></div>
+    <div class="card"><span class="tag l">Kommentieren und Stellung nehmen</span><h3 style="margin-top:8px">Eigene Meinung begründen</h3><p>Bau: These – zwei Argumente – Textbezug – Schluss. Deine Meinung ist frei, aber sie muss begründet und am Text verankert sein.</p></div>
+  </div>
+</section>
+
+<!-- ============ 7 STILMITTEL ============ -->
+<section id="stilmittel">
+  <div class="sec-head"><div class="badge b-lilac">7</div><h2>Stilmittel-Lexikon</h2></div>
+  <p class="lead">Die wichtigsten Stilmittel mit Definition, echtem antikem Beispiel und der Frage, die du dir bei der Deutung stellen kannst: Was soll der Leser dadurch spüren?</p>
+  <div class="grid g3">
+    <div class="sm"><h4>Alliteration</h4><p>Gleicher Anlaut aufeinanderfolgender Wörter. Wirkung: Klang, Einprägsamkeit, Nachdruck.</p><div class="latin">O Tite, tute, Tati, tibi tanta, tyranne, tulisti!</div><p class="mini">Ennius</p></div>
+    <div class="sm"><h4>Anapher</h4><p>Wiederholung desselben Wortes am Anfang aufeinanderfolgender Satzteile. Wirkung: eindringliche Steigerung.</p><div class="latin">Nihil agis, nihil moliris, nihil cogitas …</div><p class="mini">Cicero, In Catilinam I</p></div>
+    <div class="sm"><h4>Asyndeton</h4><p>Aufzählung ohne Bindewort. Wirkung: Tempo, Wucht, Knappheit.</p><div class="latin">Veni, vidi, vici.</div><p class="mini">Caesar (überliefert bei Sueton)</p></div>
+    <div class="sm"><h4>Polysyndeton</h4><p>Aufzählung mit wiederholtem Bindewort. Wirkung: Fülle, Feierlichkeit, Nicht-enden-Wollen.</p><div class="latin">… et ferro et igni et omni vi …</div><p class="mini">Typisches Muster</p></div>
+    <div class="sm"><h4>Trikolon</h4><p>Dreigliedrige Reihe gleich gebauter Elemente. Wirkung: Vollständigkeit, Rhythmus.</p><div class="latin">Veni, vidi, vici.</div><p class="mini">zugleich Asyndeton und Alliteration</p></div>
+    <div class="sm"><h4>Klimax</h4><p>Steigerung von schwächeren zu stärkeren Ausdrücken. Wirkung: Spannung, Dramatik.</p><div class="latin">Abiit, excessit, evasit, erupit.</div><p class="mini">Cicero, In Catilinam II</p></div>
+    <div class="sm"><h4>Antithese</h4><p>Gegenüberstellung gegensätzlicher Begriffe. Wirkung: Spannung, Zuspitzung eines Konflikts.</p><div class="latin">Odi et amo.</div><p class="mini">Catull, carmen 85</p></div>
+    <div class="sm"><h4>Chiasmus</h4><p>Überkreuzstellung: a b – b a. Wirkung: kunstvolle Verschränkung, oft Gegensatz.</p><div class="latin">satis eloquentiae, sapientiae parum</div><p class="mini">Sallust, Catilina 5</p></div>
+    <div class="sm"><h4>Parallelismus</h4><p>Gleicher Satzbau in aufeinanderfolgenden Teilen: a b – a b. Wirkung: Ordnung, Vergleichbarkeit.</p><div class="latin">Ars longa, vita brevis.</div><p class="mini">lateinische Fassung nach Hippokrates</p></div>
+    <div class="sm"><h4>Hyperbaton</h4><p>Sperrung zusammengehöriger Wörter. Wirkung: Spannung, Hervorhebung beider Teile.</p><div class="latin">Magna dis immortalibus habenda est gratia.</div><p class="mini">Cicero, In Catilinam I</p></div>
+    <div class="sm"><h4>Rhetorische Frage</h4><p>Frage, auf die keine Antwort erwartet wird. Wirkung: Empörung, Einbeziehung des Publikums.</p><div class="latin">Quo usque tandem abutere, Catilina, patientia nostra?</div><p class="mini">Cicero, In Catilinam I</p></div>
+    <div class="sm"><h4>Exclamatio</h4><p>Ausruf. Wirkung: starke Emotion, Empörung oder Begeisterung.</p><div class="latin">O tempora, o mores!</div><p class="mini">Cicero, In Catilinam I</p></div>
+    <div class="sm"><h4>Personifikation</h4><p>Dinge oder Abstrakta handeln wie Menschen. Wirkung: Lebendigkeit, Nähe.</p><div class="latin">… patria … tacita loquitur.</div><p class="mini">Cicero, In Catilinam I (das Vaterland spricht)</p></div>
+    <div class="sm"><h4>Metapher</h4><p>Bildhafte Übertragung in einen anderen Bereich. Wirkung: Anschaulichkeit, Verdichtung.</p><div class="latin">Lupus est homo homini.</div><p class="mini">Plautus, Asinaria</p></div>
+    <div class="sm"><h4>Hendiadyoin</h4><p>Ein Begriff wird durch zwei Wörter ausgedrückt. Wirkung: Verstärkung, Fülle.</p><div class="latin">ferro ignique</div><p class="mini">„mit Feuer und Schwert“ = mit Gewalt</p></div>
+    <div class="sm"><h4>Litotes</h4><p>Hervorhebung durch Verneinung des Gegenteils. Wirkung: vornehme Untertreibung, die eigentlich verstärkt.</p><div class="latin">non ignoro</div><p class="mini">„ich weiß sehr wohl“</p></div>
+    <div class="sm"><h4>Ellipse</h4><p>Auslassung eines leicht ergänzbaren Satzteils. Wirkung: Knappheit, Tempo.</p><div class="latin">Quid multa?</div><p class="mini">„Wozu viele Worte?“ – ergänze <em class="lat">dicam</em></p></div>
+    <div class="sm"><h4>Parenthese</h4><p>Einschub, der den Satzfluss unterbricht. Wirkung: Kommentar, Nachdruck, Spontaneität.</p><div class="latin">… quod, ut scribo, …</div><p class="mini">eingeschobene Bemerkung des Sprechers</p></div>
+  </div>
+</section>
+
+<!-- ============ 8 METRIK ============ -->
+<section id="metrik">
+  <div class="sec-head"><div class="badge b-petrol">8</div><h2>Metrik in Kürze</h2></div>
+  <p class="lead">Bei Dichtertexten kann eine Aufgabe zur Versmessung kommen. Mit drei Regeln und dem Hexameterschema bist du für die meisten Fälle gerüstet.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Die drei Grundregeln</h3>
+      <p><b>Naturlänge:</b> Manche Vokale sind von Natur aus lang (Wörterbuch: Längenstrich), Diphthonge wie <em class="lat">ae, au, oe</em> sind immer lang.</p>
+      <p><b>Positionslänge:</b> Eine Silbe ist lang, wenn auf ihren Vokal zwei Konsonanten folgen – auch über die Wortgrenze hinweg. <em class="lat">x</em> und <em class="lat">z</em> zählen doppelt.</p>
+      <p><b>Elision:</b> Endet ein Wort auf Vokal oder <em class="lat">-m</em> und das nächste beginnt mit Vokal oder <em class="lat">h</em>, fällt die Endsilbe weg.</p>
+    </div>
+    <div class="card">
+      <h3>Hexameter</h3>
+      <p>Sechs Versfüße. Die ersten vier sind Daktylen (— ◡ ◡) oder Spondeen (— —), der fünfte fast immer ein Daktylus, der sechste zweisilbig.</p>
+      <div class="ex"><div class="latin">Arma virumque cano, Troiae qui primus ab oris</div><div class="de">— ◡ ◡ | — ◡ ◡ | — — | — — | — ◡ ◡ | — —<br>Vergil, Aeneis I 1</div></div>
+      <p><b>Pentameter</b> (im elegischen Distichon nach dem Hexameter): — ◡ ◡ | — ◡ ◡ | — ‖ — ◡ ◡ | — ◡ ◡ | —</p>
+    </div>
+  </div>
+  <div class="note"><b>Arbeitstipp:</b> Markiere zuerst die sicher langen Silben (Diphthonge, Positionslängen), dann suche den fünften Daktylus und die zweisilbige Schlusseinheit. Die Lücken dazwischen ergeben sich oft fast von selbst.</div>
+</section>
+
+<!-- ============ 9 TRAINING ============ -->
+<section id="training">
+  <div class="sec-head"><div class="badge b-terra">9</div><h2>Training: Konstruktionen und Formen</h2></div>
+  <p class="lead">Bevor es ernst wird, ein Aufwärmtraining. Zu jeder Antwort erhältst du eine Erklärung – auch wenn du richtig liegst, lohnt sich ein Blick, denn dort steht, woran du die Lösung sicher erkennst.</p>
+  <div class="scorebar"><span>Training</span><span id="trainScore">0 / 0 richtig</span></div>
+  <div id="quiz"></div>
+  <div class="btnrow"><button class="ghost" id="quizReset">Training neu starten</button></div>
+</section>
+
+<!-- ============ SIMULATION ============ -->
+<section id="simulation">
+  <div class="sim-hero">
+    <h2>★ Maturasimulation – teste dein Können</h2>
+    <p>Diese Simulation folgt dem echten Format: ein Übersetzungstext mit 129 Wörtern (36 Punkte) und ein Interpretationstext mit zehn Arbeitsaufgaben (24 Punkte). Starte die Uhr, nimm dein Wörterbuch und arbeite so, als säßest du schon im Prüfungsraum. Am Ende bewertest du dich mit demselben Raster, mit dem auch die Matura bewertet wird.</p>
+    <div class="timer">
+      <div class="clock" id="clock">270:00</div>
+      <button id="tStart">Start</button>
+      <button id="tPause">Pause</button>
+      <button id="tReset">Zurücksetzen</button>
+      <span id="tMsg" class="mini" style="color:#fff;opacity:.9"></span>
+    </div>
+  </div>
+
+  <!-- TEIL A -->
+  <div class="card">
+    <h3 style="color:var(--terra)">Teil A · Übersetzungstext <span class="mini">(36 Punkte)</span></h3>
+    <p><b>Arbeitsanweisung:</b> Übersetze den folgenden Text in die Unterrichtssprache. Achte besonders auf die inhaltliche Übereinstimmung und auf die sprachliche Richtigkeit im Deutschen.</p>
+    <p><b>Einleitung:</b> Der Philosoph L. Annaeus Seneca (ca. 1–65 n. Chr.) schreibt in seinen letzten Lebensjahren Briefe an seinen jüngeren Freund Lucilius, in denen er ihn zu einem philosophisch bewussten Leben anleitet. Gleich der erste Brief widmet sich der Frage, wie wir mit unserer Lebenszeit umgehen.</p>
+    <p class="mini">Seneca, Epistulae morales ad Lucilium 1,1–3 (gekürzt)</p>
+    <div class="textbox latin">
+      Ita fac, mi Lucili<sup>1</sup>: vindica<sup>2</sup> te tibi, et tempus, quod adhuc aut auferebatur aut subripiebatur<sup>3</sup> aut excidebat<sup>4</sup>, collige et serva. Persuade tibi hoc sic esse, ut scribo: quaedam tempora eripiuntur nobis, quaedam subducuntur<sup>5</sup>, quaedam effluunt. Turpissima tamen est iactura<sup>6</sup>, quae per neglegentiam fit. Et si volueris attendere, magna pars vitae elabitur<sup>7</sup> male agentibus, maxima nihil agentibus, tota vita aliud agentibus. Quem mihi dabis, qui aliquod pretium tempori ponat, qui diem aestimet, qui intellegat se cotidie mori? In hoc enim fallimur, quod mortem prospicimus: magna pars eius iam praeterit<sup>8</sup>; quidquid aetatis retro est, mors tenet. Fac ergo, mi Lucili, quod facere te scribis, omnes horas complectere: sic fiet, ut minus ex crastino<sup>9</sup> pendeas, si hodierno manum inieceris<sup>10</sup>. Dum differtur, vita transcurrit. Omnia, Lucili, aliena sunt, tempus tantum nostrum est.
+    </div>
+    <div class="vocab">
+      <div><sup>1</sup> Lucilius, -i m.: Lucilius (Freund Senecas, Empfänger der Briefe)</div>
+      <div><sup>2</sup> vindicare: (für sich) beanspruchen; befreien</div>
+      <div><sup>3</sup> subripere: heimlich entwenden</div>
+      <div><sup>4</sup> excidere, excido: entfallen, entgleiten</div>
+      <div><sup>5</sup> subducere: (unbemerkt) entziehen</div>
+      <div><sup>6</sup> iactura, -ae f.: Verlust</div>
+      <div><sup>7</sup> elabi, elabor, elapsus sum: entgleiten</div>
+      <div><sup>8</sup> praeterit = praeteriit</div>
+      <div><sup>9</sup> crastinum, -i n.: der morgige Tag</div>
+      <div><sup>10</sup> manum inicere + Dat.: Hand legen an, ergreifen; zu <em class="lat">hodierno</em> ergänze <em class="lat">diei</em></div>
+    </div>
+    <h4 style="margin-top:22px">Deine Übersetzung</h4>
+    <textarea class="big" id="uebersetzung" placeholder="Schreibe hier deine Übersetzung … (wird automatisch in diesem Browser gespeichert)"></textarea>
+    <div class="btnrow"><button class="terra" id="showUT">Übersetzung abgeben und selbst bewerten</button></div>
+  </div>
+
+  <div id="utEval" class="hidden">
+    <div class="card">
+      <h3>Bewertung · Sinneinheiten <span class="mini">(12 Punkte)</span></h3>
+      <p>Vergleiche jede Sinneinheit mit deiner Übersetzung. Hak sie ab, wenn der Sinn im Wesentlichen stimmt – kleine Ungenauigkeiten bei einzelnen Wörtern werden über die Checkpoints erfasst, nicht hier. Die Musterübersetzung ist eine von mehreren möglichen guten Lösungen.</p>
+      <div class="note blue" id="yourText"></div>
+      <table class="plain se-table" id="seTable">
+        <tr><th>Latein</th><th>Musterübersetzung</th><th>erfasst?</th></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Bewertung · Lexik, Morphologie, Syntax <span class="mini">(18 Punkte)</span></h3>
+      <p>Diese 18 Checkpoints sind die Stellen, an denen in diesem Text typischerweise Punkte gewonnen oder verloren werden. Hak jeden ab, den du korrekt wiedergegeben hast.</p>
+      <div id="cpList"></div>
+    </div>
+    <div class="card">
+      <h3>Bewertung · Sprache <span class="mini">(6 Punkte)</span></h3>
+      <p>Lies deine Übersetzung laut, als wäre sie ein deutscher Text, den du nie auf Latein gesehen hast. Wähle ehrlich die passende Stufe.</p>
+      <div id="langOpts"></div>
+    </div>
+    <div class="card" style="border:2px solid var(--terra)">
+      <h3>Zwischenstand Teil A: <span id="utSum" style="color:var(--terra)">0</span> / 36 Punkte</h3>
+      <div class="bar"><div id="utBar" style="width:0;background:var(--terra)"></div></div>
+      <p class="mini" id="utHint"></p>
+    </div>
+  </div>
+
+  <!-- TEIL B -->
+  <div class="card" style="margin-top:34px">
+    <h3 style="color:var(--lilac)">Teil B · Interpretationstext <span class="mini">(24 Punkte)</span></h3>
+    <p><b>Arbeitsanweisung:</b> Der folgende Text ist Grundlage für die Lösung der zehn Arbeitsaufgaben. Lies zuerst sorgfältig die Aufgabenstellungen und löse sie dann auf der Basis des Interpretationstextes.</p>
+    <p><b>Einleitung:</b> Der Dichter Q. Horatius Flaccus (65–8 v. Chr.) richtet dieses Gedicht an eine junge Frau namens Leuconoe, die mit Hilfe der Sterndeutung herausfinden möchte, wie lange sie und der Sprecher noch zu leben haben.</p>
+    <p class="mini">Horaz, carmina I 11 (vollständig; ergänzt durch einen deutschen Vergleichstext in Aufgabe 8)</p>
+    <div class="textbox latin lines" id="itText">
+      <div>Tu ne quaesieris<sup>1</sup> – scire nefas<sup>2</sup> – quem mihi, quem tibi</div>
+      <div>finem di dederint, Leuconoe<sup>3</sup>, nec Babylonios</div>
+      <div>temptaris<sup>4</sup> numeros. Ut melius<sup>5</sup>, quidquid erit, pati!</div>
+      <div>Seu pluris<sup>6</sup> hiemes seu tribuit Iuppiter ultimam,</div>
+      <div>quae nunc oppositis debilitat pumicibus<sup>7</sup> mare</div>
+      <div>Tyrrhenum<sup>8</sup>: sapias, vina liques<sup>9</sup>, et spatio brevi</div>
+      <div>spem longam reseces<sup>10</sup>. Dum loquimur, fugerit invida</div>
+      <div>aetas: carpe diem, quam minimum credula<sup>11</sup> postero.</div>
+    </div>
+    <div class="vocab">
+      <div><sup>1</sup> quaesieris = quaesiveris</div>
+      <div><sup>2</sup> nefas (est): es ist nicht erlaubt, Frevel</div>
+      <div><sup>3</sup> Leuconoe: Vokativ</div>
+      <div><sup>4</sup> temptaris = temptaveris; temptare: hier: befragen, versuchen</div>
+      <div><sup>5</sup> ut melius (est): wie viel besser ist es</div>
+      <div><sup>6</sup> pluris = plures</div>
+      <div><sup>7</sup> pumex, -icis m.: Bimsstein; hier: Felsenklippe</div>
+      <div><sup>8</sup> Tyrrhenus 3: tyrrhenisch (Meer westlich von Italien)</div>
+      <div><sup>9</sup> liquare: (Wein) klären, seihen</div>
+      <div><sup>10</sup> resecare: zurückschneiden, beschneiden</div>
+      <div><sup>11</sup> credulus 3 + Dat.: vertrauend auf; zu <em class="lat">postero</em> ergänze <em class="lat">diei</em></div>
+    </div>
+  </div>
+
+  <div id="tasks">
+    <!-- 1 -->
+    <div class="task"><h4><span>1 · Wortschatz</span><span class="pts">3 Punkte · automatisch</span></h4>
+      <p>Finde im Interpretationstext zu jedem Fremd- bzw. Lehnwort ein sprachlich verwandtes lateinisches Wort und zitiere es.</p>
+      <div id="t1"></div>
+    </div>
+    <!-- 2 -->
+    <div class="task"><h4><span>2 · Gliedern und Strukturieren</span><span class="pts">3 Punkte · automatisch</span></h4>
+      <p>Das Gedicht lässt sich in drei Abschnitte gliedern. Ordne jedem Abschnitt die passende Überschrift zu.</p>
+      <div id="t2"></div>
+    </div>
+    <!-- 3 -->
+    <div class="task"><h4><span>3 · Belegen und Nachweisen</span><span class="pts">3 Punkte · automatisch</span></h4>
+      <p>Der Sprecher richtet zahlreiche Aufforderungen und Verbote an Leuconoe. Klicke im Text <b>alle sechs Verbformen</b> an, mit denen er sie auffordert oder ihr etwas verbietet (nur das Verb, keine Verneinung).</p>
+      <div class="textbox" id="t3" style="line-height:2.2"></div>
+      <p class="mini">Ausgewählt: <span id="t3count">0</span> · Jede richtige Form bringt 0,5 Punkte, jede falsch angeklickte zieht 0,5 Punkte ab.</p>
+    </div>
+    <!-- 4 -->
+    <div class="task"><h4><span>4 · Analysieren: Stilmittel</span><span class="pts">3 Punkte · automatisch</span></h4>
+      <p>Benenne das Stilmittel, das an der jeweiligen Stelle besonders deutlich vorliegt. Jeder Begriff passt genau einmal.</p>
+      <div id="t4"></div>
+    </div>
+    <!-- 5 -->
+    <div class="task"><h4><span>5 · Textbezüge klären</span><span class="pts">2 Punkte · automatisch</span></h4>
+      <div id="t5"></div>
+    </div>
+    <!-- 9 auto placed here for grouping? keep numbering -->
+    <div class="task self"><h4><span>6 · Sammeln und Auflisten</span><span class="pts">2 Punkte · Selbstbewertung</span></h4>
+      <p>Zitiere aus dem Text <b>vier</b> verschiedene lateinische Wörter oder Ausdrücke, die sich auf Zeit oder Lebenszeit beziehen.</p>
+      <textarea data-save="t6" placeholder="1. … 2. … 3. … 4. …"></textarea>
+      <div class="btnrow"><button class="ghost" data-model="m6">Musterlösung zeigen</button></div>
+      <div class="model" id="m6"><b>Mögliche Lösungen</b> (je 0,5 Punkte, vier davon genügen): <em class="lat">finem</em> (V. 2) · <em class="lat">quidquid erit</em> (V. 3) · <em class="lat">hiemes</em> (V. 4) · <em class="lat">ultimam</em> (V. 4) · <em class="lat">nunc</em> (V. 5) · <em class="lat">spatio brevi</em> (V. 6) · <em class="lat">dum loquimur</em> (V. 7) · <em class="lat">aetas</em> (V. 8) · <em class="lat">diem</em> (V. 8) · <em class="lat">postero</em> (V. 8).<br><b>Achtung:</b> Bei einer Sammelaufgabe zählt nur exakt Zitiertes. Eine deutsche Übersetzung statt des lateinischen Wortes bringt keinen Punkt.
+        <div class="fieldrow" style="margin-top:10px"><label>Meine Punkte:</label><select class="selfpts" data-max="2"></select></div></div>
+    </div>
+    <div class="task self"><h4><span>7 · Paraphrasieren</span><span class="pts">2 Punkte · Selbstbewertung</span></h4>
+      <p>Gib den Gedanken <em class="lat">Dum loquimur, fugerit invida aetas</em> (V. 7–8) in eigenen Worten wieder und erkläre, warum gerade dieser Satz die Aufforderung <em class="lat">carpe diem</em> vorbereitet.</p>
+      <textarea data-save="t7"></textarea>
+      <div class="btnrow"><button class="ghost" data-model="m7">Musterlösung zeigen</button></div>
+      <div class="model" id="m7"><b>Musterlösung:</b> Noch während wir miteinander reden, wird die missgünstige Zeit schon entflohen sein – Zeit vergeht unbemerkt, gerade in Momenten, in denen wir nicht auf sie achten (1 Punkt). Weil jede Sekunde unwiederbringlich verstreicht, bleibt nur eine sinnvolle Konsequenz: den gegenwärtigen Tag bewusst zu nutzen – daraus folgt unmittelbar <em class="lat">carpe diem</em> (1 Punkt).
+        <div class="fieldrow" style="margin-top:10px"><label>Meine Punkte:</label><select class="selfpts" data-max="2"></select></div></div>
+    </div>
+    <div class="task self"><h4><span>8 · Gegenüberstellen und Vergleichen</span><span class="pts">3 Punkte · Selbstbewertung</span></h4>
+      <p>Lies den folgenden Vierzeiler des Barockdichters Andreas Gryphius (1616–1664). Nenne <b>zwei Gemeinsamkeiten</b> und <b>einen Unterschied</b> zum Horaz-Gedicht, jeweils mit Belegen aus beiden Texten.</p>
+      <div class="textbox" style="font-family:'Source Serif 4',serif;font-size:1.1rem;margin-bottom:12px">
+        <b>Betrachtung der Zeit</b><br>
+        Mein sind die Jahre nicht, die mir die Zeit genommen;<br>
+        Mein sind die Jahre nicht, die etwa möchten kommen;<br>
+        Der Augenblick ist mein, und nehm ich den in acht,<br>
+        So ist der mein, der Jahr und Ewigkeit gemacht.
+      </div>
+      <textarea data-save="t8"></textarea>
+      <div class="btnrow"><button class="ghost" data-model="m8">Musterlösung zeigen</button></div>
+      <div class="model" id="m8"><b>Gemeinsamkeit 1</b> (1 P.): Die Zukunft ist dem Menschen entzogen – bei Gryphius gehören ihm die Jahre nicht, „die etwa möchten kommen“; bei Horaz soll Leuconoe nicht erforschen, wann das Ende kommt (<em class="lat">ne quaesieris … quem … finem</em>) und dem nächsten Tag möglichst wenig vertrauen (<em class="lat">quam minimum credula postero</em>).<br>
+        <b>Gemeinsamkeit 2</b> (1 P.): Einzig die Gegenwart ist verfügbar und soll genutzt werden – „Der Augenblick ist mein“ entspricht <em class="lat">carpe diem</em>.<br>
+        <b>Unterschied</b> (1 P.): Gryphius denkt christlich-religiös: Wer den Augenblick achtet, gewinnt Gott, der „Jahr und Ewigkeit gemacht“ hat – der Augenblick öffnet sich zur Ewigkeit. Horaz bleibt im Diesseits: Gelassenheit, Wein und Genuss des Tages (<em class="lat">vina liques</em>); die Götter bestimmen nur die Lebensdauer, eine Ewigkeitsperspektive fehlt.<br>
+        Auch akzeptiert: Gryphius betont zusätzlich die Vergangenheit („die mir die Zeit genommen“), bei Horaz spielt sie keine Rolle.
+        <div class="fieldrow" style="margin-top:10px"><label>Meine Punkte:</label><select class="selfpts" data-max="3"></select></div></div>
+    </div>
+    <div class="task"><h4><span>9 · Interpretieren</span><span class="pts">1 Punkt · automatisch</span></h4>
+      <div id="t9"></div>
+    </div>
+    <div class="task self"><h4><span>10 · Kommentieren und Stellung nehmen</span><span class="pts">2 Punkte · Selbstbewertung</span></h4>
+      <p>„Carpe diem“ wird heute oft als Aufforderung verstanden, einfach Spaß zu haben und nicht an morgen zu denken. Nimm in etwa 60 bis 80 Wörtern Stellung, ob diese Deutung dem Horaz-Gedicht gerecht wird. Beziehe dich dabei auf mindestens eine Textstelle.</p>
+      <textarea data-save="t10"></textarea>
+      <div class="btnrow"><button class="ghost" data-model="m10">Bewertungskriterien zeigen</button></div>
+      <div class="model" id="m10"><b>Kriterien:</b> klar erkennbare eigene Position (0,5 P.) · mindestens zwei schlüssige Argumente (1 P.) · Bezug auf eine konkrete Textstelle mit Zitat (0,5 P.).<br><b>Gedankenanstoß für eine differenzierte Antwort:</b> Das Gedicht fordert nicht zur Sorglosigkeit auf, sondern zu Gelassenheit und Maß: Leuconoe soll „vernünftig sein“ (<em class="lat">sapias</em>) und die lange Hoffnung auf eine kurze Lebensspanne zurückschneiden (<em class="lat">spatio brevi spem longam reseces</em>). Das Bild des Pflückens (<em class="lat">carpe</em>) meint ein bewusstes, achtsames Ernten des reifen Augenblicks – kein gedankenloses Verschwenden. Die moderne Spaß-Deutung greift daher zu kurz.
+        <div class="fieldrow" style="margin-top:10px"><label>Meine Punkte:</label><select class="selfpts" data-max="2"></select></div></div>
+    </div>
+  </div>
+
+  <div class="btnrow" style="margin-bottom:26px"><button class="lilac" id="checkIT">Automatische Aufgaben prüfen</button></div>
+
+  <div class="result" id="result">
+    <h3>Gesamtauswertung</h3>
+    <p class="mini">Bewerte zuerst Teil A, prüfe die automatischen Aufgaben und trage bei den Aufgaben 6, 7, 8 und 10 deine Punkte ein. Dann klicke auf „Auswerten“.</p>
+    <div class="btnrow" style="margin-bottom:16px"><button class="lilac" id="finalBtn">Auswerten</button></div>
+    <div id="finalOut" class="hidden">
+      <p><b>Teil A · Übersetzung:</b> <span id="fUT"></span> / 36</p>
+      <div class="bar"><div id="fUTbar" style="background:var(--terra)"></div></div>
+      <p><b>Teil B · Interpretation:</b> <span id="fIT"></span> / 24</p>
+      <div class="bar"><div id="fITbar" style="background:var(--lilac)"></div></div>
+      <p><b>Gesamt:</b> <span id="fTot"></span> / 60</p>
+      <div class="grade" id="fGrade"></div>
+      <p id="fText" style="margin-top:12px"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>Latein Zentralmatura · Lern- und Übungsseite · Originaltexte: Seneca, Horaz, Andreas Gryphius (gemeinfrei)</footer>
+
+<script>
+/* ---------- Speicher (sicher) ---------- */
+function sget(k){try{return localStorage.getItem('latmat_'+k)}catch(e){return null}}
+function sset(k,v){try{localStorage.setItem('latmat_'+k,v)}catch(e){}}
+
+/* ---------- 2 Stepper ---------- */
+const toks=["Caesar,","cum","hostes","castra","oppugnare","vidisset,","milites","hortatus est,","ut","fortiter","pugnarent."];
+const steps=[
+ {t:"Schritt 1 · Überblick verschaffen",h:{},x:"Lies den ganzen Satz einmal ruhig durch, ohne sofort zu übersetzen. Was erkennst du schon? <em class='lat'>Caesar</em>, <em class='lat'>hostes</em> (Feinde), <em class='lat'>castra</em> (Lager), <em class='lat'>milites</em> (Soldaten) – es geht offenbar um eine militärische Situation. Dieses Vorwissen hilft dir später, Wörterbuchbedeutungen richtig auszuwählen. In der Matura liest du dafür zuerst die deutsche Einleitung."},
+ {t:"Schritt 2 · Satzgrenzen und Einleitewörter markieren",h:{1:"sub",8:"sub"},x:"Kommas und Nebensatz-Einleiter zeigen dir die Architektur des Satzes. Hier gibt es zwei: <em class='lat'>cum</em> und <em class='lat'>ut</em>. Jedes Einleitewort öffnet einen Nebensatz, der erst mit seinem eigenen Prädikat wieder endet. Damit zerfällt der Satz bereits in überschaubare Teile."},
+ {t:"Schritt 3 · Alle Prädikate suchen",h:{5:"pred",7:"pred",10:"pred",4:"inf"},x:"Jeder Satzteil hat ein eigenes Prädikat: <em class='lat'>vidisset</em> (Konj. Plusquamperfekt – gehört zum cum-Satz), <em class='lat'>hortatus est</em> (Perfekt – das Prädikat des Hauptsatzes) und <em class='lat'>pugnarent</em> (Konj. Imperfekt – gehört zum ut-Satz). Der Infinitiv <em class='lat'>oppugnare</em> ist kein eigenes Prädikat, er wird gleich wichtig."},
+ {t:"Schritt 4 · Den Hauptsatz freilegen",h:{0:"main",6:"main",7:"main"},dim:true,x:"Blende gedanklich alle Nebensätze aus. Übrig bleibt das Gerüst: <em class='lat'>Caesar milites hortatus est</em> – Caesar ermahnte die Soldaten. Wenn der Hauptsatz steht, hast du einen festen Anker, an den du alles andere hängen kannst."},
+ {t:"Schritt 5 · Konstruktionen erkennen",h:{2:"aci",3:"aci",4:"aci",5:"pred"},x:"Nach dem Wahrnehmungsverb <em class='lat'>vidisset</em> stehen ein Akkusativ (<em class='lat'>hostes</em>) und ein Infinitiv (<em class='lat'>oppugnare</em>) – ein AcI: „dass die Feinde angriffen“. <em class='lat'>castra</em> ist das Objekt des Infinitivs. Der Infinitiv Präsens zeigt Gleichzeitigkeit zu <em class='lat'>vidisset</em>. Außerdem: <em class='lat'>cum</em> + Konj. Plusquamperfekt = vorzeitig („als/nachdem er gesehen hatte“), <em class='lat'>ut</em> + Konjunktiv nach einem Verb des Ermahnens = Begehrsatz („dass sie … sollten“)."},
+ {t:"Schritt 6 · Wörterbuch gezielt einsetzen",h:{7:"pred",4:"inf",3:"aci"},x:"Jetzt erst schlägst du nach – und zwar gezielt: <em class='lat'>hortari</em> ist ein Deponens, also trotz passiver Form aktiv: „er ermahnte, forderte auf“. <em class='lat'>oppugnare</em> heißt „angreifen, bestürmen“. <em class='lat'>castra, -orum</em> ist ein Pluralwort: „das Lager“ (Singular im Deutschen!)."},
+ {t:"Schritt 7 · Rohübersetzung",h:{},x:"Setze die Teile wortgetreu zusammen, ohne schon auf Schönheit zu achten:<div class='ex' style='margin-top:10px'>Caesar, als er gesehen hatte, dass die Feinde das Lager angriffen, ermahnte die Soldaten, dass sie tapfer kämpfen sollten.</div>Inhaltlich ist jetzt alles richtig. Im Deutschen wirkt der Satz aber noch holprig."},
+ {t:"Schritt 8 · Feinschliff im Deutschen",h:{},x:"Nun formst du gutes Deutsch – ohne den Inhalt zu verändern. Das bringt dir die Punkte im Bereich Sprache:<div class='ex' style='margin-top:10px'><b>Als Caesar gesehen hatte, dass die Feinde das Lager bestürmten, forderte er die Soldaten auf, tapfer zu kämpfen.</b></div>Das Subjekt ist nach vorne gewandert, der ut-Satz wurde zum Infinitiv „zu kämpfen“. Prüffrage: Würde ein deutscher Leser, der nie Latein gelernt hat, den Satz natürlich finden?"}
+];
+let cur=0;
+function renderStep(){
+  const s=steps[cur];
+  document.getElementById('sentence').innerHTML=toks.map((w,i)=>{
+    let c='tok'; if(s.h[i]) c+=' '+s.h[i]; else if(s.dim) c+=' dim';
+    return `<span class="${c}">${w}</span>`;}).join('');
+  document.getElementById('stepBody').innerHTML=`<h3>${s.t}</h3><p>${s.x}</p>`;
+  document.getElementById('dots').innerHTML=steps.map((_,i)=>`<span class="${i===cur?'on':''}" data-i="${i}">${i+1}</span>`).join('');
+  document.getElementById('prevStep').disabled=cur===0;
+  document.getElementById('nextStep').disabled=cur===steps.length-1;
+}
+document.getElementById('prevStep').onclick=()=>{if(cur>0){cur--;renderStep()}};
+document.getElementById('nextStep').onclick=()=>{if(cur<steps.length-1){cur++;renderStep()}};
+document.getElementById('dots').onclick=e=>{if(e.target.dataset.i){cur=+e.target.dataset.i;renderStep()}};
+renderStep();
+
+/* ---------- 9 Training ---------- */
+const quiz=[
+ {p:"Welche Konstruktion liegt vor? <em class='lat'>Urbe capta milites praedam diviserunt.</em>",o:["Ablativus absolutus","Participium coniunctum","AcI","Gerundivum"],a:0,e:"<em class='lat'>urbe capta</em> besteht aus Nomen + Partizip im Ablativ und hängt von keinem Satzglied ab – ein Abl. abs. Das PPP zeigt Vorzeitigkeit: „Nachdem die Stadt erobert worden war …“."},
+ {p:"Welche Konstruktion liegt vor? <em class='lat'>Hostes fugientes capti sunt.</em>",o:["Ablativus absolutus","Participium coniunctum","NcI","Gerundium"],a:1,e:"<em class='lat'>fugientes</em> stimmt in Fall, Zahl und Geschlecht mit dem Subjekt <em class='lat'>hostes</em> überein – also ein PC. Partizip Präsens = gleichzeitig: „Die Feinde wurden auf der Flucht gefangen.“"},
+ {p:"Wie übersetzt du <em class='lat'>Caesar in Galliam venisse dicitur</em> am besten?",o:["Caesar sagt, er sei nach Gallien gekommen.","Caesar soll nach Gallien gekommen sein.","Man sagt Caesar, dass er nach Gallien kommt.","Caesar wird nach Gallien kommen, sagt man."],a:1,e:"Passives Verb des Sagens + Nominativ + Infinitiv = NcI. Der Infinitiv Perfekt zeigt Vorzeitigkeit: „Caesar soll gekommen sein“ bzw. „Man sagt, Caesar sei gekommen.“"},
+ {p:"Welches Zeitverhältnis drückt der AcI in <em class='lat'>Dixit se venturum esse</em> aus?",o:["gleichzeitig","vorzeitig","nachzeitig"],a:2,e:"<em class='lat'>venturum esse</em> ist ein Infinitiv Futur – das signalisiert Nachzeitigkeit: „Er sagte, er werde kommen.“"},
+ {p:"Was bedeutet <em class='lat'>Carthago delenda est</em>?",o:["Karthago ist zerstört worden.","Karthago muss zerstört werden.","Karthago wird gerade zerstört.","Karthago zerstört."],a:1,e:"Gerundivum + <em class='lat'>esse</em> drückt eine Notwendigkeit aus: „muss … werden“. Das ist der berühmte Satz, mit dem Cato seine Reden beendet haben soll."},
+ {p:"Welche Form liegt in <em class='lat'>legati ad pacem petendam venerunt</em> vor?",o:["Gerundium","Gerundivum (attributiv)","Partizip Präsens","Supinum"],a:1,e:"<em class='lat'>petendam</em> hat ein Bezugswort (<em class='lat'>pacem</em>) und stimmt mit ihm überein – also Gerundivum. Mit <em class='lat'>ad</em> drückt es einen Zweck aus: „um Frieden zu erbitten“."},
+ {p:"Wie übersetzt du <em class='lat'>Timeo, ne veniat</em>?",o:["Ich fürchte, dass er nicht kommt.","Ich fürchte, dass er kommt.","Ich fürchte, damit er kommt.","Ich fürchte nicht, dass er kommt."],a:1,e:"Nach Verben des Fürchtens kehrt sich die Logik um: <em class='lat'>ne</em> heißt „dass“, <em class='lat'>ut</em> heißt „dass nicht“. Ich befürchte also sein Kommen."},
+ {p:"Wie übersetzt du <em class='lat'>Quae cum ita sint, …</em>?",o:["Welche, wenn sie so sind, …","Da dies so ist, …","Mit diesen Dingen ist es so, …","Obwohl es so ist, …"],a:1,e:"<em class='lat'>Quae</em> ist ein relativer Satzanschluss („dies“), <em class='lat'>cum</em> + Konjunktiv steht hier kausal – eine feste Wendung bei Cicero: „Da dies so ist …“."},
+ {p:"Was drückt <em class='lat'>Utinam adesses!</em> aus?",o:["einen erfüllbaren Wunsch in der Zukunft","einen unerfüllbaren Wunsch in der Gegenwart","einen Befehl","eine Frage"],a:1,e:"<em class='lat'>utinam</em> + Konjunktiv Imperfekt = unerfüllbarer Wunsch der Gegenwart: „Wenn du doch hier wärst!“ (Du bist es aber nicht.)"},
+ {p:"Wie übersetzt du <em class='lat'>Mihi liber est</em> am besten?",o:["Mir ist ein Buch.","Ich habe ein Buch.","Das Buch ist für mich da.","Ich bin ein Buch."],a:1,e:"<em class='lat'>esse</em> mit Dativ der Person drückt Besitz aus (Dativus possessivus): „Ich habe ein Buch.“"},
+ {p:"Welche Form ist <em class='lat'>complectere</em> in <em class='lat'>omnes horas complectere</em>?",o:["Infinitiv Präsens Aktiv","Imperativ Singular eines Deponens","3. Person Plural Perfekt","Konjunktiv Präsens"],a:1,e:"<em class='lat'>complecti</em> ist ein Deponens (Infinitiv auf <em class='lat'>-i</em>!). Seine Imperativform lautet <em class='lat'>complectere</em> – „umfasse!“. Der Satz steht als Aufforderung an Lucilius, das zeigt auch das parallele <em class='lat'>fac</em>."},
+ {p:"Was bedeutet <em class='lat'>praeterit</em>, wenn die Anmerkung <em class='lat'>praeterit = praeteriit</em> lautet?",o:["es geht vorüber (Präsens)","es ist vorübergegangen (Perfekt)","es wird vorübergehen (Futur)","es möge vorübergehen (Konjunktiv)"],a:1,e:"Die Kurzform <em class='lat'>praeterit</em> steht für das Perfekt <em class='lat'>praeteriit</em>: „ist schon vorüber“. Die Anmerkung warnt dich genau vor dieser Verwechslung mit dem Präsens."},
+ {p:"Welche Sinnrichtung hat <em class='lat'>cum</em> in <em class='lat'>Cum Romam venisset, amicum visitavit</em>?",o:["temporal (als, nachdem)","konzessiv (obwohl)","adversativ (während hingegen)","iterativ (immer wenn)"],a:0,e:"In einer Erzählung mit Konjunktiv Plusquamperfekt steht <em class='lat'>cum</em> narrativ-temporal: „Als (nachdem) er nach Rom gekommen war …“. Ein „obwohl“ ergäbe keinen Sinn, und das iterative cum stünde mit Indikativ."},
+ {p:"In <em class='lat'>quidquid aetatis retro est</em> ist <em class='lat'>aetatis</em> ein …",o:["Genitivus partitivus","Genitivus possessivus","Ablativus temporis","Dativus finalis"],a:0,e:"Der Genitiv bezeichnet das Ganze, von dem <em class='lat'>quidquid</em> einen Teil herausgreift: „was an Lebenszeit hinter uns liegt“ – ein Genitivus partitivus."},
+ {p:"Was bedeutet das PPP <em class='lat'>hortatus</em> in <em class='lat'>Caesar milites hortatus discessit</em>?",o:["Caesar, ermahnt worden, ging weg.","Nachdem Caesar die Soldaten ermahnt hatte, ging er weg.","Caesar ermahnt die Soldaten, die weggehen.","Caesar wurde von den Soldaten ermahnt."],a:1,e:"<em class='lat'>hortari</em> ist ein Deponens – sein PPP hat aktive Bedeutung und zeigt Vorzeitigkeit: „nachdem er ermahnt hatte“."}
+];
+let qDone=0,qRight=0;
+function renderQuiz(){
+  qDone=0;qRight=0;updQ();
+  document.getElementById('quiz').innerHTML=quiz.map((q,i)=>`<div class="q"><div class="qhead">Aufgabe ${i+1} von ${quiz.length}</div><div class="prompt">${q.p}</div><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}</div><div class="expl" id="ex${i}"></div></div>`).join('');
+}
+function updQ(){document.getElementById('trainScore').textContent=`${qRight} / ${qDone} richtig · ${quiz.length-qDone} offen`}
+document.getElementById('quiz').onclick=e=>{
+  const b=e.target.closest('.opt'); if(!b) return;
+  const qi=+b.dataset.q, oi=+b.dataset.o, box=b.parentElement;
+  if(box.dataset.done) return; box.dataset.done=1; qDone++;
+  const q=quiz[qi], ok=oi===q.a; if(ok) qRight++;
+  box.querySelectorAll('.opt').forEach((x,j)=>{if(j===q.a)x.classList.add('right');else if(j===oi)x.classList.add('wrong')});
+  const ex=document.getElementById('ex'+qi);
+  ex.innerHTML=(ok?'<b class="ok">Richtig! </b>':'<b class="no">Noch nicht ganz. </b>')+q.e; ex.classList.add('show'); updQ();
+};
+document.getElementById('quizReset').onclick=renderQuiz;
+renderQuiz();
+
+/* ---------- Timer ---------- */
+let total=270*60, left=total, tid=null;
+const saved=sget('timer'); if(saved!==null&&!isNaN(+saved)) left=+saved;
+function showClock(){const m=Math.floor(left/60),s=left%60;document.getElementById('clock').textContent=`${m}:${String(s).padStart(2,'0')}`;
+  const msg=document.getElementById('tMsg');
+  if(left===0) msg.textContent='Die Zeit ist um – Stifte weg! 😊';
+  else if(left<=25*60) msg.textContent='Kontrollphase: Lücken füllen, Deutsch glätten.';
+  else if(left<=110*60) msg.textContent='Spätestens jetzt: Wechsel zum Interpretationstext.';
+  else msg.textContent='';}
+document.getElementById('tStart').onclick=()=>{if(tid)return;tid=setInterval(()=>{if(left>0){left--;sset('timer',left);showClock()}else{clearInterval(tid);tid=null}},1000)};
+document.getElementById('tPause').onclick=()=>{clearInterval(tid);tid=null};
+document.getElementById('tReset').onclick=()=>{clearInterval(tid);tid=null;left=total;sset('timer',left);showClock()};
+showClock();
+
+/* ---------- Textfelder speichern ---------- */
+const ue=document.getElementById('uebersetzung');
+ue.value=sget('ue')||''; ue.oninput=()=>sset('ue',ue.value);
+document.querySelectorAll('textarea[data-save]').forEach(t=>{t.value=sget(t.dataset.save)||'';t.oninput=()=>sset(t.dataset.save,t.value)});
+
+/* ---------- Teil A Bewertung ---------- */
+const SE=[
+ ["Ita fac, mi Lucili: vindica te tibi,","Handle so, mein Lucilius: Nimm dich selbst für dich in Anspruch,"],
+ ["et tempus, quod adhuc aut auferebatur aut subripiebatur aut excidebat, collige et serva.","und die Zeit, die dir bisher entweder genommen oder heimlich entwendet wurde oder die dir entglitt, sammle und bewahre sie."],
+ ["Persuade tibi hoc sic esse, ut scribo:","Sei überzeugt davon, dass es so ist, wie ich schreibe:"],
+ ["quaedam tempora eripiuntur nobis, quaedam subducuntur, quaedam effluunt.","Manche Zeit wird uns entrissen, manche unbemerkt entzogen, manche verrinnt."],
+ ["Turpissima tamen est iactura, quae per neglegentiam fit.","Am schändlichsten jedoch ist der Verlust, der durch Nachlässigkeit entsteht."],
+ ["Et si volueris attendere,","Und wenn du genau hinsehen willst,"],
+ ["magna pars vitae elabitur male agentibus, maxima nihil agentibus, tota vita aliud agentibus.","entgleitet ein großer Teil des Lebens denen, die Schlechtes tun, der größte denen, die nichts tun, das ganze Leben denen, die etwas anderes (als das Wesentliche) tun."],
+ ["Quem mihi dabis, qui aliquod pretium tempori ponat, qui diem aestimet, qui intellegat se cotidie mori?","Wen wirst du mir nennen können, der der Zeit irgendeinen Wert beimisst, der den Tag zu schätzen weiß, der begreift, dass er täglich stirbt?"],
+ ["In hoc enim fallimur, quod mortem prospicimus: magna pars eius iam praeterit;","Darin nämlich täuschen wir uns, dass wir den Tod (nur) vor uns sehen: Ein großer Teil von ihm ist schon vorüber;"],
+ ["quidquid aetatis retro est, mors tenet.","was an Lebenszeit hinter uns liegt, hält der Tod in Händen."],
+ ["Fac ergo, mi Lucili, quod facere te scribis, omnes horas complectere: sic fiet, ut minus ex crastino pendeas, si hodierno manum inieceris.","Tu also, mein Lucilius, was du – wie du schreibst – tust: Umfasse alle Stunden! So wird es geschehen, dass du weniger vom morgigen Tag abhängst, wenn du den heutigen fest ergreifst."],
+ ["Dum differtur, vita transcurrit. Omnia, Lucili, aliena sunt, tempus tantum nostrum est.","Während man es aufschiebt, eilt das Leben vorüber. Alles, Lucilius, gehört anderen, nur die Zeit gehört uns."]
+];
+const CP=[
+ ["vindica te tibi","Reflexiv richtig: „dich (für) dich selbst“ – nicht „räche dich“."],
+ ["auferebatur / subripiebatur","Imperfekt Passiv: „wurde genommen / heimlich entwendet“."],
+ ["excidebat","Aktiv und intransitiv: „entglitt / ging verloren“ – keine Passivform."],
+ ["collige et serva","Zwei Imperative Singular: „sammle und bewahre“."],
+ ["persuade tibi hoc sic esse","AcI nach persuadere erkannt: „dass es so ist“."],
+ ["eripiuntur / subducuntur","Präsens Passiv: „werden entrissen / entzogen“."],
+ ["nobis","Dativ: „uns“ (wem etwas entrissen wird)."],
+ ["turpissima","Superlativ: „am schändlichsten / der schändlichste“."],
+ ["iactura","Bedeutung „Verlust“ (Anmerkung genutzt)."],
+ ["per neglegentiam","„durch Nachlässigkeit“."],
+ ["si volueris","Futur II / Konj. Perf. sinnvoll wiedergegeben: „wenn du … willst / wolltest“."],
+ ["male / nihil / aliud agentibus","Substantivierte Partizipien im Dativ: „denen, die …“."],
+ ["maxima … tota vita","Steigerung erkannt und ergänzt: „der größte Teil … das ganze Leben“."],
+ ["qui … ponat, aestimet, intellegat","Relativsätze mit Konjunktiv sinnvoll übersetzt („der … beimisst / beimessen würde“)."],
+ ["se cotidie mori","AcI nach intellegat mit Reflexivbezug: „dass er täglich stirbt“."],
+ ["quidquid aetatis","Genitivus partitivus: „was an Lebenszeit“."],
+ ["complectere","Imperativ eines Deponens: „umfasse!“ – nicht Infinitiv."],
+ ["ut … pendeas, si … inieceris","Konsekutiver ut-Satz nach fiet („dass du … abhängst“) und Bedingung mit vorzeitigem inieceris („wenn du … ergriffen hast / ergreifst“)."]
+];
+const LANG=[
+ [6,"Durchgehend flüssiges, idiomatisches Deutsch; Satzbau dem Deutschen angepasst, treffende Wortwahl."],
+ [5,"Sehr gut lesbar, vereinzelt leicht steife Stellen."],
+ [4,"Gut verständlich, mehrere am Latein klebende Wendungen."],
+ [3,"Verständlich, aber oft holprig und wortwörtlich."],
+ [2,"Häufig schwer verständlich, Satzbau lateinisch belassen."],
+ [1,"Über weite Strecken kein korrektes Deutsch."],
+ [0,"Kaum zusammenhängender deutscher Text."]
+];
+(function buildUT(){
+  const tb=document.getElementById('seTable');
+  SE.forEach((s,i)=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="lat">${s[0]}</td><td>${s[1]}</td><td class="chk"><input type="checkbox" class="seC" data-k="se${i}"></td>`;tb.appendChild(tr)});
+  document.getElementById('cpList').innerHTML=CP.map((c,i)=>`<label class="cp"><input type="checkbox" class="cpC" data-k="cp${i}"><span><em class="lat">${c[0]}</em><small>${c[1]}</small></span></label>`).join('');
+  document.getElementById('langOpts').innerHTML=LANG.map(l=>`<label class="lang-opt"><input type="radio" name="lang" value="${l[0]}"><span><b>${l[0]} Punkte</b> – ${l[1]}</span></label>`).join('');
+  document.querySelectorAll('.seC,.cpC').forEach(c=>{c.checked=sget(c.dataset.k)==='1';c.onchange=()=>{sset(c.dataset.k,c.checked?'1':'0');calcUT()}});
+  const sl=sget('lang'); document.querySelectorAll('input[name=lang]').forEach(r=>{if(r.value===sl)r.checked=true;r.onchange=()=>{sset('lang',r.value);calcUT()}});
+  if(sget('utOpen')==='1') openUT();
+})();
+function utPoints(){
+  const se=document.querySelectorAll('.seC:checked').length;
+  const cp=document.querySelectorAll('.cpC:checked').length;
+  const l=document.querySelector('input[name=lang]:checked');
+  return {se,cp,l:l?+l.value:0,sum:se+cp+(l?+l.value:0)};
+}
+function calcUT(){
+  const p=utPoints();
+  document.getElementById('utSum').textContent=p.sum;
+  document.getElementById('utBar').style.width=(p.sum/36*100)+'%';
+  document.getElementById('utHint').textContent=`Sinneinheiten ${p.se}/12 · Checkpoints ${p.cp}/18 · Sprache ${p.l}/6 · `+(p.sum>=18?'Mindestanforderung für den Übersetzungsteil erfüllt.':'Für eine positive Beurteilung braucht es mindestens 18 Punkte in diesem Teil.');
+}
+function openUT(){
+  document.getElementById('utEval').classList.remove('hidden');
+  const txt=ue.value.trim();
+  document.getElementById('yourText').innerHTML='<b>Deine Übersetzung:</b><br>'+(txt?txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>'):'<i>(noch leer)</i>');
+  calcUT();
+}
+document.getElementById('showUT').onclick=()=>{sset('utOpen','1');openUT();document.getElementById('utEval').scrollIntoView({behavior:'smooth'})};
+
+/* ---------- Teil B ---------- */
+// Aufgabe 1
+const T1=[["Debilität",["debilitat","debilitare"]],["Eloquenz",["loquimur","loqui"]],["Kredit",["credula","credulus"]],["Marine",["mare"]],["Nummer",["numeros","numerus"]],["Opposition",["oppositis","oppositus","opponere"]]];
+document.getElementById('t1').innerHTML=T1.map((t,i)=>`<div class="fieldrow"><label>${t[0]}</label><input type="text" id="t1_${i}" autocomplete="off" spellcheck="false"><span class="mini" id="t1f_${i}"></span></div>`).join('');
+// Aufgabe 2
+const SEG=["V. 1–3: <em class='lat'>Tu ne quaesieris … numeros.</em>","V. 3–6: <em class='lat'>Ut melius … Tyrrhenum:</em>","V. 6–8: <em class='lat'>sapias … postero.</em>"];
+const HEAD=[["C","Aufforderungen, die Gegenwart bewusst zu nutzen"],["A","Warnung davor, die Zukunft erforschen zu wollen"],["B","Gelassene Annahme dessen, was das Schicksal zuteilt"]];
+const T2ANS=["A","B","C"];
+document.getElementById('t2').innerHTML=SEG.map((s,i)=>`<div class="fieldrow"><label>${s}</label><select id="t2_${i}"><option value="">– bitte wählen –</option>${HEAD.map(h=>`<option value="${h[0]}">${h[1]}</option>`).join('')}</select></div>`).join('');
+// Aufgabe 3
+const lines=["Tu ne quaesieris – scire nefas – quem mihi, quem tibi","finem di dederint, Leuconoe, nec Babylonios","temptaris numeros. Ut melius, quidquid erit, pati!","Seu pluris hiemes seu tribuit Iuppiter ultimam,","quae nunc oppositis debilitat pumicibus mare","Tyrrhenum: sapias, vina liques, et spatio brevi","spem longam reseces. Dum loquimur, fugerit invida","aetas: carpe diem, quam minimum credula postero."];
+const T3SET=["quaesieris","temptaris","sapias","liques","reseces","carpe"];
+let wid=0;
+document.getElementById('t3').innerHTML=lines.map((l,li)=>`<div><span class="mini" style="display:inline-block;width:26px">${li+1}</span>`+l.split(' ').map(w=>{if(w==='–')return '– ';const clean=w.replace(/[.,:!?;]/g,'').toLowerCase();return `<span class="clickword" data-w="${clean}" data-id="${wid++}">${w}</span> `}).join('')+'</div>').join('');
+document.getElementById('t3').onclick=e=>{const c=e.target.closest('.clickword');if(!c||document.getElementById('t3').dataset.done)return;c.classList.toggle('sel');document.getElementById('t3count').textContent=document.querySelectorAll('#t3 .clickword.sel').length};
+// Aufgabe 4
+const SMOPT=["Anapher","Antithese","Hyperbaton","Klimax","Litotes","Metapher","Parenthese","Personifikation"];
+const T4=[["<em class='lat'>quem mihi, quem tibi</em> (V. 1)","Anapher","Das wiederholte <em class='lat'>quem</em> am Beginn zweier Glieder betont: Die Frage betrifft beide gleichermaßen."],["<em class='lat'>scire nefas</em> (V. 1)","Parenthese","Ein Einschub unterbricht den Satz – der Sprecher kommentiert spontan, dass solches Wissen Frevel ist."],["<em class='lat'>oppositis … pumicibus</em> (V. 5)","Hyperbaton","Adjektiv und Nomen sind gesperrt; die Wörter umschließen das Verb, so wie die Klippen das Meer umschließen."],["<em class='lat'>spatio brevi – spem longam</em> (V. 6–7)","Antithese","„kurz“ und „lang“ stehen einander scharf gegenüber: kurze Lebensspanne gegen lange Hoffnung."],["<em class='lat'>invida aetas</em> (V. 7–8)","Personifikation","Die Zeit wird „neidisch“ – sie handelt wie ein missgünstiger Mensch, der uns das Glück nicht gönnt."],["<em class='lat'>carpe diem</em> (V. 8)","Metapher","„Pflücke den Tag“ überträgt das Bild der reifen Frucht auf die Zeit: Der Tag soll genossen werden, solange er reif ist."]];
+document.getElementById('t4').innerHTML=T4.map((t,i)=>`<div class="fieldrow"><label>${t[0]}</label><select id="t4_${i}"><option value="">– bitte wählen –</option>${SMOPT.map(o=>`<option>${o}</option>`).join('')}</select><span class="mini" id="t4f_${i}"></span></div>`).join('');
+// MC-Aufgaben 5 und 9
+const MC={
+ t5:[{p:"a) Welches Wort ist zu <em class='lat'>ultimam</em> (V. 4) zu ergänzen?",o:["finem","hiemem","Leuconoen","aetatem"],a:1,e:"Durch <em class='lat'>seu pluris hiemes seu … ultimam</em> entsteht die Gegenüberstellung „mehr Winter oder den letzten (Winter)“ – zu ergänzen ist also <em class='lat'>hiemem</em>. Der Winter steht hier für ein ganzes Lebensjahr."},
+     {p:"b) Worauf bezieht sich das Relativpronomen <em class='lat'>quae</em> (V. 5)?",o:["auf Iuppiter","auf den (letzten) Winter","auf Leuconoe","auf das Meer"],a:1,e:"<em class='lat'>quae</em> ist feminin Singular und greift den zuletzt genannten Winter (<em class='lat'>hiemem ultimam</em>) auf: Es ist der Winter, der jetzt das Meer an den Klippen bricht. <em class='lat'>mare</em> ist Neutrum und zugleich das Objekt zu <em class='lat'>debilitat</em>."}],
+ t9:[{p:"Worauf spielt der Ausdruck <em class='lat'>Babylonios … numeros</em> (V. 2–3) an?",o:["auf babylonische Zahlungsmittel","auf astrologische Berechnungen zur Lebensdauer","auf die Zahl der Götter","auf Versmaße der Dichtung"],a:1,e:"Babylon galt in der Antike als Heimat der Sterndeutung. Die „babylonischen Zahlen“ sind die Berechnungen der Astrologen, mit denen Leuconoe ihre Lebensdauer erfahren will – genau davor warnt der Sprecher."}]
+};
+function renderMC(id){document.getElementById(id).innerHTML=MC[id].map((q,i)=>`<div style="margin-bottom:14px"><div class="prompt" style="margin-bottom:8px">${q.p}</div><div class="opts">${q.o.map((o,j)=>`<label class="opt" style="cursor:pointer"><input type="radio" name="${id}_${i}" value="${j}"> ${o}</label>`).join('')}</div><div class="expl" id="${id}e${i}"></div></div>`).join('')}
+renderMC('t5');renderMC('t9');
+
+// Selbstbewertung Selects
+document.querySelectorAll('.selfpts').forEach((s,i)=>{const max=+s.dataset.max;let h='<option value="">–</option>';for(let v=0;v<=max;v+=0.5)h+=`<option value="${v}">${String(v).replace('.',',')}</option>`;s.innerHTML=h;const k='self'+i;s.value=sget(k)||'';s.onchange=()=>sset(k,s.value)});
+document.querySelectorAll('[data-model]').forEach(b=>b.onclick=()=>{document.getElementById(b.dataset.model).classList.toggle('show')});
+
+let autoIT=null;
+function norm(s){return s.toLowerCase().replace(/[^a-z]/g,'')}
+document.getElementById('checkIT').onclick=()=>{
+  let p1=0,p2=0,p3=0,p4=0,p5=0,p9=0;
+  T1.forEach((t,i)=>{const inp=document.getElementById('t1_'+i),ok=t[1].includes(norm(inp.value));inp.classList.remove('mark-ok','mark-no');inp.classList.add(ok?'mark-ok':'mark-no');if(ok)p1+=.5;document.getElementById('t1f_'+i).innerHTML=ok?'✓':'Lösung: <em class="lat">'+t[1][0]+'</em>'});
+  SEG.forEach((s,i)=>{const sel=document.getElementById('t2_'+i),ok=sel.value===T2ANS[i];sel.classList.remove('mark-ok','mark-no');sel.classList.add(ok?'mark-ok':'mark-no');if(ok)p2+=1});
+  const box=document.getElementById('t3');box.dataset.done=1;let r=0,w=0;
+  box.querySelectorAll('.clickword').forEach(c=>{const inSet=T3SET.includes(c.dataset.w),sel=c.classList.contains('sel');c.classList.remove('sel');if(sel&&inSet){c.classList.add('ok');r++}else if(sel){c.classList.add('no');w++}else if(inSet)c.classList.add('miss')});
+  p3=Math.max(0,Math.min(3,r*.5-w*.5));
+  T4.forEach((t,i)=>{const sel=document.getElementById('t4_'+i),ok=sel.value===t[1];sel.classList.remove('mark-ok','mark-no');sel.classList.add(ok?'mark-ok':'mark-no');if(ok)p4+=.5;document.getElementById('t4f_'+i).innerHTML=(ok?'✓ ':'Lösung: <b>'+t[1]+'</b> – ')+t[2]});
+  ['t5','t9'].forEach(id=>MC[id].forEach((q,i)=>{const ch=document.querySelector(`input[name=${id}_${i}]:checked`),ok=ch&&+ch.value===q.a;if(ok){if(id==='t5')p5+=1;else p9+=1}
+    document.querySelectorAll(`input[name=${id}_${i}]`).forEach(r=>{const l=r.parentElement;l.classList.remove('right','wrong');if(+r.value===q.a)l.classList.add('right');else if(r.checked)l.classList.add('wrong')});
+    const ex=document.getElementById(id+'e'+i);ex.innerHTML=(ok?'<b class="ok">Richtig! </b>':'<b class="no">Noch nicht ganz. </b>')+q.e;ex.classList.add('show')}));
+  const t3note=document.createElement('div');t3note.className='expl show';t3note.innerHTML=`<b>${r} von 6 richtig gefunden${w?', '+w+' falsch angeklickt':''}.</b> Gesucht waren: <em class="lat">quaesieris</em> und <em class="lat">temptaris</em> (ne/nec + Konj. Perfekt = Verbot), <em class="lat">sapias, liques, reseces</em> (Konj. Präsens als Aufforderung) und <em class="lat">carpe</em> (Imperativ). Gestrichelt umrandet: Formen, die du übersehen hast.`;
+  if(!box.nextElementSibling.classList.contains('expl'))box.after(t3note);
+  autoIT=p1+p2+p3+p4+p5+p9;
+  document.getElementById('checkIT').textContent=`Automatische Aufgaben: ${String(autoIT).replace('.',',')} von 15 Punkten`;
+  document.getElementById('checkIT').disabled=true;
+};
+
+/* ---------- Gesamtauswertung ---------- */
+document.getElementById('finalBtn').onclick=()=>{
+  if(autoIT===null){alert('Bitte zuerst „Automatische Aufgaben prüfen“ klicken.');return}
+  let self=0,missing=false;document.querySelectorAll('.selfpts').forEach(s=>{if(s.value==='')missing=true;else self+=+s.value});
+  if(missing&&!confirm('Bei mindestens einer Selbstbewertungsaufgabe fehlen noch Punkte (zählt als 0). Trotzdem auswerten?'))return;
+  const ut=utPoints().sum,it=autoIT+self,tot=ut+it;
+  const f=v=>String(v).replace('.',',');
+  document.getElementById('finalOut').classList.remove('hidden');
+  document.getElementById('fUT').textContent=f(ut);document.getElementById('fIT').textContent=f(it);document.getElementById('fTot').textContent=f(tot);
+  document.getElementById('fUTbar').style.width=(ut/36*100)+'%';document.getElementById('fITbar').style.width=(it/24*100)+'%';
+  let g,txt;
+  if(ut<18||it<12){g='Nicht genügend';txt=`Die Gesamtpunkte allein entscheiden nicht – in jedem Teil braucht es mindestens die Hälfte (ÜT 18, IT 12). ${ut<18?'Im Übersetzungsteil fehlen dir noch '+f(18-ut)+' Punkte. Konzentriere dich auf die Sinneinheiten: Lieber jeden Satz sinngemäß erfassen als an einzelnen Wörtern hängen bleiben.':''} ${it<12?'Im Interpretationsteil fehlen dir noch '+f(12-it)+' Punkte. Die geschlossenen Aufgaben (Wortschatz, Gliederung, Stilmittel) sind die sichersten Punktebringer – übe sie gezielt.':''} Jeder Durchgang macht dich sicherer.`}
+  else if(tot>=53){g='Sehr gut';txt='Ausgezeichnet! Du beherrschst Übersetzung und Interpretation auf Maturaniveau. Halte das Niveau mit regelmäßigen Übungstexten.'}
+  else if(tot>=45){g='Gut';txt='Eine starke Leistung! Schau dir die nicht abgehakten Checkpoints an – dort liegen deine nächsten Punkte.'}
+  else if(tot>=37){g='Befriedigend';txt='Solide Basis! Mit gezieltem Training bei den Konstruktionen und beim deutschen Feinschliff ist deutlich mehr drin.'}
+  else {g='Genügend';txt='Bestanden – und das ist ein Fundament, auf dem du aufbauen kannst. Wiederhole die Konstruktionen-Werkstatt und versuch es mit einem neuen Text.'}
+  document.getElementById('fGrade').textContent=g;document.getElementById('fText').textContent=txt;
+  document.getElementById('finalOut').scrollIntoView({behavior:'smooth',block:'center'});
+};
+</script>
+</body>
+</html>
