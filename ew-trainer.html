@@ -874,6 +874,13 @@ function vStart(){
     <button class="btn flieder wide" ${weak?"":"disabled"} onclick="startQuiz('weak')">Fehler wiederholen (${weak})</button>
     <button class="btn ghost wide" onclick="go('pruefung')">Prüfung simulieren</button>
   </div>`;
+  h+=`<div class="card" style="margin-top:14px;border-left:5px solid var(--flieder)"><h3>So kommst du der Sicherheit so nahe wie möglich</h3>
+  <ul style="margin:0;padding-left:20px">
+  <li>Lies das Original-Skript mindestens einmal ganz durch, vor allem die Abbildungen. Diesen Trainer verwendest du zum Festigen und Üben.</li>
+  <li>Mach die Rechenaufgaben, bis sie automatisch sitzen. Dort holen viele Bewerber unnötig Fehler.</li>
+  <li>Peile in den Simulationen mit Zeitlimit regelmäßig über 85 bis 90 Prozent an, und das mehrmals hintereinander, nicht nur einmal.</li>
+  <li>Prüfe im Frühjahr vor dem Aufnahmeverfahren, ob die Universität Wien eine neue Lernunterlage veröffentlicht hat, und gleiche den Stoff damit ab.</li>
+  </ul></div>`;
   if(lastExam){h+=`<div class="card" style="margin-top:14px"><h3>Letzte Prüfungssimulation</h3><p style="margin:0">${new Date(lastExam.d).toLocaleDateString("de-AT")}: <b>${lastExam.r} von ${lastExam.n}</b> richtig (${Math.round(lastExam.r/lastExam.n*100)} %)</p></div>`;}
   h+=`<div class="teilh">Fortschritt nach Kapiteln</div>`;
   KAP.forEach((k,ix)=>{const p=kapProgress(k);
