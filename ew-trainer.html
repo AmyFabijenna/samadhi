@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aufnahmetest Ernährungswissenschaften – Lern- & Übungstrainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1eb; --card:#ffffff; --ink:#18181b; --muted:#55555f; --line:#e2dccf;
+  --blue:#34507e; --blue-l:#e7ecf5;
+  --petrol:#1d6b74; --petrol-l:#e2eff0;
+  --flieder:#5d4a7e; --flieder-l:#eeeaf5;
+  --sand:#efe8da; --rose:#9b4a53; --rose-l:#f6e8e9;
+  --gold:#a27a2b;
+  --radius:18px; --shadow:0 2px 10px rgba(40,35,25,.07);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Lexend",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:84px}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+header.top{background:linear-gradient(135deg,var(--blue),var(--flieder));color:#fff;padding:22px 20px 26px}
+header.top .wrap{max-width:860px;margin:0 auto}
+header.top h1{margin:0;font-size:1.35rem;font-weight:600;letter-spacing:.01em}
+header.top p{margin:4px 0 0;opacity:.88;font-size:.92rem;font-weight:300}
+main{max-width:860px;margin:0 auto;padding:18px 16px 30px}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:20;padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .in{display:flex;max-width:860px;width:100%}
+nav.tabs button{flex:1;background:none;border:0;padding:10px 4px 9px;font-size:.78rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs button .ic{font-size:1.25rem;line-height:1}
+nav.tabs button.on{color:var(--blue);font-weight:600}
+h2{font-size:1.3rem;font-weight:600;margin:6px 0 14px}
+h3{font-size:1.08rem;font-weight:600;margin:0 0 8px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 18px;margin:0 0 14px;border:1px solid #ece6da}
+.grid{display:grid;gap:12px}
+.grid.three{grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{gap:12px}}
+@media(max-width:480px){.stat b{font-size:1.25rem}.stat span{font-size:.74rem;line-height:1.3;display:block}.stat{padding:12px 4px}}
+.stat{text-align:center;padding:14px 10px}
+.stat b{display:block;font-size:1.6rem;font-weight:600;color:var(--blue)}
+.stat span{font-size:.85rem;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:12px 18px;font-weight:500;background:var(--blue);color:#fff;transition:transform .08s,filter .15s}
+.btn:active{transform:scale(.98)}
+.btn:hover{filter:brightness(1.07)}
+.btn.petrol{background:var(--petrol)}.btn.flieder{background:var(--flieder)}
+.btn.ghost{background:var(--sand);color:var(--ink)}
+.btn.small{padding:8px 13px;font-size:.9rem;border-radius:11px}
+.btn.wide{width:100%}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;font-weight:500}
+.p-Chemie{background:var(--blue-l);color:var(--blue)}
+.p-Biomoleküle{background:var(--flieder-l);color:var(--flieder)}
+.p-Ernährung{background:var(--petrol-l);color:var(--petrol)}
+.bar{height:9px;background:var(--sand);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--petrol),var(--blue));border-radius:99px}
+.kap{display:flex;gap:12px;align-items:center;cursor:pointer}
+.kap .num{flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.95rem}
+.kap .num.Chemie{background:var(--blue-l);color:var(--blue)}
+.kap .num.Biomoleküle{background:var(--flieder-l);color:var(--flieder)}
+.kap .num.Ernährung{background:var(--petrol-l);color:var(--petrol)}
+.kap .t{flex:1;min-width:0}
+.kap .t b{font-weight:500;display:block;line-height:1.35}
+.teilh{margin:20px 0 10px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+ul.merke{list-style:none;padding:0;margin:0}
+ul.merke li{background:var(--card);border:1px solid #ece6da;border-left:5px solid var(--blue);border-radius:14px;padding:13px 15px;margin-bottom:10px;box-shadow:var(--shadow)}
+ul.merke.Biomoleküle li{border-left-color:var(--flieder)}
+ul.merke.Ernährung li{border-left-color:var(--petrol)}
+b{font-weight:600}
+.flip{perspective:1200px;cursor:pointer;margin-bottom:14px}
+.flip .in{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:var(--shadow);border:1px solid #ece6da}
+.flip .f{background:#fff}
+.flip .f .q{font-size:1.25rem;font-weight:500}
+.flip .b{background:var(--blue-l);transform:rotateY(180deg);font-size:1.05rem}
+.flip .hint{position:absolute;bottom:12px;font-size:.78rem;color:var(--muted)}
+.boxes{display:flex;gap:6px}
+.boxes span{flex:1;text-align:center;background:var(--sand);border-radius:10px;padding:6px 2px;font-size:.78rem}
+.boxes span b{display:block;font-size:1.05rem}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px 15px;margin:0 0 10px;color:var(--ink);line-height:1.45}
+.opt:hover:not([disabled]){border-color:var(--blue)}
+.opt .k{display:inline-flex;width:26px;height:26px;border-radius:8px;background:var(--sand);align-items:center;justify-content:center;font-weight:600;font-size:.85rem;margin-right:10px;vertical-align:top}
+.opt.sel{border-color:var(--blue);background:var(--blue-l)}
+.opt.ok{border-color:var(--petrol);background:var(--petrol-l)}
+.opt.no{border-color:var(--rose);background:var(--rose-l)}
+.opt[disabled]{cursor:default}
+.feedback{border-radius:14px;padding:14px 16px;margin:4px 0 14px}
+.feedback.ok{background:var(--petrol-l);border:1px solid #bcd9dc}
+.feedback.no{background:var(--rose-l);border:1px solid #e6c4c8}
+.feedback h4{margin:0 0 4px;font-size:1rem}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.qtext{font-size:1.12rem;font-weight:500;margin:4px 0 16px;line-height:1.5}
+.seg{display:flex;background:var(--sand);border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg button{flex:1;border:0;background:none;padding:8px 10px;border-radius:9px;font-size:.9rem;min-width:60px}
+.seg button.on{background:#fff;box-shadow:var(--shadow);font-weight:600;color:var(--blue)}
+select{font-family:inherit;font-size:1rem;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;width:100%;color:var(--ink)}
+.timer{font-variant-numeric:tabular-nums;font-weight:600;color:var(--flieder)}
+.review{border-top:1px solid var(--line);padding:14px 0}
+.review:first-child{border-top:0}
+.tag{font-size:.78rem;font-weight:600;padding:2px 9px;border-radius:99px}
+.tag.ok{background:var(--petrol-l);color:var(--petrol)}
+.tag.no{background:var(--rose-l);color:var(--rose)}
+.big{font-size:2.4rem;font-weight:600;color:var(--blue);line-height:1.1}
+footer{max-width:860px;margin:10px auto 30px;padding:0 18px;font-size:.78rem;color:var(--muted);line-height:1.5}
+.back{background:none;border:0;color:var(--blue);padding:4px 0;margin-bottom:8px;font-weight:500}
+.note{background:var(--flieder-l);border-radius:14px;padding:12px 15px;font-size:.92rem}
+sub,sup{font-size:.72em;line-height:0}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>Aufnahmetest Ernährungswissenschaften</h1>
+  <p>Lern- & Übungstrainer zur Vorbereitungsliteratur der Universität Wien</p>
+</div></header>
+<main id="app"></main>
+<footer>
+Inhaltliche Grundlage: H. Spreitzer, P. Rust, M. W. Reichel, G. Hoffmann: <i>Chemische, biochemische und physiologische Grundlagen der Pharmazie und Ernährungswissenschaften – Vorbereitungsliteratur für das Aufnahmeverfahren</i>, Universität Wien, Februar 2024, lizenziert unter CC BY-SA. Zusammenfassungen, Karteikarten und Übungsfragen sind eigenständig formuliert und werden unter derselben Lizenz (CC BY-SA) weitergegeben. Seitenangaben beziehen sich auf die gedruckten Seitenzahlen der Unterlage. Dein Lernfortschritt wird nur in diesem Browser gespeichert.
+</footer>
+<nav class="tabs"><div class="in">
+  <button data-v="start" onclick="go('start')"><span class="ic">⌂</span>Start</button>
+  <button data-v="lernen" onclick="go('lernen')"><span class="ic">☰</span>Lernen</button>
+  <button data-v="karten" onclick="go('karten')"><span class="ic">❐</span>Karten</button>
+  <button data-v="ueben" onclick="go('ueben')"><span class="ic">✎</span>Üben</button>
+  <button data-v="pruefung" onclick="go('pruefung')"><span class="ic">◷</span>Prüfung</button>
+</div></nav>
+
+<script>
+const KAP=[];
+</script>
+<script>
+KAP.push(
+{
+id:"k1", teil:"Chemie", titel:"Größen, Einheiten & Stöchiometrie", seiten:"S. 10–12",
+merke:[
+"Ein <b>Molekül</b> besteht aus mindestens zwei Atomen, die über eine Bindung verknüpft sind. Die <b>Summenformel</b> nennt Art und Anzahl der Atome, erst die <b>Strukturformel</b> zeigt ihre Anordnung und Bindungen.",
+"<b>Intensive Größen</b> hängen nicht von der Stoffportion ab (Temperatur, Dichte), <b>extensive Größen</b> wachsen mit der Menge (Masse, Stoffmenge, Volumen). Der Quotient zweier extensiver Größen ist wieder intensiv: Dichte ρ = m/V.",
+"<b>Zustandsgrößen</b> beschreiben einen Zustand (Temperatur, Dichte, Energie), <b>Prozessgrößen</b> einen Vorgang (Arbeit, Wärme).",
+"Die <b>relative Atommasse u</b> ist auf 1/12 der Masse des Isotops ¹²C bezogen. Ein Heliumatom (2 Protonen + 2 Neutronen) hat 4 u.",
+"<b>Gesetze</b> liefern unter gleichen Bedingungen immer gleiche Ergebnisse (Massenerhaltung; Boyle-Mariotte: p·V konstant – nur für ideale Gase bei konstanter Temperatur; allgemein p·V = n·R·T). <b>Regeln</b> sind weniger strikt, z. B. die <b>RGT-Regel</b>: +10 K → Reaktionsgeschwindigkeit 2- bis 4-fach.",
+"Eine <b>Hypothese</b> ist noch nicht experimentell bestätigt. Eine <b>Theorie</b> vereint Aussagen, Gesetze und Modelle und muss Experimente korrekt vorhersagen – sonst gilt sie als falsifiziert.",
+"Molekülmodelle: Summenformel, Lewis-Formel, <b>Kugel-Stab-Modell</b> (räumliche Anordnung) und <b>Kalottenmodell</b> (zusätzlich Raumbedarf und Größenverhältnisse der Atome).",
+"<b>Avogadro-Konstante</b> N<sub>A</sub> = 6,022 · 10²³ mol⁻¹. <b>n = m / M</b>. Die molare Masse einer Verbindung ist die Summe der relativen Atommassen: NaCl = 58,5 g/mol, K₂SO₄ = 2·39 + 32 + 4·16 = 174 g/mol.",
+"Rechenbeispiel: 9,8 g H₂SO₄ (M = 98 g/mol) = 0,1 mol → ergeben mit NaOH 0,1 mol Na₂SO₄ (M = 142 g/mol) = <b>14,2 g</b>.",
+"Einheiten: 0 °C = 273,15 K · 1 bar = 100 000 Pa · 1 m³ = 1000 l · Stoffmengenkonzentration c = n/V in mol/l."
+],
+karten:[
+["Avogadro-Konstante","N<sub>A</sub> = 6,022 · 10²³ mol⁻¹ – so viele Teilchen enthält 1 mol eines Stoffes."],
+["Formel für die Stoffmenge","n = m / M (Masse in g geteilt durch molare Masse in g/mol)"],
+["Intensive vs. extensive Größe","Intensiv: unabhängig von der Menge (Temperatur, Dichte). Extensiv: abhängig von der Menge (Masse, Volumen, Stoffmenge)."],
+["RGT-Regel","Erhöht man die Temperatur um ca. 10 K, steigt die Reaktionsgeschwindigkeit auf das 2- bis 4-Fache."],
+["Hypothese vs. Theorie","Hypothese: Aussage, deren experimentelle Bestätigung aussteht. Theorie: System aus Aussagen, Gesetzen und Modellen, das Experimente korrekt vorhersagen muss."],
+["Allgemeine Gasgleichung","p · V = n · R · T (R = universelle Gaskonstante)"],
+["Bezugsgröße der relativen Atommasse","1/12 der Masse eines ¹²C-Atoms (= 1 u)"],
+["Zustandsgröße vs. Prozessgröße","Zustandsgrößen: Temperatur, Dichte, Energie. Prozessgrößen: Arbeit, Wärme."]
+],
+quiz:[
+{q:"Welche der folgenden Größen ist eine intensive Größe?",a:["Dichte","Masse","Volumen","Stoffmenge"],e:"Intensive Größen sind unabhängig von der Größe der Stoffportion. Die Dichte ist der Quotient aus Masse und Volumen und bleibt gleich, egal wie viel Stoff man betrachtet.",p:"S. 10"},
+{q:"Wie viele Teilchen enthält 1 mol eines Stoffes?",a:["6,022 · 10²³","6,022 · 10⁻²³","1,661 · 10²³","6,022 · 10²⁰"],e:"Die Avogadro-Konstante beträgt N<sub>A</sub> = 6,022 · 10²³ mol⁻¹. 12 g Kohlenstoff enthalten genauso viele Atome wie 32 g Schwefel.",p:"S. 11"},
+{q:"Wie groß ist die molare Masse von Kaliumsulfat K₂SO₄ (K = 39, S = 32, O = 16)?",a:["174 g/mol","135 g/mol","142 g/mol","190 g/mol"],e:"2 · 39 + 32 + 4 · 16 = 78 + 32 + 64 = 174 g/mol. 135 g/mol ergäbe sich mit nur einem Kaliumatom.",p:"S. 12"},
+{q:"Wie viel Gramm Natriumsulfat (M = 142 g/mol) entstehen bei vollständiger Neutralisation von 9,8 g Schwefelsäure (M = 98 g/mol) mit Natronlauge? (H₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O)",a:["14,2 g","7,1 g","28,4 g","9,8 g"],e:"n(H₂SO₄) = 9,8 g / 98 g/mol = 0,1 mol. Laut Gleichung entsteht 1 mol Na₂SO₄ pro mol H₂SO₄, also 0,1 mol · 142 g/mol = 14,2 g.",p:"S. 12"},
+{q:"Wie viele Mol sind 36 g Wasser (M = 18 g/mol)?",a:["2 mol","0,5 mol","18 mol","648 mol"],e:"n = m / M = 36 g / 18 g/mol = 2 mol.",p:"S. 12"},
+{q:"Was besagt die RGT-Regel?",a:["Bei einer Temperaturerhöhung um etwa 10 K steigt die Reaktionsgeschwindigkeit auf das 2- bis 4-Fache.","Bei einer Temperaturerhöhung um etwa 10 K halbiert sich die Reaktionsgeschwindigkeit.","Bei einer Temperaturerhöhung um etwa 10 K steigt die Reaktionsgeschwindigkeit um genau 10 %.","Die Reaktionsgeschwindigkeit ist von der Temperatur unabhängig."],e:"RGT steht für Reaktionsgeschwindigkeit-Temperatur-Regel. Sie ist ein experimenteller Befund und daher eine Regel, kein streng gültiges Gesetz.",p:"S. 11"},
+{q:"Unter welchen Bedingungen gilt das Gesetz von Boyle und Mariotte (p · V = konstant)?",a:["Für ein ideales Gas bei konstanter Temperatur","Für ein ideales Gas bei konstantem Volumen","Für jedes reale Gas bei beliebiger Temperatur","Für Flüssigkeiten bei konstantem Druck"],e:"Gesetze gelten nur, wenn ihre Gültigkeitsbedingungen eingehalten werden. Boyle-Mariotte setzt ein ideales Gas und eine konstante Temperatur voraus.",p:"S. 11"},
+{q:"Welche Aussage beschreibt eine naturwissenschaftliche Theorie?",a:["Ein System aus Aussagen, Gesetzen und Modellen, das Versuchsergebnisse korrekt vorhersagen muss","Eine Aussage über Zusammenhänge, deren experimentelle Bestätigung noch aussteht","Ein experimenteller Befund, für den keine präzise quantitative Begründung ableitbar ist","Eine vereinfachte Darstellung, die nur in bestimmten Bereichen gültig ist"],e:"Die zweite Option beschreibt eine Hypothese, die dritte eine Regel, die vierte ein Modell. Sagt eine Theorie ein Experiment falsch vorher, gilt sie als falsifiziert.",p:"S. 11"},
+{q:"Was zeigt das Kalottenmodell zusätzlich zum Kugel-Stab-Modell?",a:["Den Raumbedarf des Moleküls und die Größenverhältnisse der Atome","Nur die atomare Zusammensetzung","Die Anzahl der freien Elektronenpaare als Striche","Die Reaktionsgeschwindigkeit des Moleküls"],e:"Das Kugel-Stab-Modell zeigt die räumliche Anordnung der Atome. Das Kalottenmodell bietet mehr Information, weil es auch den Raumbedarf und die Größenverhältnisse darstellt.",p:"S. 11"},
+{q:"Worauf bezieht sich die relative Atommasse u?",a:["Auf 1/12 der Masse eines ¹²C-Atoms","Auf die Masse eines Wasserstoffatoms ¹H","Auf 1/16 der Masse eines ¹⁶O-Atoms","Auf die Masse eines Elektrons"],e:"Als Bezugsgröße wurde 1/12 der absoluten Masse des Kohlenstoffisotops ¹²C festgelegt. So hat ein Heliumatom 4 u.",p:"S. 11"},
+{q:"Welche Temperatur in Kelvin entspricht 0 °C?",a:["273,15 K","0 K","100 K","-273,15 K"],e:"0 °C = 273,15 K. Der absolute Nullpunkt (0 K) liegt bei −273,15 °C.",p:"S. 10"},
+{q:"Welche Größe ist eine Prozessgröße?",a:["Wärme","Temperatur","Dichte","Energie"],e:"Prozessgrößen wie Arbeit und Wärme charakterisieren einen Vorgang der Änderung. Temperatur, Dichte und Energie sind Zustandsgrößen.",p:"S. 11"}
+]
+},
+{
+id:"k2", teil:"Chemie", titel:"Atombau, Radioaktivität & Periodensystem", seiten:"S. 12–18",
+merke:[
+"Atome bestehen aus dem positiven <b>Kern</b> (Protonen + Neutronen = Nukleonen) und der negativen <b>Elektronenhülle</b>. Der Kern trägt fast die gesamte Masse (Nukleonen ≈ 1836-mal schwerer als ein Elektron). Atomradius ≈ 10⁻¹⁰ m, Kern ≈ 10⁻¹⁵ m.",
+"Der Kern bestimmt Stabilität und Radioaktivität, das <b>chemische Verhalten</b> bestimmt vor allem die <b>Elektronenhülle</b>.",
+"<b>Kernladungszahl Z</b> = Protonenzahl = Ordnungszahl. <b>Massenzahl A</b> = Z + Neutronenzahl. <b>Isotope</b>: gleiche Protonenzahl, verschiedene Neutronenzahl (¹H, Deuterium ²H, Tritium ³H).",
+"<b>α-Strahlung</b>: Heliumkerne (2 p + 2 n), wenige cm in Luft, Papier stoppt sie. <b>β⁻</b>: Elektronen (Neutron → Proton), durchdringt 1 cm Aluminium. <b>β⁺</b>: Positronen (Proton → Neutron), genutzt in der PET. <b>γ</b>: energiereiche elektromagnetische Wellen, nicht ablenkbar, sehr durchdringend.",
+"Kerne mit geraden Protonen- und Neutronenzahlen sind stabiler. Zerfall folgt einem Gesetz 1. Ordnung; die <b>Halbwertszeit</b> ist nicht beeinflussbar. ¹⁴C: 5730 Jahre (Radiokarbonmethode).",
+"<b>Rutherford</b> (Goldfolie): fast die gesamte Masse sitzt in einem winzigen Kern. <b>Bohr</b>: stabile Bahnen, Energie nur beim Übergang zwischen Bahnen. <b>Heisenberg</b>: Ort und Impuls nicht gleichzeitig bestimmbar → Orbitale = Räume hoher Aufenthaltswahrscheinlichkeit (90 %).",
+"Quantenzahlen: <b>n</b> (Hauptquantenzahl, Schale K, L, M …), <b>l</b> (Nebenquantenzahl, Form: s kugelförmig, p hantelförmig), <b>m</b> (Magnetquantenzahl, Orientierung im Raum), <b>s</b> (Spin ±½).",
+"<b>Pauli-Prinzip</b>: höchstens 2 Elektronen pro Orbital, mit entgegengesetztem Spin. <b>Hundsche Regel</b>: energiegleiche Orbitale zuerst einfach besetzen. Kohlenstoff: 1s² 2s² 2p².",
+"Periodensystem: <b>Perioden</b> = Zahl der Schalen; <b>Hauptgruppennummer</b> = Zahl der Valenzelektronen. 1. Alkalimetalle, 2. Erdalkalimetalle, 3. Borgruppe, 4. Kohlenstoffgruppe, 5. Stickstoffgruppe, 6. Chalkogene, 7. Halogene, 8. Edelgase.",
+"Trends: <b>Atomradius</b> sinkt in der Periode, steigt in der Gruppe. <b>Ionisierungsenergie</b> steigt in der Periode, sinkt in der Gruppe (Edelgase am höchsten, Alkalimetalle am niedrigsten). <b>Elektronegativität</b> steigt in der Periode, sinkt in der Gruppe: Fluor 4,0 (höchste), Francium 0,7.",
+"Kationen sind kleiner als ihr Atom, Anionen größer.",
+"<b>Metalle</b>: gute Leiter, Leitfähigkeit sinkt mit steigender Temperatur, Oxide reagieren basisch. <b>Nichtmetalle</b>: Isolatoren, Oxide sauer. <b>Halbmetalle</b> (B, Si, Ge, As, Te): schwache Leiter, Leitfähigkeit steigt mit der Temperatur.",
+"Nebengruppen (d-Block) sind alle Metalle, häufig zweiwertig (4s-Elektronen werden zuerst abgegeben). Lanthanoide und Actinoide = f-Block; alle Actinoide sind radioaktiv."
+],
+karten:[
+["Kernladungszahl Z","Anzahl der Protonen = Ordnungszahl im Periodensystem"],
+["Massenzahl A","Protonen + Neutronen"],
+["Isotope","Atome eines Elements mit gleicher Protonenzahl, aber unterschiedlicher Neutronenzahl"],
+["α-, β⁻-, β⁺-, γ-Strahlung","α: Heliumkerne · β⁻: Elektronen (n → p) · β⁺: Positronen (p → n) · γ: elektromagnetische Wellen"],
+["Halbwertszeit von ¹⁴C","5730 Jahre"],
+["Pauli-Prinzip","Ein Orbital enthält höchstens 2 Elektronen mit entgegengesetztem Spin."],
+["Hundsche Regel","Orbitale gleicher Energie werden zuerst einfach besetzt, dann gepaart."],
+["Vier Quantenzahlen","n Haupt- (Energieniveau), l Neben- (Form), m Magnet- (Orientierung), s Spin (±½)"],
+["Elektronegativität – Trend","Steigt in der Periode von links nach rechts, sinkt in der Gruppe von oben nach unten. Fluor 4,0 ist am höchsten."],
+["Chalkogene / Halogene","Chalkogene = 6. Hauptgruppe, Halogene = 7. Hauptgruppe"]
+],
+quiz:[
+{q:"Worin unterscheiden sich Isotope eines Elements?",a:["In der Anzahl der Neutronen","In der Anzahl der Protonen","In der Ordnungszahl","In der Anzahl der Elektronen des neutralen Atoms"],e:"Isotope haben gleiche Protonenzahl (und damit gleiche Ordnungszahl), aber unterschiedliche Neutronenzahlen und damit verschiedene Massenzahlen.",p:"S. 13"},
+{q:"Wie viele Neutronen besitzt Tritium (³₁H)?",a:["2","1","3","0"],e:"Massenzahl 3 − Kernladungszahl 1 = 2 Neutronen. Deuterium (²H) hat 1 Neutron.",p:"S. 13"},
+{q:"Welche Strahlung kann bereits von einem Blatt Papier abgeschirmt werden?",a:["α-Strahlung","β⁻-Strahlung","γ-Strahlung","β⁺-Strahlung"],e:"α-Teilchen (Heliumkerne) haben nur eine Reichweite von wenigen Zentimetern in Luft und können Papier nicht durchdringen.",p:"S. 13"},
+{q:"Was passiert im Atomkern beim β⁻-Zerfall?",a:["Ein Neutron wandelt sich in ein Proton um, ein Elektron wird ausgesandt.","Ein Proton wandelt sich in ein Neutron um, ein Positron wird ausgesandt.","Es wird ein Teilchen aus 2 Protonen und 2 Neutronen ausgesandt.","Es wird ausschließlich elektromagnetische Strahlung abgegeben."],e:"Bei β⁻ entsteht aus einem Neutron ein Proton; das Elektron verlässt den Kern. Die zweite Option beschreibt β⁺, die dritte α, die vierte γ.",p:"S. 13"},
+{q:"In welchem medizinischen Verfahren werden Positronenstrahler (β⁺) eingesetzt?",a:["Positronen-Emissions-Tomographie (PET)","Ultraschalldiagnostik","Magnetresonanztomographie","Elektrokardiographie"],e:"Positronenemitter wie ⁶⁸Ga, ¹⁸F oder ¹¹C werden in PET-Scannern genutzt.",p:"S. 13"},
+{q:"Welche Aussage über die Halbwertszeit eines Radionuklids trifft zu?",a:["Sie ist eine charakteristische Konstante und lässt sich weder chemisch noch physikalisch beeinflussen.","Sie verkürzt sich, wenn man die Probe stark erhitzt.","Sie hängt davon ab, in welcher chemischen Verbindung das Nuklid vorliegt.","Sie verdoppelt sich mit jedem Zerfallsschritt."],e:"Die Halbwertszeit gehorcht rein statistischen Gesetzen. Genau deshalb eignet sie sich zur Altersbestimmung (Radiokarbonmethode).",p:"S. 14"},
+{q:"Wie lange beträgt die Halbwertszeit von ¹⁴C?",a:["5730 Jahre","573 Jahre","57 300 Jahre","1236 Jahre"],e:"¹⁴C entsteht aus Luftstickstoff durch kosmische Strahlung. Nach dem Tod eines Organismus halbiert sich sein ¹⁴C-Anteil alle 5730 Jahre.",p:"S. 14"},
+{q:"Welchen Schluss zog Rutherford aus seinem Streuversuch mit Goldfolie?",a:["Fast die gesamte Masse des Atoms ist in einem sehr kleinen, positiven Kern konzentriert.","Elektronen bewegen sich auf festen Bahnen ohne Energieverlust.","Ort und Impuls eines Elektrons sind nicht gleichzeitig bestimmbar.","Atome sind massive, gleichmäßig geladene Kugeln."],e:"Nahezu alle α-Teilchen durchdrangen die Folie ungestört, nur etwa 1 : 100 000 wurde abgelenkt. Das spricht für einen winzigen, massereichen Kern. Option 2 ist Bohr, Option 3 Heisenberg.",p:"S. 14"},
+{q:"Was beschreibt die Nebenquantenzahl l?",a:["Das Unterniveau und die Form des Orbitals (z. B. kugel- oder hantelförmig)","Die Orientierung des Orbitals im Raum","Die Richtung des Elektronenspins","Das Hauptenergieniveau bzw. die Schale"],e:"l bestimmt die räumliche Verteilung der Ladungsdichte, also die Orbitalform (s kugelförmig, p hantelförmig). Die Orientierung beschreibt die Magnetquantenzahl m.",p:"S. 15"},
+{q:"Was besagt das Pauli-Prinzip?",a:["Ein Orbital kann höchstens zwei Elektronen mit entgegengesetztem Spin aufnehmen.","Orbitale gleicher Energie werden zuerst nur einfach besetzt.","Orbitale werden in der Reihenfolge steigender Energie besetzt.","Jedes Atom strebt acht Außenelektronen an."],e:"Zwei Elektronen dürfen nur in n, l und m übereinstimmen und müssen sich dann im Spin unterscheiden. Option 2 ist die Hundsche Regel, Option 4 die Oktettregel.",p:"S. 16"},
+{q:"Welches Element hat die höchste Elektronegativität?",a:["Fluor","Sauerstoff","Chlor","Francium"],e:"Fluor hat mit EN = 4,0 den höchsten Wert, Francium mit 0,7 den niedrigsten.",p:"S. 18"},
+{q:"Wie verändert sich die Ionisierungsenergie innerhalb einer Hauptgruppe von oben nach unten?",a:["Sie nimmt tendenziell ab.","Sie nimmt tendenziell zu.","Sie bleibt konstant.","Sie nimmt zuerst zu und dann wieder ab."],e:"Mit jeder neuen Schale wird die Kernladung stärker abgeschirmt, die äußeren Elektronen lassen sich leichter entfernen.",p:"S. 17"},
+{q:"Warum nimmt der Atomradius innerhalb einer Periode von links nach rechts ab?",a:["Die Kernladung steigt, die Zahl der Schalen bleibt gleich – die Elektronen werden stärker angezogen.","Es kommt mit jedem Element eine neue Elektronenschale hinzu.","Die Zahl der Neutronen nimmt ab.","Die Elektronen werden zunehmend abgegeben."],e:"Innerhalb einer Periode bleibt die Schalenzahl gleich, die steigende Kernladung zieht die Hülle enger zusammen. In der Gruppe wächst der Radius, weil neue Schalen dazukommen.",p:"S. 17"},
+{q:"Wie heißen die Elemente der 6. Hauptgruppe?",a:["Chalkogene","Halogene","Erdalkalimetalle","Edelgase"],e:"Chalkogene (Erzbildner) = 6. Hauptgruppe; Halogene = 7.; Erdalkalimetalle = 2.; Edelgase = 8.",p:"S. 17"},
+{q:"Wie verhält sich der Radius eines Kations im Vergleich zum neutralen Atom?",a:["Er ist kleiner.","Er ist größer.","Er ist genau gleich groß.","Er hängt nur von der Neutronenzahl ab."],e:"Das Kation hat weniger Elektronen, der Kern kann die verbleibenden stärker anziehen. Anionen sind dagegen größer als ihre Atome.",p:"S. 17, 23"},
+{q:"Welche Aussage über Halbmetalle trifft laut Unterlage zu?",a:["Sie sind schwache Leiter, ihre Leitfähigkeit nimmt mit steigender Temperatur zu.","Sie sind gute Leiter, ihre Leitfähigkeit nimmt mit steigender Temperatur ab.","Sie leiten überhaupt keinen Strom.","Ihre Oxide reagieren in Wasser stets basisch."],e:"Halbmetalle wie Bor, Silicium, Germanium, Arsen und Tellur bilden den Übergang. Bei Metallen sinkt die Leitfähigkeit mit steigender Temperatur – bei Halbmetallen steigt sie.",p:"S. 18"},
+{q:"Welche Elementgruppe besitzt die niedrigste Ionisierungsenergie?",a:["Die Alkalimetalle (1. Hauptgruppe)","Die Edelgase (8. Hauptgruppe)","Die Halogene (7. Hauptgruppe)","Die Chalkogene (6. Hauptgruppe)"],e:"Alkalimetalle erreichen durch Abgabe eines einzigen Elektrons Edelgaskonfiguration. Edelgase haben die höchste Ionisierungsenergie.",p:"S. 17"}
+]
+},
+{
+id:"k3", teil:"Chemie", titel:"Chemische Bindungen", seiten:"S. 19–25",
+merke:[
+"Bindungsarten: Ionenbindung, Atombindung (polar/unpolar), Metallbindung, Bindung in Komplexen, intermolekulare Wechselwirkungen (Wasserstoffbrücken, Van-der-Waals-Kräfte).",
+"<b>Atombindung</b> (kovalente Bindung, Elektronenpaarbindung): zwischen Elementen ähnlicher Elektronegativität, <b>gerichtet</b> (fester Winkel und Abstand). Ziel ist das Oktett; Wasserstoff strebt nur 2 Elektronen an (He-Konfiguration).",
+"<b>Mesomerie</b>: Ein Molekül lässt sich nur durch mehrere Grenzstrukturen beschreiben (Resonanzpfeil ↔). Die reale Form ist eine Überlagerung – keine Hin- und Rückreaktion.",
+"Hybridisierung ist ein rein mathematisches Modell. <b>sp³</b>: vier Orbitale, Tetraeder, 109,5° (Methan, Alkane; σ-Bindung frei drehbar). <b>sp²</b>: drei Orbitale in einer Ebene, 120°; mit dem p-Orbital entsteht die Doppelbindung (σ + π), nicht frei drehbar, planar trigonal. <b>sp</b>: 180°, Dreifachbindung (1 σ + 2 π), linear (Acetylen).",
+"Doppelbindungen können <b>cis</b> (Reste auf derselben Seite) oder <b>trans</b> sein. <b>Konjugiert</b>: durch je eine Einfachbindung getrennt; <b>kumuliert</b>: direkt benachbart.",
+"<b>Diamant</b>: sp³, extrem hart, schlecht leitend. <b>Graphit</b>: sp²-Schichten mit delokalisierten Elektronen → leitfähig, schwarz-glänzend. <b>Fulleren C₆₀</b>: 12 Fünfecke + 20 Sechsecke. Nanotubes: sp², 1–50 nm Durchmesser.",
+"<b>Polare Atombindung</b>: Elektronenpaar wird zum elektronegativeren Partner verschoben (δ⁻), der andere wird δ⁺. ΔEN = 0 unpolar · ΔEN &lt; 1,7 polar · ΔEN &gt; 1,7 Ionenbindung. HCl ist ein permanenter Dipol; CCl₄ ist wegen symmetrischer Anordnung kein Dipol.",
+"<b>H₂O</b>: Bindungswinkel 105°, <b>NH₃</b>: 107° – freie Elektronenpaare beanspruchen mehr Raum als bindende.",
+"<b>Ionenbindung</b>: Metall mit niedriger Ionisierungsenergie + Nichtmetall mit hoher Elektronenaffinität; vollständige Elektronenübertragung, <b>ungerichtete</b> Anziehung, Ionengitter. NaCl: Koordinationszahl 6. Feste Salze leiten nicht, Schmelzen und Lösungen schon.",
+"Gitterstabilität steigt mit größerer Ladung und kleinerem Abstand. Höhere Gitterenergie → höherer Schmelzpunkt und schlechtere Löslichkeit. Hydratation ist exotherm; Lösungsenthalpie = Hydratationsenthalpie + Gitterenergie. Exothermes Lösen, wenn die Hydratationsenthalpien die Gitterenergie übersteigen.",
+"<b>Metallbindung</b>: positive Atomrümpfe im delokalisierten Elektronengas → Leitfähigkeit, Verformbarkeit, Glanz. Leitfähigkeit sinkt mit steigender Temperatur.",
+"<b>Van-der-Waals-Kräfte</b>, stärkste zuerst: Dipol–Dipol > Dipol–induzierter Dipol > unpolar–unpolar (temporäre Dipole).",
+"<b>Wasserstoffbrücken</b> bilden sich nur mit sehr elektronegativen Atomen (N, O, F). Sie sind schwach, beeinflussen aber z. B. die Siedetemperatur von Wasser stark."
+],
+karten:[
+["Bindungswinkel sp³ / sp² / sp","109,5° (Tetraeder) / 120° (planar) / 180° (linear)"],
+["Aufbau einer Doppelbindung","1 σ-Bindung + 1 π-Bindung; nicht frei drehbar"],
+["Aufbau einer Dreifachbindung","1 σ-Bindung + 2 π-Bindungen; lineare Geometrie"],
+["Bindungswinkel H₂O und NH₃","H₂O 105°, NH₃ 107° – freie Elektronenpaare drücken die Winkel zusammen."],
+["ΔEN-Grenzen","0 unpolar · unter 1,7 polar · über 1,7 Ionenbindung"],
+["Wasserstoffbrücken","Nur mit sehr elektronegativen Atomen: N, O, F"],
+["Reihenfolge der Van-der-Waals-Kräfte","Dipol–Dipol > Dipol–induzierter Dipol > unpolar–unpolar"],
+["Mesomerie","Wahre Elektronenverteilung liegt zwischen mehreren Grenzstrukturen; keine Gleichgewichtsreaktion."],
+["Warum leitet Graphit?","Die p-Elektronen sind zwischen den sp²-Schichten delokalisiert."],
+["Koordinationszahl im NaCl-Gitter","6 – jedes Na⁺ ist von sechs Cl⁻ umgeben und umgekehrt."]
+],
+quiz:[
+{q:"Welchen Bindungswinkel weisen die Bindungen eines sp³-hybridisierten Kohlenstoffatoms auf?",a:["109,5°","120°","180°","90°"],e:"Die vier sp³-Hybridorbitale zeigen in die Ecken eines Tetraeders. 120° gilt für sp², 180° für sp.",p:"S. 20"},
+{q:"Warum ist der Bindungswinkel im Wassermolekül mit 105° kleiner als der ideale Tetraederwinkel?",a:["Die beiden freien Elektronenpaare des Sauerstoffs stoßen sich stärker ab und beanspruchen mehr Raum.","Sauerstoff ist sp²-hybridisiert.","Die Wasserstoffatome ziehen sich gegenseitig an.","Zwischen den Wasserstoffatomen bildet sich eine π-Bindung."],e:"Freie Elektronenpaare beanspruchen mehr Raum als bindende. Dadurch wird der Winkel zwischen den bindenden Paaren kleiner. Diese gewinkelte Form erklärt auch den Dipolcharakter.",p:"S. 22"},
+{q:"Welchen Bindungswinkel hat das Ammoniakmolekül?",a:["107°","105°","109,5°","120°"],e:"NH₃ hat ein freies Elektronenpaar (Wasser zwei), daher ist die Abweichung vom Tetraederwinkel geringer: 107°.",p:"S. 23"},
+{q:"Woraus besteht eine C=C-Doppelbindung?",a:["Aus einer σ-Bindung und einer π-Bindung","Aus zwei σ-Bindungen","Aus zwei π-Bindungen","Aus einer σ-Bindung und zwei π-Bindungen"],e:"Zwischen zwei sp²-C-Atomen entsteht eine sp²-sp²-σ-Bindung, das senkrecht stehende p-Orbital bildet eine π-Bindung. Option 4 beschreibt die Dreifachbindung.",p:"S. 21"},
+{q:"Warum ist eine Doppelbindung nicht frei drehbar?",a:["Die π-Bindung hat eine Knotenebene; ihre Elektronenwolke liegt ober- und unterhalb der Bindungsachse.","Die σ-Bindung ist bei Doppelbindungen nicht rotationssymmetrisch.","Doppelbindungen enthalten keine σ-Bindung.","Die Atome einer Doppelbindung sind sp³-hybridisiert."],e:"Die σ-Bindung ist rotationssymmetrisch und frei drehbar. Die π-Elektronenwolke würde bei Drehung auseinandergerissen.",p:"S. 21"},
+{q:"Welche Geometrie hat eine C≡C-Dreifachbindung, z. B. im Acetylen?",a:["Linear","Tetraedrisch","Planar trigonal","Gewinkelt"],e:"sp-hybridisierte C-Atome: Winkel 180°, also linear. Planar trigonal gilt für Doppelbindungen.",p:"S. 21"},
+{q:"Warum leitet Graphit elektrischen Strom, Diamant hingegen nicht?",a:["In Graphit sind die p-Elektronen zwischen den Schichten delokalisiert.","Graphit enthält Metallatome zwischen den Schichten.","In Diamant sind die Kohlenstoffatome sp²-hybridisiert.","Graphit besteht aus Ionen."],e:"Graphit besteht aus sp²-Schichten; die Elektronen der senkrecht stehenden p-Orbitale bilden eine delokalisierte Wolke. Im Diamant (sp³) ist jedes Elektron fest einer Bindung zugeordnet.",p:"S. 21–22"},
+{q:"Welche Bindungsart liegt bei einer Elektronegativitätsdifferenz von mehr als 1,7 vor?",a:["Ionenbindung","Unpolare Atombindung","Polare Atombindung","Metallbindung"],e:"Faustregel der Unterlage: ΔEN = 0 unpolar, unter 1,7 polar, über 1,7 Ionenbindung (z. B. Na⁺Cl⁻).",p:"S. 24"},
+{q:"Warum ist Tetrachlormethan (CCl₄) kein Dipolmolekül, obwohl die C–Cl-Bindungen polar sind?",a:["Die vier Chloratome sind symmetrisch um das Kohlenstoffatom angeordnet.","Chlor und Kohlenstoff haben dieselbe Elektronegativität.","CCl₄ ist eine Ionenverbindung.","Das Kohlenstoffatom besitzt zwei freie Elektronenpaare."],e:"Durch die symmetrische Tetraederanordnung heben sich die Ladungsverschiebungen auf; es kommt zu keiner Ladungsverschiebung im Gesamtmolekül.",p:"S. 22"},
+{q:"Mit welchen Atomen kann Wasserstoff Wasserstoffbrückenbindungen ausbilden?",a:["Mit N, O und F","Mit C, S und Cl","Mit Na, K und Li","Mit allen Nichtmetallen gleichermaßen"],e:"Wasserstoffbrücken entstehen nur bei Elementen mit sehr starker Elektronegativität: Stickstoff, Sauerstoff, Fluor.",p:"S. 24–25"},
+{q:"Welche Van-der-Waals-Wechselwirkung ist die stärkste?",a:["Dipol–Dipol-Wechselwirkung","Wechselwirkung zwischen Dipol und unpolarem Molekül","Wechselwirkung zwischen unpolaren Molekülen","Alle drei sind gleich stark."],e:"Reihenfolge laut Unterlage: Dipol–Dipol > Dipol–unpolares Molekül (induzierter Dipol) > unpolar–unpolar (temporärer Dipol).",p:"S. 24"},
+{q:"Unter welchen Bedingungen leitet Kochsalz (NaCl) elektrischen Strom?",a:["Als Schmelze oder in Wasser gelöst","Nur als Feststoff bei Raumtemperatur","Nur bei sehr tiefen Temperaturen","Unter keinen Bedingungen"],e:"Im festen Gitter sind die Ionen an ihre Plätze gebunden. In der Schmelze oder Lösung werden sie beweglich und leiten.",p:"S. 23"},
+{q:"Wann ist das Lösen eines Salzes in Wasser exotherm?",a:["Wenn die Summe der Hydratationsenthalpien größer ist als die Gitterenergie","Wenn die Gitterenergie größer ist als die Hydratationsenthalpie","Wenn das Salz eine sehr hohe Schmelztemperatur hat","Immer, da Hydratation stets Energie verbraucht"],e:"Hydratation setzt Energie frei. Übersteigt diese die zur Gitterzerstörung nötige Energie, wird Lösungswärme frei. Andernfalls kühlt die Lösung ab (endotherm).",p:"S. 23–24"},
+{q:"Was versteht man unter konjugierten Doppelbindungen?",a:["Doppelbindungen, die jeweils durch genau eine Einfachbindung getrennt sind","Direkt benachbarte Doppelbindungen","Doppelbindungen in cis-Konfiguration","Eine Doppel- und eine Dreifachbindung im selben Molekül"],e:"Beispiel Hexatrien. Direkt benachbarte Doppelbindungen heißen kumuliert (Kumulene).",p:"S. 21"},
+{q:"Welche Aussage zur Mesomerie ist richtig?",a:["Die tatsächliche Elektronenverteilung ist eine Überlagerung aller Grenzstrukturen.","Die Grenzstrukturen wandeln sich in einer Hin- und Rückreaktion ineinander um.","Mesomerie tritt nur bei Ionenverbindungen auf.","Die Grenzstrukturen stehen in einem chemischen Gleichgewicht."],e:"Der Resonanzpfeil kennzeichnet keine Reaktion: Das Molekül liegt nie in einer einzelnen Grenzform vor.",p:"S. 19–20"},
+{q:"Woraus besteht das Buckminster-Fulleren C₆₀?",a:["Aus 12 Fünfecken und 20 Sechsecken","Aus 20 Fünfecken und 12 Sechsecken","Ausschließlich aus Sechsecken","Aus 30 Fünfecken"],e:"Die Anordnung entspricht einem abgestumpften Ikosaeder, ähnlich den Kuppeln von Buckminster Fuller.",p:"S. 22"},
+{q:"Welche Koordinationszahl hat das Kochsalzgitter (NaCl)?",a:["6","4","8","12"],e:"Jedes Na⁺-Ion ist von sechs Cl⁻-Ionen umgeben und umgekehrt.",p:"S. 23"}
+]
+},
+{
+id:"k4", teil:"Chemie", titel:"Säuren, Basen & pH-Wert", seiten:"S. 25–28",
+merke:[
+"<b>Arrhenius</b>: Säuren geben in Wasser H⁺ ab, Basen OH⁻. <b>Brønsted-Lowry</b>: Säure = <b>Protonendonator</b>, Base = <b>Protonenakzeptor</b>. Säure-Base-Reaktion = Protonenübertragung (Protolyse).",
+"Freie Protonen gibt es in Wasser nicht: sie lagern sich an Wasser an → <b>Oxonium-/Hydronium-Ion H₃O⁺</b>, das wiederum als H₉O₄⁺ hydratisiert ist.",
+"<b>Autoprotolyse</b> des Wassers: K<sub>w</sub> = 10⁻¹⁴ mol²/l² bei 22 °C, pK<sub>w</sub> = 14. Temperaturabhängig: bei 0 °C pK<sub>w</sub> 14,89 (Neutralpunkt pH 7,45), bei 100 °C 12,13 (Neutralpunkt pH 6,07).",
+"<b>pH = −lg c(H₃O⁺)</b>; <b>pH + pOH = 14</b>. 1 M HCl → pH 0; 0,01 M HCl → pH 2; 0,01 M NaOH → pH 12; 1 M NaOH → pH 14.",
+"Korrespondierende Säure-Base-Paare: aus der Säure wird durch Protonenabgabe ihre Base. Je größer K<sub>S</sub>, desto stärker die Säure. <b>pK<sub>S</sub> + pK<sub>B</sub> = 14</b>; eine starke Säure hat eine schwache korrespondierende Base.",
+"<b>Mehrwertige Säuren</b> (H₃PO₄, H₂SO₄, H₂CO₃) geben Protonen schrittweise ab, das erste am leichtesten.",
+"Starke Säuren sind vollständig protolysiert: pH = −lg C<sub>S</sub>. Sehr starke Säuren (HClO₄, HCl, H₂SO₄) sind in Wasser gleich stark – <b>nivellierender Effekt</b>, die eigentliche Säure ist H₃O⁺.",
+"<b>Schwache Säuren</b>: pH = ½ · (pK<sub>S</sub> − lg C<sub>S</sub>). Schwache Basen: pOH = ½ · (pK<sub>B</sub> − lg C<sub>B</sub>), danach pH = 14 − pOH.",
+"<b>Ampholyte</b> können Protonen aufnehmen und abgeben: H₂O, HCO₃⁻, HPO₄²⁻, NH₃ …",
+"<b>Neutralisation</b>: Säure + Base → Salzlösung; exotherm. Reagieren tun nur H₃O⁺ und OH⁻.",
+"<b>Lewis</b>: Säure = <b>Elektronenpaarakzeptor</b> (elektrophil; AlCl₃, FeCl₃, BF₃), Base = <b>Elektronenpaardonator</b> (nukleophil; NH₃, alle Anionen).",
+"Alltags-pH-Werte: Magensaft/Zitronensaft ≈ 2, Essig/Cola ≈ 3, Hautoberfläche 5,5, Speichel 6,4, reines Wasser 7, <b>Blut 7,4</b>, Meerwasser 8,2."
+],
+karten:[
+["Brønsted-Säure / -Base","Säure = Protonendonator · Base = Protonenakzeptor"],
+["Lewis-Säure / -Base","Säure = Elektronenpaarakzeptor (z. B. BF₃) · Base = Elektronenpaardonator (z. B. NH₃)"],
+["Ionenprodukt des Wassers (22 °C)","K<sub>w</sub> = 10⁻¹⁴ mol²/l², pK<sub>w</sub> = 14"],
+["pH-Definition","pH = −lg c(H₃O⁺)"],
+["pH schwacher Säuren","pH = ½ · (pK<sub>S</sub> − lg C<sub>S</sub>)"],
+["Zusammenhang pK<sub>S</sub> und pK<sub>B</sub>","pK<sub>S</sub> + pK<sub>B</sub> = 14 (für ein korrespondierendes Paar)"],
+["Nivellierender Effekt","Sehr starke Säuren sind in Wasser gleich stark, weil sie vollständig zu H₃O⁺ reagieren."],
+["Ampholyt","Teilchen, das Protonen aufnehmen und abgeben kann, z. B. H₂O, HCO₃⁻"],
+["pH des Blutes","7,4"]
+],
+quiz:[
+{q:"Welchen pH-Wert hat eine 0,001-molare Salzsäure?",a:["3","1","2","11"],e:"HCl ist eine starke Säure: c(H₃O⁺) = 10⁻³ mol/l → pH = 3.",p:"S. 26"},
+{q:"Welchen pH-Wert hat eine 0,01-molare Natronlauge?",a:["12","2","10","13"],e:"c(OH⁻) = 10⁻² mol/l → pOH = 2 → pH = 14 − 2 = 12.",p:"S. 26–27"},
+{q:"Wie definiert die Brønsted-Lowry-Theorie eine Säure?",a:["Als Protonendonator","Als Protonenakzeptor","Als Elektronenpaarakzeptor","Als Verbindung, die in Wasser OH⁻-Ionen abgibt"],e:"Brønsted definiert über die Funktion: Säuren geben Protonen ab, Basen nehmen sie auf. Elektronenpaarakzeptor ist die Lewis-Definition.",p:"S. 25"},
+{q:"Welche Verbindung ist eine typische Lewis-Säure?",a:["BF₃","NH₃","OH⁻","H₂O"],e:"Lewis-Säuren haben eine unvollständig besetzte Außenschale und nehmen ein Elektronenpaar auf (AlCl₃, FeCl₃, BF₃). NH₃ und Anionen sind Lewis-Basen.",p:"S. 28"},
+{q:"Wie groß ist das Ionenprodukt des Wassers bei 22 °C?",a:["10⁻¹⁴ mol²/l²","10⁻⁷ mol²/l²","10⁻¹² mol²/l²","10¹⁴ mol²/l²"],e:"K<sub>w</sub> = c(H₃O⁺) · c(OH⁻) = 10⁻¹⁴ mol²/l², also pK<sub>w</sub> = 14.",p:"S. 25"},
+{q:"Wie verändert sich laut Unterlage der pH-Wert des Neutralpunkts von reinem Wasser, wenn die Temperatur auf 100 °C steigt?",a:["Er sinkt (auf etwa 6,07).","Er steigt (auf etwa 7,45).","Er bleibt exakt bei 7.","Er steigt auf etwa 8,2."],e:"Mit steigender Temperatur nimmt das Ionenprodukt zu: pK<sub>w</sub> 12,13 bei 100 °C, neutraler pH also 6,07. Bei 0 °C liegt er bei 7,45.",p:"S. 25"},
+{q:"Warum sind HClO₄, HCl und H₂SO₄ in Wasser bei gleicher Konzentration gleich stark sauer?",a:["Sie reagieren vollständig mit Wasser; die eigentliche Säure ist dann H₃O⁺ (nivellierender Effekt).","Sie besitzen alle denselben K<sub>S</sub>-Wert.","Sie geben alle zwei Protonen ab.","Wasser reagiert mit ihnen nicht."],e:"Sehr starke Säuren (K<sub>S</sub> über 100) protolysieren vollständig. Stärker als H₃O⁺ kann in Wasser keine Säure wirken.",p:"S. 27"},
+{q:"Welcher Zusammenhang gilt für ein korrespondierendes Säure-Base-Paar in Wasser?",a:["pK<sub>S</sub> + pK<sub>B</sub> = 14","pK<sub>S</sub> − pK<sub>B</sub> = 14","pK<sub>S</sub> · pK<sub>B</sub> = 14","pK<sub>S</sub> = pK<sub>B</sub>"],e:"Daraus folgt: eine starke Säure (kleiner pK<sub>S</sub>) korrespondiert mit einer schwachen Base (großer pK<sub>B</sub>).",p:"S. 27"},
+{q:"Welches Teilchen ist ein Ampholyt?",a:["HCO₃⁻","Na⁺","Cl⁻","H₃O⁺"],e:"Hydrogencarbonat kann ein Proton abgeben (→ CO₃²⁻) oder aufnehmen (→ H₂CO₃). H₃O⁺ kann nur noch Protonen abgeben.",p:"S. 28"},
+{q:"Welche Aussage zur Neutralisation trifft zu?",a:["Sie ist exotherm; es reagieren nur H₃O⁺- und OH⁻-Ionen.","Sie ist endotherm und kühlt die Lösung ab.","Dabei reagieren die Säurerest-Anionen mit den Base-Kationen.","Dabei entsteht immer ein unlösliches Salz."],e:"Bei der Neutralisation wird Neutralisationsenthalpie frei. Säurerest-Anionen und Base-Kationen bleiben gelöst zurück.",p:"S. 28"},
+{q:"Welchen pH-Wert hat menschliches Blut laut Unterlage?",a:["7,4","6,4","8,2","5,5"],e:"Blut 7,4 · Speichel 6,4 · Meerwasser 8,2 · Hautoberfläche 5,5.",p:"S. 28"},
+{q:"Eine schwache Säure hat pK<sub>S</sub> = 5 und die Konzentration C<sub>S</sub> = 0,1 mol/l. Welcher pH-Wert ergibt sich?",a:["3","2","4","6"],e:"pH = ½ · (pK<sub>S</sub> − lg C<sub>S</sub>) = ½ · (5 − (−1)) = ½ · 6 = 3.",p:"S. 27–28"},
+{q:"Was gilt für den K<sub>S</sub>-Wert einer Säure?",a:["Je stärker die Säure, desto größer ist ihr K<sub>S</sub>-Wert.","Je stärker die Säure, desto kleiner ist ihr K<sub>S</sub>-Wert.","Der K<sub>S</sub>-Wert ist für alle Säuren gleich.","Der K<sub>S</sub>-Wert sagt nichts über die Säurestärke aus."],e:"Der K<sub>S</sub>-Wert gibt die Säurestärke an. Beim pK<sub>S</sub> ist es umgekehrt: starke Säure = kleiner pK<sub>S</sub>.",p:"S. 27"},
+{q:"Was gilt für mehrwertige Säuren wie H₃PO₄?",a:["Sie geben Protonen schrittweise ab; das erste Proton wird am leichtesten übertragen.","Sie geben alle Protonen gleichzeitig ab.","Das letzte Proton wird am leichtesten abgegeben.","Sie können nur ein einziges Proton abgeben."],e:"Phosphorsäure, Schwefelsäure und Kohlensäure protolysieren stufenweise.",p:"S. 27"},
+{q:"Warum existieren in wässriger Lösung keine freien Protonen?",a:["Sie lagern sich sofort an freie Elektronenpaare von Wassermolekülen an und bilden H₃O⁺.","Sie reagieren sofort zu Wasserstoffgas.","Sie werden von Hydroxidionen vollständig verbraucht.","Wasser enthält keine Protonen."],e:"Wegen ihres winzigen Radius und hohen Ionenpotentials binden Protonen stets an Teilchen mit freiem Elektronenpaar, etwa Wasser.",p:"S. 25"}
+]
+},
+{
+id:"k5", teil:"Chemie", titel:"Redoxreaktionen & Oxidationszahlen", seiten:"S. 29",
+merke:[
+"Ursprünglich (Lavoisier): Oxidation = Sauerstoffaufnahme. Heute: <b>Oxidation = Elektronenabgabe</b>, <b>Reduktion = Elektronenaufnahme</b>. Beide laufen immer gekoppelt ab (Donator-Akzeptor-Reaktion).",
+"<b>Oxidationsmittel</b> = Elektronenakzeptor, oxidiert den Partner und <b>wird selbst reduziert</b>. <b>Reduktionsmittel</b> = Elektronendonator, <b>wird selbst oxidiert</b>.",
+"Beispiel Ca + Cl₂ → CaCl₂: Calcium gibt 2 Elektronen ab (oxidiert, Reduktionsmittel), Chlor nimmt sie auf (reduziert, Oxidationsmittel).",
+"Bei der Oxidation <b>steigt</b> die Oxidationszahl (OZ), bei der Reduktion <b>sinkt</b> sie.",
+"Bestimmung der OZ: Bindungselektronen dem elektronegativeren Partner zuordnen; OZ = Außenelektronen − zugeordnete Elektronen.",
+"Regeln: Elemente → 0 · einatomige Ionen → Ladung · <b>F</b> immer −I · <b>H</b> in Verbindungen +I · <b>O</b> −II (Peroxide −I) · Summe aller OZ = Ladung des Teilchens.",
+"Die höchstmögliche OZ entspricht der Gruppennummer (Ausnahmen F und O). Beispiel CO₂: C = +IV, O = −II."
+],
+karten:[
+["Oxidation / Reduktion","Oxidation = Elektronenabgabe (OZ steigt) · Reduktion = Elektronenaufnahme (OZ sinkt)"],
+["Oxidationsmittel","Nimmt Elektronen auf (Akzeptor) und wird dabei selbst reduziert."],
+["Reduktionsmittel","Gibt Elektronen ab (Donator) und wird dabei selbst oxidiert."],
+["OZ von Sauerstoff","−II, in Peroxiden −I"],
+["OZ von Wasserstoff / Fluor in Verbindungen","H: +I · F: −I"],
+["OZ in Elementarsubstanzen","Immer 0 (O₂, H₂, Na, Zn …)"]
+],
+quiz:[
+{q:"Was versteht man heute unter einer Oxidation?",a:["Die Abgabe von Elektronen","Die Aufnahme von Elektronen","Ausschließlich die Aufnahme von Sauerstoff","Die Abgabe von Protonen"],e:"Die erweiterte Definition beschreibt Redoxreaktionen als Elektronenübertragung. Protonenabgabe kennzeichnet dagegen eine Säure.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Schwefel in Schwefelsäure (H₂SO₄)?",a:["+VI","+IV","−II","+II"],e:"2 · (+I) + S + 4 · (−II) = 0 → S = +VI.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Kohlenstoff in Kohlendioxid (CO₂)?",a:["+IV","−IV","+II","0"],e:"Jeder Sauerstoff erhält −II, zusammen −IV. Damit das Molekül neutral ist, trägt C +IV.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Sauerstoff in Wasserstoffperoxid (H₂O₂)?",a:["−I","−II","+I","0"],e:"Peroxide sind die Ausnahme von der −II-Regel: 2 · (+I) + 2 · O = 0 → O = −I.",p:"S. 29"},
+{q:"In der Reaktion Ca + Cl₂ → CaCl₂: Welcher Stoff ist das Oxidationsmittel?",a:["Chlor","Calcium","Calciumchlorid","Es gibt kein Oxidationsmittel."],e:"Chlor nimmt die Elektronen des Calciums auf, oxidiert es und wird selbst reduziert.",p:"S. 29"},
+{q:"Was gilt für ein Reduktionsmittel?",a:["Es gibt Elektronen ab und wird selbst oxidiert.","Es nimmt Elektronen auf und wird selbst reduziert.","Es gibt Protonen ab und wird selbst zur Base.","Es bleibt bei der Reaktion unverändert."],e:"Reduktionsmittel reduzieren ihren Partner, indem sie ihm Elektronen liefern – dabei steigt ihre eigene Oxidationszahl.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Mangan in Kaliumpermanganat (KMnO₄)?",a:["+VII","+IV","+II","+VI"],e:"K (+I) + Mn + 4 · (−II) = 0 → Mn = +VII.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Stickstoff in Ammoniak (NH₃)?",a:["−III","+III","0","+V"],e:"Wasserstoff hat in Verbindungen +I: N + 3 · (+I) = 0 → N = −III.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Eisen in Fe₂O₃?",a:["+III","+II","+VI","−III"],e:"3 · (−II) = −VI; auf zwei Eisenatome verteilt ergibt sich je +III.",p:"S. 29"},
+{q:"Welche Oxidationszahl hat Sauerstoff im O₂-Molekül?",a:["0","−II","−I","+II"],e:"Atome in Elementarsubstanzen haben stets die Oxidationszahl 0.",p:"S. 29"}
+]
+}
+);
+
+KAP.push(
+{
+id:"k6", teil:"Chemie", titel:"Organische Stoffklassen & funktionelle Gruppen", seiten:"S. 30–32",
+merke:[
+"<b>Kohlenwasserstoffe</b> bestehen nur aus C und H und sind unpolar. Aliphatisch = kettenförmig (verzweigt oder unverzweigt), gesättigt oder ungesättigt.",
+"<b>Alkane</b> (Endung <b>-an</b>): nur Einfachbindungen. <b>Alkene</b> (<b>-en</b>): Doppelbindung, z. B. Ethen. <b>Alkine</b> (<b>-in</b>): Dreifachbindung, z. B. Ethin.",
+"Alkannamen nach C-Zahl: 1 Methan · 2 Ethan · 3 Propan · 4 Butan · 5 Pentan · 6 Hexan · 7 Heptan · 8 Octan · 9 Nonan · 10 Decan · 11 Undecan · 12 Dodecan.",
+"<b>Aromaten</b>: ringförmig, alle Ringatome sp², delokalisiertes π-System. <b>Benzol</b>: alle C–C-Bindungen gleich lang, Winkel 120°. Kondensierte Ringe = PAK (Naphthalen, Anthracen, Phenanthren, Benzopyren). <b>Heteroaromaten</b> enthalten N, O oder S im Ring (Pyridin, Pyrrol, Furan, Thiophen).",
+"Funktionelle Gruppen: Halogen → Halogenalkane · Amino-Gruppe → <b>Amine</b> · Hydroxy-Gruppe → <b>Alkohole</b> · Ether-Gruppe → <b>Ether</b> · Aldehyd-Gruppe (–CHO) → <b>Aldehyde</b> · Keto-Gruppe → <b>Ketone</b> · Carboxy-Gruppe (–COOH) → <b>Carbonsäuren</b>.",
+"<b>Amine</b> leiten sich von Ammoniak ab: primär (1 organischer Rest), sekundär (2), tertiär (3). Aromatisches Amin: Anilin.",
+"<b>Alkohole</b>: ein-, zwei-, dreiwertig je nach Zahl der OH-Gruppen; primär, sekundär, tertiär je nach Zahl der Alkylreste am C-Atom mit der OH-Gruppe. <b>Phenole</b>: OH direkt am Benzolring.",
+"<b>Ether</b>: zwei organische Reste über ein Sauerstoffatom verbunden (symmetrisch/unsymmetrisch, cyclisch, Phenolether).",
+"Aldehyde und Ketone sind Carbonylverbindungen; beim Keton ist das H der Aldehyd-Gruppe durch einen weiteren organischen Rest ersetzt.",
+"Carbonsäuren (Name: Alkan + „-säure“): Methansäure = <b>Ameisensäure</b> · Ethansäure = <b>Essigsäure</b> · Propansäure = Propionsäure · Butansäure = <b>Buttersäure</b> · Pentansäure = Valeriansäure · Hexansäure = Capronsäure · Octansäure = Caprylsäure · Decansäure = Caprinsäure. Aromatisch: Benzoesäure."
+],
+karten:[
+["Endungen -an / -en / -in","Alkan (nur Einfachbindungen) · Alken (Doppelbindung) · Alkin (Dreifachbindung)"],
+["Alkan mit 5, 6, 8 C-Atomen","Pentan, Hexan, Octan"],
+["Funktionelle Gruppe der Carbonsäuren","Carboxy-Gruppe –COOH"],
+["Funktionelle Gruppe der Aldehyde","Aldehyd-Gruppe –CHO"],
+["Primäres, sekundäres, tertiäres Amin","Ein, zwei bzw. drei organische Reste am Stickstoff"],
+["Tertiärer Alkohol","Das C-Atom mit der OH-Gruppe trägt drei Alkylreste."],
+["Trivialname von Methansäure / Ethansäure","Ameisensäure / Essigsäure"],
+["Heteroaromat","Aromatischer Ring mit N, O oder S statt C, z. B. Pyridin, Furan, Thiophen"]
+],
+quiz:[
+{q:"Wie heißt das unverzweigte Alkan mit sechs Kohlenstoffatomen?",a:["Hexan","Pentan","Heptan","Octan"],e:"Hexa = sechs, Endung -an für gesättigte Kohlenwasserstoffe. Pentan hat 5, Heptan 7, Octan 8 C-Atome.",p:"S. 30"},
+{q:"Welche Endung tragen Kohlenwasserstoffe mit einer Dreifachbindung?",a:["-in","-en","-an","-ol"],e:"Alkine tragen die Endung -in (z. B. Ethin), Alkene -en, Alkane -an.",p:"S. 30"},
+{q:"Wie lautet der Trivialname der Ethansäure?",a:["Essigsäure","Ameisensäure","Propionsäure","Buttersäure"],e:"Ethansäure (C2) = Essigsäure; Methansäure (C1) = Ameisensäure.",p:"S. 32"},
+{q:"Wie lautet der Trivialname der Butansäure?",a:["Buttersäure","Valeriansäure","Capronsäure","Propionsäure"],e:"Butansäure (C4) = Buttersäure. Valeriansäure ist C5, Capronsäure C6.",p:"S. 32"},
+{q:"Was kennzeichnet einen tertiären Alkohol?",a:["Das C-Atom, das die OH-Gruppe trägt, ist mit drei Alkylresten verknüpft.","Das Molekül besitzt drei OH-Gruppen.","Die OH-Gruppe sitzt am dritten C-Atom der Kette.","Das Molekül enthält drei Sauerstoffatome."],e:"Primär/sekundär/tertiär richtet sich nach dem Substitutionsgrad des C-Atoms mit der OH-Gruppe. Drei OH-Gruppen machen einen Alkohol dreiwertig.",p:"S. 31"},
+{q:"Welche funktionelle Gruppe kennzeichnet Aldehyde?",a:["–CHO","–COOH","–OH","–NH₂"],e:"–COOH ist die Carboxy-Gruppe (Carbonsäuren), –OH die Hydroxy-Gruppe (Alkohole), –NH₂ die Amino-Gruppe (Amine).",p:"S. 31–32"},
+{q:"Was ist ein Ether?",a:["Eine Verbindung, in der zwei organische Reste über ein Sauerstoffatom verbunden sind","Eine Verbindung mit einer OH-Gruppe am Benzolring","Eine Verbindung mit einer Carboxy-Gruppe","Eine Verbindung, in der Wasserstoff durch ein Halogen ersetzt ist"],e:"Ether: R–O–R'. Option 2 beschreibt Phenole, Option 3 Carbonsäuren, Option 4 Halogenalkane.",p:"S. 31"},
+{q:"Von welcher Verbindung leiten sich die Amine ab?",a:["Von Ammoniak (NH₃)","Von Wasser (H₂O)","Von Methan (CH₄)","Von Kohlensäure (H₂CO₃)"],e:"Bei Aminen sind die Wasserstoffatome des Ammoniaks teilweise oder ganz durch organische Reste ersetzt.",p:"S. 31"},
+{q:"Welche Aussage über das Benzolmolekül trifft zu?",a:["Alle C–C-Bindungen sind gleich lang, die Bindungswinkel betragen 120°.","Es besitzt abwechselnd lange Einfach- und kurze Doppelbindungen.","Die Kohlenstoffatome sind sp³-hybridisiert.","Benzol ist ein gesättigter Kohlenwasserstoff."],e:"Das reale Benzol ist eine Überlagerung beider Grenzstrukturen mit delokalisiertem π-System; alle Ringatome sind sp² und liegen in einer Ebene.",p:"S. 30"},
+{q:"Welche Verbindung ist ein Heteroaromat?",a:["Pyridin","Naphthalen","Benzol","Anthracen"],e:"Pyridin enthält ein Stickstoffatom im aromatischen Ring. Naphthalen und Anthracen sind kondensierte Benzolringe (PAK).",p:"S. 31"},
+{q:"Wie heißt die Methansäure mit Trivialnamen?",a:["Ameisensäure","Essigsäure","Benzoesäure","Caprylsäure"],e:"Methansäure (1 C-Atom) = Ameisensäure.",p:"S. 32"},
+{q:"Was unterscheidet ein Keton von einem Aldehyd?",a:["Beim Keton ist das Wasserstoffatom der Aldehyd-Gruppe durch einen weiteren organischen Rest ersetzt.","Ketone besitzen eine zusätzliche OH-Gruppe.","Ketone enthalten keinen Sauerstoff.","Ketone besitzen eine Carboxy-Gruppe."],e:"Beide sind Carbonylverbindungen (C=O). Beim Keton sitzt die Carbonylgruppe zwischen zwei organischen Resten.",p:"S. 32"}
+]
+},
+{
+id:"k7", teil:"Biomoleküle", titel:"Kohlenhydrate", seiten:"S. 32–37",
+merke:[
+"Kohlenhydrate (Saccharide) sind <b>Polyhydroxycarbonylverbindungen</b> aus C, H und O: mehrere OH-Gruppen plus eine Carbonylgruppe.",
+"<b>Photosynthese</b> in den Chloroplasten: 6 CO₂ + 6 H₂O + Licht → C₆H₁₂O₆ + 6 O₂. Beim Abbau im Menschen (Atmung) wird umgekehrt Energie frei.",
+"<b>Monosaccharide</b>: Cₙ(H₂O)ₙ, 4–7 C-Atome (Tetrosen, <b>Pentosen</b> wie Ribose, Arabinose, Xylose, <b>Hexosen</b>, Heptosen). <b>Aldosen</b> tragen am C1 eine Aldehyd-Gruppe (Glucose), <b>Ketosen</b> am C2 eine Keto-Gruppe (Fructose = Ketohexose).",
+"Stereoisomere: <b>Enantiomere</b> verhalten sich wie Bild und Spiegelbild (asymmetrisches C-Atom, Chiralität; Beispiel Milchsäure). Nicht spiegelbildliche Stereoisomere = <b>Diastereomere</b>.",
+"<b>Fischer-Projektion</b>: längste Kette senkrecht, höchst oxidiertes C oben; waagrechte Bindungen zeigen zum Betrachter. Steht die OH-Gruppe am chiralen C, das am weitesten von C1 entfernt ist, rechts → <b>D-Form</b> (bei Glucose/Fructose: C5).",
+"Glucose liegt in Wasser zu <b>99,75 % als Ring</b> (Pyranose) vor, nur 0,25 % offenkettig. Von den Ringformen 63,6 % <b>β</b> (OH oberhalb in Haworth), 36,4 % α.",
+"<b>Disaccharide</b> (C₁₂H₂₂O₁₁) entstehen unter H₂O-Abspaltung: <b>Saccharose</b> = Glucose + Fructose · <b>Maltose</b> = 2 Glucose · <b>Lactose</b> = Glucose + Galactose. Spaltung erfolgt unter Wasseraufnahme.",
+"<b>Polysaccharide</b> (C₆H₁₀O₅)ₙ: <b>Stärke</b> = 25 % Amylose (250–350 Glucose, α-1,4, unverzweigt, spiralig, wasserlöslich) + 75 % Amylopektin (600–6000 Glucose, verzweigt, nur in heißem Wasser löslich, Kleister). Abbaustücke: Dextrine (20–30 Glucose).",
+"<b>Glykogen</b>: Speicher bei Mensch und Tier (Leber, Muskel), α-glykosidisch, sehr stark verzweigt. <b>Cellulose</b>: β-glykosidisch, 8000–12 000 Glucose, faserig; Säugetiere besitzen keine Cellulase → unverdaulich.",
+"<b>Glykämischer Index</b>: Blutzuckeranstieg im Vergleich zu Glucose. Bohnen haben einen niedrigeren GI als Glucose, liefern aber nicht weniger Energie.",
+"Verdauung beginnt im Mund (Amylase im Speichel); im Dünndarmsaft: Maltase, Saccharase, Lactase. Stärke → flacher Blutzuckeranstieg, Disaccharide → rascher Anstieg und Abfall.",
+"<b>Ballaststoffe</b> (Cellulose, Hemicellulosen, Pektine, Lignine): anregen Kauen und Speichel, sättigen lang, binden Wasser, fördern die Dickdarmbewegung → mehr trinken!",
+"Leberglykogen steht allen Zellen zur Verfügung, <b>Muskelglykogen nur dem Muskel</b>. Die Speicher sind spätestens <b>18 Stunden</b> nach der letzten Mahlzeit leer. Nervenzellen und rote Blutkörperchen sind auf Glucose angewiesen. Überschuss → Fett in der Leber.",
+"Ca. 1 % des Körpers sind Kohlenhydrate. Empfehlung: <b>55–60 %</b> der Energie aus Kohlenhydraten, höchstens <b>10 %</b> aus Zucker. Bei Kohlenhydratmangel entstehen Ketonkörper."
+],
+karten:[
+["Saccharose / Maltose / Lactose","Glucose + Fructose · Glucose + Glucose · Glucose + Galactose"],
+["Aldose vs. Ketose","Aldose: Aldehyd-Gruppe an C1 (Glucose) · Ketose: Keto-Gruppe an C2 (Fructose)"],
+["Zusammensetzung der Stärke","25 % Amylose (unverzweigt, α-1,4) + 75 % Amylopektin (verzweigt)"],
+["Warum ist Cellulose für den Menschen unverdaulich?","β-glykosidische Bindungen – uns fehlt das Enzym Cellulase."],
+["Glucose in wässriger Lösung","99,75 % Ringform (63,6 % β, 36,4 % α), 0,25 % offenkettig"],
+["D- oder L-Zucker?","Entscheidend: OH-Gruppe am chiralen C, das am weitesten von C1 entfernt ist (Glucose: C5). Rechts = D."],
+["Glykogenspeicher","Leber (für alle Zellen) und Muskel (nur für den Muskel); nach spätestens 18 h aufgebraucht"],
+["Empfohlener Kohlenhydratanteil","55–60 % der Energie; höchstens 10 % als Zucker"],
+["Enantiomere","Stereoisomere, die sich wie Bild und Spiegelbild verhalten und nicht zur Deckung gebracht werden können"],
+["Summenformeln Di- und Polysaccharide","Disaccharide C₁₂H₂₂O₁₁ · Polysaccharide (C₆H₁₀O₅)ₙ"]
+],
+quiz:[
+{q:"Aus welchen Monosacchariden besteht Saccharose?",a:["Glucose und Fructose","Glucose und Galactose","Zwei Glucose-Bausteinen","Fructose und Galactose"],e:"Saccharose (Rüben- bzw. Rohrzucker) = Glucose + Fructose. Lactose = Glucose + Galactose, Maltose = 2 Glucose.",p:"S. 35"},
+{q:"Aus welchen Monosacchariden besteht Lactose (Milchzucker)?",a:["Glucose und Galactose","Glucose und Fructose","Zwei Glucose-Bausteinen","Galactose und Ribose"],e:"Lactose = D-Glucose + D-Galactose.",p:"S. 35"},
+{q:"Wie lautet die allgemeine Summenformel der Disaccharide?",a:["C₁₂H₂₂O₁₁","C₁₂H₂₄O₁₂","C₆H₁₂O₆","(C₆H₁₀O₅)ₙ"],e:"Zwei Hexosen (2 · C₆H₁₂O₆) verbinden sich unter Abspaltung eines Wassermoleküls: C₁₂H₂₄O₁₂ − H₂O = C₁₂H₂₂O₁₁.",p:"S. 35"},
+{q:"Wie wird Fructose chemisch eingeordnet?",a:["Als Ketohexose","Als Aldohexose","Als Aldopentose","Als Disaccharid"],e:"Fructose hat sechs C-Atome und eine Keto-Gruppe am C2. Glucose ist eine Aldohexose.",p:"S. 33–34"},
+{q:"Warum kann der Mensch Cellulose nicht als Energiequelle nutzen?",a:["Cellulose ist β-glykosidisch verknüpft, und dem Menschen fehlt das spaltende Enzym (Cellulase).","Cellulose enthält keine Glucose-Bausteine.","Cellulose ist α-glykosidisch verknüpft und zu stark verzweigt.","Cellulose wird bereits im Mund vollständig abgebaut."],e:"α-glykosidische Polysaccharide (Stärke, Glykogen) können wir abbauen, β-glykosidische nicht. Säugetiere besitzen keine Cellulase.",p:"S. 35–36"},
+{q:"Wie ist Stärke zusammengesetzt?",a:["Aus etwa 25 % Amylose und 75 % Amylopektin","Aus etwa 75 % Amylose und 25 % Amylopektin","Aus Glykogen und Cellulose","Ausschließlich aus Amylose"],e:"Amylose ist unverzweigt und wasserlöslich, Amylopektin verzweigt und bildet den Hauptteil.",p:"S. 35"},
+{q:"Wie sind die Glucose-Einheiten in der Amylose verknüpft?",a:["α-1,4-glykosidisch, unverzweigt","β-1,4-glykosidisch, unverzweigt","α-1,6-glykosidisch, stark verzweigt","Über Peptidbindungen"],e:"Amylose bildet eine unverzweigte, spiralige Kette aus 250–350 α-1,4-verknüpften Glucose-Einheiten.",p:"S. 35"},
+{q:"Welches C-Atom entscheidet bei der Glucose über die Zuordnung zur D- oder L-Reihe?",a:["C5","C1","C2","C6"],e:"Maßgeblich ist das asymmetrische C-Atom, das am weitesten vom C1 entfernt ist. Bei Glucose und Fructose ist das C5.",p:"S. 34"},
+{q:"In welcher Form liegt Glucose in wässriger Lösung überwiegend vor?",a:["In Ringform, und zwar überwiegend als β-Pyranose","Überwiegend offenkettig","In Ringform, überwiegend als α-Pyranose","Zu gleichen Teilen offenkettig und als Ring"],e:"99,75 % liegen als Ring vor, davon 63,6 % in der energetisch günstigeren β-Form.",p:"S. 34"},
+{q:"Welche Aussage über Enantiomere ist richtig?",a:["Sie verhalten sich wie Bild und Spiegelbild und lassen sich nicht zur Deckung bringen.","Sie unterscheiden sich in ihrer Summenformel.","Sie sind Stereoisomere, die sich nicht wie Bild und Spiegelbild verhalten.","Sie besitzen kein asymmetrisches C-Atom."],e:"Grundlage ist ein asymmetrisches C-Atom mit vier verschiedenen Resten (z. B. Milchsäure). Nicht spiegelbildliche Stereoisomere heißen Diastereomere.",p:"S. 33"},
+{q:"Welcher Zucker ist eine Pentose?",a:["Ribose","Glucose","Fructose","Galactose"],e:"Ribose, Arabinose und Xylose haben ein C₅-Skelett. Glucose, Fructose und Galactose sind Hexosen.",p:"S. 33"},
+{q:"Welche Aussage über das Glykogen der Muskulatur trifft zu?",a:["Es steht ausschließlich den Muskelzellen zur Verfügung.","Es kann von allen Zellen des Körpers genutzt werden.","Es ist β-glykosidisch verknüpft.","Es reicht für mehrere Tage Fasten."],e:"Leberglykogen versorgt alle Zellen, Muskelglykogen nur den Muskel. Die Speicher sind spätestens 18 Stunden nach der letzten Mahlzeit aufgebraucht.",p:"S. 37"},
+{q:"Welche Zellen sind laut Unterlage auf Glucose als Energiequelle angewiesen?",a:["Nervenzellen und rote Blutkörperchen","Muskel- und Fettzellen","Leber- und Nierenzellen","Haut- und Knochenzellen"],e:"Andere Gewebe können auch Energie aus Fett gewinnen.",p:"S. 37"},
+{q:"Welcher Anteil der Gesamtenergie sollte laut Unterlage aus Kohlenhydraten stammen?",a:["55–60 %","30–35 %","15 %","75–80 %"],e:"Davon sollten höchstens 10 % auf energiereiche, ballaststoffarme Kohlenhydrate wie reinen Zucker entfallen.",p:"S. 37"},
+{q:"Was geschieht bei der Verknüpfung zweier Monosaccharide zu einem Disaccharid?",a:["Es wird ein Wassermolekül abgespalten.","Es wird ein Wassermolekül aufgenommen.","Es wird Kohlendioxid freigesetzt.","Es wird ein Proton aufgenommen."],e:"Bei der Bildung wird H₂O frei; bei der Spaltung (Verdauung) wird umgekehrt Wasser angelagert.",p:"S. 35–36"},
+{q:"Was beschreibt der Glykämische Index?",a:["Den Blutzuckeranstieg durch ein Lebensmittel im Vergleich zum Anstieg durch Glucose","Den Energiegehalt eines Lebensmittels in kcal","Den Ballaststoffgehalt pro 100 g","Die Insulinmenge, die ein Diabetiker spritzen muss"],e:"Bohnen haben z. B. einen niedrigeren GI als Glucose, weil die Zucker verzögert freigesetzt werden – sie liefern dennoch nicht weniger Energie.",p:"S. 36"},
+{q:"Welche Wirkung haben Ballaststoffe laut Unterlage?",a:["Sie binden im Darm Wasser, quellen auf und regen die Dickdarmbewegung an.","Sie werden im Dünndarm vollständig zu Glucose abgebaut.","Sie beschleunigen die Aufnahme von Stärke und Vitaminen.","Sie verkürzen das Sättigungsgefühl."],e:"Ballaststoffe sättigen lange, verzögern die Aufnahme von Stärke und Vitaminen und können Schadstoffe binden. Gleichzeitig sollte mehr getrunken werden.",p:"S. 36"}
+]
+},
+{
+id:"k8", teil:"Biomoleküle", titel:"Fette (Lipide)", seiten:"S. 37–39",
+merke:[
+"<b>Neutralfette (Triglyceride)</b> = Ester aus <b>Glycerin</b> (dreiwertiger Alkohol, drei OH-Gruppen) und drei Fettsäuren. Sie sind apolar, unlöslich in Wasser, löslich in organischen Lösungsmitteln.",
+"<b>Verseifung</b> = alkalische Esterhydrolyse (Natron- oder Kalilauge) → Glycerin + Fettsäuresalze. Natriumsalze = Kernseife, Kaliumsalze = Schmierseife. Seifen bilden Micellen (hydrophiler Kopf, lipophiler Schwanz).",
+"<b>Fettsäuren</b>: unverzweigt, gerade C-Zahl, Carboxylgruppe am C1. Kurzkettig 4–6 C (Buttersäure) · mittelkettig 8–12 C (Caprylsäure, Caprinsäure) · langkettig 14–18 C (Myristin- C14, Palmitin- C16, Stearinsäure C18).",
+"Gesättigt = keine Doppelbindung · einfach ungesättigt (Ölsäure) · mehrfach ungesättigt (Linol-, Linolensäure, ω-3-Fettsäuren aus Fischöl). Die meisten ungesättigten Fettsäuren sind essentiell. <b>ω-n</b>: Position der Doppelbindung, gezählt vom Kettenende. In der Natur überwiegen cis-Formen.",
+"<b>Schmelzpunkt</b> steigt mit der Kettenlänge und sinkt mit der Zahl der Doppelbindungen (Knick → Ketten liegen weniger dicht). Kurzkettige: +16 bis −8 °C (flüssig), langkettige: +55 bis +70 °C (fest). Fette mit niedrigem Schmelzpunkt sind leichter verdaulich.",
+"<b>Fetthärtung</b>: Hydrierung der C=C-Doppelbindungen → gesättigt, höherer Schmelzpunkt, fest (Margarine).",
+"<b>Trans-Fettsäuren</b> entstehen beim Frittieren/Braten durch Isomerisierung (Ölsäure → <b>Elaidinsäure</b>); ungünstig für das Herz-Kreislauf-System.",
+"<b>Fettverdauung</b>: erst Emulgierung durch <b>Gallensäuren</b>, dann Spaltung durch <b>Lipasen</b> in Glycerin und Fettsäuren.",
+"Langkettige Fettsäuren werden im Darm wieder zu Fett aufgebaut, als <b>Chylomikronen</b> über die <b>Lymphe</b> ins Blut transportiert. Kurz- und mittelkettige gelangen direkt über die <b>Pfortader</b> zur Leber.",
+"Abbau von Depotfett: Glycerin → in der Leber zu Glucose; Fettsäuren werden an <b>Albumin</b> gebunden transportiert. Depotfett dient als Energiereserve, Stoßschutz und Wärmeschutz. Durchschnittlich ♂ <b>15 %</b>, ♀ <b>25 %</b> des Körpergewichts."
+],
+karten:[
+["Aufbau eines Triglycerids","Glycerin + 3 Fettsäuren, verbunden über Esterbindungen"],
+["Glycerin","Dreiwertiger Alkohol mit drei OH-Gruppen"],
+["Kettenlängen der Fettsäuren","kurz 4–6 C · mittel 8–12 C · lang 14–18 C"],
+["Schmelzpunkt von Fetten","Steigt mit der Kettenlänge, sinkt mit der Zahl der Doppelbindungen"],
+["Fetthärtung","Hydrierung der Doppelbindungen → gesättigt, höherer Schmelzpunkt (Margarine)"],
+["Elaidinsäure","Trans-Fettsäure, die beim Erhitzen aus Ölsäure entstehen kann"],
+["Transportweg langkettiger Fettsäuren","Als Chylomikronen über die Lymphe ins Blut"],
+["Transportweg kurz- und mittelkettiger Fettsäuren","Direkt über die Pfortader zur Leber"],
+["Kernseife / Schmierseife","Natriumsalze / Kaliumsalze der Fettsäuren"],
+["Depotfettanteil","Männer ca. 15 %, Frauen ca. 25 % des Körpergewichts"]
+],
+quiz:[
+{q:"Woraus ist ein Triglycerid aufgebaut?",a:["Aus Glycerin und drei Fettsäuren, verknüpft über Esterbindungen","Aus drei Glucose-Molekülen","Aus Glycerin und drei Aminosäuren über Peptidbindungen","Aus einer Fettsäure und drei Glycerin-Molekülen"],e:"Die drei Hydroxylgruppen des Glycerins bilden mit den Carboxylgruppen von drei Fettsäuren Esterbindungen.",p:"S. 37"},
+{q:"Wie verändert sich der Schmelzpunkt eines Fettes mit zunehmender Zahl an Doppelbindungen?",a:["Er sinkt.","Er steigt.","Er bleibt gleich.","Er steigt nur bei trans-Doppelbindungen."],e:"Doppelbindungen verursachen einen Knick in der Kette, die Fettsäuren liegen weniger dicht – zum Schmelzen wird weniger Energie benötigt.",p:"S. 38–39"},
+{q:"Wie verändert sich der Schmelzpunkt einer Fettsäure mit zunehmender Kettenlänge?",a:["Er steigt.","Er sinkt.","Er bleibt unverändert.","Er sinkt nur bei gesättigten Fettsäuren."],e:"Längere Ketten → höherer Schmelzpunkt. Langkettige Fettsäuren schmelzen bei +55 bis +70 °C und sind bei Raumtemperatur fest.",p:"S. 38"},
+{q:"Was geschieht bei der Fetthärtung?",a:["Wasserstoff wird an die Doppelbindungen ungesättigter Fettsäuren addiert.","Fette werden mit Natronlauge in Glycerin und Seife gespalten.","Gesättigte Fettsäuren erhalten zusätzliche Doppelbindungen.","cis-Doppelbindungen werden gezielt in trans-Doppelbindungen umgewandelt."],e:"Durch Hydrierung entstehen aus ungesättigten gesättigte Fettsäuren; der Schmelzpunkt steigt. So wird Margarine streichfest.",p:"S. 39"},
+{q:"Welche trans-Fettsäure kann beim starken Erhitzen aus Ölsäure entstehen?",a:["Elaidinsäure","Linolensäure","Stearinsäure","Palmitinsäure"],e:"Durch Isomerisierung der cis-Doppelbindung der Ölsäure entsteht die trans-konfigurierte Elaidinsäure.",p:"S. 39"},
+{q:"Was bedeutet die Bezeichnung ω-3-Fettsäure?",a:["Die erste Doppelbindung liegt, vom Kettenende (ω) gezählt, am dritten Kohlenstoffatom.","Die Fettsäure besitzt genau drei Doppelbindungen.","Die Fettsäure besteht aus drei Kohlenstoffatomen.","Die erste Doppelbindung liegt, von der Carboxylgruppe gezählt, am dritten C-Atom."],e:"Bei der ω-n-Bezeichnung zählt man vom Kettenende (ω) bis zur Doppelbindung.",p:"S. 38"},
+{q:"Wie viele Kohlenstoffatome besitzen langkettige Fettsäuren laut Unterlage?",a:["14 bis 18","4 bis 6","8 bis 12","20 bis 26"],e:"Kurzkettig 4–6, mittelkettig 8–12, langkettig 14–18 C-Atome (Myristin-, Palmitin-, Stearinsäure).",p:"S. 38"},
+{q:"Was ist der erste Schritt der Fettverdauung?",a:["Die Emulgierung der Fette durch Gallensäuren","Die Spaltung durch Pepsin","Die Aufnahme über die Pfortader","Die Bildung von Chylomikronen"],e:"Fette sind wasserunlöslich. Erst emulgiert haben sie eine stark vergrößerte Oberfläche, an der Lipasen angreifen können.",p:"S. 39"},
+{q:"Auf welchem Weg gelangen kurz- und mittelkettige Fettsäuren nach der Verdauung in den Körper?",a:["Direkt über die Pfortader zur Leber","Als Chylomikronen über die Lymphe","Über die Gallenblase","Über die Lunge"],e:"Kurz- und mittelkettige Fettsäuren sind wasserlöslich. Langkettige werden zu Chylomikronen verpackt und über die Lymphe transportiert.",p:"S. 39"},
+{q:"Wie werden Natriumsalze der Fettsäuren genannt?",a:["Kernseife","Schmierseife","Margarine","Chylomikronen"],e:"Bei der Verseifung entstehen Fettsäuresalze. Natriumsalze = Kernseife, Kaliumsalze = Schmierseife.",p:"S. 37"},
+{q:"Welchen Anteil am Körpergewicht macht Depotfett bei Frauen durchschnittlich aus?",a:["25 %","15 %","5 %","40 %"],e:"Durchschnitt laut Unterlage: Männer 15 %, Frauen 25 % des Körpergewichts.",p:"S. 39"},
+{q:"Wie werden freigesetzte Fettsäuren beim Abbau von Depotfett im Blut transportiert?",a:["Gebunden an Albumine","Frei gelöst im Blutplasma","Eingebaut in Hämoglobin","Als Glykogen"],e:"Fettsäuren binden an Albumine (Blutplasmaproteine). Glycerin wird in der Leber zu Glucose umgebaut.",p:"S. 39"},
+{q:"Welche Fettsäure hat 16 Kohlenstoffatome?",a:["Palmitinsäure","Stearinsäure","Myristinsäure","Buttersäure"],e:"Myristinsäure C14, Palmitinsäure C16, Stearinsäure C18, Buttersäure C4.",p:"S. 38"},
+{q:"Warum sind Öle bei Zimmertemperatur flüssig?",a:["Sie enthalten hauptsächlich ungesättigte Fettsäuren.","Sie enthalten hauptsächlich gesättigte, langkettige Fettsäuren.","Sie enthalten kein Glycerin.","Sie sind bereits gehärtet."],e:"Ungesättigte Fettsäuren haben Knicke in der Kette und liegen weniger dicht aneinander – der Schmelzpunkt sinkt unter Raumtemperatur.",p:"S. 39"}
+]
+},
+{
+id:"k9", teil:"Biomoleküle", titel:"Proteine & Aminosäuren", seiten:"S. 39–43",
+merke:[
+"Proteine bestehen aus <b>Aminosäuren</b> (Elemente C, H, O, N, teils S und P). Am zentralen α-C-Atom hängen immer: Aminogruppe, Carboxylgruppe, H-Atom und ein Rest R (Seitenkette). Nur Pflanzen und Mikroorganismen können Proteine aus einfachen Stickstoffverbindungen aufbauen.",
+"20 proteinogene α-Aminosäuren; im Menschen werden ausschließlich <b>L-Aminosäuren</b> eingebaut. <b>Glycin</b> (R = H) ist die kleinste und als einzige nicht chiral.",
+"Seitenketten: unpolar (nur C, H) · sauer (zusätzliche Carboxy-Gruppe) · polar (Heteroatom O, S, Se, N) · basisch (zusätzliche Amino-Gruppe).",
+"Aminosäuren sind <b>amphoter</b> und liegen als <b>Zwitterionen</b> vor → Eiweißpuffer (z. B. Hämoglobin hält den Blut-pH konstant).",
+"<b>Peptidbindung</b> (Amidbindung): Carboxylgruppe + Aminogruppe unter Wasserabspaltung. Dipeptid (2), Tripeptid (3), Oligopeptid (bis 10), Polypeptid (über 10), Proteine (ca. 100–1000 AS). Oxytocin = Nonapeptid.",
+"<b>Primärstruktur</b>: Aminosäuresequenz (genetisch festgelegt). <b>Sekundärstruktur</b>: α-Helix oder β-Faltblatt, stabilisiert durch H-Brücken zwischen CO- und NH-Gruppen. <b>Tertiärstruktur</b>: gesamte räumliche Struktur (Disulfidbrücken, Ionenbindungen, H-Brücken, hydrophobe WW), fibrillär oder globulär. <b>Quartärstruktur</b>: Zusammenlagerung mehrerer Peptidketten.",
+"<b>Fibrilläre</b> Proteine: faserig, wasserunlöslich, zugfest (Actin, Myosin, Keratin, <b>Kollagen</b> – häufigstes Faserprotein, Elastin, Fibrinogen). <b>Globuläre</b>: kugelförmig, wasserlöslich (Albumine, Globuline, Gluten). Komplexe Proteine besitzen eine prosthetische Gruppe (z. B. Lipoproteine).",
+"<b>Denaturierung</b> durch Säuren, Laugen, Schwermetallsalze, Lösungsmittel oder Erhitzen über <b>42 °C</b>: Sekundär- bis Quartärstruktur irreversibel zerstört, biologische Aktivität geht verloren.",
+"Decarboxylierung → biogene Amine (Tyrosin → Adrenalin). Albumin transportiert Fettsäuren, Mineralstoffe, Vitamine und Arzneistoffe.",
+"<b>Eiweißverdauung</b>: Magensäure denaturiert; <b>Endopeptidasen</b> spalten in der Mitte der Kette, <b>Exopeptidasen</b> spalten endständige Aminosäuren ab. Aminosäuren → Pfortader → Leber. Erneuerungszeit: 10 Tage (innere Organe) bis 100 Tage (Haut).",
+"Abbau nicht verwertbarer Aminosäuren in Leber und Niere zu CO₂, H₂O und Ammoniak; das Zellgift NH₃ wird zu <b>Harnstoff</b>. Ziel: ausgeglichene <b>Stickstoffbilanz</b>.",
+"<b>8 essentielle Aminosäuren</b>: Valin, Leucin, Isoleucin, Threonin, Methionin, Lysin, Phenylalanin, Tryptophan; im Säuglingsalter zusätzlich Histidin.",
+"<b>Biologische Wertigkeit</b>: wie viel g Körpereiweiß aus 100 g Nahrungseiweiß aufgebaut werden können. Limitierende AS: Getreide = <b>Lysin</b>, Rindfleisch = <b>Threonin</b>. Kombination von Eiweißquellen erhöht die Wertigkeit (Ergänzungswert).",
+"Bedarf Erwachsener: <b>0,8 g Eiweiß pro kg Körpergewicht</b>; erhöht im Wachstum, in Schwangerschaft und Stillzeit; höher bei überwiegend pflanzlicher Kost; sinkt im Alter nicht. ⅓ tierisch, ⅔ pflanzlich; höchstens <b>15 %</b> der Energie; über mehrere Mahlzeiten verteilen."
+],
+karten:[
+["Die 8 essentiellen Aminosäuren","Valin, Leucin, Isoleucin, Threonin, Methionin, Lysin, Phenylalanin, Tryptophan (Säuglinge: + Histidin)"],
+["Peptidbindung","Carboxylgruppe + Aminogruppe unter Wasserabspaltung (Amidbindung)"],
+["Vier Strukturebenen der Proteine","Primär: Sequenz · Sekundär: α-Helix/β-Faltblatt · Tertiär: gesamte 3D-Faltung · Quartär: mehrere Ketten"],
+["Limitierende Aminosäure im Getreide","Lysin"],
+["Biologische Wertigkeit","Gramm Körpereiweiß, die aus 100 g Nahrungseiweiß aufgebaut werden können"],
+["Eiweißbedarf Erwachsener","0,8 g pro kg Körpergewicht; max. 15 % der Energie"],
+["Denaturierung","Irreversible Zerstörung der Sekundär- bis Quartärstruktur, z. B. über 42 °C"],
+["Endo- vs. Exopeptidasen","Endo: spalten in der Kettenmitte · Exo: spalten endständige Aminosäuren ab"],
+["Entgiftung von Ammoniak","Umwandlung zu Harnstoff in der Leber"],
+["Glycin","Kleinste Aminosäure, Rest = H, einzige ohne chirales C-Atom"]
+],
+quiz:[
+{q:"Zwischen welchen Gruppen entsteht eine Peptidbindung?",a:["Zwischen der Carboxylgruppe der einen und der Aminogruppe der anderen Aminosäure","Zwischen zwei Aminogruppen","Zwischen zwei Carboxylgruppen","Zwischen den Seitenketten zweier Aminosäuren"],e:"Dabei wird ein Molekül Wasser abgespalten. Die Peptidbindung ist eine Amidbindung.",p:"S. 41"},
+{q:"Welche Aminosäure besitzt kein chirales C-Atom?",a:["Glycin","Alanin","Lysin","Tryptophan"],e:"Glycin trägt als Rest nur ein Wasserstoffatom; das α-C-Atom hat also zwei gleiche Substituenten.",p:"S. 41"},
+{q:"Aus welchen Aminosäuren sind die Proteine des Menschen aufgebaut?",a:["Ausschließlich aus L-Aminosäuren","Ausschließlich aus D-Aminosäuren","Aus gleichen Teilen L- und D-Aminosäuren","Überwiegend aus γ-Aminosäuren"],e:"Im menschlichen Körper werden ausschließlich L-α-Aminosäuren in Proteine eingebaut.",p:"S. 40–41"},
+{q:"Was beschreibt die Primärstruktur eines Proteins?",a:["Art, Anzahl und Abfolge der Aminosäuren","Die Ausbildung von α-Helix und β-Faltblatt","Die gesamte räumliche Faltung einer Peptidkette","Die Zusammenlagerung mehrerer Peptidketten"],e:"Die Aminosäuresequenz ist genetisch festgelegt und bestimmt die weiteren Strukturebenen.",p:"S. 41"},
+{q:"Zu welcher Strukturebene gehören α-Helix und β-Faltblatt?",a:["Sekundärstruktur","Primärstruktur","Tertiärstruktur","Quartärstruktur"],e:"Beide werden durch Wasserstoffbrücken zwischen den CO- und NH-Gruppen des Peptidrückgrats stabilisiert.",p:"S. 42"},
+{q:"Welche Wechselwirkungen bestimmen die Tertiärstruktur eines Proteins?",a:["Disulfidbrücken, Ionenbindungen, Wasserstoffbrücken und hydrophobe Wechselwirkungen","Ausschließlich die Peptidbindungen","Nur die Abfolge der Aminosäuren","Ausschließlich Van-der-Waals-Kräfte zwischen mehreren Peptidketten"],e:"Die Tertiärstruktur beschreibt die gesamte räumliche Struktur einer Kette; sie kann fibrillär oder globulär sein. Van-der-Waals-Kräfte zwischen Ketten halten die Quartärstruktur zusammen.",p:"S. 42"},
+{q:"Ab welcher Temperatur kommt es laut Unterlage zur Denaturierung von Proteinen?",a:["Über 42 °C","Über 25 °C","Über 70 °C","Erst über 100 °C"],e:"Auch Säuren, Laugen, Schwermetallsalze und Lösungsmittel zerstören die Struktur irreversibel.",p:"S. 42"},
+{q:"Welche Aminosäure ist die limitierende Aminosäure des Getreideeiweißes?",a:["Lysin","Threonin","Methionin","Tryptophan"],e:"Weizeneiweiß enthält wenig Lysin, deshalb ist seine biologische Wertigkeit niedrig. Bei Rindfleisch ist Threonin limitierend.",p:"S. 43"},
+{q:"Welche dieser Aminosäuren ist essentiell?",a:["Tryptophan","Glycin","Alanin","Serin"],e:"Essentiell: Valin, Leucin, Isoleucin, Threonin, Methionin, Lysin, Phenylalanin, Tryptophan.",p:"S. 43"},
+{q:"Wie viele Aminosäuren sind laut Unterlage für Erwachsene essentiell?",a:["8","12","20","3"],e:"Von den 20 proteinogenen Aminosäuren kann der Körper 12 selbst aufbauen; 8 müssen mit der Nahrung zugeführt werden.",p:"S. 43"},
+{q:"Welche Aminosäure ist nur im Säuglings- und Kleinkindalter zusätzlich essentiell?",a:["Histidin","Glycin","Lysin","Tyrosin"],e:"Im Säuglings- und Kleinkindalter ist Histidin zusätzlich essentiell.",p:"S. 43"},
+{q:"Wie hoch ist der tägliche Eiweißbedarf eines Erwachsenen, der Eiweiß nur zur Erneuerung benötigt?",a:["0,8 g pro kg Körpergewicht","0,3 g pro kg Körpergewicht","2,0 g pro kg Körpergewicht","80 g pro kg Körpergewicht"],e:"Für Personen mit überwiegend pflanzlicher Kost gilt ein höherer Wert; im Alter sinkt der Bedarf nicht.",p:"S. 43"},
+{q:"Wie viel Prozent der Gesamtenergie sollten höchstens durch Eiweiß gedeckt werden?",a:["15 %","5 %","30 %","55 %"],e:"Laut Unterlage höchstens 15 %, idealerweise zu einem Drittel tierisch und zu zwei Dritteln pflanzlich.",p:"S. 43"},
+{q:"Wie wird das beim Aminosäureabbau entstehende Ammoniak unschädlich gemacht?",a:["Es wird in Harnstoff umgewandelt.","Es wird zu Glucose umgebaut.","Es wird über die Lunge abgeatmet.","Es wird als Glykogen gespeichert."],e:"Ammoniak ist ein Zellgift. Die Leber wandelt es in Harnstoff um, der mit dem Harn ausgeschieden wird.",p:"S. 42"},
+{q:"Wie arbeiten Exopeptidasen?",a:["Sie spalten jeweils die endständige Aminosäure von Polypeptiden ab.","Sie spalten Proteine in der Mitte der Aminosäurekette.","Sie verknüpfen Aminosäuren zu Proteinen.","Sie spalten Fette in Glycerin und Fettsäuren."],e:"Endopeptidasen spalten in der Mitte (es entstehen Polypeptide), Exopeptidasen trennen nach und nach die endständigen Aminosäuren ab.",p:"S. 42"},
+{q:"Welches Protein gehört zu den globulären Proteinen?",a:["Albumin","Kollagen","Keratin","Myosin"],e:"Globuläre Proteine sind wasserlöslich und kugelförmig (Albumine, Globuline, Gluten). Kollagen, Keratin und Myosin sind fibrillär.",p:"S. 42"},
+{q:"Wie liegen Aminosäuren in wässriger Lösung vor?",a:["Als Zwitterionen","Als ungeladene Moleküle","Ausschließlich als Anionen","Ausschließlich als Kationen"],e:"Die Aminogruppe nimmt ein Proton auf (positiv), die Carboxylgruppe gibt eines ab (negativ). Diese amphotere Eigenschaft ermöglicht die Pufferwirkung.",p:"S. 41"},
+{q:"Was gibt die biologische Wertigkeit eines Nahrungsproteins an?",a:["Wie viel Gramm Körpereiweiß aus 100 g Nahrungseiweiß aufgebaut werden können","Wie viel Energie 100 g des Proteins liefern","Wie schnell das Protein verdaut wird","Wie viele verschiedene Aminosäuren das Protein enthält"],e:"Sie hängt vom Gehalt an essentiellen Aminosäuren ab und lässt sich durch Kombination von Eiweißquellen steigern.",p:"S. 43"},
+{q:"Wie viele Aminosäuren umfasst ein Oligopeptid laut Unterlage?",a:["Bis zu zehn","Genau drei","Mehr als zehn","Etwa 100 bis 1000"],e:"Dipeptid 2, Tripeptid 3, Oligopeptid bis 10, Polypeptid über 10, Proteine ca. 100–1000 Aminosäuren.",p:"S. 41"}
+]
+},
+{
+id:"k10", teil:"Biomoleküle", titel:"Nucleinsäuren (DNA & RNA)", seiten:"S. 43–45",
+merke:[
+"DNA (Desoxyribonucleinsäure) und RNA (Ribonucleinsäure) sind <b>Polynucleotide</b>. Ein <b>Nucleotid</b> besteht aus stickstoffhaltiger Base, einem Zucker mit 5 C-Atomen und einem Phosphorsäurerest.",
+"<b>Purine</b> (Zwei-Ring-System): Adenin (A), Guanin (G). <b>Pyrimidine</b> (Ein-Ring-System): Cytosin (C), Thymin (T), Uracil (U).",
+"DNA-Basen: A, G, C, T. RNA-Basen: A, G, C, <b>U</b> (Uracil statt Thymin).",
+"Zucker: RNA = <b>Ribose</b>, DNA = <b>Desoxyribose</b> (am C2 ein H statt OH). Ohne diese reaktive OH-Gruppe ist DNA reaktionsträger und damit ein stabilerer Informationsspeicher.",
+"<b>Basenpaarung</b> über Wasserstoffbrücken: A=T bzw. A=U mit <b>2</b> H-Brücken, G≡C mit <b>3</b> H-Brücken. Purine und Pyrimidine kommen in der DNA im Verhältnis 50 : 50 vor.",
+"Nachbarnucleotide sind über <b>Phosphodiesterbindungen</b> verknüpft (Phosphorsäure verestert die 5'- und 3'-OH-Gruppen). Zucker und Base sind <b>N-glykosidisch</b> verbunden.",
+"DNA: Doppelstrang, die beiden Stränge verlaufen <b>entgegengesetzt</b>. Zucker-Phosphat-Rückgrat außen (hydrophil), gestapelte Basenpaare innen (hydrophob) → Verdrillung zur <b>Doppelhelix</b>.",
+"RNA ist meist <b>einzelsträngig</b>, kann aber Rückfaltungen und Schleifen mit Doppelstrangbereichen bilden."
+],
+karten:[
+["Bestandteile eines Nucleotids","Base + Pentose (Ribose/Desoxyribose) + Phosphorsäurerest"],
+["Purine / Pyrimidine","Purine: Adenin, Guanin · Pyrimidine: Cytosin, Thymin, Uracil"],
+["Base nur in RNA","Uracil (ersetzt Thymin)"],
+["Wasserstoffbrücken bei A–T und G–C","A=T: 2 · G≡C: 3"],
+["Unterschied Ribose / Desoxyribose","Desoxyribose trägt am C2 ein H statt einer OH-Gruppe."],
+["Bindung zwischen Nucleotiden","Phosphodiesterbindung"],
+["Bindung zwischen Zucker und Base","N-glykosidische Bindung"]
+],
+quiz:[
+{q:"Welche Basen gehören zu den Purinen?",a:["Adenin und Guanin","Cytosin und Thymin","Thymin und Uracil","Adenin und Cytosin"],e:"Purine haben ein Zwei-Ring-System (A, G); Pyrimidine ein Ein-Ring-System (C, T, U).",p:"S. 44"},
+{q:"Welche Base kommt nur in der RNA vor?",a:["Uracil","Thymin","Adenin","Guanin"],e:"In der RNA ersetzt Uracil das Thymin der DNA.",p:"S. 44"},
+{q:"Wie viele Wasserstoffbrücken bilden Guanin und Cytosin miteinander?",a:["3","2","1","4"],e:"G≡C: drei Wasserstoffbrücken; A=T bzw. A=U: zwei.",p:"S. 44"},
+{q:"Worin unterscheidet sich Desoxyribose von Ribose?",a:["Am C2-Atom trägt sie ein Wasserstoffatom statt einer Hydroxylgruppe.","Sie besitzt sechs statt fünf Kohlenstoffatome.","Sie enthält zusätzlich eine Phosphatgruppe.","Sie trägt am C2 eine zusätzliche Hydroxylgruppe."],e:"Das Fehlen dieser reaktiven OH-Gruppe macht die DNA reaktionsträger und damit stabiler als Speichersubstanz.",p:"S. 44"},
+{q:"Durch welche Bindung sind benachbarte Nucleotide in DNA und RNA verknüpft?",a:["Phosphodiesterbindung","Peptidbindung","N-glykosidische Bindung","Wasserstoffbrückenbindung"],e:"Ein Phosphorsäurerest verestert die 5'- und 3'-OH-Gruppen zweier Zuckerreste. Die N-glykosidische Bindung verbindet Zucker und Base.",p:"S. 45"},
+{q:"Was bewirkt die Verdrillung des DNA-Doppelstrangs zur Helix?",a:["Die Stapelung der Basenpaare durch schwache Wechselwirkungen, die einen hydrophoben Innenraum erzeugt","Allein die komplementäre Basenpaarung","Kovalente Bindungen zwischen den beiden Zucker-Phosphat-Rückgraten","Ionenbindungen zwischen den Phosphatgruppen"],e:"Die Basenpaarung allein führt noch nicht zur Helix. Erst die stapelförmige Anordnung der Basenpaare erzwingt die Verdrillung.",p:"S. 45"},
+{q:"In welchem Verhältnis kommen Purin- und Pyrimidinbasen in der DNA vor?",a:["50 : 50","25 : 75","75 : 25","Das Verhältnis ist beliebig."],e:"Weil immer eine Purin- mit einer Pyrimidinbase paart, liegen beide im Verhältnis 50 : 50 vor.",p:"S. 44"},
+{q:"Welche Aussage über RNA trifft zu?",a:["Sie ist in der Regel einzelsträngig, kann aber durch Rückfaltung Doppelstrangbereiche bilden.","Sie ist immer doppelsträngig.","Sie enthält Desoxyribose und Thymin.","Ihre Nucleotide sind über Peptidbindungen verknüpft."],e:"RNA enthält Ribose und Uracil; durch komplementäre Abschnitte (A=U, G≡C) entstehen Schleifen und Rückfaltungen.",p:"S. 45"}
+]
+}
+);
+
+KAP.push(
+{
+id:"k11", teil:"Ernährung", titel:"Nahrungsquellen & Lebensmittel", seiten:"S. 48–51",
+merke:[
+"<b>Makronährstoffe</b> liefern Energie: Kohlenhydrate (inkl. Ballaststoffe), Fette, Eiweiß; wegen seines Energiegehalts auch Alkohol. <b>Mikronährstoffe</b> liefern keine Energie: Mineralstoffe (Mengenelemente Na, K, Mg, Cl; Spurenelemente Fe, I, Se) und fett-/wasserlösliche Vitamine.",
+"<b>Wasser</b> liefert keine Energie, macht aber <b>50–70 %</b> der Körpermasse aus (Baustoff, Transport- und Lösungsmittel, Temperaturregulation). Dazu kommen <b>sekundäre Pflanzeninhaltsstoffe</b> mit pharmakologischer Wirkung.",
+"<b>Getreide</b> (Weizen, Roggen, Hafer, Reis, Mais, Hirse, Gerste, Dinkel): viel Stärke. Proteine: <b>Gluteline</b> (Glutenin – Weizen, Hordenin – Gerste, Oryzenin – Reis) und <b>Prolamine</b> (Gliadin – Weizen, Zein – Mais).",
+"<b>Weizen</b> ist wegen seines Glutens das wichtigste Brotgetreide Europas; Roggen enthält wenig Gluten; Hafer, Gerste, Mais, Hirse und Reis eignen sich nicht zum Brotbacken. Vollkorn: Schale mit Ballaststoffen und Eiweiß, Keimling mit Fett, dazu Vitamine und Mineralstoffe.",
+"<b>Zöliakie</b>: Unverträglichkeit gegen <b>Gliadin</b> → Verzicht auf Weizen-, Roggen- und Gerstenprodukte. <b>Pseudocerealien</b> (botanisch kein Getreide): Buchweizen, Amaranth, Quinoa.",
+"<b>Kartoffel</b>: Ausläuferknolle, rund <b>80 % Wasser</b>, Stärke, Cellulose, Mineralstoffe, besonders Vitamin C und B1. Als Pellkartoffel energiearm; als Pommes/Chips energie-, fett- und salzreich.",
+"<b>Zucker</b> (Saccharose): Zentraleuropa ca. 100 g pro Tag; in Europa aus Zuckerrüben, in den Tropen aus Zuckerrohr. <b>Honig</b> enthält Invertasen, ist aber hinsichtlich Energie und Karies nicht günstiger als Zucker.",
+"<b>Zuckeraustauschstoffe</b> (energiehaltig): Fructose, Zuckeralkohole Isomalt, Sorbit, Mannit, Xylit – in größeren Mengen abführend. <b>Süßstoffe</b> (fast energiefrei): Saccharin 500-fache, Aspartam und Acesulfam je 200-fache Süßkraft von Saccharose.",
+"Öle (flüssig) vs. Fette (fest). <b>Oliven- und Rapsöl</b>: reich an einfach ungesättigten FS; <b>Sonnenblumen- und Maiskeimöl</b>: reich an mehrfach ungesättigten FS; <b>Kokosfett</b>: ca. 90 % gesättigte FS. Margarine: rund 80 % Öle/Fette, gehärtet und emulgiert. Fette mit niedrigem Schmelzpunkt werden besser absorbiert.",
+"<b>Milch</b>: Emulsion aus Wasser, Lipiden, Proteinen und Laktose. Milchprotein zu ca. <b>80 % Casein</b>. Käse: Gerinnung des Caseins (Lab, Milchsäurebakterien) → Bruch und Molke. Laktase-Aktivität nimmt bei der Mehrheit der Weltbevölkerung ab. <b>β-Laktoglobulin</b> = häufigstes Allergen im Säuglingsalter.",
+"<b>Ei</b>: biologische Wertigkeit 100 (Bezugsgröße). Eiklar: Albumine, Globuline; Dotter: Phosphoproteine, Lipide, Cholesterin. Das Ei-Cholesterin ist nicht allein für erhöhte Blutwerte verantwortlich.",
+"<b>Fleisch</b>: Muskelprotein aus Aktin und Myosin, hochwertiges Eiweiß, B-Vitamine, gut verfügbares Eisen, aber auch Fett, Cholesterin, Purine. Wurstwaren oft fett- und salzreich.",
+"<b>Fisch</b>: leicht verdaulich (wenig Bindegewebe), biologische Wertigkeit ca. 80 %. Fettfische: ω-3-Fettsäuren und Vitamin D; Seefisch: gute <b>Jodquelle</b>.",
+"<b>Hülsenfrüchte</b> (Erbsen, Bohnen, Soja): eiweißreich, Wertigkeit geringer als Fleisch/Fisch, aber durch Kombination (z. B. mit Getreide) deutlich steigerbar; viele Vitamine, Mineralstoffe, Isoflavonoide. Pflanzliches Protein ist wegen geringerer Energieverluste in der Erzeugung zu bevorzugen."
+],
+karten:[
+["Makro- vs. Mikronährstoffe","Makro: liefern Energie (KH, Fett, Eiweiß, Alkohol) · Mikro: keine Energie (Mineralstoffe, Vitamine)"],
+["Zöliakie","Unverträglichkeit gegen Gliadin → kein Weizen, Roggen, Gerste"],
+["Prolamine von Weizen / Mais","Gliadin / Zein"],
+["Pseudocerealien","Buchweizen, Amaranth, Quinoa"],
+["Süßkraft von Saccharin / Aspartam","Saccharin 500-fach · Aspartam 200-fach (Acesulfam ebenfalls 200-fach)"],
+["Fett mit höchstem Anteil gesättigter Fettsäuren","Kokosfett (ca. 90 %)"],
+["Öle reich an einfach ungesättigten Fettsäuren","Olivenöl und Rapsöl"],
+["Hauptfraktion des Milchproteins","Casein, ca. 80 %"],
+["Häufigstes Allergen im Säuglingsalter","β-Laktoglobulin der Kuhmilch"],
+["Warum ist Fisch leicht verdaulich?","Er hat deutlich weniger Bindegewebe als Fleisch von Schlachttieren."],
+["Wassergehalt der Kartoffel","Rund 80 %"]
+],
+quiz:[
+{q:"Auf welche Getreideprodukte müssen Menschen mit Zöliakie verzichten?",a:["Weizen, Roggen und Gerste","Reis, Mais und Hirse","Quinoa, Amaranth und Buchweizen","Nur auf Hafer"],e:"Zöliakie ist eine Unverträglichkeit gegen Gliadin, die alkohollösliche Fraktion des Glutens.",p:"S. 48"},
+{q:"Wie heißt das Prolamin des Weizens?",a:["Gliadin","Zein","Hordenin","Oryzenin"],e:"Prolamine: Gliadin (Weizen), Zein (Mais). Gluteline: Glutenin (Weizen), Hordenin (Gerste), Oryzenin (Reis).",p:"S. 48"},
+{q:"Welches Lebensmittel zählt zu den Pseudocerealien?",a:["Quinoa","Dinkel","Hirse","Roggen"],e:"Buchweizen, Amaranth und Quinoa werden wie Getreide verwendet, sind botanisch aber keines. Dinkel, Hirse und Roggen sind echte Getreidearten.",p:"S. 49"},
+{q:"Wie hoch ist die Süßkraft von Saccharin im Vergleich zu Saccharose?",a:["Etwa 500-fach","Etwa 200-fach","Etwa 50-fach","Etwa doppelt so hoch"],e:"Saccharin 500-fach, Aspartam und Acesulfam jeweils 200-fach.",p:"S. 49"},
+{q:"Welcher Stoff ist ein Zuckeralkohol?",a:["Sorbit","Aspartam","Saccharin","Saccharose"],e:"Zuckeralkohole (Isomalt, Sorbit, Mannit, Xylit) sind energiehaltige Zuckeraustauschstoffe und wirken in größeren Mengen abführend. Aspartam und Saccharin sind Süßstoffe.",p:"S. 49"},
+{q:"Welches Fett enthält laut Unterlage den höchsten Anteil an gesättigten Fettsäuren?",a:["Kokosfett","Butterfett","Palmöl","Olivenöl"],e:"Kokosfett ca. 90 %, Butterfett 62 %, Palmöl 47 %, Olivenöl 14 %.",p:"S. 49–50"},
+{q:"Welches Öl ist besonders reich an einfach ungesättigten Fettsäuren?",a:["Olivenöl","Sonnenblumenöl","Maiskeimöl","Kokosfett"],e:"Oliven- und Rapsöl liefern vor allem einfach ungesättigte Fettsäuren, Sonnenblumen- und Maiskeimöl vor allem mehrfach ungesättigte.",p:"S. 50"},
+{q:"Welche Fraktion macht den größten Anteil des Milchproteins aus?",a:["Casein (rund 80 %)","Albumin (rund 80 %)","Globulin (rund 80 %)","β-Laktoglobulin (rund 80 %)"],e:"Casein bildet mit rund 80 % den größten Anteil, gefolgt von Albuminen und Globulinen. Bei der Käseherstellung gerinnt das Casein.",p:"S. 50"},
+{q:"Welcher Milchbestandteil gilt als häufigstes Allergen im Säuglingsalter?",a:["β-Laktoglobulin","Laktose","Casein","Milchfett"],e:"β-Laktoglobulin der Kuhmilch ist Auslöser der im Säuglingsalter am häufigsten auftretenden Allergie.",p:"S. 50"},
+{q:"Wie hoch ist der Wassergehalt der Kartoffel ungefähr?",a:["80 %","20 %","50 %","95 %"],e:"Die Kartoffel enthält rund 80 % Wasser; sie liefert Stärke, Mineralstoffe sowie Vitamin C und B1.",p:"S. 49"},
+{q:"Warum ist Fischfleisch leicht verdaulich?",a:["Es enthält deutlich weniger Bindegewebe als Fleisch von Schlachttieren.","Es enthält keinerlei Eiweiß.","Es ist reich an Ballaststoffen.","Es enthält besonders viele gesättigte Fettsäuren."],e:"Zusätzlich hat Fischprotein eine hohe biologische Wertigkeit von rund 80 %.",p:"S. 51"},
+{q:"Wofür ist Seefisch eine gute Quelle?",a:["Jod","Vitamin C","Ballaststoffe","Laktose"],e:"Fettfische liefern außerdem ω-3-Fettsäuren und Vitamin D.",p:"S. 51"},
+{q:"Welcher Mineralstoff zählt zu den Spurenelementen?",a:["Selen","Natrium","Kalium","Magnesium"],e:"Mengenelemente: Natrium, Kalium, Magnesium, Chlor. Spurenelemente: Eisen, Jod, Selen.",p:"S. 48"},
+{q:"Welchen Anteil der Körpermasse macht Wasser aus?",a:["50–70 %","10–20 %","80–95 %","30–40 %"],e:"Wasser liefert keine Energie, ist aber Baustoff, Transport- und Lösungsmittel sowie Regulator der Körpertemperatur.",p:"S. 48"},
+{q:"Welche Aussage über Honig trifft laut Unterlage zu?",a:["Er ist weder bezüglich Energiegehalt noch Kariesentstehung günstiger als Zucker.","Er ist deutlich energieärmer als Haushaltszucker.","Er enthält keine Fructose.","Er schützt nachweislich vor Karies."],e:"Honig enthält Invertasen, die Saccharose in Glucose und Fructose spalten; das macht ihn aber nicht gesünder als Zucker.",p:"S. 49"},
+{q:"Wie lässt sich die biologische Wertigkeit von Hülsenfrüchten deutlich verbessern?",a:["Durch Kombination mit anderen Eiweißquellen wie Getreide, Milch oder Ei","Durch langes Kochen ohne Salz","Durch Fetthärtung","Durch Entfernen der Schale"],e:"Die Proteine ergänzen sich in ihren Aminosäuren gegenseitig (biologischer Ergänzungswert).",p:"S. 51"}
+]
+},
+{
+id:"k12", teil:"Ernährung", titel:"Verdauung & Absorption", seiten:"S. 52–56",
+merke:[
+"<b>Verdauung</b> = Zerlegung der Nahrung in aufnahmefähige Bruchstücke; <b>Absorption</b> = deren Aufnahme in den Organismus. Mechanische Prozesse (Mischbewegung, Peristaltik) + biochemische Prozesse (Enzyme).",
+"<b>Speichel</b>: pH 6–7, enthält <b>α-Amylase</b> (Stärkespaltung). Im Rachen wird der Schluckreflex ausgelöst.",
+"<b>Magensaft</b>: pH <b>0,9–1,6</b>. Salzsäure aus den <b>Belegzellen</b> aktiviert Pepsinogen zu <b>Pepsin</b>. Ebenfalls aus den Belegzellen: <b>Intrinsic Factor</b> für die Aufnahme von Vitamin B12. <b>Nebenzellen</b> bilden schützendes Mucin.",
+"<b>Leber</b>: Galle (Gallensäuresalze, Cholesterin, Lecithin) → Gallenblase → Dünndarm: neutralisiert den Speisebrei, emulgiert Fette, bildet Mizellen.",
+"<b>Pankreas</b>: endokrin → Insulin und Glukagon; exokrin → Pankreassaft mit <b>Bikarbonat</b> (neutralisiert) und Enzymen (Glucosidasen, Proteasen, Lipasen) als inaktive Vorstufen (Schutz vor Selbstverdauung). Insulin wirkt anabol (Glykogen-, Protein-, Fettaufbau).",
+"<b>Dünndarm</b>: Zwölffingerdarm → Leerdarm → Krummdarm; Ort der Resorption. Oberflächenvergrößerung durch Krypten, Zotten (Villi) und <b>Mikrovilli (Bürstensaum)</b> – etwa so groß wie ein Tennisplatz.",
+"<b>Dickdarm</b>: Rückresorption von Wasser und Elektrolyten, Eindickung zu Kot. Am dichtesten mit <b>Mikrobiota</b> besiedelt (Magen am geringsten). Die Bakterien verwerten unverdauliche Bestandteile wie Ballaststoffe und bilden nützliche Substanzen.",
+"Hormone: <b>Ghrelin</b> (Magen) → Appetit ↑ · <b>Gastrin</b> (Magen, Dünndarm) → Magensäure und Pepsin ↑ · <b>Cholecystokinin</b> (Dünndarm) → Gallenfluss ↑ · <b>Sekretin</b> (Dünndarm) → hemmt Magensäure · <b>GLP-1</b> (Dünn-, Dickdarm) → Insulin ↑, Sättigung.",
+"Kohlenhydrate: α-Amylase spaltet α-1,4-Bindungen (Amylose, Amylopektin, Glykogen); Verzweigungen (α-1,6) brauchen α-1,6-Glucosidasen; <b>Disaccharidasen</b> am Bürstensaum spalten Zweifachzucker. Cellulose (β-1,4) bleibt unverdaut.",
+"Lipide: geringe Spaltung schon durch Magenlipase; im Dünndarm Emulgierung durch Gallensäuren, Spaltung durch Lipasen; Mizellen bringen die Produkte zur Darmschleimhaut; Aufnahme per <b>passiver Diffusion</b>; in der Zelle Neuaufbau zu Triglyceriden → <b>Chylomikronen</b>.",
+"Proteine: HCl denaturiert, Pepsin spaltet erste Proteine; <b>85–95 %</b> werden im Dünndarm durch Pankreasenzyme gespalten. <b>Enteropeptidase</b> aktiviert Trypsinogen zu <b>Trypsin</b>, das die übrigen Vorstufen aktiviert. Endopeptidasen: Pepsin (Magen), Trypsin, Chymotrypsin, Elastase (Pankreas). Exopeptidasen: Carboxypeptidase A/B (Pankreas), Aminopeptidasen (Bürstensaum).",
+"Absorption: passiv (ohne Energie) oder aktiv. <b>Natrium</b>: primär-aktiv – eine ATP-verbrauchende Pumpe auf der basolateralen Seite hält Na⁺ in der Zelle niedrig; Wasser folgt dem Gradienten. <b>Sekundär-aktiv</b> mit Na⁺: Glucose, Galactose, Aminosäuren, Vitamin C."
+],
+karten:[
+["pH-Wert des Magensafts","0,9–1,6 (Salzsäure aus den Belegzellen)"],
+["Intrinsic Factor","Glykoprotein aus den Belegzellen, nötig für die Aufnahme von Vitamin B12"],
+["Aktivierung von Pepsinogen / Trypsinogen","Pepsinogen → Pepsin durch Magensäure · Trypsinogen → Trypsin durch Enteropeptidase"],
+["Ghrelin / Gastrin","Ghrelin: Appetit ↑ · Gastrin: Magensäure und Pepsin ↑"],
+["Cholecystokinin / Sekretin","CCK: Gallenfluss ↑ · Sekretin: hemmt Magensäure"],
+["GLP-1","Steigert die Insulinsekretion, beeinflusst Sättigung und Appetit"],
+["Hauptaufgabe des Dickdarms","Rückresorption von Wasser und Elektrolyten"],
+["Sekundär-aktive Absorption","Nährstoffe gelangen gemeinsam mit Na⁺ in die Zelle (Glucose, Galactose, Aminosäuren, Vitamin C)."],
+["Absorption von Lipiden","Passive Diffusion; danach Neuaufbau zu Triglyceriden und Verpackung in Chylomikronen"],
+["Bürstensaum","Mikrovilli auf den Darmzotten; stark vergrößerte Oberfläche mit Enzymen"]
+],
+quiz:[
+{q:"Welchen pH-Wert hat der Magensaft laut Unterlage?",a:["0,9 bis 1,6","6 bis 7","3,5 bis 4,5","7,4"],e:"Verantwortlich für das saure Milieu ist Salzsäure aus den Belegzellen. Speichel hat pH 6–7.",p:"S. 52"},
+{q:"Welche Zellen des Magens produzieren die Salzsäure?",a:["Die Belegzellen","Die Nebenzellen","Die β-Zellen","Die Zellen des Bürstensaums"],e:"Die Belegzellen bilden auch den Intrinsic Factor. Nebenzellen produzieren das schützende Mucin.",p:"S. 52"},
+{q:"Wofür wird der Intrinsic Factor benötigt?",a:["Für die Bindung und Absorption von Vitamin B12","Für die Aktivierung von Pepsinogen","Für die Emulgierung von Fetten","Für die Neutralisierung des Speisebreis"],e:"Der Intrinsic Factor ist ein Glykoprotein aus den Belegzellen des Magens.",p:"S. 52"},
+{q:"Wodurch wird Trypsinogen im Dünndarm zu Trypsin aktiviert?",a:["Durch die membrangebundene Enteropeptidase","Durch die Magensäure","Durch Gallensäuren","Durch Insulin"],e:"Trypsin aktiviert anschließend die anderen inaktiven Enzymvorstufen. Pepsinogen wird dagegen durch Magensäure aktiviert.",p:"S. 55"},
+{q:"Warum werden die Verdauungsenzyme des Pankreas als inaktive Vorstufen abgegeben?",a:["Damit das Pankreasgewebe sich nicht selbst verdaut","Weil sie im Pankreas zu schnell zerfallen würden","Damit sie im Magen wirken können","Weil sie erst durch Insulin aktiviert werden müssen"],e:"Die Vorstufen tragen die Endung -ogen (z. B. Trypsinogen) und werden erst im Dünndarm aktiviert.",p:"S. 55"},
+{q:"Welches Hormon stimuliert den Appetit?",a:["Ghrelin","Sekretin","Cholecystokinin","Glukagon-like Peptide 1"],e:"Ghrelin wird primär im Magen gebildet. GLP-1 beeinflusst dagegen Sättigung und steigert die Insulinsekretion.",p:"S. 54"},
+{q:"Welches Hormon hemmt die Sekretion von Magensäure?",a:["Sekretin","Gastrin","Ghrelin","Insulin"],e:"Sekretin aus dem Dünndarm hemmt die Magensäure; Gastrin stimuliert sie.",p:"S. 54"},
+{q:"Welches Hormon stimuliert den Gallenfluss?",a:["Cholecystokinin (CCK)","Gastrin","Ghrelin","Sekretin"],e:"Cholecystokinin wird im Dünndarm gebildet.",p:"S. 54"},
+{q:"Welcher Abschnitt des Verdauungstrakts ist am dichtesten mit Bakterien besiedelt?",a:["Der Dickdarm","Der Magen","Der Zwölffingerdarm","Die Speiseröhre"],e:"Der Magen ist am geringsten, der Dickdarm am dichtesten besiedelt. Dort erhalten die Bakterien unverdauliche Bestandteile wie Ballaststoffe.",p:"S. 53"},
+{q:"Was ist die wesentliche Aufgabe des Dickdarms?",a:["Die Rückresorption von Wasser und Elektrolyten","Die Spaltung von Proteinen durch Trypsin","Die Bildung von Gallenflüssigkeit","Die Absorption des Großteils der Makronährstoffe"],e:"Der Darminhalt wird dabei eingedickt, bis sich Kot bildet. Die Resorption der Nährstoffe findet im Dünndarm statt.",p:"S. 53"},
+{q:"Was bildet den sogenannten Bürstensaum des Dünndarms?",a:["Die Mikrovilli auf den Darmzotten","Die Krypten","Die Bakterien der Mikrobiota","Die Muskelschicht des Darms"],e:"Krypten (Einstülpungen), Zotten (Ausstülpungen) und Mikrovilli vergrößern die Oberfläche auf etwa die eines Tennisplatzes.",p:"S. 53"},
+{q:"Auf welche Weise wird Glucose aus dem Dünndarm aufgenommen?",a:["Sekundär-aktiv, gemeinsam mit Natriumionen","Durch passive Diffusion durch die Membran","Gebunden an Chylomikronen","Primär-aktiv unter direktem ATP-Verbrauch des Glucose-Transporters"],e:"Glucose nutzt den Natriumgradienten, den die ATP-verbrauchende Natriumpumpe auf der basolateralen Seite aufbaut.",p:"S. 55–56"},
+{q:"Wie gelangen die Spaltprodukte der Lipide in die Dünndarmzelle?",a:["Durch passive Diffusion","Sekundär-aktiv mit Natrium","Durch primär-aktiven Transport","Gar nicht – sie gehen direkt ins Blut"],e:"Zellmembranen sind ebenfalls fettlöslich. In der Zelle werden wieder Triglyceride aufgebaut und als Chylomikronen abgegeben.",p:"S. 56"},
+{q:"Welches Enzym ist eine Exopeptidase?",a:["Carboxypeptidase","Trypsin","Pepsin","Chymotrypsin"],e:"Exopeptidasen: Carboxypeptidase A und B (Pankreas), Aminopeptidasen (Bürstensaum). Pepsin, Trypsin, Chymotrypsin, Elastase sind Endopeptidasen.",p:"S. 55"},
+{q:"Wie viel Prozent der Proteine werden im Dünndarm enzymatisch zerlegt?",a:["Rund 85–95 %","Rund 10–15 %","Rund 50 %","Nahezu 0 % – die Proteinverdauung erfolgt im Magen"],e:"Im Magen beginnt die Proteinverdauung (Denaturierung, Pepsin), der Großteil erfolgt im Dünndarm durch Enzyme aus dem Pankreas.",p:"S. 55"},
+{q:"Welche Funktion hat das Bikarbonat im Pankreassaft?",a:["Es neutralisiert den sauren Speisebrei aus dem Magen.","Es aktiviert Pepsinogen.","Es emulgiert Fette.","Es senkt den Blutzucker."],e:"Bikarbonat schafft im Dünndarm ein Milieu, in dem die Pankreasenzyme arbeiten können.",p:"S. 52"},
+{q:"Welches Enzym ist im Speichel hauptsächlich enthalten?",a:["α-Amylase","Pepsin","Lipase","Lactase"],e:"Die α-Amylase spaltet Stärke. Speichel hat einen nahezu neutralen pH von 6–7.",p:"S. 52"},
+{q:"Woraus setzt sich die Gallenflüssigkeit vor allem zusammen?",a:["Aus Salzen der Gallensäuren, Cholesterin und Lecithin","Aus Salzsäure und Pepsin","Aus Bikarbonat und Trypsinogen","Aus Insulin und Glukagon"],e:"Die Galle wird von der Leber gebildet, in der Gallenblase gespeichert und neutralisiert, emulgiert Fette und ermöglicht Mizellen.",p:"S. 52"},
+{q:"In welcher Reihenfolge folgen die Abschnitte des Dünndarms aufeinander?",a:["Zwölffingerdarm – Leerdarm – Krummdarm","Leerdarm – Zwölffingerdarm – Krummdarm","Krummdarm – Leerdarm – Zwölffingerdarm","Zwölffingerdarm – Krummdarm – Leerdarm"],e:"Der Zwölffingerdarm (Duodenum) schließt an den Magen an, es folgen Leerdarm (Jejunum) und Krummdarm (Ileum).",p:"S. 53"}
+]
+},
+{
+id:"k13", teil:"Ernährung", titel:"Stoffwechsel: Glykolyse, β-Oxidation, Citratzyklus, Atmungskette, Ketogenese", seiten:"S. 56–68",
+merke:[
+"<b>Glykolyse</b>: Hauptabbauweg der Kohlenhydrate; Ausgangsstoff Glucose (Nahrung) oder Glykogen (Speicher), Endprodukt <b>Pyruvat</b>, Bilanz <b>2 ATP pro Glucose</b>; läuft aerob und anaerob.",
+"Glykolyse Schritt für Schritt: Glykogen → Glucose-1-phosphat (Glykogen-Phosphorylase) · Glucose + ATP → <b>Glucose-6-phosphat</b> (Hexokinase/Glucokinase) · → Fructose-6-phosphat · + ATP → <b>Fructose-1,6-bisphosphat</b> · <b>Aldolase</b> → Dihydroxyacetonphosphat + <b>Glycerinaldehyd-3-phosphat</b> (nur GAP wird weiter genutzt) · + Pᵢ, NAD⁺ → 1,3-Bisphosphoglycerat + NADH · → 3-Phosphoglycerat + ATP · → 2-Phosphoglycerat · − H₂O → Phosphoenolpyruvat → <b>Pyruvat</b> + ATP.",
+"Pyruvat <b>aerob</b> → <b>Acetyl-CoA</b> (CO₂ wird abgespalten, NAD⁺ → NADH). <b>Anaerob</b> → <b>Lactat</b> (NADH → NAD⁺).",
+"<b>β-Oxidation</b> (Mitochondrien): Fettsäure-CoA –FAD→ α-β-ungesättigte Fettsäure-CoA (FADH₂) → + H₂O → β-Hydroxyfettsäure-CoA → NAD⁺ → β-Ketofettsäure-CoA (NADH) → + CoA-SH → <b>Acetyl-CoA</b> + um <b>2 C-Atome verkürzte</b> Fettsäure-CoA. Wiederholung bis zum Ende.",
+"<b>Citratzyklus</b> (Mitochondrien): zentraler Stoffwechselweg für Abbau und Synthese von Kohlenhydraten, Lipiden und Proteinen. Pro Durchlauf <b>3 NADH + 1 FADH₂</b> (+ 1 GTP).",
+"Citratzyklus: Acetyl-CoA + <b>Oxalacetat</b> → <b>Citrat</b> → Isocitrat → (NADH, CO₂) <b>α-Ketoglutarat</b> → (NADH, CO₂) <b>Succinyl-CoA</b> → (GTP) <b>Succinat</b> → (FADH₂) <b>Fumarat</b> → (+ H₂O) <b>Malat</b> → (NADH) Oxalacetat.",
+"<b>Atmungskette</b>: an der <b>inneren Mitochondrienmembran</b>, Komplexe I–V. <b>I</b>: NADH → NAD⁺, Ubichinon (Q) → Hydrochinon (QH₂), pumpt Protonen in den Intermembranraum. <b>II</b>: Succinat → Fumarat mit FAD/FADH₂ (Succinat-Dehydrogenase), Elektronen auf Q. <b>III</b>: QH₂ reduziert Cytochrom c, pumpt Protonen. <b>IV</b>: <b>Cytochrom-c-Oxidase</b>, aus Protonen und Sauerstoff entsteht <b>Wasser</b>, pumpt Protonen. <b>V</b>: <b>ATPase</b> nutzt den Protonengradienten: ADP + Pᵢ → ATP, Protonen fließen zurück in die Matrix.",
+"<b>Ketogenese</b> (Leber, Hungerstoffwechsel): Wenn Kohlenhydrate fehlen, gelangt wenig Acetyl-CoA in den Citratzyklus. 2 Acetyl-CoA → Acetoacetyl-CoA → + Acetyl-CoA → <b>β-Hydroxymethylglutaryl-CoA</b> → <b>Acetoacetat</b> (+ Acetyl-CoA) → <b>Aceton</b> (−CO₂, wird abgeatmet) oder <b>β-Hydroxybutyrat</b> (mit NADH) → Energie für <b>Herz und Gehirn</b>."
+],
+karten:[
+["Endprodukt und Bilanz der Glykolyse","Pyruvat; 2 ATP pro Glucose"],
+["Schicksal von Pyruvat","Aerob → Acetyl-CoA · anaerob → Lactat"],
+["Aldolase","Spaltet Fructose-1,6-bisphosphat in Dihydroxyacetonphosphat und Glycerinaldehyd-3-phosphat."],
+["Produkt eines β-Oxidations-Zyklus","1 Acetyl-CoA + Fettsäure-CoA, die um 2 C-Atome kürzer ist (dazu FADH₂ und NADH)"],
+["Erster Schritt des Citratzyklus","Acetyl-CoA + Oxalacetat → Citrat"],
+["Ausbeute pro Citratzyklus","3 NADH, 1 FADH₂, 1 GTP, 2 CO₂"],
+["Schritt mit GTP-Bildung im Citratzyklus","Succinyl-CoA → Succinat"],
+["Komplex IV der Atmungskette","Cytochrom-c-Oxidase: Protonen + Sauerstoff → Wasser"],
+["Komplex V der Atmungskette","ATPase: nutzt den Protonengradienten zur ATP-Bildung"],
+["Ketonkörper","Acetoacetat, β-Hydroxybutyrat, Aceton"],
+["Wo laufen β-Oxidation, Citratzyklus und Atmungskette ab?","In den Mitochondrien (Atmungskette: innere Mitochondrienmembran)"]
+],
+quiz:[
+{q:"Was ist das Endprodukt der Glykolyse?",a:["Pyruvat","Acetyl-CoA","Citrat","Lactat"],e:"Pyruvat wird anschließend aerob zu Acetyl-CoA oder anaerob zu Lactat weiterverarbeitet.",p:"S. 56, 59"},
+{q:"Wie viele Moleküle ATP liefert die Glykolyse laut Unterlage pro Glucosemolekül?",a:["2","4","32","1"],e:"Die Bilanz der Glykolyse beträgt 2 ATP pro Glucose. Zwei ATP werden am Anfang investiert, mehrere am Ende gewonnen.",p:"S. 56"},
+{q:"Was entsteht aus Pyruvat unter anaeroben Bedingungen?",a:["Lactat","Acetyl-CoA","Oxalacetat","Glucose-6-phosphat"],e:"Ohne Sauerstoff wird Pyruvat unter Verbrauch von NADH zu Lactat; mit Sauerstoff zu Acetyl-CoA.",p:"S. 59"},
+{q:"Welches Enzym spaltet Fructose-1,6-bisphosphat?",a:["Aldolase","Hexokinase","Glykogen-Phosphorylase","ATPase"],e:"Die Aldolase spaltet in Dihydroxyacetonphosphat und Glycerinaldehyd-3-phosphat; nur Letzteres wird weiter genutzt.",p:"S. 58"},
+{q:"Was wird bei der Umwandlung von Glucose zu Glucose-6-phosphat verbraucht?",a:["ATP","NADH","FADH₂","GTP"],e:"Hexokinase bzw. Glucokinase überträgt eine Phosphatgruppe von ATP auf Glucose. Aus Glykogen entsteht Glucose-6-phosphat dagegen über Glucose-1-phosphat.",p:"S. 57"},
+{q:"Wo findet die β-Oxidation statt?",a:["In den Mitochondrien","Im Zellkern","Im Magen","Im Blutplasma"],e:"Lipasen spalten Fettsäuren vom Glycerin ab; diese werden in den Mitochondrien abgebaut.",p:"S. 60"},
+{q:"Um wie viele Kohlenstoffatome wird eine Fettsäure pro Durchlauf der β-Oxidation verkürzt?",a:["Um 2","Um 1","Um 4","Um 6"],e:"In jedem Durchlauf wird ein Molekül Acetyl-CoA (2 C-Atome) abgespalten.",p:"S. 61"},
+{q:"Welche Coenzyme werden in der β-Oxidation reduziert?",a:["FAD zu FADH₂ und NAD⁺ zu NADH","Nur ATP zu ADP","GDP zu GTP","CoA-SH zu Acetyl-CoA und ADP zu ATP"],e:"Im ersten Schritt wird FAD zu FADH₂, im dritten NAD⁺ zu NADH. Diese Redox-Äquivalente liefern in der Atmungskette ATP.",p:"S. 60"},
+{q:"Welche Reaktion steht am Beginn des Citratzyklus?",a:["Acetyl-CoA reagiert mit Oxalacetat zu Citrat.","Citrat reagiert zu Isocitrat.","Succinat wird zu Fumarat dehydriert.","Pyruvat reagiert zu Lactat."],e:"Dabei wird unter Beteiligung von Wasser Coenzym A abgespalten.",p:"S. 61"},
+{q:"Wie viele NADH und FADH₂ entstehen pro Durchlauf des Citratzyklus?",a:["3 NADH und 1 FADH₂","1 NADH und 3 FADH₂","2 NADH und 2 FADH₂","4 NADH und kein FADH₂"],e:"NADH entsteht bei Isocitrat → α-Ketoglutarat, α-Ketoglutarat → Succinyl-CoA und Malat → Oxalacetat; FADH₂ bei Succinat → Fumarat.",p:"S. 61–63"},
+{q:"In welchem Schritt des Citratzyklus entsteht GTP?",a:["Succinyl-CoA → Succinat","Citrat → Isocitrat","Fumarat → Malat","Malat → Oxalacetat"],e:"GTP ist gleichwertig zu ATP und kann seine Phosphatgruppe auf ADP übertragen.",p:"S. 63"},
+{q:"Welches Coenzym wird bei der Umwandlung von Succinat zu Fumarat reduziert?",a:["FAD","NAD⁺","GDP","Coenzym A"],e:"Succinat wird zu Fumarat dehydriert, dabei entsteht FADH₂. Diese Reaktion entspricht auch Komplex II der Atmungskette.",p:"S. 63, 65"},
+{q:"In welchen Schritten des Citratzyklus wird CO₂ abgespalten?",a:["Isocitrat → α-Ketoglutarat und α-Ketoglutarat → Succinyl-CoA","Citrat → Isocitrat und Fumarat → Malat","Succinat → Fumarat und Malat → Oxalacetat","Acetyl-CoA + Oxalacetat → Citrat"],e:"Beim instabilen Zwischenprodukt Oxalsuccinat wird CO₂ spontan abgespalten; ein weiteres CO₂ entsteht bei der Bildung von Succinyl-CoA.",p:"S. 62"},
+{q:"Wo laufen die Reaktionen der Atmungskette ab?",a:["An der inneren Mitochondrienmembran","Im Cytosol","An der Zellmembran","Im endoplasmatischen Retikulum"],e:"Dort sitzen die Komplexe I–V; Protonen werden in den Intermembranraum gepumpt.",p:"S. 64"},
+{q:"Welcher Komplex der Atmungskette bildet ATP?",a:["Komplex V (ATPase)","Komplex I","Komplex III","Komplex IV"],e:"Die ATPase nutzt den Protonengradienten: Protonen strömen in die Matrix zurück, dabei entsteht aus ADP und Phosphat ATP.",p:"S. 66"},
+{q:"Was geschieht an Komplex IV der Atmungskette?",a:["Cytochrom c wird oxidiert; aus Protonen und Sauerstoff entsteht Wasser.","NADH wird zu NAD⁺ oxidiert und Ubichinon reduziert.","Succinat wird zu Fumarat umgesetzt.","ATP wird aus ADP und Phosphat gebildet."],e:"Komplex IV ist die Cytochrom-c-Oxidase. Er pumpt zusätzlich Protonen in den Intermembranraum.",p:"S. 66"},
+{q:"Welche Funktion hat Komplex I der Atmungskette?",a:["Er oxidiert NADH zu NAD⁺, überträgt Elektronen auf Ubichinon und pumpt Protonen in den Intermembranraum.","Er setzt Succinat mit FAD zu Fumarat um.","Er bildet Wasser aus Sauerstoff.","Er nutzt den Protonengradienten zur ATP-Bildung."],e:"Aus Ubichinon (Q) entsteht dabei Hydrochinon (QH₂), das Komplex III weiterverwendet.",p:"S. 64"},
+{q:"Welche Substanz zählt nicht zu den Ketonkörpern?",a:["Lactat","Aceton","Acetoacetat","β-Hydroxybutyrat"],e:"Ketonkörper: Acetoacetat, β-Hydroxybutyrat, Aceton. Lactat entsteht aus Pyruvat bei Sauerstoffmangel.",p:"S. 67–68"},
+{q:"Wann und wo findet die Ketogenese statt?",a:["Im Hungerstoffwechsel bei Kohlenhydratmangel, in der Leber","Nach kohlenhydratreichen Mahlzeiten, im Muskel","Bei Sauerstoffmangel, im Gehirn","Bei Eiweißmangel, in der Niere"],e:"Aus Acetyl-CoA (aus der β-Oxidation) bildet die Leber Ketonkörper, die Herz und Gehirn mit Energie versorgen.",p:"S. 67"},
+{q:"Welches Zwischenprodukt entsteht in der Ketogenese aus Acetoacetyl-CoA und Acetyl-CoA?",a:["β-Hydroxymethylglutaryl-CoA","Succinyl-CoA","Fructose-1,6-bisphosphat","Phosphoenolpyruvat"],e:"Daraus wird anschließend Acetyl-CoA abgespalten und Acetoacetat gebildet.",p:"S. 67–68"},
+{q:"Was geschieht mit dem Aceton, das in der Ketogenese entsteht?",a:["Es wird über die Lunge abgeatmet.","Es wird zu Glucose umgebaut.","Es wird als Glykogen gespeichert.","Es wird zu Harnstoff umgewandelt."],e:"Das erklärt den charakteristischen Geruch der Ausatemluft. β-Hydroxybutyrat wird dagegen über das Blut zu Herz und Gehirn transportiert.",p:"S. 68"}
+]
+},
+{
+id:"k14", teil:"Ernährung", titel:"Energiehaushalt", seiten:"S. 69–72",
+merke:[
+"Einheit der Energie: <b>Joule</b> (kg·m²/s²); 1 J hebt etwa 100 g (eine Tafel Schokolade) um 1 m an. <b>1 cal</b> erwärmt 1 g Wasser von 14,5 auf 15,5 °C. <b>1 cal = 4,1855 J</b>; 1 kJ = 0,2389 kcal.",
+"Energiebilanz = Energiezufuhr (Nahrung) – Energieverbrauch (Grundumsatz, Leistungsumsatz …). Der Mensch ist <b>heterotroph</b>.",
+"Kohlenhydrat-Überschuss → kurzfristig Glykogen (Leber, Muskel), darüber hinaus in der Leber zu Fett. Fett ist der konzentrierteste Energiespeicher.",
+"Brennwerte (kJ/g bzw. kcal/g): <b>physikalisch</b> KH 17,2 (4,1) · Fett 38,9 (9,3) · Protein 23 (5,4). <b>Physiologisch</b> KH 17,2 (4,1) · Fett 38,9 (9,3) · <b>Protein 17,2 (4,1)</b>. <b>Atwater-Faktoren</b>: 17 / 38 / 17 kJ bzw. <b>4 / 9 / 4 kcal</b>.",
+"Beim Protein ist der physiologische Brennwert deutlich kleiner, weil die <b>Harnstoffsynthese</b> (Entgiftung des Ammoniaks) Energie kostet.",
+"<b>ATP</b> ist die zentrale Energiewährung („Energie-Kreditkarte“). Spaltung zu ADP + Phosphat setzt ca. <b>33 kJ/mol</b> frei. Ein Erwachsener bildet und verbraucht täglich <b>80–100 kg ATP</b>.",
+"Wirkungsgrad der Umwandlung in ATP: Kohlenhydrate 45 %, Lipide 43 %, Proteine 38 %. Der Rest geht als <b>Wärme</b> „verloren“ – Energie wird nie vernichtet.",
+"Energieverbrauch: <b>Grundumsatz</b> (Erhaltung lebensnotwendiger Funktionen; abhängig von Alter, Gewicht, Schwangerschaft …) + <b>Leistungsumsatz</b> (körperliche Aktivität) + Umsatzanstieg nach Nahrungsaufnahme (<b>5–10 %</b>).",
+"Grundumsatz nach Formel (MJ/Tag), z. B. Frauen 31–60 J.: 0,034 · kg KG + 3,538; Männer 31–60 J.: 0,048 · kg KG + 3,653.",
+"<b>Täglicher Energiebedarf = GU × PAL</b>. PAL: 1,2 bettlägerig · 1,4–1,5 Büro · 1,6–1,7 Studierende · 1,8–1,9 Kellner/Verkäufer · 2,0–2,4 Land-/Forstarbeit, Sport.",
+"Richtwerte bei PAL 1,4: Frauen 25–50 J. 1.900 kcal, Männer 25–50 J. 2.400 kcal; Frauen ≥ 65 J. 1.600 kcal, Männer ≥ 65 J. 2.000 kcal."
+],
+karten:[
+["Atwater-Faktoren","Kohlenhydrate 4 kcal/g · Fett 9 kcal/g · Protein 4 kcal/g (17 / 38 / 17 kJ/g)"],
+["Umrechnung cal ↔ J","1 cal = 4,1855 J · 1 kJ = 0,2389 kcal"],
+["Warum ist der physiologische Brennwert von Protein kleiner?","Die Harnstoffsynthese zur Entgiftung von Ammoniak verbraucht Energie."],
+["Energie bei der ATP-Spaltung","Ca. 33 kJ pro mol ATP"],
+["Täglicher ATP-Umsatz","80–100 kg ATP pro Tag"],
+["Formel Energiebedarf","Gesamtenergiebedarf = Grundumsatz × PAL"],
+["PAL-Wert Büroarbeit","1,4–1,5"],
+["Nahrungsinduzierte Thermogenese","Ca. 5–10 % des täglichen Gesamtumsatzes"],
+["Wirkungsgrad ATP-Bildung","KH 45 %, Lipide 43 %, Proteine 38 %"]
+],
+quiz:[
+{q:"Welcher Atwater-Faktor gilt für Fett?",a:["9 kcal/g (38 kJ/g)","4 kcal/g (17 kJ/g)","7 kcal/g (29 kJ/g)","5,4 kcal/g (23 kJ/g)"],e:"Atwater-Faktoren: Kohlenhydrate und Protein 4 kcal/g, Fett 9 kcal/g. 5,4 kcal/g ist der physikalische Brennwert von Protein.",p:"S. 70"},
+{q:"Warum ist der physiologische Brennwert von Protein deutlich kleiner als sein physikalischer Brennwert?",a:["Weil die Harnstoffsynthese zur Entgiftung von Ammoniak Energie verbraucht","Weil Proteine schwer verdaulich sind und kaum absorbiert werden","Weil Proteine im Kalorimeter nicht vollständig verbrennen","Weil Proteine im Körper nur gespeichert, nicht abgebaut werden"],e:"Die Unterlage betont: Das liegt nicht an schlechter Verdaulichkeit, sondern an der Energie für die Harnstoffsynthese.",p:"S. 70"},
+{q:"Wie hoch ist der physiologische Brennwert von Kohlenhydraten?",a:["17,2 kJ/g bzw. 4,1 kcal/g","38,9 kJ/g bzw. 9,3 kcal/g","23 kJ/g bzw. 5,4 kcal/g","29 kJ/g bzw. 7 kcal/g"],e:"Bei Kohlenhydraten sind physikalischer und physiologischer Brennwert laut Tabelle gleich (17,2 kJ/g).",p:"S. 70"},
+{q:"Wie viele Kilojoule entsprechen ungefähr einer Kilokalorie?",a:["4,19 kJ","0,24 kJ","1 kJ","9 kJ"],e:"1 cal = 4,1855 J, also 1 kcal ≈ 4,19 kJ. Umgekehrt: 1 kJ = 0,2389 kcal.",p:"S. 69"},
+{q:"Wie hoch ist der Umsatzanstieg nach der Nahrungsaufnahme ungefähr?",a:["5–10 % des täglichen Gesamtumsatzes","30–40 % des täglichen Gesamtumsatzes","1 % des täglichen Gesamtumsatzes","50 % des täglichen Gesamtumsatzes"],e:"Neben Grundumsatz und Leistungsumsatz ist das die dritte Kategorie des Energieverbrauchs.",p:"S. 71"},
+{q:"Welcher PAL-Wert entspricht einer ausschließlich sitzenden Tätigkeit ohne anstrengende Freizeitaktivität (z. B. Büroangestellte)?",a:["1,4–1,5","1,2","1,8–1,9","2,0–2,4"],e:"1,2 bettlägerig, 1,6–1,7 Studierende, 1,8–1,9 Kellner/Verkäufer, 2,0–2,4 körperlich schwer Arbeitende und Sportler.",p:"S. 72"},
+{q:"Eine Person hat einen Grundumsatz von 6 MJ pro Tag und einen PAL-Wert von 1,5. Wie hoch ist ihr täglicher Energiebedarf?",a:["9 MJ","7,5 MJ","4 MJ","6 MJ"],e:"Energiebedarf = GU × PAL = 6 MJ × 1,5 = 9 MJ.",p:"S. 72"},
+{q:"Grundumsatz einer 40-jährigen Frau: GU (MJ/Tag) = 0,034 · kg KG + 3,538. Wie hoch ist er bei 60 kg Körpergewicht (gerundet)?",a:["5,58 MJ","2,04 MJ","3,57 MJ","6,58 MJ"],e:"0,034 · 60 = 2,04; 2,04 + 3,538 = 5,578 ≈ 5,58 MJ pro Tag.",p:"S. 71"},
+{q:"Wie viel Energie liefert eine Mahlzeit mit 10 g Fett und 20 g Kohlenhydraten (nach Atwater-Faktoren)?",a:["170 kcal","120 kcal","130 kcal","270 kcal"],e:"10 g · 9 kcal/g = 90 kcal; 20 g · 4 kcal/g = 80 kcal; zusammen 170 kcal.",p:"S. 70"},
+{q:"Wie viel Energie wird bei der Spaltung von 1 mol ATP zu ADP und Phosphat ungefähr frei?",a:["Ca. 33 kJ","Ca. 3,3 kJ","Ca. 330 kJ","Ca. 3300 kJ"],e:"Diese Energie kann z. B. für die Muskelkontraktion genutzt werden.",p:"S. 71"},
+{q:"Wie viel ATP synthetisiert (und verbraucht) ein Erwachsener ungefähr pro Tag?",a:["80–100 kg","80–100 g","8–10 kg","1 kg"],e:"ATP wird ständig auf- und abgebaut; es ist die häufigste Transportform von Energie im Körper.",p:"S. 71"},
+{q:"Bei welchem Makronährstoff ist der Wirkungsgrad der Umwandlung in ATP laut Unterlage am höchsten?",a:["Kohlenhydrate (ca. 45 %)","Lipide (ca. 43 %)","Proteine (ca. 38 %)","Bei allen exakt gleich"],e:"Der nicht in ATP umgewandelte Anteil wird als Wärme frei.",p:"S. 71"},
+{q:"Wie wird der Mensch hinsichtlich seiner Ernährungsweise eingeordnet?",a:["Als heterotroph","Als autotroph","Als photosynthetisch","Als chemoautotroph"],e:"Heterotrophe Lebewesen bauen ihren Körper aus bereits vorhandenen Verbindungen der Nahrung auf.",p:"S. 69"},
+{q:"Welcher Richtwert für die tägliche Energiezufuhr gilt für eine 25- bis 50-jährige Frau bei PAL 1,4?",a:["1.900 kcal","2.400 kcal","1.600 kcal","2.200 kcal"],e:"Männer gleichen Alters: 2.400 kcal. Frauen ab 65: 1.600 kcal.",p:"S. 72"},
+{q:"Was versteht man unter dem Grundumsatz?",a:["Die Energiemenge zur Erhaltung der lebensnotwendigen Körperfunktionen","Die Energie, die für Sport und Beruf benötigt wird","Den Umsatzanstieg nach einer Mahlzeit","Die gesamte mit der Nahrung aufgenommene Energie"],e:"Der Grundumsatz hängt u. a. von Alter, Körpergewicht und besonderen Anforderungen wie Schwangerschaft oder Stillzeit ab.",p:"S. 71"}
+]
+},
+{
+id:"k15", teil:"Ernährung", titel:"Ernährungsabhängige Krankheiten", seiten:"S. 72–77",
+merke:[
+"<b>Körperzusammensetzung</b>: <b>Hautfaltendicke</b> mit dem Kaliper an definierten Stellen (ca. 50 % des Körperfetts liegt unter der Haut). <b>Bioelektrische Impedanzanalyse (BIA)</b>: schwacher Wechselstrom über Elektroden an Handgelenk und Knöchel; Impedanz = ohmscher + kapazitiver Widerstand → Körperwasser.",
+"<b>Verzehrserhebung</b>: <b>FFQ</b> (Verzehrshäufigkeit, rückwirkend über Monate/Jahre, gutes Gedächtnis nötig) · <b>Wiegeprotokoll</b> (alles abwiegen, inkl. Reste und Außer-Haus) · <b>Schätzprotokoll</b> (Mengen geschätzt) · <b>Erinnerungsprotokoll</b> (geschulter Interviewer, z. B. 24-Stunden-Recall).",
+"<b>BMI</b> (kg/m², WHO): &lt; 18,5 Untergewicht · 18,5–24,9 Normalgewicht · 25,0–29,9 Übergewicht (Prä-Adipositas) · 30,0–34,9 Adipositas I · 35,0–39,9 Adipositas II · ≥ 40 Adipositas III.",
+"Fettverteilung: <b>android</b> (männlich, bauchbetont) vs. <b>gynoid</b> (weiblich). <b>WHR</b> &gt; 0,85 (Frauen) bzw. &gt; 1,0 (Männer) = abdominelle Adipositas. Taillenumfang: leicht erhöhtes Risiko ab 80 cm (F) / 94 cm (M), stark erhöht ab 88 cm / 102 cm.",
+"Entstehung: exogene (Ernährung, Bewegungsmangel) und endogene Faktoren (Genetik, Hormone); langfristig <b>positive Energiebilanz</b>.",
+"Folgen von Übergewicht: Bewegungsapparat, Bronchien, Herz-Kreislauf (Bluthochdruck, Arteriosklerose, Herzinfarkt), Diabetes Typ II, Fettstoffwechselstörungen, Gicht, Krebs, Depression, Unfälle.",
+"<b>Primärprävention</b>: gesunder Lebensstil verhindert die Entstehung. <b>Sekundärprävention</b>: bei bereits bestehendem Übergewicht Folgekomplikationen vermeiden.",
+"<b>Diabetes mellitus</b>: Störung der Insulinsekretion (β-Zellen der Langerhans'schen Inseln) oder -wirkung → chronische <b>Hyperglykämie</b>. <b>Typ I</b>: Autoimmunerkrankung, oft Kindes-/Jugendalter, β-Zellen zerstört → Insulingabe. <b>Typ II</b>: schleichend, <b>Insulinresistenz</b>; IIa normalgewichtig mit verringerter Insulinproduktion, IIb übergewichtig, häufig metabolisches Syndrom.",
+"<b>Insulin</b> fördert die Aufnahme von Glucose, Fett- und Aminosäuren in die Zellen sowie den Aufbau von Glykogen, Triglyceriden und Proteinen.",
+"Blutzucker gesund <b>70–110 mg/dL</b>; über <b>180 mg/dL</b> wird Glucose mit dem Harn ausgeschieden (<b>Nierenschwelle</b>); unter <b>50 mg/dL</b> = Hypoglykämie (Zittern, Schweißausbruch, rascher Puls, Schwindel, Appetit). Diabetisches Koma: Ketonkörperbildung, <b>Acetongeruch</b> der Ausatemluft.",
+"Chronische Folgen: <b>Mikroangiopathie</b> (kleine Gefäße: Augenhintergrund, Niere, Nerven) · <b>Makroangiopathie</b> (Arteriosklerose → Herzinfarkt, Schlaganfall) · <b>diabetischer Fuß</b>.",
+"Diagnostik: <b>Glukosetoleranztest</b> (nüchtern 50–100 g Glucose, Messungen über 2 Stunden). <b>HbA1c</b> = Langzeitparameter für den Blutzucker der vergangenen Wochen.",
+"Therapie: Typ I → Insulin, abgestimmt auf <b>Broteinheiten</b> (1 BE = 10–12 g verdauliche KH). Typ II → Ursachen behandeln (Gewicht normalisieren, Bewegung), ggf. Medikamente/Insulin. Ausgewogene vollwertige Mischkost.",
+"<b>Glykämischer Index</b>: hoch ≥ 70 (Cornflakes 81, Kartoffeln 78, Wassermelone 76, Reis 73) · mittel 56–69 (Vollkornreis 68, Saccharose 65, Pommes frites 63, Honig 61, grobes Roggenvollkornbrot 57) · niedrig ≤ 55 (Nudeln 49, Vollmilch 39, Nüsse 24). Diabetiker: GI ≤ 50 bevorzugen. <b>Glykämische Last</b> = GI × Kohlenhydratanteil."
+],
+karten:[
+["BMI-Klassen (WHO)","&lt;18,5 Unter · 18,5–24,9 Normal · 25–29,9 Prä-Adipositas · 30–34,9 Grad I · 35–39,9 Grad II · ≥40 Grad III"],
+["Abdominelle Adipositas (WHR)","Frauen &gt; 0,85 · Männer &gt; 1,0"],
+["Taillenumfang stark erhöhtes Risiko","Frauen ab 88 cm · Männer ab 102 cm"],
+["FFQ","Food Frequency Questionnaire: erfasst rückwirkend die Verzehrshäufigkeit über lange Zeiträume."],
+["Diabetes Typ I vs. Typ II","Typ I: Autoimmun, β-Zellen zerstört, Insulinmangel · Typ II: schleichend, Insulinresistenz"],
+["Nierenschwelle für Glucose","Ca. 180 mg/dL"],
+["Hypoglykämie","Blutzucker unter 50 mg/dL"],
+["Broteinheit (BE)","Lebensmittelmenge mit 10–12 g verdaulichen Kohlenhydraten"],
+["Glykämische Last","GI × Kohlenhydratanteil des Lebensmittels"],
+["Mikro- vs. Makroangiopathie","Mikro: kleine Gefäße (Auge, Niere, Nerven) · Makro: große Arterien (Arteriosklerose)"],
+["Primär- vs. Sekundärprävention","Primär: Entstehung verhindern · Sekundär: bei bestehender Erkrankung Folgen vermeiden"]
+],
+quiz:[
+{q:"Eine Person hat einen BMI von 27. Wie wird ihr Körpergewicht nach WHO eingestuft?",a:["Übergewicht (Prä-Adipositas)","Normalgewicht","Adipositas Grad I","Adipositas Grad II"],e:"Prä-Adipositas: 25,0–29,9 kg/m². Adipositas Grad I beginnt bei 30.",p:"S. 74"},
+{q:"Eine Person wiegt 80 kg und ist 1,60 m groß. In welche BMI-Klasse fällt sie?",a:["Adipositas Grad I","Übergewicht (Prä-Adipositas)","Adipositas Grad II","Normalgewicht"],e:"BMI = 80 / 1,6² = 80 / 2,56 = 31,25 kg/m² → Adipositas Grad I (30,0–34,9).",p:"S. 74"},
+{q:"Ab welchem Taille-Hüft-Verhältnis (WHR) spricht man bei Frauen von abdomineller Adipositas?",a:["Über 0,85","Über 1,0","Über 0,7","Über 1,2"],e:"Grenzwerte laut Unterlage: Frauen über 0,85, Männer über 1,0.",p:"S. 74"},
+{q:"Ab welchem Taillenumfang besteht bei Männern ein stark erhöhtes gesundheitliches Risiko?",a:["102 cm","94 cm","88 cm","80 cm"],e:"Männer: leicht erhöht ab 94 cm, stark ab 102 cm. Frauen: 80 cm bzw. 88 cm.",p:"S. 74"},
+{q:"Welche Methode erfasst rückwirkend, wie häufig bestimmte Lebensmittel über Monate oder Jahre verzehrt wurden?",a:["Der Verzehrshäufigkeits-Fragebogen (FFQ)","Das Wiegeprotokoll","Das Schätzprotokoll","Die bioelektrische Impedanzanalyse"],e:"Der FFQ setzt ein gutes Erinnerungsvermögen voraus. Wiege- und Schätzprotokolle erfassen den aktuellen Verzehr.",p:"S. 74"},
+{q:"Wie nennt man die Methode, bei der ein geschulter Interviewer den Verzehr des vergangenen Tages erfragt?",a:["Erinnerungsprotokoll (24-Stunden-Protokoll)","Wiegeprotokoll","Food Frequency Questionnaire","Hautfaltendickenmessung"],e:"Beim Erinnerungsprotokoll erfasst ein Interviewer per Befragung die verzehrten Lebensmittel und Getränke.",p:"S. 74"},
+{q:"Was wird bei der bioelektrischen Impedanzanalyse (BIA) gemessen?",a:["Der Spannungsabfall eines schwachen Wechselstroms, verursacht durch die Impedanz des Körpers","Die Dicke von Hautfalten mit einer Messzange","Der Taillen- und Hüftumfang","Der Blutzuckerverlauf nach Glucosegabe"],e:"Die Impedanz ist die Summe aus ohmschem und kapazitivem Widerstand. Daraus lassen sich Gesamtkörperwasser und extrazelluläre Flüssigkeit ableiten.",p:"S. 72"},
+{q:"Mit welchem Instrument wird die Hautfaltendicke gemessen?",a:["Mit einem Kaliper","Mit einem Kalorimeter","Mit Elektroden an Handgelenk und Knöchel","Mit einem Maßband an Taille und Hüfte"],e:"Aus den Messwerten an definierten Stellen wird mit alters- und geschlechtsspezifischen Formeln der Körperfettanteil berechnet.",p:"S. 72"},
+{q:"Welche Aussage beschreibt Diabetes mellitus Typ I?",a:["Eine Autoimmunerkrankung, bei der die β-Zellen der Langerhans'schen Inseln zerstört werden","Eine schleichend entstehende Insulinresistenz","Eine Erkrankung, die ausschließlich durch Übergewicht entsteht","Eine Überproduktion von Insulin"],e:"Typ I tritt oft schon im Kindes- oder Jugendalter auf; die regelmäßige Insulingabe ist unverzichtbar.",p:"S. 75"},
+{q:"Was kennzeichnet Diabetes mellitus Typ II?",a:["Eine Insulinresistenz: Die Zellen nehmen das Insulinsignal nur stark vermindert wahr.","Die autoimmune Zerstörung der β-Zellen im Kindesalter","Ein dauerhaft zu niedriger Blutzuckerspiegel","Das vollständige Fehlen der Bauchspeicheldrüse"],e:"Anfangs produziert der Körper immer mehr Insulin, dennoch gelangt Glucose kaum in die Zellen. Typ IIb ist häufig Folge eines metabolischen Syndroms.",p:"S. 75"},
+{q:"Ab welchem Blutglucosespiegel wird Glucose über den Harn ausgeschieden (Nierenschwelle)?",a:["Über ca. 180 mg/dL","Über ca. 110 mg/dL","Über ca. 70 mg/dL","Über ca. 400 mg/dL"],e:"Die Folge sind vermehrter Harndrang und Durstgefühl. Bei Gesunden liegt der Blutzucker bei 70–110 mg/dL.",p:"S. 76"},
+{q:"Ab welchem Blutglucosewert spricht man laut Unterlage von einer Hypoglykämie?",a:["Unter 50 mg/dL","Unter 110 mg/dL","Unter 90 mg/dL","Unter 10 mg/dL"],e:"Typische Zeichen: Zittern, Schweißausbruch, rascher Puls, Schwindel, vermehrter Appetit.",p:"S. 76"},
+{q:"Wodurch entsteht der acetonartige Geruch der Ausatemluft beim diabetischen Koma?",a:["Durch die vermehrte Bildung von Ketonkörpern","Durch erhöhte Milchsäurebildung","Durch zu viel Insulin im Blut","Durch eine Störung der Harnstoffsynthese"],e:"Bei Insulinmangel gelangt kaum Energie in die Zellen; über die β-Oxidation werden vermehrt Ketonkörper gebildet, darunter Aceton.",p:"S. 76"},
+{q:"Was versteht man unter einer Mikroangiopathie bei Diabetes?",a:["Krankhafte Veränderungen kleiner Blutgefäße, z. B. am Augenhintergrund, an Nieren und Nerven","Arteriosklerose der großen Arterien","Eine Störung der Wundheilung am Fuß","Einen akuten Unterzucker"],e:"Die Makroangiopathie betrifft die großen Arterien (Arteriosklerose) und erhöht das Risiko für Herzinfarkt und Schlaganfall.",p:"S. 76"},
+{q:"Wie viele verdauliche Kohlenhydrate enthält eine Broteinheit (BE)?",a:["10–12 g","1–2 g","25–30 g","50 g"],e:"Diabetiker/innen mit Typ I stimmen ihre Insulindosis an Broteinheiten ab.",p:"S. 77"},
+{q:"Wie berechnet sich die glykämische Last eines Lebensmittels?",a:["Glykämischer Index × Kohlenhydratanteil","Glykämischer Index ÷ Fettanteil","Kohlenhydratanteil × Energiegehalt","Glykämischer Index + Ballaststoffanteil"],e:"So können z. B. Wassermelone (hoher GI, wenig KH) und Lebensmittel mit niedrigem GI und viel KH ähnlich wirken.",p:"S. 77"},
+{q:"Welches Lebensmittel hat laut Tabelle den niedrigsten glykämischen Index?",a:["Gemischte Nüsse","Cornflakes","Gekochte Kartoffeln","Honig"],e:"Nüsse 24, Honig 61, Kartoffeln 78, Cornflakes 81.",p:"S. 77"},
+{q:"Was versteht man unter Primärprävention von Übergewicht?",a:["Durch einen gesunden Lebensstil entsteht Übergewicht gar nicht erst.","Bei bestehendem Übergewicht werden Folgekomplikationen vermieden.","Übergewicht wird mit Medikamenten behandelt.","Adipositas wird operativ behandelt."],e:"Sekundärprävention setzt ein, wenn Übergewicht bereits besteht.",p:"S. 75"},
+{q:"Welcher Test dient laut Unterlage dem gesicherten Nachweis eines Diabetes?",a:["Der Glukosetoleranztest","Die Hautfaltendickenmessung","Die bioelektrische Impedanzanalyse","Der Food Frequency Questionnaire"],e:"Nüchtern werden 50–100 g Glucose in Wasser verabreicht und der Blutzucker über zwei Stunden mehrfach gemessen.",p:"S. 76"}
+]
+}
+);
+
+</script>
+<script>
+// ---------- Speicher ----------
+const KEY="ew_aufnahmetest_v1";
+let S={q:{},c:{},exams:[]};
+let memOnly=false;
+function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);S=Object.assign({q:{},c:{},exams:[]},o);}}catch(e){memOnly=true;}}
+function save(){if(memOnly)return;try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){memOnly=true;}}
+load();
+
+// ---------- Hilfen ----------
+const $=s=>document.querySelector(s);
+const app=()=>document.getElementById("app");
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const L="ABCD";
+const kapById=id=>KAP.find(k=>k.id===id);
+function allQ(){const r=[];KAP.forEach(k=>k.quiz.forEach((q,i)=>r.push({kid:k.id,i,id:k.id+"-"+i,q})));return r;}
+function allC(){const r=[];KAP.forEach(k=>k.karten.forEach((c,i)=>r.push({kid:k.id,i,id:k.id+"-"+i,c})));return r;}
+function qStat(id){return S.q[id]||{r:0,w:0,last:null};}
+function isWeak(id){const s=S.q[id];return s&&s.last===false;}
+function kapProgress(k){
+  const n=k.quiz.length;let mastered=0,seen=0;
+  k.quiz.forEach((q,i)=>{const s=S.q[k.id+"-"+i];if(s){seen++;if(s.last===true)mastered++;}});
+  return {n,seen,mastered,pct:Math.round(mastered/n*100)};
+}
+function record(id,ok){const s=S.q[id]||{r:0,w:0,last:null};if(ok)s.r++;else s.w++;s.last=ok;S.q[id]=s;save();}
+function teilClass(t){return t;}
+let timerId=null;
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+
+// ---------- Navigation ----------
+let view="start";
+function go(v,arg){stopTimer();view=v;document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  ({start:vStart,lernen:vLernen,kapitel:vKapitel,karten:vKarten,ueben:vUeben,pruefung:vPruefung})[v](arg);window.scrollTo(0,0);}
+
+// ---------- Start ----------
+function vStart(){
+  const qs=allQ();const seen=qs.filter(x=>S.q[x.id]).length;
+  let r=0,w=0;Object.values(S.q).forEach(s=>{r+=s.r;w+=s.w;});
+  const quote=r+w?Math.round(r/(r+w)*100):0;
+  const weak=qs.filter(x=>isWeak(x.id)).length;
+  const cards=allC();const masteredC=cards.filter(x=>(S.c[x.id]||1)>=4).length;
+  const lastExam=S.exams.length?S.exams[S.exams.length-1]:null;
+  let h=`<div class="card"><h2 style="margin-top:0">Schön, dass du da bist.</h2>
+  <p class="muted" style="margin:0">Hier lernst du den gesamten Stoff der Vorbereitungsliteratur Schritt für Schritt: erst verstehen, dann mit Karteikarten festigen, dann mit Übungsfragen und Prüfungssimulation trainieren.</p></div>
+  <div class="grid three">
+    <div class="card stat"><b>${seen}/${qs.length}</b><span>Fragen bearbeitet</span></div>
+    <div class="card stat"><b>${quote}%</b><span>Trefferquote</span></div>
+    <div class="card stat"><b>${masteredC}/${cards.length}</b><span>Karten gefestigt</span></div>
+  </div>
+  <div class="grid two">
+    <button class="btn wide" onclick="go('lernen')">Stoff lernen</button>
+    <button class="btn petrol wide" onclick="startQuiz('mix')">Gemischte Übung (20 Fragen)</button>
+    <button class="btn flieder wide" ${weak?"":"disabled"} onclick="startQuiz('weak')">Fehler wiederholen (${weak})</button>
+    <button class="btn ghost wide" onclick="go('pruefung')">Prüfung simulieren</button>
+  </div>`;
+  if(lastExam){h+=`<div class="card" style="margin-top:14px"><h3>Letzte Prüfungssimulation</h3><p style="margin:0">${new Date(lastExam.d).toLocaleDateString("de-AT")}: <b>${lastExam.r} von ${lastExam.n}</b> richtig (${Math.round(lastExam.r/lastExam.n*100)} %)</p></div>`;}
+  h+=`<div class="teilh">Fortschritt nach Kapiteln</div>`;
+  KAP.forEach((k,ix)=>{const p=kapProgress(k);
+    h+=`<div class="card kap" onclick="go('kapitel','${k.id}')"><div class="num ${k.teil}">${ix+1}</div><div class="t"><b>${k.titel}</b>
+    <div class="bar" style="margin:7px 0 4px"><i style="width:${p.pct}%"></i></div><span class="small muted">${p.mastered} von ${p.n} Fragen sicher · ${k.seiten}</span></div></div>`;});
+  if(memOnly)h+=`<p class="note">Hinweis: Dein Browser erlaubt hier kein Speichern. Der Fortschritt bleibt nur bis zum Schließen der Seite erhalten.</p>`;
+  h+=`<p class="small muted" style="text-align:center;margin-top:18px"><button class="btn ghost small" onclick="resetAll()">Fortschritt zurücksetzen</button></p>`;
+  app().innerHTML=h;
+}
+function resetAll(){if(confirm("Möchtest du deinen gesamten Lernfortschritt löschen?")){S={q:{},c:{},exams:[]};save();go("start");}}
+
+// ---------- Lernen ----------
+function vLernen(){
+  let h=`<h2>Stoff lernen</h2><p class="muted" style="margin-top:-6px">Wähle ein Kapitel. Jedes enthält die wichtigsten Inhalte als Merkkarten, dazu Karteikarten und Übungsfragen.</p>`;
+  let last="";
+  KAP.forEach((k,ix)=>{
+    if(k.teil!==last){last=k.teil;h+=`<div class="teilh">${k.teil==="Chemie"?"Chemische Grundlagen":k.teil==="Biomoleküle"?"Biomoleküle":"Ernährungswissenschaftliche Grundlagen"}</div>`;}
+    const p=kapProgress(k);
+    h+=`<div class="card kap" onclick="go('kapitel','${k.id}')"><div class="num ${k.teil}">${ix+1}</div><div class="t"><b>${k.titel}</b><span class="small muted">${k.seiten} · ${k.merke.length} Merkpunkte · ${k.quiz.length} Fragen · ${p.pct}% sicher</span></div><span class="muted">›</span></div>`;
+  });
+  app().innerHTML=h;
+}
+function vKapitel(id){
+  const k=kapById(id);const ix=KAP.indexOf(k);
+  let h=`<button class="back" onclick="go('lernen')">‹ Alle Kapitel</button>
+  <div class="row" style="margin-bottom:6px"><span class="pill p-${k.teil}">${k.teil}</span><span class="small muted">${k.seiten}</span></div>
+  <h2>${ix+1}. ${k.titel}</h2>
+  <ul class="merke ${k.teil}">${k.merke.map(m=>`<li>${m}</li>`).join("")}</ul>
+  <div class="grid two" style="margin-top:16px">
+    <button class="btn flieder wide" onclick="go('karten','${k.id}')">Karteikarten (${k.karten.length})</button>
+    <button class="btn petrol wide" onclick="startQuiz('kap','${k.id}')">Übungsfragen (${k.quiz.length})</button>
+  </div>
+  <div class="row" style="justify-content:space-between;margin-top:16px">
+    ${ix>0?`<button class="btn ghost small" onclick="go('kapitel','${KAP[ix-1].id}')">‹ Voriges Kapitel</button>`:"<span></span>"}
+    ${ix<KAP.length-1?`<button class="btn ghost small" onclick="go('kapitel','${KAP[ix+1].id}')">Nächstes Kapitel ›</button>`:""}
+  </div>`;
+  app().innerHTML=h;
+}
+
+// ---------- Karteikarten (Leitner) ----------
+let K={list:[],pos:0,scope:"all"};
+function vKarten(scope){
+  if(scope){startCards(scope);return;}
+  const cards=allC();const cnt=[0,0,0,0,0];cards.forEach(c=>cnt[(S.c[c.id]||1)-1]++);
+  let h=`<h2>Karteikarten</h2><p class="muted" style="margin-top:-6px">Tippe auf eine Karte, um sie umzudrehen. Was du weißt, wandert ein Fach weiter; was noch unsicher ist, zurück in Fach 1. Karten in niedrigen Fächern kommen öfter dran.</p>
+  <div class="card"><div class="boxes">${cnt.map((n,i)=>`<span><b>${n}</b>Fach ${i+1}</span>`).join("")}</div></div>
+  <button class="btn wide flieder" onclick="startCards('all')">Alle Kapitel lernen (Schwächste zuerst)</button>
+  <div class="teilh">Nach Kapitel</div>`;
+  KAP.forEach((k,ix)=>{const n=k.karten.length;const sure=k.karten.filter((c,i)=>(S.c[k.id+"-"+i]||1)>=4).length;
+    h+=`<div class="card kap" onclick="startCards('${k.id}')"><div class="num ${k.teil}">${ix+1}</div><div class="t"><b>${k.titel}</b><span class="small muted">${sure} von ${n} Karten gefestigt</span></div><span class="muted">›</span></div>`;});
+  app().innerHTML=h;
+}
+function startCards(scope){
+  let list=allC();if(scope!=="all")list=list.filter(c=>c.kid===scope);
+  list=shuffle(list).sort((a,b)=>(S.c[a.id]||1)-(S.c[b.id]||1));
+  if(scope==="all")list=list.slice(0,25);
+  K={list,pos:0,scope};view="karten";document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v==="karten"));drawCard();window.scrollTo(0,0);
+}
+function drawCard(){
+  const c=K.list[K.pos];
+  if(!c){app().innerHTML=`<div class="card" style="text-align:center"><h2>Runde geschafft</h2><p class="muted">Du hast alle ${K.list.length} Karten dieser Runde durchgearbeitet.</p>
+  <div class="grid two"><button class="btn flieder wide" onclick="startCards('${K.scope}')">Noch eine Runde</button><button class="btn ghost wide" onclick="go('karten')">Zur Übersicht</button></div></div>`;return;}
+  const k=kapById(c.kid);const box=S.c[c.id]||1;
+  app().innerHTML=`<button class="back" onclick="go('karten')">‹ Übersicht</button>
+  <div class="qhead"><span class="pill p-${k.teil}">${k.titel}</span><span class="small muted">${K.pos+1} / ${K.list.length} · Fach ${box}</span></div>
+  <div class="flip" id="fc" onclick="this.classList.toggle('on')"><div class="in">
+    <div class="f"><div class="q">${c.c[0]}</div><div class="hint">Tippen zum Umdrehen</div></div>
+    <div class="b"><div>${c.c[1]}</div><div class="hint">${k.seiten}</div></div>
+  </div></div>
+  <div class="grid two"><button class="btn ghost wide" onclick="rateCard(false)">Noch unsicher</button><button class="btn petrol wide" onclick="rateCard(true)">Wusste ich</button></div>`;
+}
+function rateCard(ok){const c=K.list[K.pos];const b=S.c[c.id]||1;S.c[c.id]=ok?Math.min(5,b+1):1;save();K.pos++;drawCard();}
+
+// ---------- Üben (Quiz mit Sofort-Feedback) ----------
+let Q={items:[],pos:0,right:0,answered:false,mode:"",scope:""};
+function vUeben(){
+  const weak=allQ().filter(x=>isWeak(x.id)).length;
+  let h=`<h2>Üben</h2><p class="muted" style="margin-top:-6px">Nach jeder Antwort siehst du sofort, ob sie stimmt – mit Erklärung und Seitenangabe.</p>
+  <div class="grid two"><button class="btn petrol wide" onclick="startQuiz('mix')">Gemischt (20 Fragen)</button>
+  <button class="btn flieder wide" ${weak?"":"disabled"} onclick="startQuiz('weak')">Fehler wiederholen (${weak})</button>
+  <button class="btn ghost wide" onclick="startQuiz('new')">Noch nie gesehene Fragen</button>
+  <button class="btn ghost wide" onclick="startQuiz('all')">Alle ${allQ().length} Fragen</button></div>
+  <div class="teilh">Nach Kapitel</div>`;
+  KAP.forEach((k,ix)=>{const p=kapProgress(k);
+    h+=`<div class="card kap" onclick="startQuiz('kap','${k.id}')"><div class="num ${k.teil}">${ix+1}</div><div class="t"><b>${k.titel}</b><div class="bar" style="margin:7px 0 4px"><i style="width:${p.pct}%"></i></div><span class="small muted">${p.mastered} von ${p.n} sicher</span></div><span class="muted">›</span></div>`;});
+  app().innerHTML=h;
+}
+function prep(x){const order=shuffle([0,1,2,3].slice(0,x.q.a.length));return Object.assign({},x,{order,choice:null});}
+function startQuiz(mode,scope){
+  let list=allQ();
+  if(mode==="kap")list=list.filter(x=>x.kid===scope);
+  if(mode==="weak")list=list.filter(x=>isWeak(x.id));
+  if(mode==="new")list=shuffle(list.filter(x=>!S.q[x.id])).slice(0,20);
+  list=shuffle(list);
+  if(mode==="mix")list=list.slice(0,20);
+  if(!list.length){app().innerHTML=`<div class="card" style="text-align:center"><h2>Keine Fragen gefunden</h2><p class="muted">${mode==="new"?"Du hast bereits alle Fragen mindestens einmal bearbeitet – stark!":"Hier gibt es gerade nichts zu wiederholen."}</p><button class="btn" onclick="go('ueben')">Zurück</button></div>`;return;}
+  Q={items:list.map(prep),pos:0,right:0,answered:false,mode,scope};
+  view="ueben";document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v==="ueben"));
+  drawQ();
+}
+function drawQ(){
+  const it=Q.items[Q.pos];
+  if(!it){const pct=Math.round(Q.right/Q.items.length*100);
+    app().innerHTML=`<div class="card" style="text-align:center"><h2>Übung abgeschlossen</h2><div class="big">${Q.right} / ${Q.items.length}</div><p class="muted">${pct} % richtig. ${pct>=80?"Sehr sicher – weiter so!":pct>=60?"Gute Basis. Wiederhole die Fehler, dann sitzt es.":"Lies das Kapitel noch einmal in Ruhe und wiederhole dann die Fehler."}</p>
+    <div class="grid two"><button class="btn flieder wide" onclick="startQuiz('weak')">Fehler wiederholen</button><button class="btn ghost wide" onclick="go('ueben')">Zur Übersicht</button></div></div>`;window.scrollTo(0,0);return;}
+  const k=kapById(it.kid);const q=it.q;
+  let h=`<button class="back" onclick="go('ueben')">‹ Beenden</button>
+  <div class="qhead"><span class="pill p-${k.teil}">${k.titel}</span><span class="small muted">${Q.pos+1} / ${Q.items.length}</span></div>
+  <div class="bar" style="margin-bottom:14px"><i style="width:${Q.pos/Q.items.length*100}%"></i></div>
+  <div class="card"><div class="qtext">${q.q}</div>`;
+  it.order.forEach((oi,ix)=>{let cls="opt";
+    if(Q.answered){if(oi===0)cls+=" ok";else if(oi===it.choice)cls+=" no";}
+    h+=`<button class="${cls}" ${Q.answered?"disabled":""} onclick="answer(${oi})"><span class="k">${L[ix]}</span>${q.a[oi]}</button>`;});
+  if(Q.answered){const ok=it.choice===0;
+    h+=`<div class="feedback ${ok?"ok":"no"}"><h4>${ok?"Richtig.":"Nicht ganz – richtig ist: "+q.a[0]}</h4><div>${q.e}</div><div class="small muted" style="margin-top:6px">Unterlage ${q.p}</div></div>
+    <button class="btn wide" onclick="nextQ()">${Q.pos+1<Q.items.length?"Nächste Frage":"Ergebnis anzeigen"}</button>`;}
+  h+=`</div>`;
+  app().innerHTML=h;
+}
+function answer(oi){if(Q.answered)return;const it=Q.items[Q.pos];it.choice=oi;Q.answered=true;const ok=oi===0;if(ok)Q.right++;record(it.id,ok);drawQ();}
+function nextQ(){Q.pos++;Q.answered=false;drawQ();window.scrollTo(0,0);}
+
+// ---------- Prüfungssimulation ----------
+let P={n:40,timed:true,items:[],pos:0,left:0,done:false};
+function vPruefung(){
+  let h=`<h2>Prüfungssimulation</h2>
+  <div class="card"><p style="margin-top:0">Wie im echten Multiple-Choice-Test: gemischte Fragen aus allen Kapiteln, keine Rückmeldung während der Prüfung, am Ende die Auswertung mit allen Erklärungen.</p>
+  <h3>Anzahl der Fragen</h3><div class="seg" id="segN">${[20,40,60,90].map(n=>`<button class="${P.n===n?"on":""}" onclick="P.n=${n};vPruefung()">${n}</button>`).join("")}</div>
+  <h3 style="margin-top:16px">Zeitlimit</h3><div class="seg">${[["ja","Mit Zeit (1 Min. pro Frage)"],["nein","Ohne Zeitlimit"]].map(([v,t])=>`<button class="${(P.timed?"ja":"nein")===v?"on":""}" onclick="P.timed=${v==="ja"};vPruefung()">${t}</button>`).join("")}</div>
+  <button class="btn wide" style="margin-top:18px" onclick="startExam()">Prüfung starten</button></div>`;
+  if(S.exams.length){h+=`<div class="teilh">Bisherige Simulationen</div><div class="card">`+S.exams.slice(-8).reverse().map(e=>`<div class="row" style="justify-content:space-between;padding:4px 0"><span>${new Date(e.d).toLocaleDateString("de-AT")}</span><span><b>${e.r}/${e.n}</b> · ${Math.round(e.r/e.n*100)} %</span></div>`).join("")+`</div>`;}
+  app().innerHTML=h;
+}
+function startExam(){
+  // ausgewogen: aus jedem Kapitel anteilig ziehen
+  const per={};allQ().forEach(x=>{(per[x.kid]=per[x.kid]||[]).push(x);});
+  Object.keys(per).forEach(k=>per[k]=shuffle(per[k]));
+  const out=[];let added=true;
+  while(out.length<P.n&&added){added=false;for(const k of KAP){if(out.length>=P.n)break;const p=per[k.id];if(p.length){out.push(p.shift());added=true;}}}
+  P.items=shuffle(out).map(prep);P.pos=0;P.done=false;P.left=P.items.length*60;
+  stopTimer();if(P.timed){timerId=setInterval(()=>{P.left--;const t=document.getElementById("tmr");if(t)t.textContent=fmt(P.left);if(P.left<=0){stopTimer();finishExam();}},1000);}
+  drawExam();
+}
+function fmt(s){s=Math.max(0,s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
+function drawExam(){
+  const it=P.items[P.pos];const q=it.q;const answeredCount=P.items.filter(x=>x.choice!==null).length;
+  let h=`<div class="qhead"><span class="small muted">Frage ${P.pos+1} von ${P.items.length} · ${answeredCount} beantwortet</span>${P.timed?`<span class="timer" id="tmr">${fmt(P.left)}</span>`:""}</div>
+  <div class="bar" style="margin-bottom:14px"><i style="width:${answeredCount/P.items.length*100}%"></i></div>
+  <div class="card"><div class="qtext">${q.q}</div>`;
+  it.order.forEach((oi,ix)=>{h+=`<button class="opt ${it.choice===oi?"sel":""}" onclick="pick(${oi})"><span class="k">${L[ix]}</span>${q.a[oi]}</button>`;});
+  h+=`<div class="row" style="justify-content:space-between;margin-top:6px">
+    <button class="btn ghost small" ${P.pos===0?"disabled":""} onclick="P.pos--;drawExam()">‹ Zurück</button>
+    ${P.pos<P.items.length-1?`<button class="btn small" onclick="P.pos++;drawExam()">Weiter ›</button>`:`<button class="btn petrol small" onclick="confirmFinish()">Abgeben</button>`}
+  </div></div>
+  <button class="btn ghost wide" onclick="confirmFinish()">Prüfung jetzt abgeben</button>`;
+  app().innerHTML=h;
+}
+function pick(oi){P.items[P.pos].choice=oi;if(P.pos<P.items.length-1){P.pos++;}drawExam();window.scrollTo(0,0);}
+function confirmFinish(){const open=P.items.filter(x=>x.choice===null).length;if(open&&!confirm(`Noch ${open} Frage(n) unbeantwortet. Trotzdem abgeben?`))return;stopTimer();finishExam();}
+function finishExam(){
+  if(P.done)return;P.done=true;
+  let r=0;const byK={};
+  P.items.forEach(it=>{const ok=it.choice===0;if(ok)r++;if(it.choice!==null)record(it.id,ok);const b=byK[it.kid]=byK[it.kid]||{r:0,n:0};b.n++;if(ok)b.r++;});
+  S.exams.push({d:Date.now(),r,n:P.items.length});save();
+  const pct=Math.round(r/P.items.length*100);
+  let h=`<div class="card" style="text-align:center"><h2>Auswertung</h2><div class="big">${r} / ${P.items.length}</div><p class="muted" style="margin-bottom:0">${pct} % richtig${P.timed?` · Restzeit ${fmt(P.left)}`:""}</p></div>
+  <div class="teilh">Nach Kapiteln</div><div class="card">`;
+  KAP.forEach(k=>{const b=byK[k.id];if(!b)return;const p=Math.round(b.r/b.n*100);
+    h+=`<div style="padding:5px 0"><div class="row" style="justify-content:space-between"><span class="small">${k.titel}</span><span class="small"><b>${b.r}/${b.n}</b></span></div><div class="bar"><i style="width:${p}%"></i></div></div>`;});
+  h+=`</div><div class="grid two"><button class="btn flieder wide" onclick="startQuiz('weak')">Fehler gezielt üben</button><button class="btn ghost wide" onclick="go('pruefung')">Neue Simulation</button></div>
+  <div class="teilh">Alle Fragen mit Lösung</div><div class="card">`;
+  P.items.forEach((it,ix)=>{const q=it.q;const ok=it.choice===0;
+    h+=`<div class="review"><div class="row" style="justify-content:space-between"><span class="small muted">Frage ${ix+1} · ${kapById(it.kid).titel}</span><span class="tag ${ok?"ok":"no"}">${ok?"richtig":it.choice===null?"offen":"falsch"}</span></div>
+    <div style="font-weight:500;margin:6px 0">${q.q}</div>
+    ${!ok&&it.choice!==null?`<div class="small" style="color:var(--rose)">Deine Antwort: ${q.a[it.choice]}</div>`:""}
+    <div class="small" style="color:var(--petrol)"><b>Richtig: ${q.a[0]}</b></div>
+    <div class="small muted" style="margin-top:4px">${q.e} (${q.p})</div></div>`;});
+  h+=`</div>`;
+  app().innerHTML=h;window.scrollTo(0,0);
+}
+
+go("start");
+</script>
+</body>
+</html>
